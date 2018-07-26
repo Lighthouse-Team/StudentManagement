@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.DepartmentMapper">
+
+	<resultMap type="com.project.beans.Department" id="departmentMap">
+		<id column="departmentId" property="departmentId" />
+		<result column="departmentName" property="departmentName" />
+	</resultMap>
+
+	<!-- 通过 departmentId 获取指定部门信息: public department getDepartmentByDepartmentId(Integer 
+		departmentId); -->
+	<select id="getDepartmentByDepartmentId" resultMap="departmentMap">
+		select * from Department d
+		<where>
+			departmentId = #{departmentId}
+		</where>
+	</select>
+
+	<!-- 通过 department 对象属性查询部门信息: public department getDepartmentByEntity(Department 
+		department); -->
+	<select id="getDepartmentByEntity" resultMap="departmentMap">
+		select * from Department d
+		<where>
+			<if test="departmentId != null">
+				and departmentId = #{departmentId}
+			</if>
+			<if test="departmentName != null">
+				and departmentName = #{departmentName}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取所有部门信息: public List<Department> getAllDepartment(); -->
+	<select id="getAllDepartment" resultMap="departmentMap">
+		select * from Department
+	</select>
+
+	<!-- 通过 department 属性模糊查询部门信息: public List<department> getDepartmentListByEntityForLike(Department 
+		department); -->
+	<select id="getDepartmentListByEntityForLike" resultMap="departmentMap">
+		select * from Department
+		<where>
+			<if test="departmentId != null">
+				and departmentId like CONCAT('%', #{departmentId}, '%')
+			</if>
+			<if test="departmentName != null">
+				and departmentName like CONCAT('%', #{departmentName},
+				'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 更新部门信息: public void updateDepartmentByEntity(Department department); -->
+	<update id="updateDepartmentByEntity">
+		update Department
+		<trim prefix="set" suffixOverrides=",">
+			<if test="departmentName != null">
+				departmentName = #{departmentName}
+			</if>
+
+		</trim>
+		where departmentId = #{departmentId}
+	</update>
+
+	<!-- 添加部门信息, 并返回添加后的主键值: public void addDepartment(Department department); -->
+	<insert id="addDepartment">
+		insert into Department
+		<include refid="departmentProperty" />
+		values
+		(#{departmentName})
+	</insert>
+
+	<!-- 通过 departmentId 删除指定部门信息: public void deleteDepartmentBydepartmentId(Integer 
+		departmentId); -->
+	<delete id="deleteDepartmentBydepartmentId">
+		delete from department
+		where departmentId =
+		#{departmentId}
+	</delete>
+
+	<sql id="departmentProperty">
+		(departmentName)
+	</sql>
+
+</mapper>

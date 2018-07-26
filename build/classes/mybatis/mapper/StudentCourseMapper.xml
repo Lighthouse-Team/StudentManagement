@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.StudentCourseMapper">
+
+	<resultMap type="com.project.beans.StudentCourse" id="studentCourseMap">
+		<id column="scId" property="scId" />
+		<result column="score" property="score" />
+		<result column="scLevel" property="scLevel" />
+		<result column="scTerm" property="scTerm" />
+		<result column="examProperty" property="examProperty" />
+		<result column="scoreMark" property="scoreMark" />
+
+		<!-- 级联学生属性 -->
+		<association property="scStudent"
+			select="com.project.dao.StudentMapper.getStudentByStudentId" column="studentId">
+		</association>
+		<!-- 级联课程属性 -->
+		<association property="scCourse"
+			select="com.project.dao.CourseMapper.getCourseByCourseId" column="courseId">
+		</association>
+	</resultMap>
+
+	<!-- 通过 studentCourse 对象属性查询学生课程信息: public StudentCourse getStudentCourseByEntity(StudentCourse 
+		studentCourse); -->
+	<select id="getStudentCourseByEntity" resultMap="studentCourseMap">
+		select * from Student s, Course c, StudentCourse sc
+		<where>
+			s.studentId = sc.studentId and c.courseId = sc.courseId
+			<if test="score != 0">
+				and sc.score = #{score}
+			</if>
+			<if test="scLevel != null">
+				and sc.scLevel = #{scLevel}
+			</if>
+			<if test="scTerm != null">
+				and sc.scTerm = #{scTerm}
+			</if>
+			<if test="examProperty != null">
+				and sc.examProperty = #{examProperty}
+			</if>
+			<if test="scoreMark != null">
+				and sc.scoreMark = #{scoreMark}
+			</if>
+			<if test="scStudent != null">
+				and sc.studentId = #{scStudent.studentId}
+			</if>
+			<if test="scCourse != null">
+				and sc.courseId = #{scCourse.courseId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取所有学生课程信息: public List<StudentCourse> getAllStudentCourse(); -->
+	<select id="getAllStudentCourse" resultMap="studentCourseMap">
+		select * from Student s, Course c, StudentCourse sc
+		<where>
+			s.studentId = sc.studentId and c.courseId = sc.courseId
+		</where>
+	</select>
+
+	<!-- 通过 studentCourse 属性模糊查询学生课程信息: public List<StudentCourse> getStudentCourseListByEntityForLike(StudentCourse 
+		studentCourse); -->
+	<select id="getStudentCourseListByEntityForLike" resultMap="studentCourseMap">
+		select * from Student s, Course c, StudentCourse sc
+		<where>
+			s.studentId = sc.studentId and c.courseId = sc.courseId
+			<if test="score != 0">
+				and sc.score like CONCAT('%', #{score}, '%')
+			</if>
+			<if test="scLevel != null">
+				and sc.scLevel like CONCAT('%', #{scLevel}, '%')
+			</if>
+			<if test="scTerm != null">
+				and sc.scTerm like CONCAT('%', #{scTerm}, '%')
+			</if>
+			<if test="examProperty != null">
+				and sc.examProperty = #{examProperty}
+			</if>
+			<if test="scoreMark != null">
+				and sc.scoreMark = #{scoreMark}
+			</if>
+			<if test="scStudent != null">
+				and sc.studentId like CONCAT('%', #{scStudent.studentId},
+				'%')
+			</if>
+			<if test="scCourse != null">
+				and sc.courseId like CONCAT('%', #{scCourse.courseId},
+				'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 更新学生课程信息: public void updateStudentCourseByEntity(StudentCourse studentCourse); -->
+	<update id="updateStudentCourseByEntity">
+		update StudentCourse
+		<trim prefix="set" suffixOverrides=",">
+			<if test="score != 0">
+				sc.score = #{score},
+			</if>
+			<if test="scLevel != null">
+				sc.scLevel = #{scLevel},
+			</if>
+			<if test="scTerm != null">
+				sc.scTerm = #{scTerm},
+			</if>
+			<if test="examProperty != null">
+				sc.examProperty = #{examProperty},
+			</if>
+			<if test="scoreMark != null">
+				sc.scoreMark = #{scoreMark},
+			</if>
+			<if test="scStudent != null">
+				sc.studentId = #{scStudent.studentId},
+			</if>
+			<if test="scCourse != null">
+				sc.courseId = #{scCourse.courseId},
+			</if>
+		</trim>
+		<where>
+			sc.scId = #{scId}
+		</where>
+	</update>
+
+	<!-- 添加学生课程信息, 并返回添加后的主键值: public void addStudentCourse(StudentCourse studentCourse); -->
+	<insert id="addStudentCourse">
+		insert into StudentCourse
+		<include refid="studentCourseProperty" />
+		values
+		(#{score}, #{scLevel}, #{scStudent.studentId},
+		#{scCourse.courseId}, #{scTerm}, #{examProperty}, #{scoreMark})
+	</insert>
+
+	<!-- 通过 studentCourse 删除指定学生课程信息: public void deleteStudentCourseByEntity(StudentCourse 
+		studentCourse); -->
+	<delete id="deleteStudentCourseByEntity">
+		delete from StudentCourse
+		<where>
+			<if test="scId = null">
+				scId = #{scId}
+			</if>
+			<if test="scStudent != null">
+				studentId = #{scStudent.studentId}
+			</if>
+			<if test="scCourse != null">
+				courseId = #{scCourse.courseId}
+			</if>
+		</where>
+	</delete>
+
+
+
+
+	<!-- 下面为前端展示需要用到的接口的实现 -->
+
+	<!-- 通过 grade 获得该年级该学期所有课程的加权总分: public double getACTotalScoreByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACTotalScoreByGrade" resultType="java.lang.Double">
+		select sum(sc.score * c.courseCredits) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期所有课程的总学分: public double getACTotalCreditsByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACTotalCreditsByGrade" resultType="java.lang.Double">
+		select sum(c.courseCredits) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期的所有成绩记录数: public Integer getACTotalSocreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACTotalSocreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期的优秀成绩记录数: public Integer getACExcellentScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACExcellentScoreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and sc.score >= 90
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期的良好成绩记录数: public Integer getACGoodScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACGoodScoreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and sc.score >= 80
+			<![CDATA[and sc.score < 90]]>
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期的中等成绩记录数: public Integer getACMediumScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACMediumScoreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and sc.score >= 70
+			<![CDATA[and sc.score < 80]]>
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级该学期的及格成绩记录数: public Integer getACPassScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getACPassScoreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and sc.score >= 60
+			<![CDATA[and sc.score < 70]]>
+		</where>
+	</select>
+
+
+
+	<sql id="studentCourseProperty">
+		(score, scLevel, studentId, courseId, scTerm, examProperty,
+		scoreMark)
+	</sql>
+
+</mapper>

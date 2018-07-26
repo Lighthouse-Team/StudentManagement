@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.UserMapper">
+
+	<resultMap type="com.project.beans.User" id="userMap">
+		<id column="userId" property="userId" />
+		<result column="userName" property="userName" />
+		<result column="passWord" property="passWord" />
+		<result column="nickName" property="nickName" />
+		<result column="permission" property="permission" />
+
+		<association property="department"
+			select="com.project.dao.DepartmentMapper.getDepartmentByDepartmentId"
+			column="departmentId">
+		</association>
+
+	</resultMap>
+
+	<!-- 根据指定用户 id 查询用户: public User getUserById(Integer userId); -->
+	<select id="getUserById" resultMap="userMap">
+		select * from User u, Department d
+		<where>
+			u.departmentId = d.departmentId
+			and userId = #{userId}
+		</where>
+	</select>
+
+	<!-- 查看指定用户名的用户是否存在(用户名验证): public User getUserByUserName(String userName); -->
+	<select id="getUserByUserName" resultType="com.project.beans.User">
+		select * from User
+		<where>
+			userName = #{userName}
+		</where>
+
+	</select>
+
+	<!-- 查看指定昵称的用户是否存在: public User getUserByNickName(String nickName); -->
+	<select id="getUserByNickName" resultType="com.project.beans.User">
+		select * from User
+		where nickName = #{nickName}
+	</select>
+
+	<!-- 通过指定 User 对象的属性更新用户: public void updateUser(User user); -->
+	<update id="updateUser">
+		update User
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName != null">
+				userName = #{userName},
+			</if>
+			<if test="nickName != null">
+				nickName = #{nickName},
+			</if>
+			<if test="passWord != null">
+				passWord = #{passWord},
+			</if>
+			<if test="permission != 0">
+				permission = #{permission},
+			</if>
+			<if test="department != null">
+				departmentId = #{department.departmentId},
+			</if>
+		</trim>
+		where userId = #{userId}
+	</update>
+
+	<!-- 通过用户名及密码查看用户是否存在(登陆使用): public User getUserByUserNameAndPassWord(String 
+		userName, String passWord); -->
+	<select id="getUserByUserNameAndPassWord" resultType="com.project.beans.User">
+		select * from User
+		<where>
+			userName = #{userName} and passWord = #{passWord}
+		</where>
+	</select>
+
+	<!-- 添加用户: public void addUser(User user); -->
+	<insert id="addUser" useGeneratedKeys="true" keyProperty="userId"
+		parameterType="com.project.beans.User">
+		insert into User
+		<include refid="userProperty" />
+		values
+		(#{userName}, #{passWord}, #{nickName}, #{permission},
+		#{department.departmentId})
+	</insert>
+
+	<!-- 查询所有用户: public List<User> getUserAllUsers(); -->
+	<select id="getUserAllUsers" resultMap="userMap">
+		select * from user u, department d
+		<where>
+			u.departmentId = d.departmentId
+		</where>
+	</select>
+
+	<sql id="userProperty">
+		(userName, passWord, nickName, permission, departmentId)
+	</sql>
+
+</mapper>

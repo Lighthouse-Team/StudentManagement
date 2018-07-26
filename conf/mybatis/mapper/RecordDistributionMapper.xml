@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.RecordDistributionMapper">
+	
+	<!-- 通过年级查询成绩记录总数: public Integer getTotalNumberByGrade(String grade); -->
+	<select id="getTotalNumberByGrade" resultType="java.lang.Integer" parameterType="java.lang.String">
+		
+		SELECT COUNT(*) FROM student s
+		JOIN studentcourse sc on s.studentId = sc.studentId
+		JOIN course c on c.courseId = sc.courseId
+		where s.studentClass LIKE CONCAT('%', #{grade}, '%')
+		
+	</select>
+	
+</mapper>

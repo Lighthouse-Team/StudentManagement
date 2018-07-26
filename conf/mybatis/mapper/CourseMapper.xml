@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.CourseMapper">
+
+	<resultMap type="com.project.beans.Course" id="courseMap">
+		<id column="courseId" property="courseId" />
+		<result column="courseNumber" property="courseNumber" />
+		<result column="courseName" property="courseName" />
+		<result column="coursePeriod" property="coursePeriod" />
+		<result column="courseCredits" property="courseCredits" />
+		<result column="courseDepartment" property="courseDepartment" />
+		<result column="courseAttribute" property="courseAttribute" />
+		<result column="courseProperty" property="courseProperty" />
+		<result column="courseTerm" property="courseTerm" />
+	</resultMap>
+
+	<resultMap type="com.project.beans.Course" id="courseStudentMap">
+		<id column="courseId" property="courseId" />
+		<result column="courseNumber" property="courseNumber" />
+		<result column="courseName" property="courseName" />
+		<result column="coursePeriod" property="coursePeriod" />
+		<result column="courseCredits" property="courseCredits" />
+		<result column="courseDepartment" property="courseDepartment" />
+		<result column="courseAttribute" property="courseAttribute" />
+		<result column="courseProperty" property="courseProperty" />
+		<result column="courseTerm" property="courseTerm" />
+
+		<collection property="studentList"
+			select="com.project.dao.StudentMapper.getStudentByStudentId" column="studentId">
+		</collection>
+	</resultMap>
+
+	<!-- 通过 courseId 获取指定课程信息: public course getCourseByCourseId(Integer courseId); -->
+	<select id="getCourseByCourseId" resultMap="courseMap">
+		select * from Course c
+		<where>
+			courseId = #{courseId}
+		</where>
+	</select>
+
+	<!-- 通过 courseNumber 获取指定课程信息: public Course getCourseByCourseNumber(String 
+		CourseNumber); -->
+	<select id="getCourseByCourseNumber" resultMap="courseMap">
+		select * from Course c
+		<where>
+			courseNumber = #{courseNumber}
+		</where>
+	</select>
+
+	<!-- 通过 course 对象属性查询课程信息: public course getcourseByEntity(course course); -->
+	<select id="getCourseByEntity" resultMap="courseMap">
+		select * from Course c
+		<where>
+			<if test="courseId != null">
+				and courseId = #{courseId}
+			</if>
+			<if test="courseNumber != null">
+				and courseNumber = #{courseNumber}
+			</if>
+			<if test="courseName != null">
+				and courseName = #{courseName}
+			</if>
+			<if test="coursePeriod != null">
+				and coursePeriod = #{coursePeriod}
+			</if>
+			<if test="courseCredits != 0">
+				and courseCredits = #{courseCredits}
+			</if>
+			<if test="courseDepartment != null">
+				and courseDepartment = #{courseDepartment}
+			</if>
+			<if test="courseAttribute != null">
+				and courseAttribute = #{courseAttribute}
+			</if>
+			<if test="courseProperty != null">
+				and courseProperty = #{courseProperty}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取所有课程信息: public List<course> getAllcourse(); -->
+	<select id="getAllcourse" resultMap="courseMap">
+		select * from Course c
+	</select>
+
+	<!-- 通过 course 属性模糊查询课程信息列表: public List<course> getCourseListByEntityForLike(course 
+		course); -->
+	<select id="getCourseListByEntityForLike" resultMap="courseMap">
+		select * from Course c
+		<where>
+			<if test="courseId != null">
+				courseId like CONCAT('%', #{courseId}, '%')
+			</if>
+			<if test="courseNumber != null">
+				and courseNumber like CONCAT('%', #{courseNumber}, '%')
+			</if>
+			<if test="courseName != null">
+				and courseName like CONCAT('%', #{courseName}, '%')
+			</if>
+			<if test="coursePeriod != null">
+				and coursePeriod like CONCAT('%', #{coursePeriod}, '%')
+			</if>
+			<if test="courseCredits != 0">
+				and courseCredits like CONCAT('%', #{courseCredits}, '%')
+			</if>
+			<if test="courseDepartment != null">
+				and courseDepartment like CONCAT('%',
+				#{courseDepartment}, '%')
+			</if>
+			<if test="courseAttribute != null">
+				and courseAttribute like CONCAT('%', #{courseAttribute},
+				'%')
+			</if>
+			<if test="courseProperty != null">
+				and courseProperty like CONCAT('%', #{courseProperty},
+				'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据课程属性查询学生选课情况: public List<Course> getCourseDetailsByEntityForLike(Course 
+		course); -->
+	<select id="getCourseDetailsByEntityForLike" resultMap="courseStudentMap">
+		select s.*, c.*
+		from Student s, Course c, StudentCourse sc
+		<where>
+			s.studentId = sc.studentId and c.courseId = sc.courseId
+			<if test="courseId != null">
+				and c.courseId like CONCAT('%', #{courseId}, '%')
+			</if>
+			<if test="courseName != null">
+				and c.courseNumber like CONCAT('%', #{courseName}, '%')
+			</if>
+			<if test="coursePeriod != null">
+				and c.coursePeriod like CONCAT('%', #{coursePeriod}, '%')
+			</if>
+			<if test="courseCredits != 0">
+				and c.courseCredits like CONCAT('%', #{courseCredits}, '%')
+			</if>
+			<if test="courseDepartment != null">
+				and c.courseDepartment like CONCAT('%', #{courseDepartment}, '%')
+			</if>
+			<if test="courseAttribute != null">
+				and c.courseAttribute like CONCAT('%', #{courseAttribute}, '%')
+			</if>
+			<if test="courseProperty != null">
+				and c.courseProperty like CONCAT('%', #{courseProperty}, '%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 更新课程信息: public void updateCourseByEntity(course course); -->
+	<update id="updateCourseByEntity">
+		update Course
+		<trim prefix="set" suffixOverrides=",">
+			<if test="courseNumber != null">
+				courseNumber = #{courseNumber},
+			</if>
+			<if test="courseName != null">
+				courseName = #{courseName},
+			</if>
+			<if test="coursePeriod != null">
+				coursePeriod = #{coursePeriod},
+			</if>
+			<if test="courseCredits != 0">
+				courseCredits = #{courseCredits},
+			</if>
+			<if test="courseDepartment != null">
+				courseDepartment = #{courseDepartment},
+			</if>
+			<if test="courseAttribute != null">
+				courseAttribute = #{courseAttribute},
+			</if>
+			<if test="courseProperty != null">
+				courseProperty = #{courseProperty},
+			</if>
+		</trim>
+		where courseId = #{courseId}
+	</update>
+
+	<!-- 添加课程信息, 并返回添加后的主键值: public void addCourse(course course); -->
+	<insert id="addCourse">
+		insert into Course
+		<include refid="courseProperty" />
+		values
+		(#{courseNumber}, #{courseName}, #{coursePeriod},
+		#{courseCredits}, #{courseDepartment}, #{courseAttribute},
+		#{courseProperty}, #{courseTerm})
+	</insert>
+
+	<!-- 通过 courseId 删除指定课程信息: public void deletecourseByCourseId(Integer courseId); -->
+	<delete id="deleteCourseByCourseId">
+		delete from course where courseId = #{courseId}
+	</delete>
+
+	<sql id="courseProperty">
+		(courseNumber, courseName, coursePeriod, courseCredits,
+		courseDepartment, courseAttribute, courseProperty, courseTerm)
+	</sql>
+
+</mapper>
