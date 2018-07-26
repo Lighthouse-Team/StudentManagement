@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.project.beans.Course;
 import com.project.beans.Student;
 import com.project.beans.StudentCourse;
 import com.project.dto.OverallDistribution;
@@ -70,23 +71,25 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getACScoreDistributionByGradeTest() {
+	public void getACScoreDistribution() {
 		Integer grade = 2015;
+		// String year = "2016-2017"; // 结果为0
+		String year = "2017-2018";
 		Integer term = 1;
-		OverallDistribution overallDistribution = studentCourseService.getACScoreDistributionByGrade(grade, term);
+		OverallDistribution overallDistribution = studentCourseService.getACScoreDistributionByGrade(grade, year, term);
 		System.out.println(overallDistribution);
 	}
 
 	@Test
-	public void getACScoreDistributionListByYearTest() {
-		String year = "2015-2016";
+	public void getUniversityACScoreDistribution() {
+		// String year = "2016-2017"; // 结果为0
+		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getACScoreDistributionListByYear(year, term);
+		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistribution(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
 		}
 	}
-	
-	
+
 
 }

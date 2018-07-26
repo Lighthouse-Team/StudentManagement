@@ -55,10 +55,7 @@ public interface StudentCourseMapper {
 	 */
 	public void deleteStudentCourseByEntity(StudentCourse studentCourse);
 
-	
-	
-	
-	
+
 	/**
 	 * 下面为前端展示数据需要的接口
 	 * 
@@ -69,68 +66,77 @@ public interface StudentCourseMapper {
 	 * 通过 grade 获得该年级该学期所有课程的加权总分
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
-	public double getACTotalScoreByGrade(@Param(value = "grade") Integer grade, @Param(value = "term") Integer term);
+	public double getACTotalScoreByGrade(@Param(value = "grade") Integer grade, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期所有课程的总学分
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
-	public double getACTotalCreditsByGrade(@Param(value = "grade") Integer grade, @Param(value = "term") Integer term);
+	public double getACTotalCreditsByGrade(@Param(value = "grade") Integer grade, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期的所有成绩记录数
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public Integer getACTotalSocreRecordNumberByGrade(@Param(value = "grade") Integer grade,
-			@Param(value = "term") Integer term);
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期的优秀成绩记录数
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public Integer getACExcellentScoreRecordNumberByGrade(@Param(value = "grade") Integer grade,
-			@Param(value = "term") Integer term);
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期的良好成绩记录数
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public Integer getACGoodScoreRecordNumberByGrade(@Param(value = "grade") Integer grade,
-			@Param(value = "term") Integer term);
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期的中等成绩记录数
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public Integer getACMediumScoreRecordNumberByGrade(@Param(value = "grade") Integer grade,
-			@Param(value = "term") Integer term);
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 grade 获得该年级该学期的及格成绩记录数
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public Integer getACPassScoreRecordNumberByGrade(@Param(value = "grade") Integer grade,
-			@Param(value = "term") Integer term);
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 }

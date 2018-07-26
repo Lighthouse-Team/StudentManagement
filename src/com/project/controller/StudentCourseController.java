@@ -41,7 +41,7 @@ public class StudentCourseController {
 		map.put("yearList", yearList);
 		
 		if(year != null) {
-			List<OverallDistribution> odList = studentCourseService.getACScoreDistributionListByYear(year, term);
+			List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistribution(year, term);
 			map.put("odList", odList);
 		}
 		
@@ -66,7 +66,7 @@ public class StudentCourseController {
 	@ResponseBody
 	@RequestMapping("/getAllCourseDistributedData")
 	public List<OverallDistribution> sendAllCourseDistributedData(String year, Integer term){
-		List<OverallDistribution> odList = studentCourseService.getACScoreDistributionListByYear(year, term);
+		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistribution(year, term);
 		return odList;
 	}
 }

@@ -68,10 +68,10 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public double getACTotalScoreByGrade(Integer grade, Integer term) {
-		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, term);
+	public double getACTotalScoreByGrade(Integer grade, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term);
 		if (totalScoreRecordNumber != 0) {
-			return studentCourseMapper.getACTotalScoreByGrade(grade, term);
+			return studentCourseMapper.getACTotalScoreByGrade(grade, year, term);
 		} else {
 			return 0;
 		}
@@ -84,10 +84,10 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public double getACTotalCreditsByGrade(Integer grade, Integer term) {
-		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, term);
+	public double getACTotalCreditsByGrade(Integer grade, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term);
 		if (totalScoreRecordNumber != 0) {
-			return studentCourseMapper.getACTotalCreditsByGrade(grade, term);
+			return studentCourseMapper.getACTotalCreditsByGrade(grade, year, term);
 		} else {
 			return 0;
 		}
@@ -100,9 +100,9 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public double getACAverageScoreByGrade(Integer grade, Integer term) {
-		double acTotalScore = getACTotalScoreByGrade(grade, term); // 加权总分
-		double acTotalCredits = getACTotalCreditsByGrade(grade, term); // 总学分
+	public double getACAverageScoreByGrade(Integer grade, String year, Integer term) {
+		double acTotalScore = getACTotalScoreByGrade(grade, year, term); // 加权总分
+		double acTotalCredits = getACTotalCreditsByGrade(grade, year, term); // 总学分
 		if (acTotalCredits != 0) {
 			double acAverageScore = acTotalScore / acTotalCredits;
 			return acAverageScore;
@@ -118,12 +118,12 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public double getUniversityACAverageScore(Integer gradeOne, Integer term) {
+	public double getUniversityACAverageScore(Integer gradeOne, String year, Integer term) {
 		double acTotalScore = 0;
 		double acTotalCredits = 0;
 		for (Integer gradeI = gradeOne -3; gradeI <= gradeOne; gradeI++) {
-			acTotalScore += getACTotalScoreByGrade(gradeI, term);
-			acTotalCredits += getACTotalCreditsByGrade(gradeI, term);
+			acTotalScore += getACTotalScoreByGrade(gradeI, year, term);
+			acTotalCredits += getACTotalCreditsByGrade(gradeI, year, term);
 		}
 		if (acTotalCredits != 0) {
 			double acAverageScore = acTotalScore / acTotalCredits;
@@ -140,12 +140,12 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public OverallDistribution getACScoreDistributionByGrade(Integer grade, Integer term) {
-		Integer totalNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, term); // 成绩记录总数
-		Integer excellentNumber = studentCourseMapper.getACExcellentScoreRecordNumberByGrade(grade, term); // 优秀成绩记录数
-		Integer goodNumber = studentCourseMapper.getACGoodScoreRecordNumberByGrade(grade, term); // 良好成绩记录数
-		Integer mediumNumber = studentCourseMapper.getACMediumScoreRecordNumberByGrade(grade, term); // 中等成绩记录数
-		Integer passNumber = studentCourseMapper.getACPassScoreRecordNumberByGrade(grade, term); // 及格成绩记录数
+	public OverallDistribution getACScoreDistributionByGrade(Integer grade, String year, Integer term) {
+		Integer totalNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term); // 成绩记录总数
+		Integer excellentNumber = studentCourseMapper.getACExcellentScoreRecordNumberByGrade(grade, year, term); // 优秀成绩记录数
+		Integer goodNumber = studentCourseMapper.getACGoodScoreRecordNumberByGrade(grade, year, term); // 良好成绩记录数
+		Integer mediumNumber = studentCourseMapper.getACMediumScoreRecordNumberByGrade(grade, year, term); // 中等成绩记录数
+		Integer passNumber = studentCourseMapper.getACPassScoreRecordNumberByGrade(grade, year, term); // 及格成绩记录数
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		OverallDistribution overallDistribution = new OverallDistribution();
 		String strGrade = String.valueOf(grade);
@@ -156,7 +156,7 @@ public class StudentCourseService {
 			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
 			double passRate = (double) passNumber / totalNumber; // 及格率
 			double failRate = (double) failNumber / totalNumber; // 不及格率
-			double averageScore = getACAverageScoreByGrade(grade, term); // 平均分
+			double averageScore = getACAverageScoreByGrade(grade, year, term); // 平均分
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			String strExcellentRate = rateDF.format(excellentRate);
@@ -185,13 +185,13 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 year 属性查询全校该学期所有课程（必修课、专业选修课、通识选修课)的分布
+	 * 通过 grade 属性查询全校该学期所有课程（必修课、专业选修课、通识选修课)的分布
 	 * 
-	 * @param year
+	 * @param gradeOne
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getACScoreDistributionListByYear(String year, Integer term) {
+	public List<OverallDistribution> getUniversityACScoreDistribution(String year, Integer term) {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		List<OverallDistribution> odList = new ArrayList<>();
@@ -201,13 +201,13 @@ public class StudentCourseService {
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
 		for (Integer gradeI = gradeOne -3; gradeI <= gradeOne; gradeI++) {
-			OverallDistribution ov = getACScoreDistributionByGrade(gradeI, term);
+			OverallDistribution ov = getACScoreDistributionByGrade(gradeI, year, term);
 			odList.add(ov);
-			totalNumber += studentCourseMapper.getACTotalSocreRecordNumberByGrade(gradeI, term);
-			excellentNumber += studentCourseMapper.getACExcellentScoreRecordNumberByGrade(gradeI, term);
-			goodNumber += studentCourseMapper.getACGoodScoreRecordNumberByGrade(gradeI, term);
-			mediumNumber += studentCourseMapper.getACMediumScoreRecordNumberByGrade(gradeI, term);
-			passNumber += studentCourseMapper.getACPassScoreRecordNumberByGrade(gradeI, term);
+			totalNumber += studentCourseMapper.getACTotalSocreRecordNumberByGrade(gradeI, year, term);
+			excellentNumber += studentCourseMapper.getACExcellentScoreRecordNumberByGrade(gradeI, year, term);
+			goodNumber += studentCourseMapper.getACGoodScoreRecordNumberByGrade(gradeI, year, term);
+			mediumNumber += studentCourseMapper.getACMediumScoreRecordNumberByGrade(gradeI, year, term);
+			passNumber += studentCourseMapper.getACPassScoreRecordNumberByGrade(gradeI, year, term);
 		}
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		OverallDistribution overallDistribution = new OverallDistribution();
@@ -217,7 +217,8 @@ public class StudentCourseService {
 			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
 			double passRate = (double) passNumber / totalNumber; // 及格率
 			double failRate = (double) failNumber / totalNumber; // 不及格率
-			double averageScore = getUniversityACAverageScore(gradeOne, term); // 平均分
+			double averageScore = getUniversityACAverageScore(gradeOne, year, term); // 平均分
+
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			String strExcellentRate = rateDF.format(excellentRate);

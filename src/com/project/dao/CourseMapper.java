@@ -79,7 +79,6 @@ public interface CourseMapper {
 	 * @return
 	 */
 	public List<Course> getCourseDetailsByEntityForLike(Course course);
-
 	
 	
 	/**
@@ -102,5 +101,4 @@ public interface CourseMapper {
 	 * 设置通识选修课的 courseType = 3
 	 */
 	public void setCourseTypeOfGeneralElectiveCourse();
-
 }

@@ -154,8 +154,9 @@
 
 	<!-- 下面为前端展示需要用到的接口的实现 -->
 
-	<!-- 通过 grade 获得该年级该学期所有课程的加权总分: public double getACTotalScoreByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期所有课程的加权总分: public double getACTotalScoreByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACTotalScoreByGrade" resultType="java.lang.Double">
 		select sum(sc.score * c.courseCredits) from student s, course c,
 		studentcourse sc
@@ -165,13 +166,16 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期所有课程的总学分: public double getACTotalCreditsByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期所有课程的总学分: public double getACTotalCreditsByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACTotalCreditsByGrade" resultType="java.lang.Double">
 		select sum(c.courseCredits) from student s, course c, studentcourse sc
 		<where>
@@ -180,13 +184,16 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期的所有成绩记录数: public Integer getACTotalSocreRecordNumberByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期的所有成绩记录数: public Integer getACTotalSocreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACTotalSocreRecordNumberByGrade" resultType="java.lang.Integer">
 		select count(*) from student s, course c, studentcourse sc
 		<where>
@@ -195,13 +202,16 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期的优秀成绩记录数: public Integer getACExcellentScoreRecordNumberByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期的优秀成绩记录数: public Integer getACExcellentScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACExcellentScoreRecordNumberByGrade" resultType="java.lang.Integer">
 		select count(*) from student s, course c, studentcourse sc
 		<where>
@@ -210,14 +220,17 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 			and sc.score >= 90
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期的良好成绩记录数: public Integer getACGoodScoreRecordNumberByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期的良好成绩记录数: public Integer getACGoodScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACGoodScoreRecordNumberByGrade" resultType="java.lang.Integer">
 		select count(*) from student s, course c, studentcourse sc
 		<where>
@@ -226,15 +239,18 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 			and sc.score >= 80
 			<![CDATA[and sc.score < 90]]>
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期的优秀成绩记录数: public Integer getACMediumScoreRecordNumberByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期的中等成绩记录数: public Integer getACMediumScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACMediumScoreRecordNumberByGrade" resultType="java.lang.Integer">
 		select count(*) from student s, course c, studentcourse sc
 		<where>
@@ -243,15 +259,18 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 			and sc.score >= 70
 			<![CDATA[and sc.score < 80]]>
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得该年级该学期的优秀成绩记录数: public Integer getACPassScoreRecordNumberByGrade(Integer 
-		grade, Integer term); -->
+	<!-- 通过 grade 获得该年级该学期的及格成绩记录数: public Integer getACPassScoreRecordNumberByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getACPassScoreRecordNumberByGrade" resultType="java.lang.Integer">
 		select count(*) from student s, course c, studentcourse sc
 		<where>
@@ -260,8 +279,10 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and c.courseTerm = #{term}
+			and sc.scTerm like CONCAT(#{year}, '%')
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			and
+			sc.scoreMark = 1
 			and sc.score >= 60
 			<![CDATA[and sc.score < 70]]>
 		</where>
