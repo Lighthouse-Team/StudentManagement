@@ -55,6 +55,7 @@ public interface StudentCourseMapper {
 	 */
 	public void deleteStudentCourseByEntity(StudentCourse studentCourse);
 
+
 	/**
 	 * 下面为前端展示数据需要的接口
 	 * 

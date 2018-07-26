@@ -48,7 +48,7 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping("/getAllCourseDistributed")
+/*	@RequestMapping("/getAllCourseDistributed")
 	public String getAllCourseDistributed(HttpSession session, Map<String, Object> map, @RequestParam(value="year", required=false) String year, 
 			@RequestParam(value="term", required=false) Integer term) {
 		User user = (User) session.getAttribute("user");
@@ -68,7 +68,7 @@ public class UserController {
 		}
 		
 		return "getAllCourseDistributed";
-	}
+	}*/
 	
 	public List<String> getYearList() {
 		DateFormat df = new SimpleDateFormat("yyyy");

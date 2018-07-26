@@ -56,6 +56,10 @@ public class TestCourse {
 		System.out.println(course);
 		List<Course> courseList = courseService.getCourseListByEntityForLike(course);
 		System.out.println(courseList);
-		
+	}
+	
+	@Test
+	public void setCourseTypeTest() {
+		courseService.setCourseType();
 	}
 }

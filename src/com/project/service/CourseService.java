@@ -78,5 +78,14 @@ public class CourseService {
 	public List<Course> getCourseDetailsByEntityForLike(Course course) {
 		return courseMapper.getCourseDetailsByEntityForLike(course);
 	}
+	
+	/**
+	 * 设置 courseType
+	 */
+	public void setCourseType() {
+		courseMapper.setCourseTypeOfRequierdCourse();
+		courseMapper.setCourseTypeOfProfessionalElectiveCourse();
+		courseMapper.setCourseTypeOfGeneralElectiveCourse();
+	}
 
 }

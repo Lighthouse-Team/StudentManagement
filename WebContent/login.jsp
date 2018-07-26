@@ -84,7 +84,7 @@
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-last-name">passWord</label> <input
-										type="text" name="passWord" placeholder="密码..."
+										type="passWord" name="passWord" placeholder="密码..."
 										class="form-last-name form-control" id="passWord">
 								</div>
 

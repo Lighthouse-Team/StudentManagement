@@ -177,5 +177,9 @@ public class InsertIntoDB {
 		}
 
 	}
+	
+	public void setCourseType() {
+		
+	}
 
 }

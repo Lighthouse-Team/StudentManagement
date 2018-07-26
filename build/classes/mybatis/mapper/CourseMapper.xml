@@ -137,16 +137,20 @@
 				and c.coursePeriod like CONCAT('%', #{coursePeriod}, '%')
 			</if>
 			<if test="courseCredits != 0">
-				and c.courseCredits like CONCAT('%', #{courseCredits}, '%')
+				and c.courseCredits like CONCAT('%', #{courseCredits},
+				'%')
 			</if>
 			<if test="courseDepartment != null">
-				and c.courseDepartment like CONCAT('%', #{courseDepartment}, '%')
+				and c.courseDepartment like CONCAT('%',
+				#{courseDepartment}, '%')
 			</if>
 			<if test="courseAttribute != null">
-				and c.courseAttribute like CONCAT('%', #{courseAttribute}, '%')
+				and c.courseAttribute like CONCAT('%',
+				#{courseAttribute}, '%')
 			</if>
 			<if test="courseProperty != null">
-				and c.courseProperty like CONCAT('%', #{courseProperty}, '%')
+				and c.courseProperty like CONCAT('%', #{courseProperty},
+				'%')
 			</if>
 		</where>
 	</select>
@@ -194,6 +198,43 @@
 	<delete id="deleteCourseByCourseId">
 		delete from course where courseId = #{courseId}
 	</delete>
+
+	<!-- 在这里设置课程的 courseType -->
+	<!-- 设置必修课的 courseType = 1: public void setCourseTypeOfRequierdCourse(); -->
+	<update id="setCourseTypeOfRequierdCourse">
+		update course
+		<trim prefix="set" suffixOverrides=",">
+			courseType = 1,
+		</trim>
+		<where>
+			courseAttribute = '必修'
+		</where>
+	</update>
+	
+	<!-- 设置专业选修课的 courseType = 2: public void setCourseTypeOfProfessionalElectiveCourse(); -->
+	<update id="setCourseTypeOfProfessionalElectiveCourse">
+		update course
+		<trim prefix="set" suffixOverrides=",">
+			courseType = 2,
+		</trim>
+		<where>
+			courseAttribute != '必修'
+			and (courseProperty = '专业选修课' or courseProperty = '专业选修课程')
+		</where>
+	</update>
+	
+	<!-- 设置通识选修课的 courseType = 2: public void setCourseTypeOfGeneralElectiveCourse(); -->
+	<update id="setCourseTypeOfGeneralElectiveCourse">
+		update course
+		<trim prefix="set" suffixOverrides=",">
+			courseType = 3,
+		</trim>
+		<where>
+			courseAttribute != '必修'
+			and courseProperty != '专业选修课'
+			and courseProperty != '专业选修课程'
+		</where>
+	</update>
 
 	<sql id="courseProperty">
 		(courseNumber, courseName, coursePeriod, courseCredits,

@@ -79,5 +79,26 @@ public interface CourseMapper {
 	 * @return
 	 */
 	public List<Course> getCourseDetailsByEntityForLike(Course course);
-
+	
+	
+	/**
+	 * 这里设置 courseType
+	 * 
+	 * @author xiapeng 2018年7月26日09:40:23
+	 */
+	
+	/**
+	 * 设置必修课的 courseType = 1
+	 */
+	public void setCourseTypeOfRequierdCourse();
+	
+	/**
+	 * 设置专业选修课的 courseType = 2
+	 */
+	public void setCourseTypeOfProfessionalElectiveCourse();
+	
+	/**
+	 * 设置通识选修课的 courseType = 3
+	 */
+	public void setCourseTypeOfGeneralElectiveCourse();
 }
