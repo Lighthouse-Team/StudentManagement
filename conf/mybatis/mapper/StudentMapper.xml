@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.StudentMapper">
+
+	<resultMap type="com.project.beans.Student" id="studentMap">
+		<id column="studentId" property="studentId" />
+		<result column="studentNumber" property="studentNumber" />
+		<result column="studentName" property="studentName" />
+		<result column="studentSex" property="studentSex" />
+		<result column="studentIDCard" property="studentIDCard" />
+		<result column="studentBirth" property="studentBirth" />
+		<result column="enrollment" property="enrollment" />
+		<result column="studentClass" property="studentClass" />
+
+		<!-- 执行懒加载 -->
+		<association property="sDepartment"
+			select="com.project.dao.DepartmentMapper.getDepartmentByDepartmentId"
+			column="departmentId">
+		</association>
+	</resultMap>
+
+	<resultMap type="com.project.beans.Student" id="studentCourseMap">
+		<id column="studentId" property="studentId" />
+		<result column="studentNumber" property="studentNumber" />
+		<result column="studentName" property="studentName" />
+		<result column="studentSex" property="studentSex" />
+		<result column="studentIDCard" property="studentIDCard" />
+		<result column="studentBirth" property="studentBirth" />
+		<result column="enrollment" property="enrollment" />
+		<result column="studentClass" property="studentClass" />
+
+		<!-- 执行懒加载 -->
+		<association property="sDepartment"
+			select="com.project.dao.DepartmentMapper.getDepartmentByDepartmentId"
+			column="departmentId">
+		</association>
+
+		<!-- <collection property="courseList" select="com.project.dao.CourseMapper.getCourseByCourseId" 
+			column="courseId"> </collection> -->
+
+		<collection property="courseList" ofType="com.project.beans.Course">
+			<id column="courseId" property="courseId" />
+			<result column="courseNumber" property="courseNumber" />
+			<result column="courseName" property="courseName" />
+			<result column="coursePeriod" property="coursePeriod" />
+			<result column="courseCredits" property="courseCredits" />
+			<result column="courseDepartment" property="courseDepartment" />
+			<result column="courseAttribute" property="courseAttribute" />
+			<result column="courseProperty" property="courseProperty" />
+			<result column="courseTerm" property="courseTerm" />
+			<!-- <result column="score" property="score"/> -->
+		</collection>
+
+	</resultMap>
+
+	<!-- 通过 studentId 获取指定学生信息: public Student getStudentByStudentId(Integer 
+		studentId); -->
+	<select id="getStudentByStudentId" resultMap="studentMap">
+		select * from Student s, Department d
+		<where>
+			s.departmentId = d.departmentId
+			and studentId = #{studentId}
+		</where>
+	</select>
+
+	<!-- 通过 studentNumber 获取指定学生信息：public Student getStudentByStudentNumber(String 
+		studentNumber); -->
+	<select id="getStudentByStudentNumber" resultMap="studentMap">
+		select * from student s, department d
+		<where>
+			s.departmentId = d.departmentId
+			and studentNumber =
+			#{studentNumber}
+
+		</where>
+	</select>
+
+	<!-- 通过 student 对象属性查询学生信息: public Student getStudentByEntity(Student student); -->
+	<select id="getStudentByEntity" resultMap="studentMap">
+		select * from Student s, Department d
+		<where>
+			s.departmentId = d.departmentId
+			<if test="studentId != null">
+				and studentId = #{studentId}
+			</if>
+			<if test="studentNumber != null">
+				and studentNumber = #{studentNumber}
+			</if>
+			<if test="studentName != null">
+				and studentName = #{studentName}
+			</if>
+			<if test="studentSex != null">
+				and studentSex = #{studentSex}
+			</if>
+			<if test="studentIDCard != null">
+				and studentIDCard = #{studentIDCard}
+			</if>
+			<if test="studentBirth != null">
+				and studentBirth = #{strStudentBirth}
+			</if>
+			<if test="enrollment != null">
+				and enrollment = #{strEnrollment}
+			</if>
+			<if test="studentClass != null">
+				and studentClass = #{studentClass}
+			</if>
+			<if test="sDepartment != null">
+				and s.departmentId = #{sDepartment.departmentId}
+			</if>
+
+		</where>
+	</select>
+
+	<!-- 获取所有学生信息: public List<Student> getAllStudent(); -->
+	<select id="getAllStudent" resultMap="studentMap">
+		select * from Student s, Department d
+		<where>
+			s.departmentId = d.departmentId
+		</where>
+	</select>
+
+	<!-- 通过 student 属性模糊查询学生信息: public List<Student> getStudentListByEntityForLike(Student 
+		student); -->
+	<select id="getStudentListByEntityForLike" resultMap="studentMap">
+		select * from Student s, Department d
+		<where>
+			s.departmentId = d.departmentId
+			<if test="studentId != null">
+				and studentId like CONCAT('%', #{studentId}, '%')
+			</if>
+			<if test="studentNumber != null">
+				and studentNumber like CONCAT('%', #{studentNumber}, '%')
+			</if>
+			<if test="studentName != null">
+				and studentName like CONCAT('%', #{studentName}, '%')
+			</if>
+			<if test="studentSex != null">
+				and studentSex = #{studentSex}
+			</if>
+			<if test="studentIDCard != null">
+				and studentIDCard like CONCAT('%', #{studentIDCard}, '%')
+			</if>
+			<if test="studentBirth != null">
+				and studentBirth like CONCAT('%', #{strStudentBirth},
+				'%')
+			</if>
+			<if test="enrollment != null">
+				and enrollment like CONCAT('%', #{strEnrollment}, '%')
+			</if>
+			<if test="studentClass != null">
+				and studentClass like CONCAT('%', #{studentClass}, '%')
+			</if>
+			<if test="sDepartment != null">
+				and s.departmentId = #{sDepartment.departmentId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 更新学生信息: public void updateStudentByEntity(Student student); -->
+	<update id="updateStudentByEntity">
+		update Student
+		<trim prefix="set" suffixOverrides=",">
+			<if test="studentNumber != null">
+				studentNumber = #{studentNumber},
+			</if>
+			<if test="studentName != null">
+				studentName = #{studentName},
+			</if>
+			<if test="studentSex != null">
+				studentSex = #{studentSex},
+			</if>
+			<if test="studentIDCard != null">
+				studentIDCard = #{studentIDCard},
+			</if>
+			<if test="studentBirth != null">
+				studentBirth = #{studentBirth},
+			</if>
+			<if test="enrollment != null">
+				enrollment = #{enrollment},
+			</if>
+			<if test="studentClass != null">
+				studentClass = #{studentClass},
+			</if>
+			<if test="sDepartment">
+				departmentId = #{sDepartment.departmentId},
+			</if>
+		</trim>
+		where studentId = #{studentId}
+	</update>
+
+	<!-- 添加学生信息, 并返回添加后的主键值: public void addStudent(Student student); -->
+	<insert id="addStudent">
+		insert into Student
+		<include refid="studentProperty" />
+		values
+		(#{studentNumber}, #{studentName}, #{studentSex},
+		#{studentIDCard}, #{studentBirth}, #{enrollment}, #{studentClass},
+		#{sDepartment.departmentId})
+	</insert>
+
+	<!-- 通过 studentId 删除指定学生信息: public void deleteStudentByStudentId(Integer 
+		studentId); -->
+	<delete id="deleteStudentByStudentId">
+		delete from Student
+		<where>
+			studentId = #{studentId}
+		</where>
+	</delete>
+
+	<!-- 通过班级号查询固定年级学生信息列表: public List<Student> getStudentByStudentClass(String 
+		studentClass); -->
+	<select id="getStudentByStudentClass" resultMap="studentMap">
+		select * from student
+		<where>
+			studentClass = #{studentClass}
+		</where>
+	</select>
+
+
+	<!-- 查询学生选课情况: public List<Student> getStudentDetailsByEntityForLike(Student 
+		student); -->
+	<select id="getStudentDetailsByEntityForLike" resultMap="studentCourseMap">
+		select * from Student s, Course c, StudentCourse sc, Department d
+		<where>
+			s.studentId = sc.studentId and c.courseId = sc.courseId and
+			s.departmentId = d.departmentId
+			<if test="studentId != null">
+				and studentId like CONCAT('%', #{studentId}, '%')
+			</if>
+			<if test="studentNumber != null">
+				and studentNumber like CONCAT('%', #{studentNumber}, '%')
+			</if>
+			<if test="studentName != null">
+				and studentName like CONCAT('%', #{studentName}, '%')
+			</if>
+			<if test="studentSex != null">
+				and studentSex = #{studentSex}
+			</if>
+			<if test="studentIDCard != null">
+				and studentIDCard like CONCAT('%', #{studentIDCard}, '%')
+			</if>
+			<if test="studentBirth != null">
+				and studentBirth like CONCAT('%', #{strStudentBirth},
+				'%')
+			</if>
+			<if test="enrollment != null">
+				and enrollment like CONCAT('%', #{strEnrollment}, '%')
+			</if>
+			<if test="studentClass != null">
+				and studentClass like CONCAT('%', #{studentClass}, '%')
+			</if>
+			<if test="sDepartment != null">
+				and s.departmentId = #{sDepartment.departmentId}
+			</if>
+		</where>
+	</select>
+
+	<sql id="studentProperty">
+		(studentNumber, studentName, studentSex, studentIDCard,
+		studentBirth, enrollment, studentClass, departmentId)
+	</sql>
+
+</mapper>

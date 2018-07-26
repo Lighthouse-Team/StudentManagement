@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.TeacherMapper">
+
+	<resultMap type="com.project.beans.Teacher" id="teacherMap">
+		<id column="teacherId" property="teacherId" />
+		<result column="teacherName" property="teacherName" />
+		<result column="teacherNumber" property="teacherNumber" />
+		<result column="teacherSex" property="teacherSex" />
+		<result column="teacherBirth" property="teacherBirth" />
+		<result column="hireDate" property="hireDate" />
+
+		<!-- 执行懒加载 -->
+		<association property="teacherDepartment"
+			select="com.project.dao.DepartmentMapper.getDepartmentByDepartmentId"
+			column="departmentId">
+		</association>
+
+	</resultMap>
+
+	<!-- 通过 teacherId 获取指定教师信息: public Teacher getTeacherByTeacherId(Integer 
+		teacherId); -->
+	<select id="getTeacherByTeacherId" resultMap="teacherMap">
+		select * from Teacher t, Department d
+		<where>
+			t.departmentId = d.departmentId
+			and teacherId = #{teacherId}
+		</where>
+	</select>
+
+	<!-- 通过 teacher 对象属性查询教师信息: public Teacher getTeacherByEntity(Teacher teacher); -->
+	<select id="getTeacherByEntity" resultMap="teacherMap">
+		select * from Teacher t, Department d
+		<where>
+			t.departmentId = d.departmentId
+			<if test="teacherId != null">
+				and teacherId = #{teacherId}
+			</if>
+			<if test="teacherNumber != null">
+				and teacherNumber = #{teacherNumber}
+			</if>
+			<if test="teacherName != null">
+				and teacherName = #{teacherName}
+			</if>
+			<if test="teacherSex != null">
+				and teacherSex = #{teacherSex}
+			</if>
+			<if test="teacherBirth != null">
+				and teacherBirth = #{strTeacherBirth}
+			</if>
+			<if test="hireDate != null">
+				and hireDate = #{strHireDate}
+			</if>
+			<if test="teacherDepartment != null">
+				and t.departmentId = #{teacherDepartment.departmentId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取所有教师信息: public List<Teacher> getAllTeacher(); -->
+	<select id="getAllTeacher" resultMap="teacherMap">
+		select * from Teacher t, Department d
+		<where>
+			t.departmentId = d.departmentId
+		</where>
+	</select>
+
+	<!-- 通过 teacher 属性模糊查询教师信息: public List<Teacher> getTeacherListByEntityForLike(Teacher 
+		teacher); -->
+	<select id="getTeacherListByEntityForLike" resultMap="teacherMap">
+		select * from Teacher t, Department d
+		<where>
+			t.departmentId = d.departmentId
+			<if test="teacherNumber != null">
+				and teacherNumber like CONCAT('%', #{teacherNumber}, '%')
+			</if>
+			<if test="teacherName != null">
+				and teacherName like CONCAT('%', #{teacherName}, '%')
+			</if>
+			<if test="teacherSex != null">
+				and teacherSex = #{teacherSex}
+			</if>
+			<if test="teacherBirth != null">
+				and teacherBirth like CONCAT('%', #{strTeacherBirth},
+				'%')
+			</if>
+			<if test="hireDate != null">
+				and hireDate like CONCAT('%', #{strHireDate}, '%')
+			</if>
+			<if test="teacherDepartment != null">
+				and t.departmentId like CONCAT('%',
+				#{teacherDepartment.departmentId}, '%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 更新教师信息: public void updateTeacherByEntity(Teacher teacher); -->
+	<update id="updateTeacherByEntity">
+		update Teacher
+		<trim prefix="set" suffixOverrides=",">
+			<if test="teacherNumber != null">
+				teacherNumber = #{teacherNumber}
+			</if>
+			<if test="teacherName != null">
+				teacherName = #{teacherName}
+			</if>
+			<if test="teacherSex != null">
+				teacherSex = #{teacherSex}
+			</if>
+			<if test="teacherBirth != null">
+				teacherBirth = #{teacherBirth}
+			</if>
+			<if test="hireDate != null">
+				hireDate = #{strHireDate}
+			</if>
+			<if test="teacherDepartment">
+				departmentId = #{teacherDepartment.departmentId}
+			</if>
+		</trim>
+		where teacherId = #{teacherId}
+	</update>
+
+	<!-- 添加教师信息, 并返回添加后的主键值: public void addTeacher(Teacher teacher); -->
+	<insert id="addTeacher">
+		insert into Teacher
+		<include refid="teacherProperty" />
+		values
+		(#{teacherNumber}, #{teacherName}, #{teacherSex},
+		#{teacherBirth}, #{hireDate}, #{teacherDepartment.departmentId})
+	</insert>
+
+	<!-- 通过 teacherId 删除指定教师信息: public void deleteTeacherByTeacherId(Integer 
+		teacherId); -->
+	<delete id="deleteTeacherByTeacherId">
+		delete from Teacher
+		<where>
+			teacherId = #{teacherId}
+		</where>
+	</delete>
+
+	<sql id="teacherProperty">
+		(teacherNumber, teacherName, teacherSex, teacherBirth,
+		hireDate, departmentId)
+	</sql>
+
+</mapper>
