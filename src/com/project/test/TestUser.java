@@ -24,9 +24,12 @@ public class TestUser {
 		userService = (UserService) applicationContext.getBean("userService");
 	}
 	
+
+
 	public String testTest() {
 		System.out.println("xiapeng");
 		return "xiapeng";
+
 	}
 	
 }
