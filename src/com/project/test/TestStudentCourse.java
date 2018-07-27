@@ -71,7 +71,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getACScoreDistribution() {
+	public void getACScoreDistributionTest() {
 		Integer grade = 2015;
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
@@ -81,7 +81,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getUniversityACScoreDistribution() {
+	public void getUniversityACScoreDistributionTest() {
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
@@ -91,5 +91,27 @@ public class TestStudentCourse {
 		}
 	}
 
+	@Test
+	public void getAGScoreDistributionTest() {
+		Integer courseType = 1;
+		// String year = "2016-2017"; // 结果为0
+		String year = "2017-2018";
+		Integer term = 1;
+		OverallDistribution overallDistribution = studentCourseService.getAGScoreDistributionByCourseType(courseType,
+				year, term);
+		System.out.println(overallDistribution);
+	}
+
+	@Test
+	public void getUniversityAGScoreDistributionTest() {
+		Integer courseType = 1;
+		// String year = "2016-2017"; // 结果为0
+		String year = "2017-2018";
+		Integer term = 1;
+		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistribution(year, term);
+		for (OverallDistribution od : odList) {
+			System.out.println(od);
+		}
+	}
 
 }

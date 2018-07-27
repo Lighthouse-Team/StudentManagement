@@ -56,7 +56,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 下面为前端展示数据需要的方法
+	 * 下面为前端展示数据需要的方法，通过 grade
 	 * 
 	 * @author xiapeng 2018年7月25日17:05:52
 	 */
@@ -65,6 +65,7 @@ public class StudentCourseService {
 	 * 通过 grade 获得该年级该学期所有课程的加权总分
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
@@ -81,6 +82,7 @@ public class StudentCourseService {
 	 * 通过 grade 获得该年级该学期所有课程的总学分
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
@@ -97,37 +99,40 @@ public class StudentCourseService {
 	 * 通过 grade 属性查询该年级该学期所有课程（必修课、专业选修课、通识选修课）的平均分
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
 	public double getACAverageScoreByGrade(Integer grade, String year, Integer term) {
-		double acTotalScore = getACTotalScoreByGrade(grade, year, term); // 加权总分
-		double acTotalCredits = getACTotalCreditsByGrade(grade, year, term); // 总学分
-		if (acTotalCredits != 0) {
-			double acAverageScore = acTotalScore / acTotalCredits;
-			return acAverageScore;
+		double totalScore = getACTotalScoreByGrade(grade, year, term); // 加权总分
+		double totalCredits = getACTotalCreditsByGrade(grade, year, term); // 总学分
+		if (totalCredits != 0) {
+			double averageScore = totalScore / totalCredits;
+			return averageScore;
 		} else {
 			return -1; // 除数异常
 		}
 	}
 
 	/**
-	 * 通过 gradeOne 属性查询全校该学期所有课程（必修课、专业选修课、通识选修课）的平均分
+	 * 查询全校该学期所有课程（必修课、专业选修课、通识选修课）的平均分
 	 * 
-	 * @param gradeOne
+	 * @param year
 	 * @param term
 	 * @return
 	 */
-	public double getUniversityACAverageScore(Integer gradeOne, String year, Integer term) {
-		double acTotalScore = 0;
-		double acTotalCredits = 0;
-		for (Integer gradeI = gradeOne -3; gradeI <= gradeOne; gradeI++) {
-			acTotalScore += getACTotalScoreByGrade(gradeI, year, term);
-			acTotalCredits += getACTotalCreditsByGrade(gradeI, year, term);
+	public double getUniversityACAverageScore(String year, Integer term) {
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		double totalScore = 0;
+		double totalCredits = 0;
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			totalScore += getACTotalScoreByGrade(gradeI, year, term);
+			totalCredits += getACTotalCreditsByGrade(gradeI, year, term);
 		}
-		if (acTotalCredits != 0) {
-			double acAverageScore = acTotalScore / acTotalCredits;
-			return acAverageScore;
+		if (totalCredits != 0) {
+			double averageScore = totalScore / totalCredits;
+			return averageScore;
 		} else {
 			return -1; // 除数异常
 		}
@@ -137,6 +142,7 @@ public class StudentCourseService {
 	 * 通过 grade 属性查询该年级该学期所有课程（必修课、专业选修课、通识选修课)的分布
 	 * 
 	 * @param grade
+	 * @param year
 	 * @param term
 	 * @return
 	 */
@@ -185,9 +191,9 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 grade 属性查询全校该学期所有课程（必修课、专业选修课、通识选修课)的分布
+	 * 查询全校该学期所有课程（必修课、专业选修课、通识选修课)的成绩分布
 	 * 
-	 * @param gradeOne
+	 * @param year
 	 * @param term
 	 * @return
 	 */
@@ -200,7 +206,7 @@ public class StudentCourseService {
 		Integer goodNumber = 0; // 良好成绩记录数
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
-		for (Integer gradeI = gradeOne -3; gradeI <= gradeOne; gradeI++) {
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			OverallDistribution ov = getACScoreDistributionByGrade(gradeI, year, term);
 			odList.add(ov);
 			totalNumber += studentCourseMapper.getACTotalSocreRecordNumberByGrade(gradeI, year, term);
@@ -217,7 +223,7 @@ public class StudentCourseService {
 			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
 			double passRate = (double) passNumber / totalNumber; // 及格率
 			double failRate = (double) failNumber / totalNumber; // 不及格率
-			double averageScore = getUniversityACAverageScore(gradeOne, year, term); // 平均分
+			double averageScore = getUniversityACAverageScore(year, term); // 平均分
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
@@ -229,6 +235,189 @@ public class StudentCourseService {
 			String strAverageScore = scoreDF.format(averageScore);
 
 			overallDistribution.setGrade("全校");
+			overallDistribution.setTotalNumber(totalNumber);
+			overallDistribution.setExcellentNumber(excellentNumber);
+			overallDistribution.setGoodNumber(goodNumber);
+			overallDistribution.setMediumNumber(mediumNumber);
+			overallDistribution.setPassNumber(passNumber);
+			overallDistribution.setFailNumber(failNumber);
+			overallDistribution.setAverageScore(strAverageScore);
+			overallDistribution.setExcellentRate(strExcellentRate);
+			overallDistribution.setGoodRate(strGoodRate);
+			overallDistribution.setMediumRate(strMediumRate);
+			overallDistribution.setPassRate(strPassRate);
+			overallDistribution.setFailRate(strFailRate);
+		} else {
+			overallDistribution.initValue();
+		}
+		odList.add(overallDistribution);
+		return odList;
+	}
+
+	/**
+	 * 通过 courseType
+	 */
+
+	/**
+	 * 通过 courseType 获得该课程该学期的加权总分
+	 * 
+	 * @param courseType
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getAGTotalScoreByCourseType(Integer courseType, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getAGTotalSocreRecordNumberByCourseType(courseType, year,
+				term);
+		if (totalScoreRecordNumber != 0) {
+			return studentCourseMapper.getAGTotalScoreByCourseType(courseType, year, term);
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * 通过 courseType 获得该课程该学期的总学分
+	 * 
+	 * @param courseType
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getAGTotalCreditsByCourseType(Integer courseType, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getAGTotalSocreRecordNumberByCourseType(courseType, year,
+				term);
+		if (totalScoreRecordNumber != 0) {
+			return studentCourseMapper.getAGTotalCreditsByCourseType(courseType, year, term);
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * 通过 courseType 获取该课程该学期的平均分
+	 * 
+	 * @param courseType
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getAGAverageScoreByCourseType(Integer courseType, String year, Integer term) {
+		double totalScore = studentCourseMapper.getAGTotalScoreByCourseType(courseType, year, term);
+		double totalCredits = studentCourseMapper.getAGTotalCreditsByCourseType(courseType, year, term);
+		if (totalCredits != 0) {
+			double averageScore = totalScore / totalCredits;
+			return averageScore;
+		} else {
+			return -1; // 除数异常
+		}
+	}
+
+	/**
+	 * 通过 courseType 获得该课程该学期的成绩分布
+	 * 
+	 * @param courseType
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public OverallDistribution getAGScoreDistributionByCourseType(Integer courseType, String year, Integer term) {
+		Integer totalNumber = studentCourseMapper.getAGTotalSocreRecordNumberByCourseType(courseType, year, term);
+		Integer excellentNumber = studentCourseMapper.getAGExcellentScoreRecordNumberByCourseType(courseType, year,
+				term);
+		Integer goodNumber = studentCourseMapper.getAGGoodScoreRecordNumberByCourseType(courseType, year, term);
+		Integer mediumNumber = studentCourseMapper.getAGMediumScoreRecordNumberByCourseType(courseType, year, term);
+		Integer passNumber = studentCourseMapper.getAGPassScoreRecordNumberByCourseType(courseType, year, term);
+		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber;
+		String strCourseType = null;
+		switch (courseType) {
+		case 1:
+			strCourseType = "必修课";
+			break;
+		case 2:
+			strCourseType = "专业选修课";
+			break;
+		case 3:
+			strCourseType = "通识选修课";
+		}
+		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setCourseType(strCourseType);
+		if (totalNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalNumber;
+			double goodRate = (double) goodNumber / totalNumber;
+			double mediumRate = (double) mediumNumber / totalNumber;
+			double passRate = (double) passNumber / totalNumber;
+			double failRate = (double) failNumber / totalNumber;
+			double averageScore = getAGAverageScoreByCourseType(courseType, year, term);
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strGoodRate = rateDF.format(goodRate);
+			String strMediumRate = rateDF.format(mediumRate);
+			String strPassRate = rateDF.format(passRate);
+			String strFailRate = rateDF.format(failRate);
+			String strAverageScore = scoreDF.format(averageScore);
+
+			overallDistribution.setTotalNumber(totalNumber);
+			overallDistribution.setExcellentNumber(excellentNumber);
+			overallDistribution.setGoodNumber(goodNumber);
+			overallDistribution.setMediumNumber(mediumNumber);
+			overallDistribution.setPassNumber(passNumber);
+			overallDistribution.setFailNumber(failNumber);
+			overallDistribution.setAverageScore(strAverageScore);
+			overallDistribution.setExcellentRate(strExcellentRate);
+			overallDistribution.setGoodRate(strGoodRate);
+			overallDistribution.setMediumRate(strMediumRate);
+			overallDistribution.setPassRate(strPassRate);
+			overallDistribution.setFailRate(strFailRate);
+		} else {
+			overallDistribution.initValue();
+		}
+		return overallDistribution;
+	}
+
+	/**
+	 * 查询全校该学期所有年级的成绩分布
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<OverallDistribution> getUniversityAGScoreDistribution(String year, Integer term) {
+		List<OverallDistribution> odList = new ArrayList<>();
+		Integer totalNumber = 0;
+		Integer excellentNumber = 0;
+		Integer goodNumber = 0;
+		Integer mediumNumber = 0;
+		Integer passNumber = 0;
+		for (Integer courseType = 1; courseType <= 3; courseType++) {
+			OverallDistribution od = getAGScoreDistributionByCourseType(courseType, year, term);
+			odList.add(od);
+			totalNumber += od.getTotalNumber();
+			excellentNumber += od.getExcellentNumber();
+			goodNumber += od.getGoodNumber();
+			mediumNumber += od.getMediumNumber();
+			passNumber += od.getPassNumber();
+		}
+		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber;
+		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setCourseType("全校");
+		if (totalNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalNumber;
+			double goodRate = (double) goodNumber / totalNumber;
+			double mediumRate = (double) mediumNumber / totalNumber;
+			double passRate = (double) passNumber / totalNumber;
+			double failRate = (double) failNumber / totalNumber;
+			double averageScore = getUniversityACAverageScore(year, term);
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strGoodRate = rateDF.format(goodRate);
+			String strMediumRate = rateDF.format(mediumRate);
+			String strPassRate = rateDF.format(passRate);
+			String strFailRate = rateDF.format(failRate);
+			String strAverageScore = scoreDF.format(averageScore);
+
 			overallDistribution.setTotalNumber(totalNumber);
 			overallDistribution.setExcellentNumber(excellentNumber);
 			overallDistribution.setGoodNumber(goodNumber);

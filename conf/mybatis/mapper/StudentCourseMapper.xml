@@ -152,7 +152,7 @@
 
 
 
-	<!-- 下面为前端展示需要用到的接口的实现 -->
+	<!-- 下面为前端展示需要用到的接口的实现，通过 grade -->
 
 	<!-- 通过 grade 获得该年级该学期所有课程的加权总分: public double getACTotalScoreByGrade(@Param(value 
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
@@ -285,6 +285,132 @@
 			sc.scoreMark = 1
 			and sc.score >= 60
 			<![CDATA[and sc.score < 70]]>
+		</where>
+	</select>
+
+
+	<!-- 通过 courseType -->
+	<!-- 通过 courseType 获得该年级该学期所有课程的加权总分: public double getAGTotalScoreByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGTotalScoreByCourseType" resultType="java.lang.Double">
+		select sum(sc.score * c.courseCredits) from course c,studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and
+			c.courseType = #{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期所有课程的总学分: public double getAGTotalCreditsByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGTotalCreditsByCourseType" resultType="java.lang.Double">
+		select sum(c.courseCredits) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and
+			c.courseType = #{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期的所有成绩记录数: public Integer getAGTotalSocreRecordNumberByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGTotalSocreRecordNumberByCourseType" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and
+			c.courseType = #{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期的优秀成绩记录数: public Integer getAGExcellentScoreRecordNumberByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGExcellentScoreRecordNumberByCourseType"
+		resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and
+			c.courseType = #{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 90
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期的良好成绩记录数: public Integer getAGGoodScoreRecordNumberByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGGoodScoreRecordNumberByCourseType" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and c.courseType =
+			#{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 80
+			<![CDATA[ and sc.score < 90]]>
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期的中等成绩记录数: public Integer getAGMediumScoreRecordNumberByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGMediumScoreRecordNumberByCourseType"
+		resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and c.courseType =
+			#{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 70
+			<![CDATA[ and sc.score < 80]]>
+		</where>
+	</select>
+
+	<!-- 通过 CourseType 获得该年级该学期的及格成绩记录数: public Integer getAGPassScoreRecordNumberByCourseType(@Param(value 
+		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getAGPassScoreRecordNumberByCourseType" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseTerm = #{term}
+			and c.courseType =
+			#{courseType}
+			and sc.scTerm like CONCAT(#{year}, '%')
+			and
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 60
+			<![CDATA[ and sc.score < 70]]>
 		</where>
 	</select>
 
