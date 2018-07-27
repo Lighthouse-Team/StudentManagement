@@ -24,4 +24,8 @@ public class TestUser {
 		userService = (UserService) applicationContext.getBean("userService");
 	}
 	
+	public void testTest() {
+		
+	}
+	
 }
