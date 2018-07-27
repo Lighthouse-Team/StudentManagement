@@ -25,7 +25,7 @@ public class TestUser {
 	}
 	
 	public void testTest() {
-		
+		System.out.println("xiapeng");
 	}
 	
 }
