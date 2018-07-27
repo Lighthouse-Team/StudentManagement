@@ -26,9 +26,9 @@ public class TestUser {
 	
 
 
-	public String testTest() {
+	public Integer testTest() {
 		System.out.println("xiapeng");
-		return "xiapeng";
+		return 0;
 
 	}
 	
