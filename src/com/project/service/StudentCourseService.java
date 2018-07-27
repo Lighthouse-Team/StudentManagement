@@ -217,6 +217,7 @@ public class StudentCourseService {
 		}
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setGrade("全校");
 		if (totalNumber != 0) {
 			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
 			double goodRate = (double) goodNumber / totalNumber; // 良好率
@@ -234,7 +235,6 @@ public class StudentCourseService {
 			String strFailRate = rateDF.format(failRate);
 			String strAverageScore = scoreDF.format(averageScore);
 
-			overallDistribution.setGrade("全校");
 			overallDistribution.setTotalNumber(totalNumber);
 			overallDistribution.setExcellentNumber(excellentNumber);
 			overallDistribution.setGoodNumber(goodNumber);

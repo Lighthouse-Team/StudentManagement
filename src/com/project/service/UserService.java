@@ -11,7 +11,6 @@ import com.project.beans.Course;
 import com.project.beans.Student;
 import com.project.beans.StudentCourse;
 import com.project.beans.User;
-import com.project.dao.RecordDistributionMapper;
 import com.project.dao.StudentCourseMapper;
 import com.project.dao.StudentMapper;
 import com.project.dao.UserMapper;
@@ -28,9 +27,6 @@ public class UserService {
 
 	@Autowired
 	private StudentCourseMapper studentCourseMapper;
-
-	@Autowired
-	private RecordDistributionMapper recordDistributionMapper;
 
 	public User getUserByUserName(String userName) {
 		return userMapper.getUserByUserName(userName);
@@ -278,23 +274,5 @@ public class UserService {
 
 		return scDistribution;
 	}
-
-	/**
-	 * end
-	 */
-
-	/**
-	 * 
-	 * @param grade
-	 * @return
-	 */
-	public Integer getTotalNumberByGrade(String grade) {
-		if (grade != null) {
-			return recordDistributionMapper.getTotalNumberByGrade(grade);
-		}
-		else {
-			return 0;
-		}
-	}
-
+	
 }
