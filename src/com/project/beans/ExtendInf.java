@@ -6,5 +6,5 @@ package com.project.beans;
  *
  */
 public class ExtendInf {
-
+//ssj
 }
