@@ -6,5 +6,5 @@ package com.project.beans;
  *
  */
 public class ExtendInf {
-// 测试添加注释
+
 }
