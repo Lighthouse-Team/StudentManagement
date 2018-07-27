@@ -24,9 +24,8 @@ public class TestUser {
 		userService = (UserService) applicationContext.getBean("userService");
 	}
 	
-	public Integer testTest() {
+	public void testTest() {
 		System.out.println("xiapeng");
-		return 0;
 	}
 	
 }
