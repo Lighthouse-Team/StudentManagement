@@ -26,9 +26,9 @@ public class TestUser {
 	
 
 
-	public void testTest() {
+	public double testTest() {
 		System.out.println("xiapeng");
-
+		return 0;
 	}
 	
 }
