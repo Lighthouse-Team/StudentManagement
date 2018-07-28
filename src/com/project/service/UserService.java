@@ -28,6 +28,7 @@ public class UserService {
 	@Autowired
 	private StudentCourseMapper studentCourseMapper;
 
+	
 	public User getUserByUserName(String userName) {
 		return userMapper.getUserByUserName(userName);
 	}

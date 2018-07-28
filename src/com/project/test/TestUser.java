@@ -23,11 +23,4 @@ public class TestUser {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		userService = (UserService) applicationContext.getBean("userService");
 	}
-	
-	//11
-	public String testTest() {
-		System.out.println("xiapeng");
-		return "xiapeng";
-	}
-	
 }

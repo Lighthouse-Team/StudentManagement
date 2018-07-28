@@ -2,6 +2,7 @@ package com.project.test;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -10,28 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.project.beans.Course;
 import com.project.beans.Student;
 import com.project.beans.StudentCourse;
 import com.project.dto.OverallDistribution;
-import com.project.service.CourseService;
 import com.project.service.StudentCourseService;
-import com.project.service.StudentService;
 
 public class TestStudentCourse {
 
 	@Autowired
 	private StudentCourseService studentCourseService;
-	@Autowired
-	private StudentService studentService;
-	@Autowired
-	private CourseService courseService;
 
 	@Before
 	public void before() {
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-
 		studentCourseService = (StudentCourseService) applicationContext.getBean("studentCourseService");
 	}
 
@@ -64,14 +57,13 @@ public class TestStudentCourse {
 
 		DecimalFormat df = new DecimalFormat("0.00%"); // 系统可以识别这里的%
 		System.out.println(df.format(d)); // 121.20%
-		String str = df.format(d);
 
 		DecimalFormat df2 = new DecimalFormat("0%");
 		System.out.println(df2.format(d)); // 121%
 	}
 
 	@Test
-	public void getACScoreDistributionTest() {
+	public void getACScoreDistributionByGradeTest() {
 		Integer grade = 2015;
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
@@ -81,18 +73,18 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getUniversityACScoreDistributionTest() {
+	public void getUniversityACScoreDistributionListTest() {
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistribution(year, term);
+		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
 		}
 	}
 
 	@Test
-	public void getAGScoreDistributionTest() {
+	public void getAGScoreDistributionByCourseTypeTest() {
 		Integer courseType = 1;
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
@@ -103,13 +95,32 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getUniversityAGScoreDistributionTest() {
-		Integer courseType = 1;
+	public void getUniversityAGScoreDistributionListTest() {
 		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistribution(year, term);
+		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
 		for (OverallDistribution od : odList) {
+			System.out.println(od);
+		}
+	}
+
+	@Test
+	public void getRPECScoreDistributionByGradeTest() {
+		Integer grade = 2015;
+		String year = "2017-2018";
+		Integer term = 1;
+		OverallDistribution overallDistribution = studentCourseService.getRPECScoreDistributionByGrade(grade, year,
+				term);
+		System.out.println(overallDistribution);
+	}
+	
+	@Test
+	public void getUniversityRPECScoreDistributionListTest() {
+		String year = "2017-2018";
+		Integer term = 1;
+		List<OverallDistribution> odList = studentCourseService.getUniversityRPECScoreDistributionList(year, term);
+		for(OverallDistribution od : odList) {
 			System.out.println(od);
 		}
 	}

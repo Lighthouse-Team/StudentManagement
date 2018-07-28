@@ -56,13 +56,15 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 下面为前端展示数据需要的方法，通过 grade
-	 * 
-	 * @author xiapeng 2018年7月25日17:05:52
+	 * 下面为前端展示数据需要的接口
 	 */
 
 	/**
-	 * 通过 grade 获得该年级该学期所有课程的加权总分
+	 * 通过 grade 属性获得AC的考试成绩的分布，AC指所有课程，包括：必修课、专业选修课、通识选修课
+	 */
+
+	/**
+	 * 通过 grade 获得该年级该学期AC的加权总分
 	 * 
 	 * @param grade
 	 * @param year
@@ -74,12 +76,12 @@ public class StudentCourseService {
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getACTotalScoreByGrade(grade, year, term);
 		} else {
-			return 0;
+			return 0; // 成绩记录数为0，总分也是0
 		}
 	}
 
 	/**
-	 * 通过 grade 获得该年级该学期所有课程的总学分
+	 * 通过 grade 获得该年级该学期AC的总学分
 	 * 
 	 * @param grade
 	 * @param year
@@ -91,12 +93,12 @@ public class StudentCourseService {
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getACTotalCreditsByGrade(grade, year, term);
 		} else {
-			return 0;
+			return 0; // 成绩记录数为0，总学分也是0
 		}
 	}
 
 	/**
-	 * 通过 grade 属性查询该年级该学期所有课程（必修课、专业选修课、通识选修课）的平均分
+	 * 通过 grade 查询该年级该学期AC的平均分
 	 * 
 	 * @param grade
 	 * @param year
@@ -115,7 +117,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 查询全校该学期所有课程（必修课、专业选修课、通识选修课）的平均分
+	 * 查询全校该学期AC的平均分
 	 * 
 	 * @param year
 	 * @param term
@@ -139,7 +141,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 grade 属性查询该年级该学期所有课程（必修课、专业选修课、通识选修课)的分布
+	 * 通过 grade 属性查询该年级该学期AC的分布
 	 * 
 	 * @param grade
 	 * @param year
@@ -191,13 +193,13 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 查询全校该学期所有课程（必修课、专业选修课、通识选修课)的成绩分布
+	 * 查询全校该学期AC的成绩分布
 	 * 
 	 * @param year
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getUniversityACScoreDistribution(String year, Integer term) {
+	public List<OverallDistribution> getUniversityACScoreDistributionList(String year, Integer term) {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		List<OverallDistribution> odList = new ArrayList<>();
@@ -255,11 +257,11 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 courseType
+	 * 通过 courseType 属性获得AG该课程的考试成绩分布，AG指所有年级
 	 */
 
 	/**
-	 * 通过 courseType 获得该课程该学期的加权总分
+	 * 通过 courseType 获得AG该学期该课程的加权总分
 	 * 
 	 * @param courseType
 	 * @param year
@@ -272,12 +274,12 @@ public class StudentCourseService {
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getAGTotalScoreByCourseType(courseType, year, term);
 		} else {
-			return 0;
+			return 0; // 成绩记录数为0，总分也是0
 		}
 	}
 
 	/**
-	 * 通过 courseType 获得该课程该学期的总学分
+	 * 通过 courseType 获得AG该学期该课程的总学分
 	 * 
 	 * @param courseType
 	 * @param year
@@ -290,12 +292,12 @@ public class StudentCourseService {
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getAGTotalCreditsByCourseType(courseType, year, term);
 		} else {
-			return 0;
+			return 0; // 成绩记录数为0，总学分也是0
 		}
 	}
 
 	/**
-	 * 通过 courseType 获取该课程该学期的平均分
+	 * 通过 courseType 获得AG该学期该课程的平均分
 	 * 
 	 * @param courseType
 	 * @param year
@@ -314,7 +316,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 courseType 获得该课程该学期的成绩分布
+	 * 通过 courseType 获得AG该学期该课程的成绩分布
 	 * 
 	 * @param courseType
 	 * @param year
@@ -377,13 +379,13 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 查询全校该学期所有年级的成绩分布
+	 * 查询全校该学期AC的的成绩分布
 	 * 
 	 * @param year
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getUniversityAGScoreDistribution(String year, Integer term) {
+	public List<OverallDistribution> getUniversityAGScoreDistributionList(String year, Integer term) {
 		List<OverallDistribution> odList = new ArrayList<>();
 		Integer totalNumber = 0;
 		Integer excellentNumber = 0;
@@ -409,6 +411,203 @@ public class StudentCourseService {
 			double passRate = (double) passNumber / totalNumber;
 			double failRate = (double) failNumber / totalNumber;
 			double averageScore = getUniversityACAverageScore(year, term);
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strGoodRate = rateDF.format(goodRate);
+			String strMediumRate = rateDF.format(mediumRate);
+			String strPassRate = rateDF.format(passRate);
+			String strFailRate = rateDF.format(failRate);
+			String strAverageScore = scoreDF.format(averageScore);
+
+			overallDistribution.setTotalNumber(totalNumber);
+			overallDistribution.setExcellentNumber(excellentNumber);
+			overallDistribution.setGoodNumber(goodNumber);
+			overallDistribution.setMediumNumber(mediumNumber);
+			overallDistribution.setPassNumber(passNumber);
+			overallDistribution.setFailNumber(failNumber);
+			overallDistribution.setAverageScore(strAverageScore);
+			overallDistribution.setExcellentRate(strExcellentRate);
+			overallDistribution.setGoodRate(strGoodRate);
+			overallDistribution.setMediumRate(strMediumRate);
+			overallDistribution.setPassRate(strPassRate);
+			overallDistribution.setFailRate(strFailRate);
+		} else {
+			overallDistribution.initValue();
+		}
+		odList.add(overallDistribution);
+		return odList;
+	}
+
+	/**
+	 * 通过 grade 属性获得AC的考试成绩的分布，AC指所有课程，包括：必修课、专业选修课、通识选修课
+	 */
+
+	/**
+	 * 通过 grade 获得该年级该学期RPEC的加权总分
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getRPECTotalScoreByGrade(Integer grade, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(grade, year, term);
+		if (totalScoreRecordNumber != 0) {
+			return studentCourseMapper.getRPECTotalScoreByGrade(grade, year, term);
+		} else {
+			return 0; // 成绩记录数为0，总分也是0
+		}
+	}
+
+	/**
+	 * 通过 grade 获得该年级该学期RPEC的总学分
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getRPECTotalCreditsByGrade(Integer grade, String year, Integer term) {
+		Integer totalScoreRecordNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(grade, year, term);
+		if(totalScoreRecordNumber != 0) {
+			return studentCourseMapper.getRPECTotalCreditsByGrade(grade, year, term);
+		} else {
+			return 0; // 成绩记录数为0，总学分也是0
+		}
+	}
+	
+	/**
+	 * 通过 grade 查询该年级该学期RPEC的平均分
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getRPECAverageScoreByGrade(Integer grade, String year, Integer term) {
+		double totalScore = getRPECTotalScoreByGrade(grade, year, term); // 加权总分
+		double totalCredits = getRPECTotalCreditsByGrade(grade, year, term); // 总学分
+		if (totalCredits != 0) {
+			double averageScore = totalScore / totalCredits;
+			return averageScore;
+		} else {
+			return -1; // 除数异常
+		}
+	}
+	
+	/**
+	 * 查询全校该学期RPEC的平均分
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getUniversityRPECAverageScore(String year, Integer term) {
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		double totalScore = 0;
+		double totalCredits = 0;
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			totalScore += getRPECTotalScoreByGrade(gradeI, year, term);
+			totalCredits += getRPECTotalCreditsByGrade(gradeI, year, term);
+		}
+		if (totalCredits != 0) {
+			double averageScore = totalScore / totalCredits;
+			return averageScore;
+		} else {
+			return -1; // 除数异常
+		}
+	}
+	
+	/**
+	 * 通过 grade 属性查询该年级该学期RPEC的分布
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public OverallDistribution getRPECScoreDistributionByGrade(Integer grade, String year, Integer term) {
+		Integer totalNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(grade, year, term); // 成绩记录总数
+		Integer excellentNumber = studentCourseMapper.getRPECExcellentScoreRecordNumberByGrade(grade, year, term); // 优秀成绩记录数
+		Integer goodNumber = studentCourseMapper.getRPECGoodScoreRecordNumberByGrade(grade, year, term); // 良好成绩记录数
+		Integer mediumNumber = studentCourseMapper.getRPECMediumScoreRecordNumberByGrade(grade, year, term); // 中等成绩记录数
+		Integer passNumber = studentCourseMapper.getRPECPassScoreRecordNumberByGrade(grade, year, term); // 及格成绩记录数
+		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
+		OverallDistribution overallDistribution = new OverallDistribution();
+		String strGrade = String.valueOf(grade);
+		overallDistribution.setGrade(strGrade);
+		if (totalNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
+			double goodRate = (double) goodNumber / totalNumber; // 良好率
+			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
+			double passRate = (double) passNumber / totalNumber; // 及格率
+			double failRate = (double) failNumber / totalNumber; // 不及格率
+			double averageScore = getRPECAverageScoreByGrade(grade, year, term); // 平均分
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strGoodRate = rateDF.format(goodRate);
+			String strMediumRate = rateDF.format(mediumRate);
+			String strPassRate = rateDF.format(passRate);
+			String strFailRate = rateDF.format(failRate);
+			String strAverageScore = scoreDF.format(averageScore);
+
+			overallDistribution.setTotalNumber(totalNumber);
+			overallDistribution.setExcellentNumber(excellentNumber);
+			overallDistribution.setGoodNumber(goodNumber);
+			overallDistribution.setMediumNumber(mediumNumber);
+			overallDistribution.setPassNumber(passNumber);
+			overallDistribution.setFailNumber(failNumber);
+			overallDistribution.setAverageScore(strAverageScore);
+			overallDistribution.setExcellentRate(strExcellentRate);
+			overallDistribution.setGoodRate(strGoodRate);
+			overallDistribution.setMediumRate(strMediumRate);
+			overallDistribution.setPassRate(strPassRate);
+			overallDistribution.setFailRate(strFailRate);
+		} else {
+			overallDistribution.initValue();
+		}
+		return overallDistribution;
+	}
+
+	/**
+	 * 查询全校该学期RPEC的成绩分布
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<OverallDistribution> getUniversityRPECScoreDistributionList(String year, Integer term) {
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		List<OverallDistribution> odList = new ArrayList<>();
+		Integer totalNumber = 0; // 成绩记录总数
+		Integer excellentNumber = 0; // 优秀成绩记录数
+		Integer goodNumber = 0; // 良好成绩记录数
+		Integer mediumNumber = 0; // 中等成绩记录数
+		Integer passNumber = 0; // 及格成绩记录数
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			OverallDistribution ov = getRPECScoreDistributionByGrade(gradeI, year, term);
+			odList.add(ov);
+			totalNumber += studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(gradeI, year, term);
+			excellentNumber += studentCourseMapper.getRPECExcellentScoreRecordNumberByGrade(gradeI, year, term);
+			goodNumber += studentCourseMapper.getRPECGoodScoreRecordNumberByGrade(gradeI, year, term);
+			mediumNumber += studentCourseMapper.getRPECMediumScoreRecordNumberByGrade(gradeI, year, term);
+			passNumber += studentCourseMapper.getRPECPassScoreRecordNumberByGrade(gradeI, year, term);
+		}
+		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
+		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setGrade("全校");
+		if (totalNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
+			double goodRate = (double) goodNumber / totalNumber; // 良好率
+			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
+			double passRate = (double) passNumber / totalNumber; // 及格率
+			double failRate = (double) failNumber / totalNumber; // 不及格率
+			double averageScore = getUniversityRPECAverageScore(year, term); // 平均分
+
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			String strExcellentRate = rateDF.format(excellentRate);
