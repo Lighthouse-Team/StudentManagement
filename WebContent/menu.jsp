@@ -165,9 +165,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="test" class="nav-link">
+                <a href="getVariousCourseDistributedPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>各类成绩分布情况</p>
+                  <p>各类课程成绩分布情况</p>
                 </a>
               </li>
               <!-- <li class="nav-item">

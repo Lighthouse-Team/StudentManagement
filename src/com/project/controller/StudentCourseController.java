@@ -26,28 +26,7 @@ public class StudentCourseController {
 	@Autowired
 	private StudentCourseService studentCourseService;
 
-	@RequestMapping("/getAllCourseDistributed")
-	public String getAllCourseDistributed(HttpSession session, Map<String, Object> map, @RequestParam(value="year", required=false) String year, 
-			@RequestParam(value="term", required=false) Integer term) {
-		User user = (User) session.getAttribute("user");
-		if(user == null) {
-			return "redirect:/login.jsp";
-		} 
-		
-		List<String> yearList = getYearList();
-		
-//		System.out.println("year: " + year);
-//		System.out.println("term: " + term);
-		map.put("yearList", yearList);
-		
-		if(year != null) {
-			List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
-			map.put("odList", odList);
-		}
-		
-		return "getAllCourseDistributed";
-	}
-	
+	//获取年份列表
 	public List<String> getYearList() {
 		DateFormat df = new SimpleDateFormat("yyyy");
 		String yearNow = df.format(new Date());
@@ -62,11 +41,86 @@ public class StudentCourseController {
 		
 		return years;
 	}
+
+	/**
+	 * 返回所有课程成绩分布情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getAllCourseDistributed")
+	public String getAllCourseDistributed(HttpSession session, Map<String, Object> map, @RequestParam(value="year", required=false) String year, 
+			@RequestParam(value="term", required=false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		
+		map.put("yearList", yearList);
+		
+		if(year != null) {
+			List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
+			map.put("odList", odList);
+		}
+		
+		return "getAllCourseDistributed";
+	}
 	
+	/**
+	 * 返回所有课程成绩分布情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/getAllCourseDistributedData")
 	public List<OverallDistribution> sendAllCourseDistributedData(String year, Integer term){
 		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
 		return odList;
 	}
+	
+	/**
+	 * 跳转页面至各类课程成绩分布情况页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getVariousCourseDistributedPage")
+	public String getVariousCourseDistributedPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getVariousCourseDistributed";
+	}
+	
+	@RequestMapping("/getVariousCourseDistributed")
+	public String getVariousCourseDistributed(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
+			map.put("odList", odList);
+		}
+		return "getVariousCourseDistributed";
+	}
+	
+	
+	
+	
+	
 }

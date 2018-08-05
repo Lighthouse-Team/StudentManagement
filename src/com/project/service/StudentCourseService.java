@@ -334,13 +334,13 @@ public class StudentCourseService {
 		String strCourseType = null;
 		switch (courseType) {
 		case 1:
-			strCourseType = "必修课";
+			strCourseType = "必修";
 			break;
 		case 2:
-			strCourseType = "专业选修课";
+			strCourseType = "专业选修";
 			break;
 		case 3:
-			strCourseType = "通识选修课";
+			strCourseType = "通识选修";
 		}
 		OverallDistribution overallDistribution = new OverallDistribution();
 		overallDistribution.setCourseType(strCourseType);

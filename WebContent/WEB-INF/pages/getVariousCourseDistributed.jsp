@@ -318,7 +318,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">所有课程成绩分布</li>
+							<li class="breadcrumb-item active">各类课程成绩分布</li>
 						</ol>
 					</div>
 				</div>
@@ -334,7 +334,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="" method="post">
+						<form action="getVariousCourseDistributed" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -343,7 +343,7 @@
 										data-placeholder="Select a State" style="width: 100%;">
 										<option value="">选择学年</option>
 										<c:forEach items="${yearList}" var="year">
-											<option value="${year }">${year }</option>
+											<option value="${year}">${year }</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -387,8 +387,7 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<!-- <th>序号</th> -->
-										<th>年级</th>
+										<th>课程种类</th>
 										<th>成绩记录总数</th>
 										<th>优秀(90-100)</th>
 										<th>良好(80-89)</th>
@@ -404,9 +403,9 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${odList }" var="OverallDistribution">
+									<c:forEach items="${odList}" var="OverallDistribution">
 										<tr>
-											<td>${OverallDistribution.grade }</td>
+											<td>${OverallDistribution.courseType }</td>
 											<td>${OverallDistribution.totalNumber }</td>
 											<td>${OverallDistribution.excellentNumber }</td>
 											<td>${OverallDistribution.goodNumber }</td>
