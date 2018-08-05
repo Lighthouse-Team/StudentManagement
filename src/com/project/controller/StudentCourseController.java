@@ -101,6 +101,14 @@ public class StudentCourseController {
 		return "getVariousCourseDistributed";
 	}
 	
+	/**
+	 * 返回分类课程成绩分布情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
 	@RequestMapping("/getVariousCourseDistributed")
 	public String getVariousCourseDistributed(HttpSession session, Map<String, Object> map,
 			@RequestParam(value = "year", required = false) String year,
@@ -119,8 +127,17 @@ public class StudentCourseController {
 		return "getVariousCourseDistributed";
 	}
 	
-	
-	
-	
+	/**
+	 * 返回分类课程成绩分布情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getVariousCourseDistributedData")
+	public List<OverallDistribution> sendVariousCourseDistributedData(String year, Integer term){
+		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
+		return odList;
+	}
 	
 }
