@@ -165,7 +165,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="test" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>各类成绩分布情况</p>
                 </a>
