@@ -1,3 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/Lighthouse-Team/StudentManagement.git
 eclipse.preferences.version=1
 encoding//WebContent/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js=UTF-8
 encoding//WebContent/plugins/colorpicker/bootstrap-colorpicker.js=UTF-8
@@ -5,7 +8,4 @@ encoding//src/com/project/beans=GBK
 encoding//src/com/project/controller=UTF-8
 encoding//src/com/project/dao=UTF-8
 encoding/<project>=UTF-8
-<<<<<<< HEAD
 separateDerivedEncodings=true
-=======
->>>>>>> branch 'master' of https://github.com/Lighthouse-Team/StudentManagement.git

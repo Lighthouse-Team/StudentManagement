@@ -3,8 +3,6 @@ package com.project.test;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
@@ -183,21 +181,6 @@ public class TestStudentCourse {
 		List<String> classNumberList = studentCourseService.getAllClassNumberByGrade(grade);
 		System.out.println(classNumberList.size());
 		System.out.println(classNumberList);
-	}
-
-	@Test
-	public void listIteratorTest() {
-		List<String> strList = new ArrayList<>();
-		strList.add("201501");
-		strList.add("201502");
-		strList.add("201503");
-		strList.add("201504");
-		System.out.println(strList);
-		System.out.println(strList.size());
-		Iterator<String> strIt = strList.iterator();
-		while (strIt.hasNext()) {
-			System.out.println(strIt.next());
-		}
 	}
 
 	@Test
