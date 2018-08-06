@@ -37,7 +37,7 @@
 		select * from Department
 	</select>
 
-	<!-- 通过 department 属性模糊查询部门信息: public List<department> getDepartmentListByEntityForLike(Department 
+	<!-- 通过 department 属性模糊查询部门信息: public List<Department> getDepartmentListByEntityForLike(Department 
 		department); -->
 	<select id="getDepartmentListByEntityForLike" resultMap="departmentMap">
 		select * from Department
@@ -46,8 +46,7 @@
 				and departmentId like CONCAT('%', #{departmentId}, '%')
 			</if>
 			<if test="departmentName != null">
-				and departmentName like CONCAT('%', #{departmentName},
-				'%')
+				and departmentName like CONCAT(#{departmentName}, '%')
 			</if>
 		</where>
 	</select>

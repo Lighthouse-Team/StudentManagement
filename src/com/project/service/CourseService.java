@@ -39,14 +39,14 @@ public class CourseService {
 	 * @param course
 	 * @return
 	 */
-	public Integer insertCourse(Course course) {
+	public void insertCourse(Course course) {
 		courseMapper.addCourse(course);
-		course = getcourseByEntity(course);
-		if (course != null) {
-			return course.getCourseId();
-		} else {
-			return -1; // 插入异常
-		}
+		// course = getcourseByEntity(course); // 注释了节省导入数据库的时间
+		// if (course != null) {
+		// return course.getCourseId();
+		// } else {
+		// return -1; // 插入异常
+		// }
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class CourseService {
 	public List<Course> getCourseDetailsByEntityForLike(Course course) {
 		return courseMapper.getCourseDetailsByEntityForLike(course);
 	}
-	
+
 	/**
 	 * 设置 courseType
 	 */

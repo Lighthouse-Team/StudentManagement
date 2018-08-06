@@ -152,9 +152,9 @@
 
 
 
-	<!-- 下面为前端展示需要用到的接口的实现 -->
+	<!-- ======下面为前端展示需要用到的接口的实现======== -->
 
-	<!-- 通过 grade 属性获得AC的考试成绩的分布，AC指所有课程，包括：必修课、专业选修课、通识选修课 -->
+	<!-- ======通过 grade 属性获得AC的考试成绩的分布，AC指所有课程，包括：必修课、专业选修课、通识选修课======= -->
 
 	<!-- 通过 grade 获得该年级该学期AC的加权总分: public double getACTotalScoreByGrade(@Param(value 
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
@@ -291,7 +291,7 @@
 	</select>
 
 
-	<!-- 通过 courseType 属性获得AG该课程的考试成绩分布，AG指所有年级 -->
+	<!-- =======通过 courseType 属性获得AG该课程的考试成绩分布，AG指所有年级====== -->
 
 	<!-- 通过 courseType 获得AG该学期所有课程的加权总分: public double getAGTotalScoreByCourseType(@Param(value 
 		= "courseType") Integer courseType, @Param(value = "year") String year, @Param(value 
@@ -417,7 +417,7 @@
 		</where>
 	</select>
 
-	<!-- 通过 grade 属性获得RPEC的考试成绩的分布，RPEC指必修课和专业选修课 -->
+	<!-- =======通过 grade 属性获得RPEC的考试成绩的分布，RPEC指必修课和专业选修课======== -->
 
 	<!-- 通过 grade 获得该年级该学期RPEC的加权总分: public double getRPECTotalScoreByGrade(@Param(value 
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
@@ -572,7 +572,271 @@
 		</where>
 	</select>
 
+	<!-- ======通过 grade和departmentId 获得RPEC的考试成绩的分布，RPEC指必修课和专业选修课======= -->
 
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的加权总分: public double getRPECTotalScoreByGradeAndDepartmentId(@Param(value 
+		= "departmentId") Integer departmentId, @Param(value = "grade") Integer grade, 
+		@Param(value = "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getRPECTotalScoreByGradeAndDepartmentId" resultType="java.lang.Double">
+		select sum(sc.score * c.courseCredits) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的总学分: public double getRPECTotalCreditsByGradeAndDepartmentId(@Param(value 
+		= "departmentId") Integer departmentId, @Param(value = "grade") Integer grade, 
+		@Param(value = "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getRPECTotalCreditsByGradeAndDepartmentId"
+		resultType="java.lang.Double">
+		select sum(c.courseCredits) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的所有成绩记录数: public Integer getRPECTotalScoreRecordNumberByGradeAndDepartmentId( 
+		@Param(value = "departmentId") Integer departmentId, @Param(value = "grade") 
+		Integer grade, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getRPECTotalScoreRecordNumberByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的优秀成绩记录数: public Integer getRPECExcellentScoreRecordNumberByGradeAndDepartmentId( 
+		@Param(value = "departmentId") Integer departmentId, @Param(value = "grade") 
+		Integer grade, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getRPECExcellentScoreRecordNumberByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score
+			>= 90
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的良好成绩记录数: public Integer getRPECGoodScoreRecordNumberByGradeAndDepartmentId( 
+		@Param(value = "departmentId") Integer departmentId, @Param(value = "grade") 
+		Integer grade, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getRPECGoodScoreRecordNumberByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score
+			>= 80
+			<![CDATA[and sc.score < 90]]>
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的中等成绩记录数: public Integer getRPECMediumScoreRecordNumberByGradeAndDepartmentId( 
+		@Param(value = "departmentId") Integer departmentId, @Param(value = "grade") 
+		Integer grade, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getRPECMediumScoreRecordNumberByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score
+			>= 70
+			<![CDATA[and sc.score < 80]]>
+		</where>
+	</select>
+
+	<!-- 通过 grade和departmentId 获得该学院该年级该学期RPEC的及格成绩记录数: public Integer getRPECPassScoreRecordNumberByGradeAndDepartmentId( 
+		@Param(value = "departmentId") Integer departmentId, @Param(value = "grade") 
+		Integer grade, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getRPECPassScoreRecordNumberByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c,
+		studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseTerm = #{term}
+			and (c.courseType = 1 or
+			c.courseType = 2)
+			and sc.examProperty = 1
+			and
+			sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score
+			>= 60
+			<![CDATA[and sc.score < 70]]>
+		</where>
+	</select>
+
+	<!-- ======通过 classNumber 获得该班级RPEC的优秀率、不及格情况，RPEC指必修课和专业选修课======== -->
+
+	<!-- 通过 grade 获得该年级的所有班级: public List<String> getAllClassNumberByGrade(@Param(value 
+		= "grade") Integer grade); -->
+	<select id="getAllClassNumberByGrade" resultType="java.lang.String">
+		select studentClass from student
+		<where>
+			studentClass like CONCAT(#{grade}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 classNumber 获得该班级RPEC的成绩记录总数: public Integer getRPECTotalScoreRecordNumberByClassNumber(@Param(value 
+		= "classNumber") String classNumber, @Param(value = "year") String year, 
+		@Param(value = "term") Integer term); -->
+	<select id="getRPECTotalScoreRecordNumberByClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseTerm = #{term}
+			and
+			(c.courseType = 1 or c.courseType = 2)
+			and sc.scTerm like
+			CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 classNumber 获得该班级RPEC的优秀成绩记录数: public Integer getRPECExcellentScoreRecordNumberByClassNumber(@Param(value 
+		= "classNumber") String classNumber, @Param(value = "year") String year, 
+		@Param(value = "term") Integer term); -->
+	<select id="getRPECExcellentScoreRecordNumberByClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseTerm = #{term}
+			and
+			(c.courseType = 1 or c.courseType = 2)
+			and sc.scTerm like
+			CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.score >= 90
+		</where>
+	</select>
+
+	<!-- 通过 classNumber 获得该班级RPEC的不及格成绩记录数: public Integer getRPECFailScoreRecordNumberByClassNumber(@Param(value 
+		= "classNumber") String classNumber, @Param(value = "year") String year, 
+		@Param(value = "term") Integer term); -->
+	<select id="getRPECFailScoreRecordNumberByClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseTerm = #{term}
+			and
+			(c.courseType = 1 or c.courseType = 2)
+			and sc.scTerm like
+			CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
 
 
 

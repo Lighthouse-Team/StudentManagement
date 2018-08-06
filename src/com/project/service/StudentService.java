@@ -59,14 +59,14 @@ public class StudentService {
 	 * @param student
 	 * @return
 	 */
-	public Integer insertStudent(Student student) {
+	public void insertStudent(Student student) {
 		studentMapper.addStudent(student);
-		student = getStudentByEntity(student);
-		if (student != null) {
-			return student.getStudentId();
-		} else {
-			return -1; // 插入异常
-		}
+		// student = getStudentByEntity(student); // 注释了节省导入数据库的时间
+		// if (student != null) {
+		// return student.getStudentId();
+		// } else {
+		// return -1; // 插入异常
+		// }
 	}
 
 	/**

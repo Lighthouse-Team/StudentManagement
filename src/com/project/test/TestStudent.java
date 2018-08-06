@@ -26,14 +26,14 @@ public class TestStudent {
 	}
 
 	@Test
-	public void getStudentByStudentNumberTest() {	// 这里和下面找到学生对象必须要求数据库中该学生具有departmentId
-//		String studentNumber = "2015061524";
-//		String studentNumber = "20171101JX";
+	public void getStudentByStudentNumberTest() { // 这里和下面找到学生对象必须要求数据库中该学生具有departmentId
+		// String studentNumber = "2015061524";
+		// String studentNumber = "20171101JX";
 		String studentNumber = "2014061525";
 		Student student = studentService.getStudentByStudentNumber(studentNumber);
 		System.out.println(student);
 	}
-	
+
 	@Test
 	public void getStudentByEntityTest() {
 		Student student = new Student();
@@ -59,17 +59,7 @@ public class TestStudent {
 			System.out.println(studentList.get(i));
 		}
 	}
-	
-	@Test
-	public void intTest() {	// 返回值时studentId，但是这里没有成功返回，有问题
-		Student student = new Student();
-		student.setStudentName("夏朋");
-		Integer studentId = studentService.insertStudent(student);
-		System.out.println(studentId);
-		Student student2 = new Student();
-		System.out.println(student2);
-	}
-	
+
 	@Test
 	public void strStudentBirthTest() { // studentBirth为空的时候，不能转换为strStudentBirth，故getStudentByEntity里要把strStudentBirth注释掉
 		Student student = new Student();
