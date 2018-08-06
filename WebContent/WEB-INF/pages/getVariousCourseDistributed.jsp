@@ -135,16 +135,8 @@
 	        $("#variousScRateLinePic").css("display","block");
 	    } 
 		
-		url = "getVariousCourseDistributedData";
-		var args = {
-			year : $("#year").val(),
-			term : $("#term").val()
-		};
-		$.post(url, args, function(odList){
-			
-		});
-		
-		
+		getBarPic();      //显示柱状图
+		getLinePic();     //显示折线图
 		
 	/* var options = document.getElementById('year').children;
 		options[0].selected = true;
@@ -154,6 +146,381 @@
 		$("#term").get(0).selectedIndex=0; */
 		 
 	};
+	
+	
+	/* 显示柱状图 */
+	function getBarPic(){
+		var app = {};
+		option = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '{c}% {name|{a}}',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: []
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: 'Forest',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: 'Steppe',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: 'Desert',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: 'Wetland',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		var eRateList = new Array();
+		var firstRateList = new Array();
+		var secondRateList = new Array();
+		var thirdRateList = new Array();
+		var forthRateList = new Array();
+		url = "getVariousCourseDistributedData";
+		var args = {
+			year : $("#year").val(),
+			term : $("#term").val()
+		};
+		$.post(url, args, function(odList){
+			for(var i=0; i<odList.length ; i++){
+				option.legend.data[i] = odList[i].courseType;
+				option.series[i].name = odList[i].courseType;
+				
+				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
+				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
+				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
+				var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
+				var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
+				aRateList[i] = aRateNumber;
+				bRateList[i] = bRateNumber;
+				cRateList[i] = cRateNumber;
+				dRateList[i] = dRateNumber;
+				eRateList[i] = eRateNumber;
+			}
+			
+			firstRateList[0] = aRateList[0]; //得到必修课成绩的百分比
+			firstRateList[1] = bRateList[0];
+			firstRateList[2] = cRateList[0];
+			firstRateList[3] = dRateList[0];
+			firstRateList[4] = eRateList[0];
+
+			secondRateList[0] = aRateList[1]; //得到专业选修成绩的百分比
+			secondRateList[1] = bRateList[1];
+			secondRateList[2] = cRateList[1];
+			secondRateList[3] = dRateList[1];
+			secondRateList[4] = eRateList[1];
+
+			thirdRateList[0] = aRateList[2]; //得到通识教育成绩的百分比
+			thirdRateList[1] = bRateList[2];
+			thirdRateList[2] = cRateList[2];
+			thirdRateList[3] = dRateList[2];
+			thirdRateList[4] = eRateList[2];
+
+			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
+			forthRateList[1] = bRateList[3];
+			forthRateList[2] = cRateList[3];
+			forthRateList[3] = dRateList[3];
+			forthRateList[4] = eRateList[3];
+			
+			option.series[0].data = firstRateList;
+			option.series[1].data = secondRateList;
+			option.series[2].data = thirdRateList;
+			option.series[3].data = forthRateList;
+			
+			var dom = document.getElementById("variousScRateBarPic");
+			var myChart = echarts.init(dom);
+			if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+		});
+		
+	}
+	
+	function getLinePic(){
+		var app1 = {};
+		option1 = null;
+		option1 = {
+		    title: {
+		        text: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:[]
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    toolbox: {
+		        feature: {
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis: {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: ['优秀率','良好率','中等率','及格率','不及格率']
+		    },
+		    yAxis: {  
+	              type: 'value',  
+	              axisLabel: {  
+	                    show: true,  
+	                    interval: 'auto',  
+	                    formatter: '{value}%'  
+	                  },  
+	              show: true  
+	          },  
+		    series: [
+		        {
+		            name:'邮件营销',
+		            type:'line',
+		            stack: '总量1',
+		            data:[ 13, 10, 13, 9, 23]
+		        },
+		        {
+		            name:'联盟广告',
+		            type:'line',
+		            stack: '总量2',
+		            data:[20, 18, 19, 24, 20]
+		        },
+		        {
+		            name:'视频广告',
+		            type:'line',
+		            stack: '总量3',
+		            data:[10, 23, 21, 14, 90]
+		        },
+		        {
+		            name:'直接访问',
+		            type:'line',
+		            stack: '总量4',
+		            data:[32, 13, 30, 34, 30]
+		        }
+		    ]
+		};
+		;
+		
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		var eRateList = new Array();
+		var firstRateList = new Array();
+		var secondRateList = new Array();
+		var thirdRateList = new Array();
+		var forthRateList = new Array();
+		url = "getVariousCourseDistributedData";
+		var args = {
+			year : $("#year").val(),
+			term : $("#term").val()
+		};
+		$.post(url, args, function(odList){
+			
+			
+			for(var i=0; i<odList.length ; i++){
+				option1.legend.data[i] = odList[i].courseType;
+				option1.series[i].name = odList[i].courseType;
+				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
+				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
+				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
+				var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
+				var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
+				aRateList[i] = aRateNumber;
+				bRateList[i] = bRateNumber;
+				cRateList[i] = cRateNumber;
+				dRateList[i] = dRateNumber;
+				eRateList[i] = eRateNumber;
+			}
+			
+			firstRateList[0] = aRateList[0]; //得到必修课成绩的百分比
+			firstRateList[1] = bRateList[0];
+			firstRateList[2] = cRateList[0];
+			firstRateList[3] = dRateList[0];
+			firstRateList[4] = eRateList[0];
+
+			secondRateList[0] = aRateList[1]; //得到专业选修成绩的百分比
+			secondRateList[1] = bRateList[1];
+			secondRateList[2] = cRateList[1];
+			secondRateList[3] = dRateList[1];
+			secondRateList[4] = eRateList[1];
+
+			thirdRateList[0] = aRateList[2]; //得到通识教育成绩的百分比
+			thirdRateList[1] = bRateList[2];
+			thirdRateList[2] = cRateList[2];
+			thirdRateList[3] = dRateList[2];
+			thirdRateList[4] = eRateList[2];
+
+			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
+			forthRateList[1] = bRateList[3];
+			forthRateList[2] = cRateList[3];
+			forthRateList[3] = dRateList[3];
+			forthRateList[4] = eRateList[3];
+			
+			option1.series[0].data = firstRateList;
+			option1.series[1].data = secondRateList;
+			option1.series[2].data = thirdRateList;
+			option1.series[3].data = forthRateList;
+			
+			var dom1 = document.getElementById("variousScRateLinePic");
+			var myChart1 = echarts.init(dom1);
+			if (option1 && typeof option1 === "object") {
+			    myChart1.setOption(option1, true);
+			}
+		});
+		
+	
+	}
+	
 </script>
 
 
@@ -219,7 +586,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" value="查询" /> 
+						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -276,7 +643,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  onclick = "getVariousDistributedData()">显示成绩分析图</button>
+							<button  class="btn btn-info float-left" onclick = "getVariousDistributedData()">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>

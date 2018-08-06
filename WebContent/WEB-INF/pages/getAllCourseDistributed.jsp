@@ -223,9 +223,14 @@
 		
 		$.post(url, args, function(odList) {
 			for (var i = 0; i < odList.length ; i++) {
-				option.legend.data[i] = odList[i].grade + '级' ; //得到年级号
-				option.series[i].name = odList[i].grade + '级' ;
-				
+				if(odList[i].grade != "全校"){
+					option.legend.data[i] = odList[i].grade + '级';
+					option.series[i].name = odList[i].grade + '级';
+				}
+				else{
+					option.legend.data[i] = odList[i].grade ; //得到年级号
+					option.series[i].name = odList[i].grade ;
+				}
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
 				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
 				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
@@ -365,7 +370,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" value="查询" /> 
+						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -423,7 +428,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  onclick = "getDistributedData()">显示成绩分析图</button>
+							<button class="btn btn-info float-left" onclick = "getDistributedData()">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -544,7 +549,7 @@
 	};
 	
 	option = {
-	    color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+	    color: ['#003366', '#006699', '#4cabce', '#e5323e',	'#000000'],
 	    tooltip: {
 	        trigger: 'axis',
 	        axisPointer: {
