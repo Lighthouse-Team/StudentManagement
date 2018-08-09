@@ -4,8 +4,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.ibatis.annotations.Param;
@@ -16,8 +18,11 @@ import com.project.beans.StudentCourse;
 import com.project.dao.StudentCourseMapper;
 import com.project.dao.StudentMapper;
 import com.project.dto.ClassExcellentFailDistribution;
-import com.project.dto.DepartmentAverageScoreCompare;
+import com.project.dto.GradeDepartmentAverageScoreCompare;
+import com.project.dto.GradeDepartmentFailDistribution;
 import com.project.dto.DepartmentDistribution;
+import com.project.dto.DepartmentFailDistribution;
+import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 
 @Service
@@ -759,9 +764,9 @@ public class StudentCourseService {
 		} else {
 			totalScore = totalCredits = 0;
 			List<Integer> departmentIdList = new ArrayList<>(Arrays.asList(6, 20, 21));
-			for (Integer Id : departmentIdList) {
-				totalScore += getRPECTotalScoreByGradeAndDepartmentId(Id, grade, year, term);
-				totalCredits += getRPECTotalCreditsByGradeAndDepartmentId(Id, grade, year, term);
+			for (Integer id : departmentIdList) {
+				totalScore += getRPECTotalScoreByGradeAndDepartmentId(id, grade, year, term);
+				totalCredits += getRPECTotalCreditsByGradeAndDepartmentId(id, grade, year, term);
 			}
 		}
 		if (totalCredits != 0) {
@@ -798,16 +803,16 @@ public class StudentCourseService {
 		} else {
 			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
 			totalNumber = excellentNumber = goodNumber = mediumNumber = passNumber = 0;
-			for (Integer Id : departmentIdList) {
-				totalNumber += studentCourseMapper.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(Id, grade, year,
+			for (Integer id : departmentIdList) {
+				totalNumber += studentCourseMapper.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(id, grade, year,
 						term);
-				excellentNumber += studentCourseMapper.getRPECExcellentScoreRecordNumberByGradeAndDepartmentId(Id,
+				excellentNumber += studentCourseMapper.getRPECExcellentScoreRecordNumberByGradeAndDepartmentId(id,
 						grade, year, term);
-				goodNumber += studentCourseMapper.getRPECGoodScoreRecordNumberByGradeAndDepartmentId(Id, grade, year,
+				goodNumber += studentCourseMapper.getRPECGoodScoreRecordNumberByGradeAndDepartmentId(id, grade, year,
 						term);
-				mediumNumber += studentCourseMapper.getRPECMediumScoreRecordNumberByGradeAndDepartmentId(Id, grade,
+				mediumNumber += studentCourseMapper.getRPECMediumScoreRecordNumberByGradeAndDepartmentId(id, grade,
 						year, term);
-				passNumber += studentCourseMapper.getRPECPassScoreRecordNumberByGradeAndDepartmentId(Id, grade, year,
+				passNumber += studentCourseMapper.getRPECPassScoreRecordNumberByGradeAndDepartmentId(id, grade, year,
 						term);
 			}
 		}
@@ -928,8 +933,8 @@ public class StudentCourseService {
 	 * @param grade
 	 * @return
 	 */
-	public List<String> getAllClassNumberByGrade(Integer grade) {
-		List<String> classNumberList = studentCourseMapper.getAllClassNumberByGrade(grade);
+	public List<String> getAllClassNumberListByGrade(Integer grade) {
+		List<String> classNumberList = studentCourseMapper.getAllClassNumberListByGrade(grade);
 		List<String> classNumberUniqueList = new ArrayList<>();
 		Map<String, Integer> flagMap = new HashedMap<>();
 		for (String classNumber : classNumberList) {
@@ -984,9 +989,9 @@ public class StudentCourseService {
 	 * @param year
 	 * @param term
 	 */
-	public List<ClassExcellentFailDistribution> getClassRPECScoreDistributionByGrade(Integer grade, String year,
+	public List<ClassExcellentFailDistribution> getClassRPECScoreDistributionListByGrade(Integer grade, String year,
 			Integer term) {
-		List<String> classNumberList = getAllClassNumberByGrade(grade);
+		List<String> classNumberList = getAllClassNumberListByGrade(grade);
 		List<ClassExcellentFailDistribution> cefdList = new ArrayList<>();
 		for (String classNumber : classNumberList) {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
@@ -1025,11 +1030,11 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public DepartmentAverageScoreCompare getDepartmentRPECAverageScoreCompareByGradeAndDepartmentId(Integer grade,
+	public GradeDepartmentAverageScoreCompare getRPECDepartmentAverageScoreCompareByGradeAndDepartmentId(Integer grade,
 			double gradeAverageScore, Integer departmentId, String year, Integer term) {
 		String departmentName = getDepartmentNameByDepartmentId(departmentId);
 		String strGrade = String.valueOf(grade);
-		DepartmentAverageScoreCompare departmentAverageScoreCompare = new DepartmentAverageScoreCompare();
+		GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = new GradeDepartmentAverageScoreCompare();
 		departmentAverageScoreCompare.setGrade(strGrade);
 		departmentAverageScoreCompare.setDepartmentName(departmentName);
 		Integer totalNumber = getRPECTotalScoreRecordNumberByGradeAndDepartmentId(grade, departmentId, year, term);
@@ -1057,12 +1062,12 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<DepartmentAverageScoreCompare> getDepartmentRPECAverageScoreCompareByGrade(Integer grade, String year,
-			Integer term) {
-		List<DepartmentAverageScoreCompare> dascList = new ArrayList<>();
+	public List<GradeDepartmentAverageScoreCompare> getRPECGradeDepartmentAverageScoreCompareListByGrade(Integer grade,
+			String year, Integer term) {
+		List<GradeDepartmentAverageScoreCompare> dascList = new ArrayList<>();
 		double gradeAverageScore = getRPECAverageScoreByGrade(grade, year, term);
 		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
-			DepartmentAverageScoreCompare departmentAverageScoreCompare = getDepartmentRPECAverageScoreCompareByGradeAndDepartmentId(
+			GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = getRPECDepartmentAverageScoreCompareByGradeAndDepartmentId(
 					grade, gradeAverageScore, departmentId, year, term);
 			dascList.add(departmentAverageScoreCompare);
 		}
@@ -1074,18 +1079,494 @@ public class StudentCourseService {
 	 * 
 	 * @param year
 	 * @param term
-	 * @return 
+	 * @return
 	 */
-	public List<List<DepartmentAverageScoreCompare>> getDepartmentRPECAverageScoreCompare(String year, Integer term) {
-		List<List<DepartmentAverageScoreCompare>> dascListList = new ArrayList<>();
+	public List<List<GradeDepartmentAverageScoreCompare>> getRPECGradeDepartmentAverageScoreCompareListList(String year,
+			Integer term) {
+		List<List<GradeDepartmentAverageScoreCompare>> dascListList = new ArrayList<>();
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			List<DepartmentAverageScoreCompare> dascList = getDepartmentRPECAverageScoreCompareByGrade(gradeI, year,
-					term);
+			List<GradeDepartmentAverageScoreCompare> dascList = getRPECGradeDepartmentAverageScoreCompareListByGrade(
+					gradeI, year, term);
 			dascListList.add(dascList);
 		}
 		return dascListList;
 	}
 
+	/*
+	 * ======获得所有专业所有年级的平均成绩和差值====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能
+	 */
+
+	/*
+	 * ======获得全校各年级本科生RC的不及格整体情况，RC指必修课======
+	 */
+
+	/**
+	 * 通过 grade 获得该年级RC不及格情况
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public GradeFailDistribution getRCGradeFailDistributionByGrade(Integer grade, String year, Integer term) {
+		GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
+		String strGrade = String.valueOf(grade);
+		gradeFailDistribution.setGrade(strGrade);
+		List<Integer> failStudentIdList = new ArrayList<>();
+		failStudentIdList = studentCourseMapper.getRCFailStudentIdListByGrade(grade, year, term);
+		Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
+		Integer oneFailNumber = 0;
+		Integer twoFailNumber = 0;
+		Integer threeFailNumber = 0;
+		Integer fourFailNumber = 0;
+		Integer fiveFailNumber = 0;
+		Integer sixFailNumber = 0;
+		Integer sevenFailNumber = 0;
+		Integer eightFailNumber = 0;
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = studentCourseMapper.getTotalStudentNumberByGrade(grade);
+		if (totalStudentNumber != 0) {
+			for (Integer studentId : failStudentIdSet) {
+				Integer failCourseNumber = Collections.frequency(failStudentIdList, studentId);
+				// failStudentIdList里所有的studentId都是有不及格记录的，所以failCourseNumber至少为1
+				switch (failCourseNumber) {
+				case 1:
+					oneFailNumber++;
+					break;
+				case 2:
+					twoFailNumber++;
+					break;
+				case 3:
+					threeFailNumber++;
+					break;
+				case 4:
+					fourFailNumber++;
+					break;
+				case 5:
+					fiveFailNumber++;
+					break;
+				case 6:
+					sixFailNumber++;
+					break;
+				case 7:
+					sevenFailNumber++;
+					break;
+				default:
+					eightFailNumber++;
+				}
+			}
+			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + fourFailNumber + fiveFailNumber
+					+ sixFailNumber + sevenFailNumber + eightFailNumber;
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			gradeFailDistribution.setOneFailNumber(oneFailNumber);
+			gradeFailDistribution.setTwoFailNumber(twoFailNumber);
+			gradeFailDistribution.setThreeFailNumber(threeFailNumber);
+			gradeFailDistribution.setFourFailNumber(fourFailNumber);
+			gradeFailDistribution.setFiveFailNumber(fiveFailNumber);
+			gradeFailDistribution.setSixFailNumber(sixFailNumber);
+			gradeFailDistribution.setSevenFailNumber(sevenFailNumber);
+			gradeFailDistribution.setEightFailNumber(eightFailNumber);
+			gradeFailDistribution.setTotalFailNumber(totalFailNumber);
+			gradeFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			gradeFailDistribution.setFailRate(strFailRate);
+		}
+		return gradeFailDistribution;
+	}
+
+	/**
+	 * 获得全校所有年级RC的不及格情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<GradeFailDistribution> getUniversityRCGradeFailDistributionList(String year, Integer term) {
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		List<GradeFailDistribution> gfdList = new ArrayList<>();
+		Integer oneFailNumber = 0;
+		Integer twoFailNumber = 0;
+		Integer threeFailNumber = 0;
+		Integer fourFailNumber = 0;
+		Integer fiveFailNumber = 0;
+		Integer sixFailNumber = 0;
+		Integer sevenFailNumber = 0;
+		Integer eightFailNumber = 0;
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
+			gradeFailDistribution = getRCGradeFailDistributionByGrade(gradeI, year, term);
+			gfdList.add(gradeFailDistribution);
+			oneFailNumber += gradeFailDistribution.getOneFailNumber();
+			twoFailNumber += gradeFailDistribution.getTwoFailNumber();
+			threeFailNumber += gradeFailDistribution.getThreeFailNumber();
+			fourFailNumber += gradeFailDistribution.getFourFailNumber();
+			fiveFailNumber += gradeFailDistribution.getFiveFailNumber();
+			sixFailNumber += gradeFailDistribution.getSixFailNumber();
+			sevenFailNumber += gradeFailDistribution.getSevenFailNumber();
+			eightFailNumber += gradeFailDistribution.getEightFailNumber();
+			totalFailNumber += gradeFailDistribution.getTotalFailNumber();
+			totalStudentNumber += gradeFailDistribution.getTotalStudentNumber();
+		}
+		GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
+		gradeFailDistribution.setGrade("合计");
+		if (totalStudentNumber != 0) {
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			gradeFailDistribution.setOneFailNumber(oneFailNumber);
+			gradeFailDistribution.setTwoFailNumber(twoFailNumber);
+			gradeFailDistribution.setThreeFailNumber(threeFailNumber);
+			gradeFailDistribution.setFourFailNumber(fourFailNumber);
+			gradeFailDistribution.setFiveFailNumber(fiveFailNumber);
+			gradeFailDistribution.setSixFailNumber(sixFailNumber);
+			gradeFailDistribution.setSevenFailNumber(sevenFailNumber);
+			gradeFailDistribution.setEightFailNumber(eightFailNumber);
+			gradeFailDistribution.setTotalFailNumber(totalFailNumber);
+			gradeFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			gradeFailDistribution.setFailRate(strFailRate);
+			gfdList.add(gradeFailDistribution);
+		}
+		return gfdList;
+	}
+
+	/*
+	 * ======获得各院系本科生RC不及格学生整体情况，RC指必修课======
+	 */
+
+	/**
+	 * 通过 departmentId 获得该学院RC的不及格情况
+	 * 
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public DepartmentFailDistribution getRCDepartmentFailDistributionByDepartmentId(Integer departmentId, String year,
+			Integer term) {
+		String departmentName = getDepartmentNameByDepartmentId(departmentId);
+		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
+		departmentFailDistribution.setDepartmentName(departmentName);
+		Integer oneFailNumber = 0;
+		Integer twoFailNumber = 0;
+		Integer threeFailNumber = 0;
+		Integer geFourFailNumber = 0;
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		if (departmentId != 6) {
+			for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+				totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI,
+						departmentId);
+			} // 这里totalStudentNumber的计算需要加上4个年级的才能包括该学院所有在读本科生，下面failStudentIdList的计算不需要这样做是因为有year做限制，在指定year有考试成绩就是当时的在读本科生
+			List<Integer> failStudentIdList = new ArrayList<>();
+			failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(departmentId, year, term);
+			Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
+			for (Integer failStudentId : failStudentIdSet) {
+				Integer failCourseNumber = Collections.frequency(failStudentIdList, failStudentId);
+				switch (failCourseNumber) {
+				case 1:
+					oneFailNumber++;
+					break;
+				case 2:
+					twoFailNumber++;
+					break;
+				case 3:
+					threeFailNumber++;
+					break;
+				default:
+					geFourFailNumber++;
+				} // switch
+			} // for
+		} else {
+			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
+			for (Integer id : departmentIdList) {
+				for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+					totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI, id);
+				}
+				List<Integer> failStudentIdList = new ArrayList<>();
+				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(id, year, term);
+				Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
+				for (Integer failStudentId : failStudentIdSet) {
+					Integer failCourseNumber = Collections.frequency(failStudentIdList, failStudentId);
+					switch (failCourseNumber) {
+					case 1:
+						oneFailNumber++;
+						break;
+					case 2:
+						twoFailNumber++;
+						break;
+					case 3:
+						threeFailNumber++;
+						break;
+					default:
+						geFourFailNumber++;
+					} // switch
+				} // for
+			}
+		}
+		if (totalStudentNumber != 0) {
+			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
+
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			departmentFailDistribution.setOneFailNumber(oneFailNumber);
+			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
+			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
+			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
+			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			departmentFailDistribution.setFailRate(strFailRate);
+		}
+		return departmentFailDistribution;
+	}
+
+	/**
+	 * 获得全校各学院RC的不及格情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<DepartmentFailDistribution> getUniversityRCDepartmentFailDistributionList(String year, Integer term) {
+		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
+		Integer oneFailNumber = 0;
+		Integer twoFailNumber = 0;
+		Integer threeFailNumber = 0;
+		Integer geFourFailNumber = 0;
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+			DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
+			departmentFailDistribution = getRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
+			dfdList.add(departmentFailDistribution);
+			oneFailNumber += departmentFailDistribution.getOneFailNumber();
+			twoFailNumber += departmentFailDistribution.getTwoFailNumber();
+			threeFailNumber += departmentFailDistribution.getThreeFailNumber();
+			geFourFailNumber += departmentFailDistribution.getGeFourFailNumber();
+			totalFailNumber += departmentFailDistribution.getTotalFailNumber();
+			totalStudentNumber += departmentFailDistribution.getTotalStudentNumber();
+		}
+		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
+		departmentFailDistribution.setDepartmentName("全校");
+		if (totalStudentNumber != 0) {
+			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
+
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			departmentFailDistribution.setOneFailNumber(oneFailNumber);
+			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
+			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
+			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
+			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			departmentFailDistribution.setFailRate(strFailRate);
+		}
+		dfdList.add(departmentFailDistribution);
+		return dfdList;
+	}
+
+	/*
+	 * 该功能测试用
+	 */
+
+	/**
+	 * 测试 public DepartmentFailDistribution
+	 * getRCDepartmentFailDistributionByDepartmentId(Integer departmentId, String
+	 * year, Integer term);
+	 * 
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public DepartmentFailDistribution testGetRCDepartmentFailDistributionByDepartmentId(Integer departmentId,
+			String year, Integer term) {
+		String departmentName = getDepartmentNameByDepartmentId(departmentId);
+		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
+		departmentFailDistribution.setDepartmentName(departmentName);
+		Integer oneFailNumber = 0;
+		Integer twoFailNumber = 0;
+		Integer threeFailNumber = 0;
+		Integer geFourFailNumber = 0;
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI, departmentId);
+			List<Integer> studentIdList = new ArrayList<>();
+			studentIdList = studentCourseMapper.getStudentIdListByGradeAndDepartmentId(gradeI, departmentId);
+			for (Integer studentId : studentIdList) {
+				Integer failCourseNumber = studentCourseMapper.getRCFailCourseNumberByStudentId(studentId, year, term);
+				if (failCourseNumber != 0) {
+					switch (failCourseNumber) {
+					case 1:
+						oneFailNumber++;
+						break;
+					case 2:
+						twoFailNumber++;
+						break;
+					case 3:
+						threeFailNumber++;
+						break;
+					default:
+						geFourFailNumber++;
+					}
+				}
+			}
+		}
+		if (totalStudentNumber != 0) {
+			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
+
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			departmentFailDistribution.setOneFailNumber(oneFailNumber);
+			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
+			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
+			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
+			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			departmentFailDistribution.setFailRate(strFailRate);
+		}
+		return departmentFailDistribution;
+	}
+
+	/*
+	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程
+	 */
+
+	/**
+	 * 通过 grade和departmentId 获得该年级该学院RC的不及格情况
+	 * 
+	 * @param grade
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public GradeDepartmentFailDistribution getRCGradeDepartmentFailDistributionByGradeAndDepartmentId(Integer grade,
+			Integer departmentId, String year, Integer term) {
+		String departmentName = getDepartmentNameByDepartmentId(departmentId);
+		String strGrade = String.valueOf(grade);
+		GradeDepartmentFailDistribution gradeDepartmentFailDistribution = new GradeDepartmentFailDistribution();
+		gradeDepartmentFailDistribution.setGrade(strGrade);
+		gradeDepartmentFailDistribution.setDepartmentName(departmentName);
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		if (departmentId != 6) {
+			totalStudentNumber = studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(grade, departmentId);
+			if (totalStudentNumber != 0) {
+				List<Integer> failStudentIdList = new ArrayList<>();
+				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(departmentId, year, term);
+				Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
+				totalFailNumber = failStudentIdSet.size();
+				double failRate = (double) totalFailNumber / totalStudentNumber;
+
+				DecimalFormat rateDF = new DecimalFormat("0.00%");
+				String strFailRate = rateDF.format(failRate);
+
+				gradeDepartmentFailDistribution.setTotalFailNumber(totalFailNumber);
+				gradeDepartmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+				gradeDepartmentFailDistribution.setFailRate(strFailRate);
+			}
+		} else {
+			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
+			for (Integer id : departmentIdList) {
+				totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(grade, id);
+				List<Integer> failStudentIdList = new ArrayList<>();
+				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(id, year, term);
+				Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
+				totalFailNumber += failStudentIdSet.size();
+			}
+			if (totalStudentNumber != 0) {
+				double failRate = (double) totalFailNumber / totalStudentNumber;
+
+				DecimalFormat rateDF = new DecimalFormat("0.00%");
+				String strFailRate = rateDF.format(failRate);
+				gradeDepartmentFailDistribution.setTotalFailNumber(totalFailNumber);
+				gradeDepartmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+				gradeDepartmentFailDistribution.setFailRate(strFailRate);
+			}
+		}
+		return gradeDepartmentFailDistribution;
+	}
+
+	/**
+	 * 通过 grade 获得该年级RC的不及格情况
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<GradeDepartmentFailDistribution> getRCGradeDepartmentFailDistributionListByGrade(Integer grade,
+			String year, Integer term) {
+		List<GradeDepartmentFailDistribution> gdfdList = new ArrayList<>();
+		Integer totalFailNumber = 0;
+		Integer totalStudentNumber = 0;
+		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+			GradeDepartmentFailDistribution gradeDepartmentFailDistribution = new GradeDepartmentFailDistribution();
+			gradeDepartmentFailDistribution = getRCGradeDepartmentFailDistributionByGradeAndDepartmentId(grade,
+					departmentId, year, term);
+			gdfdList.add(gradeDepartmentFailDistribution);
+			totalFailNumber += gradeDepartmentFailDistribution.getTotalFailNumber();
+			totalStudentNumber += gradeDepartmentFailDistribution.getTotalStudentNumber();
+		}
+		String strGrade = String.valueOf(grade);
+		GradeDepartmentFailDistribution gradeDepartmentFailDistribution = new GradeDepartmentFailDistribution();
+		gradeDepartmentFailDistribution.setGrade(strGrade);
+		gradeDepartmentFailDistribution.setDepartmentName("全校");
+		if (totalStudentNumber != 0) {
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			gradeDepartmentFailDistribution.setTotalFailNumber(totalFailNumber);
+			gradeDepartmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			gradeDepartmentFailDistribution.setFailRate(strFailRate);
+		}
+		gdfdList.add(gradeDepartmentFailDistribution);
+		return gdfdList;
+	}
+
+	/**
+	 * 获得各院系分年级学生RC的不及格情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<List<GradeDepartmentFailDistribution>> getRCGradeDepartmentFailDistributionListList(String year,
+			Integer term) {
+		List<List<GradeDepartmentFailDistribution>> gdfdListList = new ArrayList<>();
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			List<GradeDepartmentFailDistribution> gdfdList = new ArrayList<>();
+			gdfdList = getRCGradeDepartmentFailDistributionListByGrade(gradeI, year, term);
+			gdfdListList.add(gdfdList);
+		}
+		return gdfdListList;
+	}
 }

@@ -407,7 +407,7 @@ public interface StudentCourseMapper {
 	 * @param grade
 	 * @return
 	 */
-	public List<String> getAllClassNumberByGrade(@Param(value = "grade") Integer grade);
+	public List<String> getAllClassNumberListByGrade(@Param(value = "grade") Integer grade);
 
 	/**
 	 * 通过 classNumber 获得该班级RPEC的成绩记录总数
@@ -445,5 +445,78 @@ public interface StudentCourseMapper {
 	/*
 	 * ======获得所有专业所有年级的平均成绩和差值====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能
 	 */
+
+	/*
+	 * ======获得全校各年级本科生RC的不及格整体情况，RC指必修课======
+	 */
+
+	/**
+	 * 通过 grade 获得该年级的学生总数
+	 * 
+	 * @param grade
+	 * @return
+	 */
+	public Integer getTotalStudentNumberByGrade(@Param(value = "grade") Integer grade);
+
+	/**
+	 * 通过 grade 获得不及格学生的studentId列表
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getRCFailStudentIdListByGrade(@Param(value = "grade") Integer grade,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/*
+	 * ======获得各院系本科生RC不及格学生整体情况，RC指必修课======
+	 */
+
+	/**
+	 * 通过 grade和departmentId 获得该院系的学生总数
+	 * 
+	 * @param grade
+	 * @param departmentId
+	 * @return
+	 */
+	public Integer getTotalStudentNumberByGradeAndDepartmentId(@Param(value = "grade") Integer grade,
+			@Param(value = "departmentId") Integer departmentId);
+
+	/**
+	 * 通过 departmentId 获得不及格学生的studentId列表
+	 * 
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getRCFailStudentIdListByDepartmentId(@Param(value = "departmentId") Integer departmentId,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/*
+	 * 测试用
+	 */
+
+	/**
+	 * 通过 grade和departmentId 获得该年级该学院的studentId列表
+	 * 
+	 * @param grade
+	 * @param departmentId
+	 * @return
+	 */
+	public List<Integer> getStudentIdListByGradeAndDepartmentId(@Param(value = "grade") Integer grade,
+			@Param(value = "departmentId") Integer departmentId);
+
+	/**
+	 * 通过 studentId 获得该学生RC的不及格课程数目
+	 * 
+	 * @param studentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getRCFailCourseNumberByStudentId(@Param(value = "studentId") Integer studentId,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 }

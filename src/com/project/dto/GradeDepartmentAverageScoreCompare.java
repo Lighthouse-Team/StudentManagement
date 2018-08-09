@@ -2,19 +2,19 @@ package com.project.dto;
 
 import java.io.Serializable;
 
-public class DepartmentAverageScoreCompare implements Serializable{
+public class GradeDepartmentAverageScoreCompare implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3381304321018919091L;
 
-	String grade;
-	String departmentName;
-	String averageScore;
-	String difference;
+	String grade;			// 年级
+	String departmentName;	// 专业名称
+	String averageScore;	// 年级平均分
+	String difference;		// 平均分差值（院系平均分-年级平均分）
 	
-	public DepartmentAverageScoreCompare() {
+	public GradeDepartmentAverageScoreCompare() {
 		super();
 	}
 	
@@ -23,7 +23,7 @@ public class DepartmentAverageScoreCompare implements Serializable{
 		this.difference = "0";
 	}
 
-	public DepartmentAverageScoreCompare(String grade, String departmentName, String averageScore, String difference) {
+	public GradeDepartmentAverageScoreCompare(String grade, String departmentName, String averageScore, String difference) {
 		super();
 		this.grade = grade;
 		this.departmentName = departmentName;
