@@ -18,10 +18,12 @@ import com.project.beans.StudentCourse;
 import com.project.dao.StudentCourseMapper;
 import com.project.dao.StudentMapper;
 import com.project.dto.ClassExcellentFailDistribution;
+import com.project.dto.ClassFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
 import com.project.dto.GradeDepartmentFailDistribution;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.DepartmentFailDistribution;
+import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 
@@ -989,8 +991,8 @@ public class StudentCourseService {
 	 * @param year
 	 * @param term
 	 */
-	public List<ClassExcellentFailDistribution> getClassRPECScoreDistributionListByGrade(Integer grade, String year,
-			Integer term) {
+	public List<ClassExcellentFailDistribution> getRPECClassExcellentFailDistributionListByGrade(Integer grade,
+			String year, Integer term) {
 		List<String> classNumberList = getAllClassNumberListByGrade(grade);
 		List<ClassExcellentFailDistribution> cefdList = new ArrayList<>();
 		for (String classNumber : classNumberList) {
@@ -1101,6 +1103,17 @@ public class StudentCourseService {
 	/*
 	 * ======获得全校各年级本科生RC的不及格整体情况，RC指必修课======
 	 */
+
+	/**
+	 * 通过 studentIdList 获得该列表中的学生数量
+	 * 
+	 * @param studentIdList
+	 * @return
+	 */
+	public Integer getTotalStudentNumberByStudentIdList(List<Integer> studentIdList) {
+		Set<Integer> studentIdSet = new HashSet<>(studentIdList);
+		return studentIdSet.size();
+	}
 
 	/**
 	 * 通过 grade 获得该年级RC不及格情况
@@ -1383,7 +1396,7 @@ public class StudentCourseService {
 	}
 
 	/*
-	 * 该功能测试用
+	 * 上个功能测试用
 	 */
 
 	/**
@@ -1452,7 +1465,7 @@ public class StudentCourseService {
 	}
 
 	/*
-	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程
+	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程======
 	 */
 
 	/**
@@ -1478,8 +1491,7 @@ public class StudentCourseService {
 			if (totalStudentNumber != 0) {
 				List<Integer> failStudentIdList = new ArrayList<>();
 				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(departmentId, year, term);
-				Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
-				totalFailNumber = failStudentIdSet.size();
+				totalFailNumber = getTotalStudentNumberByStudentIdList(failStudentIdList);
 				double failRate = (double) totalFailNumber / totalStudentNumber;
 
 				DecimalFormat rateDF = new DecimalFormat("0.00%");
@@ -1495,8 +1507,7 @@ public class StudentCourseService {
 				totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(grade, id);
 				List<Integer> failStudentIdList = new ArrayList<>();
 				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(id, year, term);
-				Set<Integer> failStudentIdSet = new HashSet<>(failStudentIdList);
-				totalFailNumber += failStudentIdSet.size();
+				totalFailNumber += getTotalStudentNumberByStudentIdList(failStudentIdList);
 			}
 			if (totalStudentNumber != 0) {
 				double failRate = (double) totalFailNumber / totalStudentNumber;
@@ -1568,5 +1579,122 @@ public class StudentCourseService {
 			gdfdListList.add(gdfdList);
 		}
 		return gdfdListList;
+	}
+
+	/*
+	 * ======获得各班级不及格情况======
+	 */
+
+	/**
+	 * 通过 classNumber 获得该班级RC的不及格情况
+	 * 
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public ClassFailDistribution getRCClassFailDistributionByClassNumber(String classNumber, String year,
+			Integer term) {
+		ClassFailDistribution classFailDistribution = new ClassFailDistribution();
+		classFailDistribution.setClassNumber(classNumber);
+		List<Integer> failStudentIdList = new ArrayList<>();
+		failStudentIdList = studentCourseMapper.getRCFailStudentIdListByClassNumber(classNumber, year, term);
+		Integer totalFailNumber = getTotalStudentNumberByStudentIdList(failStudentIdList);
+		Integer totalStudentNumber = studentCourseMapper.getTotalStudentNumberByClassNumber(classNumber);
+		if (totalStudentNumber != 0) {
+			double failRate = (double) totalFailNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			String strFailRate = rateDF.format(failRate);
+
+			classFailDistribution.setTotalFailNumber(totalFailNumber);
+			classFailDistribution.setTotalStudentNumber(totalStudentNumber);
+			classFailDistribution.setFailRate(strFailRate);
+		}
+		return classFailDistribution;
+	}
+
+	/**
+	 * 通过 grade 获得该年级各班级RC的不及格情况
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<ClassFailDistribution> getRCClassFailDistributionListByGrade(Integer grade, String year, Integer term) {
+		List<ClassFailDistribution> cfdList = new ArrayList<>();
+		List<String> classNumberList = getAllClassNumberListByGrade(grade);
+		for (String classNumber : classNumberList) {
+			ClassFailDistribution classFailDistribution = new ClassFailDistribution();
+			classFailDistribution = getRCClassFailDistributionByClassNumber(classNumber, year, term);
+			cfdList.add(classFailDistribution);
+		}
+		return cfdList;
+	}
+
+	/*
+	 * ======获得各年级各类课程的缺考情况======
+	 */
+
+	/**
+	 * 通过 grade 获得该年级各类课程的缺考情况
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public GradeAbsenceDistribution getGradeAbsenceDistributionByGrade(Integer grade, String year, Integer term) {
+		GradeAbsenceDistribution gradeAbsenceDistribution = new GradeAbsenceDistribution();
+		String strGrade = String.valueOf(grade);
+		gradeAbsenceDistribution.setGrade(strGrade);
+		List<Integer> rcAbsenceStudentIdList = studentCourseMapper.getRCAbsenceStudentIdListByGrade(grade, year, term);
+		List<Integer> pecAbsenceStudentIdList = studentCourseMapper.getPECAbsenceStudentIdListByGrade(grade, year,
+				term);
+		List<Integer> gecAbsenceStudentIdList = studentCourseMapper.getGECAbsenceStudentIdListByGrade(grade, year,
+				term);
+		Integer rcAbsenceNumber = getTotalStudentNumberByStudentIdList(rcAbsenceStudentIdList);
+		Integer pecAbsenceNumber = getTotalStudentNumberByStudentIdList(pecAbsenceStudentIdList);
+		Integer gecAbsenceNumber = getTotalStudentNumberByStudentIdList(gecAbsenceStudentIdList);
+		Integer totalAbsenceNumber = rcAbsenceNumber + pecAbsenceNumber + gecAbsenceNumber;
+		gradeAbsenceDistribution.setRcAbsenceNumber(rcAbsenceNumber);
+		gradeAbsenceDistribution.setPecAbsenceNumber(pecAbsenceNumber);
+		gradeAbsenceDistribution.setGecAbsenceNumber(gecAbsenceNumber);
+		gradeAbsenceDistribution.setTotalAbsenceNumber(totalAbsenceNumber);
+		return gradeAbsenceDistribution;
+	}
+
+	/**
+	 * 获得各年级各类课程的缺考情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<GradeAbsenceDistribution> getGradeAbsenceDistributionList(String year, Integer term) {
+		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		Integer rcAbsenceNumber = 0;
+		Integer pecAbsenceNumber = 0;
+		Integer gecAbsenceNumber = 0;
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			GradeAbsenceDistribution gradeAbsenceDistribution = new GradeAbsenceDistribution();
+			gradeAbsenceDistribution = getGradeAbsenceDistributionByGrade(gradeI, year, term);
+			gadList.add(gradeAbsenceDistribution);
+			rcAbsenceNumber += gradeAbsenceDistribution.getRcAbsenceNumber();
+			pecAbsenceNumber += gradeAbsenceDistribution.getPecAbsenceNumber();
+			gecAbsenceNumber += gradeAbsenceDistribution.getGecAbsenceNumber();
+		}
+		Integer totalAbsenceNumber = rcAbsenceNumber + pecAbsenceNumber + gecAbsenceNumber;
+		GradeAbsenceDistribution gradeAbsenceDistribution = new GradeAbsenceDistribution();
+		gradeAbsenceDistribution.setGrade("全校");
+		gradeAbsenceDistribution.setRcAbsenceNumber(rcAbsenceNumber);
+		gradeAbsenceDistribution.setPecAbsenceNumber(pecAbsenceNumber);
+		gradeAbsenceDistribution.setGecAbsenceNumber(gecAbsenceNumber);
+		gradeAbsenceDistribution.setTotalAbsenceNumber(totalAbsenceNumber);
+		gadList.add(gradeAbsenceDistribution);
+		return gadList;
 	}
 }

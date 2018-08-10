@@ -495,7 +495,7 @@ public interface StudentCourseMapper {
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/*
-	 * 测试用
+	 * 上个功能测试用
 	 */
 
 	/**
@@ -519,4 +519,67 @@ public interface StudentCourseMapper {
 	public Integer getRCFailCourseNumberByStudentId(@Param(value = "studentId") Integer studentId,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
+	/*
+	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能
+	 */
+
+	/*
+	 * ======获得各班级不及格情况======
+	 */
+
+	/**
+	 * 通过 classNumber 获得该班级RC的不及格学生的studentId列表
+	 * 
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getRCFailStudentIdListByClassNumber(@Param(value = "classNumber") String classNumber,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 classNumber 获得该班级的学生总数
+	 * 
+	 * @param classNumber
+	 * @return
+	 */
+	public Integer getTotalStudentNumberByClassNumber(@Param(value = "classNumber") String classNumber);
+
+	/*
+	 * ======获得各年级各类课程的缺考情况======
+	 */
+
+	/**
+	 * 通过 grade 获得该年级缺考RC的studentId列表
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getRCAbsenceStudentIdListByGrade(@Param(value = "grade") Integer grade,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 grade 获得该年级缺考PEC的studentId列表
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getPECAbsenceStudentIdListByGrade(@Param(value = "grade") Integer grade,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 grade 获得该年级缺考GEC的studentId列表
+	 * 
+	 * @param grade
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getGECAbsenceStudentIdListByGrade(@Param(value = "grade") Integer grade,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 }

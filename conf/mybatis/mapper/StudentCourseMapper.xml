@@ -906,7 +906,7 @@
 		</where>
 	</select>
 
-	<!-- 该功能测试用 -->
+	<!-- 上个功能测试用 -->
 
 	<!-- 通过 grade和departmentId 获得该年级该学院的studentId列表: public List<Integer> getStudentIdListByGradeAndDepartmentId(@Param(value 
 		= "grade") Integer grade, @Param(value = "departmentId") Integer departmentId); -->
@@ -937,6 +937,99 @@
 			and
 			sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
+
+	<!-- ======获得各院系分年级本科生RC的不及格情况，RC指必修课程====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能 -->
+
+	<!-- ======获得各班级不及格情况====== -->
+
+	<!-- 通过 classNumber 获得该班级RC的不及格学生的studentId列表: public List<Integer> getRCFailStudentIdListByClassNumber(@Param(value 
+		= "classNumber") String classNumber, @Param(value = "year") String year, 
+		@Param(value = "term") Integer term); -->
+	<select id="getRCFailStudentIdListByClassNumber" resultType="java.lang.Integer">
+		select s.studentId from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseTerm = #{term}
+			and
+			c.courseType = 1
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
+
+	<!-- 通过 classNumber 获得该班级的学生总数: public Integer getTotalStudentNumberByClassNumber(@Param(value 
+		= "classNumber") String classNumber); -->
+	<select id="getTotalStudentNumberByClassNumber" resultType="java.lang.Integer">
+		select count(*) from student
+		<where>
+			studentClass = #{classNumber}
+		</where>
+	</select>
+
+	<!-- ======获得各年级各类课程的缺考情况====== -->
+
+	<!-- 通过 grade 获得该年级缺考RC的studentId列表: public List<Integer> getRCAbsenceStudentIdListByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getRCAbsenceStudentIdListByGrade" resultType="java.lang.Integer">
+		select s.studentId from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and c.courseType = 1
+			and sc.examProperty = 1
+			and sc.scoreMark = 2
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级缺考PEC的studentId列表: public List<Integer> getPECAbsenceStudentIdListByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getPECAbsenceStudentIdListByGrade" resultType="java.lang.Integer">
+		select s.studentId from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and c.courseType = 2
+			and sc.examProperty = 1
+			and sc.scoreMark = 2
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 grade 获得该年级缺考GEC的studentId列表: public List<Integer> getGECAbsenceStudentIdListByGrade(@Param(value 
+		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getGECAbsenceStudentIdListByGrade" resultType="java.lang.Integer">
+		select s.studentId from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and c.courseTerm = #{term}
+			and c.courseType = 3
+			and sc.examProperty = 1
+			and sc.scoreMark = 2
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
 		</where>
 	</select>
 

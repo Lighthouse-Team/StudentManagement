@@ -16,10 +16,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.project.beans.Student;
 import com.project.beans.StudentCourse;
 import com.project.dto.ClassExcellentFailDistribution;
+import com.project.dto.ClassFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
 import com.project.dto.GradeDepartmentFailDistribution;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.DepartmentFailDistribution;
+import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
@@ -206,7 +208,7 @@ public class TestStudentCourse {
 		String year = "2017-2018";
 		Integer term = 1;
 		List<ClassExcellentFailDistribution> cefdList = studentCourseService
-				.getClassRPECScoreDistributionListByGrade(grade, year, term);
+				.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
 		for (ClassExcellentFailDistribution cefd : cefdList) {
 			System.out.println(cefd);
 		}
@@ -246,6 +248,13 @@ public class TestStudentCourse {
 	/*
 	 * 测试第3章第1个功能
 	 */
+	
+	@Test
+	public void getTotalStudentNumberByStudentIdListTest() {
+		List<Integer> studentIdList = new ArrayList<>();
+		Integer totalStudentNumber = studentCourseService.getTotalStudentNumberByStudentIdList(studentIdList);
+		System.out.println(totalStudentNumber);
+	}
 
 	@Test
 	public void constructorTest() {
@@ -334,6 +343,47 @@ public class TestStudentCourse {
 			for (GradeDepartmentFailDistribution gradeDepartmentFailDistribution : gdfdList) {
 				System.out.println(gradeDepartmentFailDistribution);
 			}
+		}
+	}
+
+	/*
+	 * 测试第3章第4个功能
+	 */
+
+	@Test
+	public void getRCClassFailDistributionByClassNumberTest() {
+		String classNumber = "20150111";
+		String year = "2017-2018";
+		Integer term = 1;
+		ClassFailDistribution classFailDistribution = new ClassFailDistribution();
+		classFailDistribution = studentCourseService.getRCClassFailDistributionByClassNumber(classNumber, year, term);
+		System.out.println(classFailDistribution);
+	}
+
+	@Test
+	public void getRCClassFailDistributionListTest() {
+		Integer grade = 2015;
+		String year = "2017-2018";
+		Integer term = 1;
+		List<ClassFailDistribution> cfdList = new ArrayList<>();
+		cfdList = studentCourseService.getRCClassFailDistributionListByGrade(grade, year, term);
+		for (ClassFailDistribution classFailDistribution : cfdList) {
+			System.out.println(classFailDistribution);
+		}
+	}
+
+	/*
+	 * 测试第3章第5个功能
+	 */
+
+	@Test
+	public void getGradeAbsenceDistributionListTest() {
+		String year = "2017-2018";
+		Integer term = 1;
+		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
+		for (GradeAbsenceDistribution gradeAbsenceDistribution : gadList) {
+			System.out.println(gradeAbsenceDistribution);
 		}
 	}
 }
