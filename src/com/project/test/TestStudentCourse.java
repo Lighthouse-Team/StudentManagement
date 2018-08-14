@@ -3,6 +3,7 @@ package com.project.test;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.beans.Student;
 import com.project.beans.StudentCourse;
+import com.project.dto.BasicCourseClassDistribution;
+import com.project.dto.BasicCourseDetailDistribution;
+import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
@@ -50,6 +54,19 @@ public class TestStudentCourse {
 
 		DecimalFormat df2 = new DecimalFormat("0%");
 		System.out.println(df2.format(d)); // 121%
+	}
+
+	@Test
+	public void integerDoubleTest() {
+		Integer b = 3;
+		double a = 4;
+		double c = a / b;
+		System.out.println(c); // 1.3333333333
+		Integer a2 = 4;
+		double c2 = a2 / b;
+		System.out.println(c2); // 1.0
+		c2 = (double) a2 / b;
+		System.out.println(c2); // 1.3333333333
 	}
 
 	/*
@@ -248,7 +265,7 @@ public class TestStudentCourse {
 	/*
 	 * 测试第3章第1个功能
 	 */
-	
+
 	@Test
 	public void getTotalStudentNumberByStudentIdListTest() {
 		List<Integer> studentIdList = new ArrayList<>();
@@ -361,7 +378,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRCClassFailDistributionListTest() {
+	public void getRCClassFailDistributionListByGradeTest() {
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -384,6 +401,112 @@ public class TestStudentCourse {
 		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
 		for (GradeAbsenceDistribution gradeAbsenceDistribution : gadList) {
 			System.out.println(gradeAbsenceDistribution);
+		}
+	}
+
+	/*
+	 * 测试第4章第1个功能
+	 */
+
+	@Test
+	public void getGradeByCourseNameTest() {
+		String courseName = "大学英语（三）";
+		String year = "2017-2018";
+		Integer term = 1;
+		String grade = studentCourseService.getGradeByCourseName(courseName, year, term);
+		System.out.println(grade); // 2015
+	}
+
+	@Test
+	public void getTotalStudentNumberByCourseName() {
+		String courseName = "自动控制原理";
+		String year = "2017-2018";
+		Integer term = 1;
+		double totalScore = studentCourseService.getCourseTotalScoreByCourseName(courseName, year, term);
+		System.out.println(totalScore);
+	}
+
+	@Test
+	public void getBasicCourseOverallDistributionListTest() {
+		// 课比较少的情况下5.6秒，有点慢，需要改善
+		String year = "2017-2018";
+		Integer term = 1;
+		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+		for (BasicCourseOverallDistribution basicCourseOverallDistribution : bcodList) {
+			System.out.println(basicCourseOverallDistribution);
+		}
+	}
+
+	/*
+	 * 测试第4章第2个功能
+	 */
+
+	@Test
+	public void getBasicCourseDetailDistributionListTest() {
+		String courseName = "大学英语（三）";
+		String year = "2017-2018";
+		Integer term = 1;
+		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
+		bcddList = studentCourseService.getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
+		for (BasicCourseDetailDistribution basicCourseDetailDistribution : bcddList) {
+			System.out.println(basicCourseDetailDistribution);
+		}
+	}
+
+	@Test
+	public void getBasicCourseDetailDistributionListListTest() {
+		// 34秒，还是在多数课程学生人数为0的情况，太慢了
+		String year = "2017-2018";
+		Integer term = 1;
+		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
+		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
+		for (List<BasicCourseDetailDistribution> bcddList : bcddListList) {
+			for (BasicCourseDetailDistribution basicCourseDetailDistribution : bcddList) {
+				System.out.println(basicCourseDetailDistribution);
+			}
+		}
+	}
+
+	/*
+	 * 测试第4章第3章的功能
+	 */
+
+	@Test
+	public void getBasicCourseClassDistributionByCourseNameAndClassNumberTest() {
+		String courseName = "操作系统";
+		String classNumber = "20150615";
+		String year = "2017-2018";
+		Integer term = 1;
+		BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
+		basicCourseClassDistribution = studentCourseService
+				.getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName, classNumber, year, term);
+		System.out.println(basicCourseClassDistribution);
+	}
+
+	@Test
+	public void getBasicCourseClassDistributionListByCourseNameTest() {
+		// 16.7秒，慢
+		String courseName = "操作系统";
+		String year = "2017-2018";
+		Integer term = 1;
+		List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
+		bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
+		for (BasicCourseClassDistribution basicCourseClassDistribution : bccdList) {
+			System.out.println(basicCourseClassDistribution);
+		}
+	}
+
+	@Test
+	public void getBasicCourseClassDistributionListListTest() {
+		String year = "2017-2018";
+		Integer term = 1;
+		List<List<BasicCourseClassDistribution>> bccdListList = new ArrayList<>();
+		bccdListList = studentCourseService.getBasicCourseClassDistributionListList(year, term);
+		for (List<BasicCourseClassDistribution> bccdList : bccdListList) {
+			for (BasicCourseClassDistribution basicCourseClassDistribution : bccdList) {
+				System.out.println(basicCourseClassDistribution);
+			}
 		}
 	}
 }

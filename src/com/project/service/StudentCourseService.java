@@ -1,22 +1,31 @@
 package com.project.service;
 
+import static org.junit.Assert.fail;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.jdbc.StringUtils;
 import com.project.beans.StudentCourse;
 import com.project.dao.StudentCourseMapper;
 import com.project.dao.StudentMapper;
+import com.project.dto.BasicCourseClassDistribution;
+import com.project.dto.BasicCourseDetailDistribution;
+import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
@@ -122,12 +131,13 @@ public class StudentCourseService {
 	public double getACAverageScoreByGrade(Integer grade, String year, Integer term) {
 		double totalScore = getACTotalScoreByGrade(grade, year, term); // 加权总分
 		double totalCredits = getACTotalCreditsByGrade(grade, year, term); // 总学分
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -322,12 +332,13 @@ public class StudentCourseService {
 	public double getAGAverageScoreByCourseType(Integer courseType, String year, Integer term) {
 		double totalScore = studentCourseMapper.getAGTotalScoreByCourseType(courseType, year, term);
 		double totalCredits = studentCourseMapper.getAGTotalCreditsByCourseType(courseType, year, term);
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -505,12 +516,13 @@ public class StudentCourseService {
 	public double getRPECAverageScoreByGrade(Integer grade, String year, Integer term) {
 		double totalScore = getRPECTotalScoreByGrade(grade, year, term); // 加权总分
 		double totalCredits = getRPECTotalCreditsByGrade(grade, year, term); // 总学分
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -760,23 +772,24 @@ public class StudentCourseService {
 	public double getRPECAverageScoreByGradeAndDepartmentId(Integer departmentId, Integer grade, String year,
 			Integer term) {
 		double totalScore, totalCredits;
+		totalScore = totalCredits = 0;
 		if (departmentId != 6) {
 			totalScore = getRPECTotalScoreByGradeAndDepartmentId(departmentId, grade, year, term); // 加权总分
 			totalCredits = getRPECTotalCreditsByGradeAndDepartmentId(departmentId, grade, year, term); // 总学分
 		} else {
-			totalScore = totalCredits = 0;
 			List<Integer> departmentIdList = new ArrayList<>(Arrays.asList(6, 20, 21));
 			for (Integer id : departmentIdList) {
 				totalScore += getRPECTotalScoreByGradeAndDepartmentId(id, grade, year, term);
 				totalCredits += getRPECTotalCreditsByGradeAndDepartmentId(id, grade, year, term);
 			}
 		}
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -1696,5 +1709,356 @@ public class StudentCourseService {
 		gradeAbsenceDistribution.setTotalAbsenceNumber(totalAbsenceNumber);
 		gadList.add(gradeAbsenceDistribution);
 		return gadList;
+	}
+
+	/*
+	 * ======大一、大二、大三具有代表性的14门主要基础课程成绩基本情况======
+	 */
+
+	/**
+	 * 通过 courseName 获得该课程的年级编号
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public String getGradeByCourseName(String courseName, String year, Integer term) {
+		List<String> classNumberList = studentCourseMapper.getCourseClassNumberListBycourseName(courseName, year, term);
+		List<String> gradeList = new ArrayList<>();
+		for (String classNumber : classNumberList) {
+			gradeList.add(classNumber.substring(0, 4));
+		}
+		Set<String> gradeSet = new HashSet<>(gradeList);
+		Iterator<String> gradeIt = gradeSet.iterator();
+		String resultGrade = "--";
+		if (gradeIt.hasNext()) {
+			resultGrade = gradeIt.next();
+			while (gradeIt.hasNext()) {
+				String tmpGrade = gradeIt.next();
+				if (Collections.frequency(classNumberList, resultGrade) < Collections.frequency(classNumberList,
+						tmpGrade)) {
+					resultGrade = tmpGrade;
+				}
+			}
+		}
+		return resultGrade;
+	}
+
+	/**
+	 * 通过 courseName 获得该课程的总分（非加权）
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getCourseTotalScoreByCourseName(String courseName, String year, Integer term) {
+		Integer totalNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseName(courseName, year, term);
+		if (totalNumber != 0) {
+			return studentCourseMapper.getCourseTotalScoreByCourseName(courseName, year, term);
+		} else {
+			return 0; // 学生数为0，加权总分也为0
+		}
+	}
+
+	/**
+	 * 通过 courseName 获得该课程的平均分
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getCourseAverageScoreByCourseName(String courseName, String year, Integer term) {
+		Integer totalNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseName(courseName, year, term);
+		double averageScore = 0;
+		if (totalNumber != 0) {
+			double totalScore = getCourseTotalScoreByCourseName(courseName, year, term);
+			averageScore = totalScore / totalNumber;
+		} else {
+			averageScore = -1; // 除数异常
+		}
+		return averageScore;
+	}
+
+	/**
+	 * 通过 courseName 获得该课程的成绩基本情况
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public BasicCourseOverallDistribution getBasicCourseOverallDistributionByCourseName(String courseName, String year,
+			Integer term) {
+		String grade = getGradeByCourseName(courseName, year, term);
+		BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
+		basicCourseOverallDistribution.setGrade(grade);
+		basicCourseOverallDistribution.setCourseName(courseName);
+		Integer totalNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseName(courseName, year, term);
+		if (totalNumber != 0) {
+			Integer excellentNumber = studentCourseMapper.getCourseExcellentNumberByCourseName(courseName, year, term);
+			Integer failNumber = studentCourseMapper.getCourseFailNumberByCourseName(courseName, year, term);
+			double excellentRate = (double) excellentNumber / totalNumber;
+			double failRate = (double) failNumber / totalNumber;
+			double averageScore = getCourseAverageScoreByCourseName(courseName, year, term);
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strFailRate = rateDF.format(failRate);
+			String strAverageScore = scoreDF.format(averageScore);
+
+			basicCourseOverallDistribution.setExcellentNumber(excellentNumber);
+			basicCourseOverallDistribution.setFailNumber(failNumber);
+			basicCourseOverallDistribution.setTotalNumber(totalNumber);
+			basicCourseOverallDistribution.setExcellentRate(strExcellentRate);
+			basicCourseOverallDistribution.setFailRate(strFailRate);
+			basicCourseOverallDistribution.setAverageScore(strAverageScore);
+		}
+		return basicCourseOverallDistribution;
+	}
+
+	/**
+	 * 获得要分析总体情况的主要课程
+	 * 
+	 * @return
+	 */
+	public List<String> getBasicCourseOverallList() {
+		List<String> bcoList = new ArrayList<>();
+		bcoList.add("自动控制原理");
+		bcoList.add("电磁场");
+		bcoList.add("机械设计");
+		bcoList.add("数字电子技术");
+		bcoList.add("大学英语（三）");
+		bcoList.add("大学物理下A");
+		bcoList.add("大学物理下B");
+		bcoList.add("大学物理实验（二）");
+		bcoList.add("复变函数与积分变换");
+		bcoList.add("大学英语（一）");
+		bcoList.add("大学计算机基础A");
+		bcoList.add("普通化学");
+		bcoList.add("线性代数与解析几何A");
+		bcoList.add("微积分A（一）");
+		return bcoList;
+	}
+
+	/**
+	 * 获得主要基础课程成绩基本情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<BasicCourseOverallDistribution> getBasicCourseOverallDistributionList(String year, Integer term) {
+		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+		List<String> bcoList = getBasicCourseOverallList();
+		for (String courseName : bcoList) {
+			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
+			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
+			bcodList.add(basicCourseOverallDistribution);
+		}
+		return bcodList;
+	}
+
+	/*
+	 * ======大一、大二具有代表性的10门主要基础课程成绩具体分析======
+	 */
+
+	/**
+	 * 通过 courseName和departmentId 获得该课程该学院的成绩具体分析
+	 * 
+	 * @param courseName
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public BasicCourseDetailDistribution getBasicCourseDetailDistributionByCourseNameAndDepartmentId(String courseName,
+			Integer departmentId, String year, Integer term) {
+		String departmentName = getDepartmentNameByDepartmentId(departmentId);
+		BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
+		basicCourseDetailDistribution.setCourseName(courseName);
+		basicCourseDetailDistribution.setDepartmentName(departmentName);
+		Integer totalStudentNumber = 0;
+		Integer excellentNumber = 0;
+		Integer failNumber = 0;
+		if (departmentId != 6) {
+			totalStudentNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseNameAndDepartmentId(courseName,
+					departmentId, year, term);
+			excellentNumber = studentCourseMapper.getCourseExcellentNumberByCourseNameAndDepartmentId(courseName,
+					departmentId, year, term);
+			failNumber = studentCourseMapper.getCourseFailNumberByCourseNameAndDepartmentId(courseName, departmentId,
+					year, term);
+		} else {
+			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
+			for (Integer id : departmentIdList) {
+				totalStudentNumber += studentCourseMapper
+						.getCourseTotalStudentNumberByCourseNameAndDepartmentId(courseName, id, year, term);
+				excellentNumber += studentCourseMapper.getCourseExcellentNumberByCourseNameAndDepartmentId(courseName,
+						id, year, term);
+				failNumber += studentCourseMapper.getCourseFailNumberByCourseNameAndDepartmentId(courseName, id, year,
+						term);
+			}
+		} // if
+		if (totalStudentNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalStudentNumber;
+			double failRate = (double) failNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strFailRate = rateDF.format(failRate);
+
+			basicCourseDetailDistribution.setExcellentNumber(excellentNumber);
+			basicCourseDetailDistribution.setFailNumber(failNumber);
+			basicCourseDetailDistribution.setTotalStudentNumber(totalStudentNumber);
+			basicCourseDetailDistribution.setExcellentRate(strExcellentRate);
+			basicCourseDetailDistribution.setFailRate(strFailRate);
+		}
+		return basicCourseDetailDistribution;
+	}
+
+	/**
+	 * 通过 courseName 获得该课程的成绩具体分析
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<BasicCourseDetailDistribution> getBasicCourseDetailDistributionListByCourseName(String courseName,
+			String year, Integer term) {
+		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
+		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+			BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
+			basicCourseDetailDistribution = getBasicCourseDetailDistributionByCourseNameAndDepartmentId(courseName,
+					departmentId, year, term);
+			bcddList.add(basicCourseDetailDistribution);
+		}
+		return bcddList;
+	}
+
+	/**
+	 * 获得要分析具体情况的主要课程
+	 * 
+	 * @return
+	 */
+	public List<String> getBasicCourseDetailList() {
+		List<String> bcdList = new ArrayList<>();
+		bcdList.add("大学英语（三）");
+		bcdList.add("大学物理下A");
+		bcdList.add("大学物理下B");
+		bcdList.add("大学物理实验（二）");
+		bcdList.add("复变函数与积分变换");
+		bcdList.add("大学英语（一）");
+		bcdList.add("大学计算机基础A");
+		bcdList.add("普通化学");
+		bcdList.add("线性代数与解析几何A");
+		bcdList.add("微积分A（一）");
+		return bcdList;
+	}
+
+	/**
+	 * 获得主要基础课程成绩具体情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<List<BasicCourseDetailDistribution>> getBasicCourseDetailDistributionListList(String year,
+			Integer term) {
+		List<String> bcdList = getBasicCourseDetailList();
+		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
+		for (String courseName : bcdList) {
+			List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
+			bcddList = getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
+			bcddListList.add(bcddList);
+		}
+		return bcddListList;
+	}
+
+	/*
+	 * 大一，大二具有代表性的10门基础课程各班成绩情况
+	 */
+
+	/**
+	 * 通过 courseName和classNumber 获得该课程该班级的成绩情况
+	 * 
+	 * @param courseName
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public BasicCourseClassDistribution getBasicCourseClassDistributionByCourseNameAndClassNumber(String courseName,
+			String classNumber, String year, Integer term) {
+		BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
+		basicCourseClassDistribution.setCourseName(courseName);
+		basicCourseClassDistribution.setClassNumber(classNumber);
+		Integer totalNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseNameAndClassNumber(courseName,
+				classNumber, year, term);
+		if (totalNumber != 0) {
+			Integer excellentNumber = studentCourseMapper.getCourseExcellentNumberByCourseNameAndClassNumber(courseName,
+					classNumber, year, term);
+			Integer failNumber = studentCourseMapper.getCourseFailNumberByCourseNameAndClassNumber(courseName,
+					classNumber, year, term);
+			double excellentRate = (double) excellentNumber / totalNumber;
+			double failRate = (double) failNumber / totalNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strFailRate = rateDF.format(failRate);
+			basicCourseClassDistribution.setTotalNumber(totalNumber);
+			basicCourseClassDistribution.setExcellentRate(strExcellentRate);
+			basicCourseClassDistribution.setFailRate(strFailRate);
+		}
+		return basicCourseClassDistribution;
+	}
+
+	/**
+	 * 通过 courseName 获得该课程所有班级的成绩情况列表
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<BasicCourseClassDistribution> getBasicCourseClassDistributionListByCourseName(String courseName,
+			String year, Integer term) {
+		List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
+		String strGrade = getGradeByCourseName(courseName, year, term);
+		if (!strGrade.equals("--")) {
+			Integer grade = Integer.parseInt(strGrade);
+			List<String> classNumberList = getAllClassNumberListByGrade(grade);
+			for (String classNumber : classNumberList) {
+				BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
+				basicCourseClassDistribution = getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName,
+						classNumber, year, term);
+				bccdList.add(basicCourseClassDistribution);
+			}
+		}
+		return bccdList;
+	}
+
+	/**
+	 * 获得大一，大二10门基础课程所有班级的成绩情况列表
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<List<BasicCourseClassDistribution>> getBasicCourseClassDistributionListList(String year, Integer term) {
+		List<List<BasicCourseClassDistribution>> bccdListList = new ArrayList<>();
+		List<String> bcdList = getBasicCourseDetailList();
+		for (String courseName : bcdList) {
+			List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
+			bccdList = getBasicCourseClassDistributionListByCourseName(courseName, year, term);
+			bccdListList.add(bccdList);
+		}
+		return bccdListList;
 	}
 }

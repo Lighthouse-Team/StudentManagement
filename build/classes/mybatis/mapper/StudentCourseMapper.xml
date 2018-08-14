@@ -1033,6 +1033,236 @@
 		</where>
 	</select>
 
+	<!-- ======大一、大二、大三具有代表性的14门主要基础课程成绩基本情况====== -->
+
+	<!-- 通过 courseName 获得该课程在指定学年的上课班级列表: public List<String> getCourseClassNumberListBycourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseClassNumberListBycourseName" resultType="java.lang.String">
+		select s.studentClass from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			c.courseName = #{courseName}
+			and c.courseTerm = #{term}
+			and
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.scTerm like
+			CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 courseName 获得该课程的参加考试总人数: public Integer getCourseTotalStudentNumberByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseTotalStudentNumberByCourseName" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 courseName 获得该课程得优秀的学生人数: public Integer getCourseExcellentNumberByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseExcellentNumberByCourseName" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score >= 90
+		</where>
+	</select>
+
+	<!-- 通过 courseName 获得该课程得不及格的学生人数: public Integer getCourseFailNumberByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseFailNumberByCourseName" resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
+
+	<!-- 通过 courseName 获得该课程的总分（非加权）: public double getCourseTotalScoreByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseTotalScoreByCourseName" resultType="java.lang.Double">
+		select sum(sc.score) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- ======大一、大二具有代表性的10门主要基础课程成绩具体分析====== -->
+
+	<!-- 通过 courseName和departmentId 获得该课程该学院的参加考试总人数: public Integer getCourseTotalStudentNumberByCourseNameAndDepartmentId( 
+		@Param(value = "courseName") String courseName, @Param(value = "departmentId") 
+		Integer departmentId, @Param(value = "year") String year, @Param(value = 
+		"term") Integer term); -->
+	<select id="getCourseTotalStudentNumberByCourseNameAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.departmentId = #{departmentId}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 courseName和departmentId 获得该课程该学院优秀的学生人数: public Integer getCourseExcellentNumberByCourseNameAndDepartmentId(@Param(value 
+		= "courseName") String courseName, @Param(value = "departmentId") Integer 
+		departmentId, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getCourseExcellentNumberByCourseNameAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.departmentId = #{departmentId}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score >= 90
+		</where>
+	</select>
+
+	<!-- 通过 courseName和departmentId 获得该课程该学院不及格的学生人数: public Integer getCourseFailNumberByCourseNameAndDepartmentId(@Param(value 
+		= "courseName") String courseName, @Param(value = "departmentId") Integer 
+		departmentId, @Param(value = "year") String year, @Param(value = "term") 
+		Integer term); -->
+	<select id="getCourseFailNumberByCourseNameAndDepartmentId"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.departmentId = #{departmentId}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
+
+	<!-- 大一，大二具有代表性的10门基础课程各班成绩情况 -->
+
+	<!-- 通过 courseName和classNumber 获得该课程该班级的参加考试总人数: public Integer getCourseTotalStudentNumberByCourseNameAndClassNumber(@Param(value 
+		= "courseName") String courseName, @Param(value = "classNumber") String classNumber, 
+		@Param(value = "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getCourseTotalStudentNumberByCourseNameAndClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass =
+			#{classNumber}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm =
+			#{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like
+			CONCAT(#{year}, '%')
+		</where>
+	</select>
+
+	<!-- 通过 courseName和classNumber 获得该课程该班级的优秀学生数: public Integer getCourseExcellentNumberByCourseNameAndClassNumber(@Param(value 
+		= "courseName") String courseName, @Param(value = "classNumber") String classNumber, 
+		@Param(value = "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getCourseExcellentNumberByCourseNameAndClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.score >=90
+		</where>
+	</select>
+
+	<!-- 通过 courseName和classNumber 获得该课程该班级的不及格学生数: public Integer getCourseFailNumberByCourseNameAndClassNumber(@Param(value 
+		= "courseName") String courseName, @Param(value = "classNumber") String classNumber, 
+		@Param(value = "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getCourseFailNumberByCourseNameAndClassNumber"
+		resultType="java.lang.Integer">
+		select count(*) from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass = #{classNumber}
+			and c.courseName = #{courseName}
+			and
+			c.courseTerm = #{term}
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			and
+			sc.scTerm like CONCAT(#{year}, '%')
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
 
 	<sql id="studentCourseProperty">
 		(score, scLevel, studentId, courseId, scTerm, examProperty,

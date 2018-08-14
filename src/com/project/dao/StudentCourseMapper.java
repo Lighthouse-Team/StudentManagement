@@ -582,4 +582,149 @@ public interface StudentCourseMapper {
 	 */
 	public List<Integer> getGECAbsenceStudentIdListByGrade(@Param(value = "grade") Integer grade,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/*
+	 * ======大一、大二、大三具有代表性的14门主要基础课程成绩基本情况======
+	 */
+
+	/**
+	 * 通过 courseName 获得该课程在指定学年的上课班级列表
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<String> getCourseClassNumberListBycourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName 获得该课程的参加考试总人数
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseTotalStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName 获得该课程得优秀的学生人数
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseExcellentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName 获得该课程得不及格的学生人数
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseFailNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName 获得该课程的总分（非加权）
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public double getCourseTotalScoreByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/*
+	 * ======大一、大二具有代表性的10门主要基础课程成绩具体分析======
+	 */
+
+	/**
+	 * 通过 courseName和departmentId 获得该课程该学院的参加考试总人数
+	 * 
+	 * @param courseName
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseTotalStudentNumberByCourseNameAndDepartmentId(
+			@Param(value = "courseName") String courseName, @Param(value = "departmentId") Integer departmentId,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName和departmentId 获得该课程该学院优秀的学生人数
+	 * 
+	 * @param courseName
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseExcellentNumberByCourseNameAndDepartmentId(@Param(value = "courseName") String courseName,
+			@Param(value = "departmentId") Integer departmentId, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName和departmentId 获得该课程该学院不及格的学生人数
+	 * 
+	 * @param courseName
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseFailNumberByCourseNameAndDepartmentId(@Param(value = "courseName") String courseName,
+			@Param(value = "departmentId") Integer departmentId, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
+
+	/*
+	 * 大一，大二具有代表性的10门基础课程各班成绩情况
+	 */
+
+	/**
+	 * 通过 courseName和classNumber 获得该课程该班级的参加考试总人数
+	 * 
+	 * @param courseName
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseTotalStudentNumberByCourseNameAndClassNumber(@Param(value = "courseName") String courseName,
+			@Param(value = "classNumber") String classNumber, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName和classNumber 获得该课程该班级的优秀学生数
+	 * 
+	 * @param courseName
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseExcellentNumberByCourseNameAndClassNumber(@Param(value = "courseName") String courseName,
+			@Param(value = "classNumber") String classNumber, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
+
+	/**
+	 * 通过 courseName和classNumber 获得该课程该班级的不及格学生数
+	 * 
+	 * @param courseName
+	 * @param classNumber
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseFailNumberByCourseNameAndClassNumber(@Param(value = "courseName") String courseName,
+			@Param(value = "classNumber") String classNumber, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
 }
