@@ -26,9 +26,6 @@ public class DepartmentDistribution implements Serializable {
 
 	public DepartmentDistribution() {
 		super();
-	}
-	
-	public void initValue() {
 		this.totalNumber = 0;
 		this.excellentNumber = 0;
 		this.goodNumber = 0;
@@ -42,7 +39,7 @@ public class DepartmentDistribution implements Serializable {
 		this.passRate = "0%";
 		this.failRate = "0%";
 	}
-
+	
 	public DepartmentDistribution(String grade, String departmentName, Integer totalNumber, Integer excellentNumber,
 			Integer goodNumber, Integer mediumNumber, Integer passNumber, Integer failNumber, String averageScore,
 			String excellentRate, String goodRate, String mediumRate, String passRate, String failRate) {

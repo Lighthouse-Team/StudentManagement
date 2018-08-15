@@ -16,9 +16,6 @@ public class GradeDepartmentAverageScoreCompare implements Serializable{
 	
 	public GradeDepartmentAverageScoreCompare() {
 		super();
-	}
-	
-	public void initValue() {
 		this.averageScore = "0";
 		this.difference = "0";
 	}

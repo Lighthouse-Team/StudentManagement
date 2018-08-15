@@ -18,9 +18,6 @@ public class ClassExcellentFailDistribution implements Serializable{
 	
 	public ClassExcellentFailDistribution() {
 		super();
-	}
-	
-	public void InitValue() {
 		totalNumber = 0;
 		excellentNumber = 0;
 		failNumber = 0;

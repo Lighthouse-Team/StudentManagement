@@ -167,7 +167,7 @@ public class TestStudentCourse {
 		String year = "2017-2018";
 		Integer term = 1;
 		double averageScore = studentCourseService.getRPECAverageScoreByGrade(grade, year, term);
-		System.out.println(averageScore); // 76.21->75.45（真实）
+		System.out.println(averageScore);
 	}
 
 	@Test
@@ -183,7 +183,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getDepartmentRPECScoreDistributionByGradeTest() {
+	public void getDepartmentRPECScoreDistributionListByGradeTest() {
 		// 查询19个院系，16.7秒，速度有点慢
 		Integer grade = 2015;
 		// String year = "2016-2017"; // 结果为0
@@ -219,7 +219,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getClassRPECScoreDistributionByGradeTest() {
+	public void getClassRPECScoreDistributionListByGradeTest() {
 		// 通识查询143个班，30.4秒，速度有点慢，看是否可以改善
 		Integer grade = 2015;
 		String year = "2017-2018";
@@ -236,7 +236,7 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getDepartmentAverageScoreCompareByGradeTest() {
+	public void getDepartmentAverageScoreCompareListByGradeTest() {
 		// 12.6秒，速度有点慢
 		Integer grade = 2015;
 		String year = "2017-2018";
@@ -267,22 +267,7 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getTotalStudentNumberByStudentIdListTest() {
-		List<Integer> studentIdList = new ArrayList<>();
-		Integer totalStudentNumber = studentCourseService.getTotalStudentNumberByStudentIdList(studentIdList);
-		System.out.println(totalStudentNumber);
-	}
-
-	@Test
-	public void constructorTest() {
-		GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = new GradeDepartmentAverageScoreCompare();
-		System.out.println(departmentAverageScoreCompare);
-		GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
-		System.out.println(gradeFailDistribution);
-	}
-
-	@Test
-	public void getGradeFailDistributionTest() {
+	public void getRCGradeFailDistributionByGradeTest() {
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -292,30 +277,15 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void listSetTest() {
-		List<String> list = new ArrayList<>();
-		list.add("1");
-		list.add("3");
-		list.add("1");
-		list.add("2");
-		list.add("6");
-		list.add("4");
-		list.add("5");
-		Set uniqueSet = new HashSet<>(list);
-		System.out.println(list); // 1,3,1,2,6,4,5
-		System.out.println(uniqueSet); // 1,2,3,4,5,6
-	}
-
-	@Test
-	public void getUniversityRCGradeFailDistributionListTest() {
+	public void getRCGradeFailDistributionListTest() {
+		// 1.7秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<GradeFailDistribution> gfdList = new ArrayList<>();
-		gfdList = studentCourseService.getUniversityRCGradeFailDistributionList(year, term);
+		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
 		for (GradeFailDistribution gradeFailDistribution : gfdList) {
 			System.out.println(gradeFailDistribution);
 		}
-
 	}
 
 	/*
@@ -323,11 +293,11 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getUniversityRCDepartmentFailDistributionListTest() {
+	public void getRCDepartmentFailDistributionListTest() {
 		String year = "2017-2018";
 		Integer term = 1;
 		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
-		dfdList = studentCourseService.getUniversityRCDepartmentFailDistributionList(year, term);
+		dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
 		for (DepartmentFailDistribution departmentFailDistribution : dfdList) {
 			System.out.println(departmentFailDistribution);
 		}
@@ -335,8 +305,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getDepartmentFailDistributionByDepartmentIdTest() {
-		// 测试结果和原方法一致，除了6系
-		Integer departmentId = 1;
+		// 验证结果和原方法一致
+		// 这个用于验证上面写的方法的正确性，不用于处理正式数据传给前端
+		// 按理说，不及格门数为3的学生数应该多于不及格门数>=4的学生人数，但有部分不符合，可能计算误差或者所给数据不完整
+		Integer departmentId = 6;
 		String year = "2017-2018";
 		Integer term = 1;
 		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
@@ -351,7 +323,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCGradeDepartmentFailDistributionListListTest() {
-		// 2.7秒，速度还行
+		// 2.7
 		String year = "2017-2018";
 		Integer term = 1;
 		List<List<GradeDepartmentFailDistribution>> gdfdListList = studentCourseService
@@ -379,6 +351,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCClassFailDistributionListByGradeTest() {
+		// 7.4秒
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -395,6 +368,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getGradeAbsenceDistributionListTest() {
+		// 2.4秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
@@ -418,17 +392,8 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getTotalStudentNumberByCourseName() {
-		String courseName = "自动控制原理";
-		String year = "2017-2018";
-		Integer term = 1;
-		double totalScore = studentCourseService.getCourseTotalScoreByCourseName(courseName, year, term);
-		System.out.println(totalScore);
-	}
-
-	@Test
 	public void getBasicCourseOverallDistributionListTest() {
-		// 课比较少的情况下5.6秒，有点慢，需要改善
+		// 5.6秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
@@ -444,7 +409,8 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseDetailDistributionListTest() {
-		String courseName = "大学英语（三）";
+		// 5.3秒
+		String courseName = "操作系统";
 		String year = "2017-2018";
 		Integer term = 1;
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();

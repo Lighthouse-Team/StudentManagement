@@ -28,9 +28,6 @@ public class OverallDistribution implements Serializable {
 	
 	public OverallDistribution() {
 		super();
-	}
-	
-	public void initValue() {
 		this.totalNumber = 0;
 		this.excellentNumber = 0;
 		this.goodNumber = 0;

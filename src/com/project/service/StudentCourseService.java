@@ -211,8 +211,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		return overallDistribution;
 	}
@@ -274,8 +272,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		odList.add(overallDistribution);
 		return odList;
@@ -399,8 +395,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		return overallDistribution;
 	}
@@ -460,8 +454,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		odList.add(overallDistribution);
 		return odList;
@@ -596,8 +588,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		return overallDistribution;
 	}
@@ -659,8 +649,6 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-		} else {
-			overallDistribution.initValue();
 		}
 		odList.add(overallDistribution);
 		return odList;
@@ -866,8 +854,6 @@ public class StudentCourseService {
 			departmentDistribution.setMediumRate(strMediumRate);
 			departmentDistribution.setPassRate(strPassRate);
 			departmentDistribution.setFailRate(strFailRate);
-		} else {
-			departmentDistribution.initValue();
 		}
 		return departmentDistribution;
 	}
@@ -931,8 +917,6 @@ public class StudentCourseService {
 			departmentDistribution.setMediumRate(strMediumRate);
 			departmentDistribution.setPassRate(strPassRate);
 			departmentDistribution.setFailRate(strFailRate);
-		} else {
-			departmentDistribution.initValue();
 		}
 		ddList.add(departmentDistribution);
 		return ddList;
@@ -972,13 +956,13 @@ public class StudentCourseService {
 	 */
 	public ClassExcellentFailDistribution getRPECExcellentFailDistributionByClassNumber(String classNumber, String year,
 			Integer term) {
-		Integer totalNumber = studentCourseMapper.getRPECTotalScoreRecordNumberByClassNumber(classNumber, year, term);
-		Integer excellentNumber = studentCourseMapper.getRPECExcellentScoreRecordNumberByClassNumber(classNumber, year,
-				term);
-		Integer failNumber = studentCourseMapper.getRPECFailScoreRecordNumberByClassNumber(classNumber, year, term);
 		ClassExcellentFailDistribution classExcellentFailDistribution = new ClassExcellentFailDistribution();
 		classExcellentFailDistribution.setClassNumber(classNumber);
+		Integer totalNumber = studentCourseMapper.getRPECTotalScoreRecordNumberByClassNumber(classNumber, year, term);
 		if (totalNumber != 0) {
+			Integer excellentNumber = studentCourseMapper.getRPECExcellentScoreRecordNumberByClassNumber(classNumber,
+					year, term);
+			Integer failNumber = studentCourseMapper.getRPECFailScoreRecordNumberByClassNumber(classNumber, year, term);
 			double excellentRate = (double) excellentNumber / totalNumber;
 			double failRate = (double) failNumber / totalNumber;
 
@@ -991,8 +975,6 @@ public class StudentCourseService {
 			classExcellentFailDistribution.setFailNumber(failNumber);
 			classExcellentFailDistribution.setExcellentRate(strExcellentRate);
 			classExcellentFailDistribution.setFailRate(strFailRate);
-		} else {
-			classExcellentFailDistribution.InitValue();
 		}
 		return classExcellentFailDistribution;
 	}
@@ -1063,8 +1045,6 @@ public class StudentCourseService {
 
 			departmentAverageScoreCompare.setAverageScore(strAverageScore);
 			departmentAverageScoreCompare.setDifference(strDifference);
-		} else {
-			departmentAverageScoreCompare.initValue();
 		}
 		return departmentAverageScoreCompare;
 	}
@@ -1212,7 +1192,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<GradeFailDistribution> getUniversityRCGradeFailDistributionList(String year, Integer term) {
+	public List<GradeFailDistribution> getRCGradeFailDistributionList(String year, Integer term) {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		List<GradeFailDistribution> gfdList = new ArrayList<>();
@@ -1367,7 +1347,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<DepartmentFailDistribution> getUniversityRCDepartmentFailDistributionList(String year, Integer term) {
+	public List<DepartmentFailDistribution> getRCDepartmentFailDistributionList(String year, Integer term) {
 		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
 		Integer oneFailNumber = 0;
 		Integer twoFailNumber = 0;
@@ -1435,29 +1415,61 @@ public class StudentCourseService {
 		Integer totalStudentNumber = 0;
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
-		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI, departmentId);
-			List<Integer> studentIdList = new ArrayList<>();
-			studentIdList = studentCourseMapper.getStudentIdListByGradeAndDepartmentId(gradeI, departmentId);
-			for (Integer studentId : studentIdList) {
-				Integer failCourseNumber = studentCourseMapper.getRCFailCourseNumberByStudentId(studentId, year, term);
-				if (failCourseNumber != 0) {
-					switch (failCourseNumber) {
-					case 1:
-						oneFailNumber++;
-						break;
-					case 2:
-						twoFailNumber++;
-						break;
-					case 3:
-						threeFailNumber++;
-						break;
-					default:
-						geFourFailNumber++;
+		if (departmentId != 6) {
+			for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+				totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI,
+						departmentId);
+				List<Integer> studentIdList = new ArrayList<>();
+				studentIdList = studentCourseMapper.getStudentIdListByGradeAndDepartmentId(gradeI, departmentId);
+				for (Integer studentId : studentIdList) {
+					Integer failCourseNumber = studentCourseMapper.getRCFailCourseNumberByStudentId(studentId, year,
+							term);
+					if (failCourseNumber != 0) {
+						switch (failCourseNumber) {
+						case 1:
+							oneFailNumber++;
+							break;
+						case 2:
+							twoFailNumber++;
+							break;
+						case 3:
+							threeFailNumber++;
+							break;
+						default:
+							geFourFailNumber++;
+						} // switch
+					} // if
+				} // for
+			} // for
+		} else {
+			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
+			for (Integer id : departmentIdList) {
+				for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+					totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(gradeI, id);
+					List<Integer> studentIdList = new ArrayList<>();
+					studentIdList = studentCourseMapper.getStudentIdListByGradeAndDepartmentId(gradeI, id);
+					for (Integer studentId : studentIdList) {
+						Integer failCourseNumber = studentCourseMapper.getRCFailCourseNumberByStudentId(studentId, year,
+								term);
+						if (failCourseNumber != 0) {
+							switch (failCourseNumber) {
+							case 1:
+								oneFailNumber++;
+								break;
+							case 2:
+								twoFailNumber++;
+								break;
+							case 3:
+								threeFailNumber++;
+								break;
+							default:
+								geFourFailNumber++;
+							}
+						}
 					}
 				}
 			}
-		}
+		} // else
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
