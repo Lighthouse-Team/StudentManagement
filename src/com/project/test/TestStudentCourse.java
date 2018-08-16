@@ -30,6 +30,7 @@ import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
 //import com.project.service.StudentService;
+import com.project.service.StudentService;
 
 public class TestStudentCourse {
 
@@ -74,21 +75,20 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getACScoreDistributionByGradeTest() {
+	public void getACOverallDistributionByGradeTest() {
 		Integer grade = 2015;
-		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
-		OverallDistribution overallDistribution = studentCourseService.getACScoreDistributionByGrade(grade, year, term);
+		OverallDistribution overallDistribution = studentCourseService.getACOverallDistributionByGrade(grade, year,
+				term);
 		System.out.println(overallDistribution);
 	}
 
 	@Test
-	public void getUniversityACScoreDistributionListTest() {
-		// String year = "2016-2017"; // 结果为0
+	public void getACOverallDistributionListTest() {
 		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
 		}
@@ -99,22 +99,20 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getAGScoreDistributionByCourseTypeTest() {
+	public void getAGOverallDistributionByCourseTypeTest() {
 		Integer courseType = 1;
-		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
-		OverallDistribution overallDistribution = studentCourseService.getAGScoreDistributionByCourseType(courseType,
+		OverallDistribution overallDistribution = studentCourseService.getAGOverallDistributionByCourseType(courseType,
 				year, term);
 		System.out.println(overallDistribution);
 	}
 
 	@Test
-	public void getUniversityAGScoreDistributionListTest() {
-		// String year = "2016-2017"; // 结果为0
+	public void getAGOverallDistributionListtTest() {
 		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getAGOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
 		}
@@ -125,20 +123,20 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getRPECScoreDistributionByGradeTest() {
+	public void getRPECOverallDistributionByGradeTest() {
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
-		OverallDistribution overallDistribution = studentCourseService.getRPECScoreDistributionByGrade(grade, year,
+		OverallDistribution overallDistribution = studentCourseService.getRPECOverallDistributionByGrade(grade, year,
 				term);
 		System.out.println(overallDistribution);
 	}
 
 	@Test
-	public void getUniversityRPECScoreDistributionListTest() {
+	public void getRPECOverallDistributionListTest() {
 		String year = "2017-2018";
 		Integer term = 1;
-		List<OverallDistribution> odList = studentCourseService.getUniversityRPECScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getRPECOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
 		}
@@ -151,8 +149,7 @@ public class TestStudentCourse {
 	@Test
 	public void getRPECAverageScoreByGradeAndDepartmentIdTest() {
 		Integer grade = 2015;
-		Integer departmentId = 3;
-		// String year = "2016-2017"; // 结果为-1，表示成绩异常
+		Integer departmentId = 6;
 		String year = "2017-2018";
 		Integer term = 1;
 		double averageScore = studentCourseService.getRPECAverageScoreByGradeAndDepartmentId(departmentId, grade, year,
@@ -161,36 +158,24 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRPECAverageScoreByGradeTest() { // 第2章第1个功能里定义的方法，可以用在这里
-		Integer grade = 2015;
-		// String year = "2016-2017"; // 结果为-1，表示成绩异常
-		String year = "2017-2018";
-		Integer term = 1;
-		double averageScore = studentCourseService.getRPECAverageScoreByGrade(grade, year, term);
-		System.out.println(averageScore);
-	}
-
-	@Test
-	public void getRPECScoreDistributionByGradeAndDepartmentIdTest() {
+	public void getRPECDepartmentDistributionByGradeAndDepartmentIdTest() {
 		Integer grade = 2015;
 		Integer departmentId = 1;
-		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
 		DepartmentDistribution departmentDistribution = studentCourseService
-				.getRPECScoreDistributionByGradeAndDepartmentId(departmentId, grade, year, term);
+				.getRPECDepartmentDistributionByGradeAndDepartmentId(departmentId, grade, year, term);
 		System.out.println(departmentDistribution);
 	}
 
 	@Test
-	public void getDepartmentRPECScoreDistributionListByGradeTest() {
+	public void getRPECDepartmentDistributionListByGradeTest() {
 		// 查询19个院系，16.7秒，速度有点慢
 		Integer grade = 2015;
-		// String year = "2016-2017"; // 结果为0
 		String year = "2017-2018";
 		Integer term = 1;
-		List<DepartmentDistribution> ddList = studentCourseService.getDepartmentRPECScoreDistributionListByGrade(grade,
-				year, term);
+		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year,
+				term);
 		for (DepartmentDistribution dd : ddList) {
 			System.out.println(dd);
 		}
@@ -201,9 +186,9 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getAllClassNumberByGradeTest() {
+	public void getClassNumberListByGradeTest() {
 		Integer grade = 2015;
-		List<String> classNumberList = studentCourseService.getAllClassNumberListByGrade(grade);
+		List<String> classNumberList = studentCourseService.getClassNumberListByGrade(grade);
 		System.out.println(classNumberList.size());
 		System.out.println(classNumberList);
 	}
@@ -219,8 +204,8 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getClassRPECScoreDistributionListByGradeTest() {
-		// 通识查询143个班，30.4秒，速度有点慢，看是否可以改善
+	public void getRPECClassExcellentFailDistributionListByGradeTest() {
+		// 通识查询143个班，29.2秒，速度有点慢，看是否可以改善
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -237,7 +222,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getDepartmentAverageScoreCompareListByGradeTest() {
-		// 12.6秒，速度有点慢
+		// 11.3秒，速度有点慢
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -293,18 +278,19 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getRCDepartmentFailDistributionListTest() {
+	public void getDepartmentFailDistributionByDepartmentIdTest() {
+		// 1.5秒
+		Integer departmentId = 6;
 		String year = "2017-2018";
 		Integer term = 1;
-		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
-		dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
-		for (DepartmentFailDistribution departmentFailDistribution : dfdList) {
-			System.out.println(departmentFailDistribution);
-		}
+		DepartmentFailDistribution departmentFailDistribution = studentCourseService
+				.getRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
+		System.out.println(departmentFailDistribution);
 	}
 
 	@Test
-	public void getDepartmentFailDistributionByDepartmentIdTest() {
+	public void testDepartmentFailDistributionByDepartmentIdTest() {
+		// 10.4秒
 		// 验证结果和原方法一致
 		// 这个用于验证上面写的方法的正确性，不用于处理正式数据传给前端
 		// 按理说，不及格门数为3的学生数应该多于不及格门数>=4的学生人数，但有部分不符合，可能计算误差或者所给数据不完整
@@ -317,13 +303,37 @@ public class TestStudentCourse {
 		System.out.println(departmentFailDistribution);
 	}
 
+	@Test
+	public void getRCDepartmentFailDistributionListTest() {
+		// 2.3秒
+		String year = "2017-2018";
+		Integer term = 1;
+		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
+		dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
+		for (DepartmentFailDistribution departmentFailDistribution : dfdList) {
+			System.out.println(departmentFailDistribution);
+		}
+	}
+
 	/*
 	 * 测试第3章第3个功能
 	 */
 
 	@Test
+	public void getRCGradeDepartmentFailDistributionListByGradeTest() {
+		// 2.2秒
+		Integer grade = 2015;
+		String year = "2017-2018";
+		Integer term = 1;
+		List<GradeDepartmentFailDistribution> gdfdList = studentCourseService.getRCGradeDepartmentFailDistributionListByGrade(grade, year, term);
+		for(GradeDepartmentFailDistribution gradeDepartmentFailDistribution : gdfdList) {
+			System.out.println(gradeDepartmentFailDistribution);
+		}
+	}
+
+	@Test
 	public void getRCGradeDepartmentFailDistributionListListTest() {
-		// 2.7
+		// 2.7秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<List<GradeDepartmentFailDistribution>> gdfdListList = studentCourseService
@@ -341,6 +351,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCClassFailDistributionByClassNumberTest() {
+		// 1.5秒
 		String classNumber = "20150111";
 		String year = "2017-2018";
 		Integer term = 1;
@@ -351,7 +362,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCClassFailDistributionListByGradeTest() {
-		// 7.4秒
+		// 6.4秒
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
@@ -368,7 +379,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getGradeAbsenceDistributionListTest() {
-		// 2.4秒
+		// 2秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
@@ -422,7 +433,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseDetailDistributionListListTest() {
-		// 34秒，还是在多数课程学生人数为0的情况，太慢了
+		// 30秒，还是在多数课程学生人数为0的情况，太慢了
 		String year = "2017-2018";
 		Integer term = 1;
 		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
@@ -452,7 +463,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseClassDistributionListByCourseNameTest() {
-		// 16.7秒，慢
+		// 15.5秒
 		String courseName = "操作系统";
 		String year = "2017-2018";
 		Integer term = 1;
@@ -465,6 +476,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseClassDistributionListListTest() {
+		// 一个课程140+个班，10个课目前只有3个有成绩，共400+班，35.8秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<List<BasicCourseClassDistribution>> bccdListList = new ArrayList<>();

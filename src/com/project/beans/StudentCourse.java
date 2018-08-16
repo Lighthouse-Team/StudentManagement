@@ -7,12 +7,12 @@ package com.project.beans;
  */
 public class StudentCourse {
 
-	private Integer scId;	// 选课Id，主键
-	private double score;	// 课程分数
-	private String scLevel;	// 课程等级	（优秀：95， 良好85， 中等：75，及格：65，不及格：35）
-	private String scTerm;  // 选课年份
-	private Integer examProperty; 	//考试性质（1：正常考试。2：补考。3：补考二。4：自主考试。）
-	private Integer scoreMark; 		//成绩标志（1：空（参加考试）。2：缺考。3：缓考。4：违纪。5：作弊。）
+	private Integer scId;			// 选课Id，主键
+	private double score;			// 课程分数
+	private String scLevel;			// 课程等级	（优秀：95	 良好85	中等：75	及格：65	不及格：35）
+	private String examTerm;  		// 选课年份
+	private Integer examProperty; 	// 考试性质（1：正常考试	2：补考	3：补考二	4：自主考试）
+	private Integer scoreMark; 		// 成绩标志（1：空（参加考试）	2：缺考	3：缓考	4：违纪	5：作弊）
 	
 	
 	// 级联属性
@@ -23,13 +23,13 @@ public class StudentCourse {
 		super();
 	}
 
-	public StudentCourse(Integer scId, double score, String scLevel, String scTerm, Integer examProperty,
+	public StudentCourse(Integer scId, double score, String scLevel, String examTerm, Integer examProperty,
 			Integer scoreMark, Student scStudent, Course scCourse) {
 		super();
 		this.scId = scId;
 		this.score = score;
 		this.scLevel = scLevel;
-		this.scTerm = scTerm;
+		this.examTerm = examTerm;
 		this.examProperty = examProperty;
 		this.scoreMark = scoreMark;
 		this.scStudent = scStudent;
@@ -60,12 +60,12 @@ public class StudentCourse {
 		this.scLevel = scLevel;
 	}
 
-	public String getScTerm() {
-		return scTerm;
+	public String getExamTerm() {
+		return examTerm;
 	}
 
-	public void setScTerm(String scTerm) {
-		this.scTerm = scTerm;
+	public void setExamTerm(String examTerm) {
+		this.examTerm = examTerm;
 	}
 
 	public Integer getExamProperty() {
@@ -102,7 +102,7 @@ public class StudentCourse {
 
 	@Override
 	public String toString() {
-		return "StudentCourse [scId=" + scId + ", score=" + score + ", scLevel=" + scLevel + ", scTerm=" + scTerm
+		return "StudentCourse [scId=" + scId + ", score=" + score + ", scLevel=" + scLevel + ", examTerm=" + examTerm
 				+ ", examProperty=" + examProperty + ", scoreMark=" + scoreMark + ", scStudent=" + scStudent
 				+ ", scCourse=" + scCourse + "]";
 	}

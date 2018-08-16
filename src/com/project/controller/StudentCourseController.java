@@ -66,7 +66,7 @@ public class StudentCourseController {
 		map.put("yearList", yearList);
 		
 		if(year != null) {
-			List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
+			List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 			map.put("odList", odList);
 		}
 		
@@ -82,7 +82,7 @@ public class StudentCourseController {
 	@ResponseBody
 	@RequestMapping("/getAllCourseDistributedData")
 	public List<OverallDistribution> sendAllCourseDistributedData(String year, Integer term){
-		List<OverallDistribution> odList = studentCourseService.getUniversityACScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 		return odList;
 	}
 	
@@ -124,7 +124,7 @@ public class StudentCourseController {
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
 		if(year != null) {
-			List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
+			List<OverallDistribution> odList = studentCourseService.getAGOverallDistributionList(year, term);
 			map.put("odList", odList);
 		}
 		return "getVariousCourseDistributed";
@@ -139,7 +139,7 @@ public class StudentCourseController {
 	@ResponseBody
 	@RequestMapping("/getVariousCourseDistributedData")
 	public List<OverallDistribution> sendVariousCourseDistributedData(String year, Integer term){
-		List<OverallDistribution> odList = studentCourseService.getUniversityAGScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getAGOverallDistributionList(year, term);
 		return odList;
 	}
 	
@@ -183,7 +183,7 @@ public class StudentCourseController {
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
 		if(year != null) {
-			List<OverallDistribution> odList = studentCourseService.getUniversityRPECScoreDistributionList(year, term);
+			List<OverallDistribution> odList = studentCourseService.getRPECOverallDistributionList(year, term);
 			map.put("odList", odList);
 		}
 		return "getUniversityRPECScoreDistributed";
@@ -199,7 +199,7 @@ public class StudentCourseController {
 	@ResponseBody
 	@RequestMapping("/getUniversityRPECScoreDistributedData")
 	public List<OverallDistribution> sendUniversityRPECScoreDistributedData(String year, Integer term){
-		List<OverallDistribution> odList = studentCourseService.getUniversityRPECScoreDistributionList(year, term);
+		List<OverallDistribution> odList = studentCourseService.getRPECOverallDistributionList(year, term);
 		return odList;
 	}
 	
@@ -242,7 +242,7 @@ public class StudentCourseController {
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
 		if(year != null) {
-			List<DepartmentDistribution> ddList = studentCourseService.getDepartmentRPECScoreDistributionListByGrade(grade, year, term);
+			List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
 			map.put("ddList", ddList);
 		}
 		return "getDepartmentRPECScoreDistributionListByGrade";

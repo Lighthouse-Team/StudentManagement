@@ -13,7 +13,6 @@
 		<result column="courseDepartment" property="courseDepartment" />
 		<result column="courseAttribute" property="courseAttribute" />
 		<result column="courseProperty" property="courseProperty" />
-		<result column="courseTerm" property="courseTerm" />
 	</resultMap>
 
 	<resultMap type="com.project.beans.Course" id="courseStudentMap">
@@ -25,7 +24,6 @@
 		<result column="courseDepartment" property="courseDepartment" />
 		<result column="courseAttribute" property="courseAttribute" />
 		<result column="courseProperty" property="courseProperty" />
-		<result column="courseTerm" property="courseTerm" />
 
 		<collection property="studentList"
 			select="com.project.dao.StudentMapper.getStudentByStudentId" column="studentId">
@@ -191,7 +189,7 @@
 		values
 		(#{courseNumber}, #{courseName}, #{coursePeriod},
 		#{courseCredits}, #{courseDepartment}, #{courseAttribute},
-		#{courseProperty}, #{courseTerm})
+		#{courseProperty})
 	</insert>
 
 	<!-- 通过 courseId 删除指定课程信息: public void deletecourseByCourseId(Integer courseId); -->
@@ -210,7 +208,7 @@
 			courseAttribute = '必修'
 		</where>
 	</update>
-	
+
 	<!-- 设置专业选修课的 courseType = 2: public void setCourseTypeOfProfessionalElectiveCourse(); -->
 	<update id="setCourseTypeOfProfessionalElectiveCourse">
 		update course
@@ -219,10 +217,11 @@
 		</trim>
 		<where>
 			courseAttribute != '必修'
-			and (courseProperty = '专业选修课' or courseProperty = '专业选修课程')
+			and (courseProperty = '专业选修课' or
+			courseProperty = '专业选修课程')
 		</where>
 	</update>
-	
+
 	<!-- 设置通识选修课的 courseType = 2: public void setCourseTypeOfGeneralElectiveCourse(); -->
 	<update id="setCourseTypeOfGeneralElectiveCourse">
 		update course
@@ -232,13 +231,14 @@
 		<where>
 			courseAttribute != '必修'
 			and courseProperty != '专业选修课'
-			and courseProperty != '专业选修课程'
+			and
+			courseProperty != '专业选修课程'
 		</where>
 	</update>
 
 	<sql id="courseProperty">
 		(courseNumber, courseName, coursePeriod, courseCredits,
-		courseDepartment, courseAttribute, courseProperty, courseTerm)
+		courseDepartment, courseAttribute, courseProperty)
 	</sql>
 
 </mapper>

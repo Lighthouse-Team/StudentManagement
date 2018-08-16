@@ -9,15 +9,14 @@ import java.util.List;
  */
 public class Course {
 
-	private Integer courseId;		// 课程 id 号
-	private String courseName;		// 课程名称
-	private String courseNumber;	// 课程编号
-	private String coursePeriod;	// 课程学时：多个学时或多个周
-	private double courseCredits;	// 课程学分
-	private String courseDepartment;// 开课单位
-	private String courseAttribute;	// 课程属性：专业核心课程、专业选修课程等等
-	private String courseProperty;	// 课程性质：必修、公选、任选、限选
-	private Integer courseTerm;		// 课程学期：1、2，一个学年只有2个学期
+	private Integer courseId;			// 课程 id 号
+	private String courseName;			// 课程名称
+	private String courseNumber;		// 课程编号
+	private String coursePeriod;		// 课程学时：多个学时或多个周
+	private double courseCredits;		// 课程学分
+	private String courseDepartment;	// 开课单位
+	private String courseAttribute;		// 课程属性：专业核心课程、专业选修课程等等
+	private String courseProperty;		// 课程性质：必修、公选、任选、限选
 	
 	private List<Student> studentList;	// 选课学生
 	
@@ -26,8 +25,7 @@ public class Course {
 	}
 
 	public Course(Integer courseId, String courseName, String courseNumber, String coursePeriod, double courseCredits,
-			String courseDepartment, String courseAttribute, String courseProperty, Integer courseTerm,
-			List<Student> studentList) {
+			String courseDepartment, String courseAttribute, String courseProperty, List<Student> studentList) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
@@ -37,7 +35,6 @@ public class Course {
 		this.courseDepartment = courseDepartment;
 		this.courseAttribute = courseAttribute;
 		this.courseProperty = courseProperty;
-		this.courseTerm = courseTerm;
 		this.studentList = studentList;
 	}
 
@@ -105,14 +102,6 @@ public class Course {
 		this.courseProperty = courseProperty;
 	}
 
-	public Integer getCourseTerm() {
-		return courseTerm;
-	}
-
-	public void setCourseTerm(Integer courseTerm) {
-		this.courseTerm = courseTerm;
-	}
-
 	public List<Student> getStudentList() {
 		return studentList;
 	}
@@ -126,7 +115,6 @@ public class Course {
 		return "Course [courseId=" + courseId + ", courseName=" + courseName + ", courseNumber=" + courseNumber
 				+ ", coursePeriod=" + coursePeriod + ", courseCredits=" + courseCredits + ", courseDepartment="
 				+ courseDepartment + ", courseAttribute=" + courseAttribute + ", courseProperty=" + courseProperty
-				+ ", courseTerm=" + courseTerm + ", studentList=" + studentList + "]";
+				+ ", studentList=" + studentList + "]";
 	}
-
 }
