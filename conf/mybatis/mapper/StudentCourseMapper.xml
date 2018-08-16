@@ -8,7 +8,7 @@
 		<id column="scId" property="scId" />
 		<result column="score" property="score" />
 		<result column="scLevel" property="scLevel" />
-		<result column="scTerm" property="scTerm" />
+		<result column="examTerm" property="examTerm" />
 		<result column="examProperty" property="examProperty" />
 		<result column="scoreMark" property="scoreMark" />
 
@@ -34,8 +34,8 @@
 			<if test="scLevel != null">
 				and sc.scLevel = #{scLevel}
 			</if>
-			<if test="scTerm != null">
-				and sc.scTerm = #{scTerm}
+			<if test="examTerm != null">
+				and sc.examTerm = #{examTerm}
 			</if>
 			<if test="examProperty != null">
 				and sc.examProperty = #{examProperty}
@@ -72,8 +72,8 @@
 			<if test="scLevel != null">
 				and sc.scLevel like CONCAT('%', #{scLevel}, '%')
 			</if>
-			<if test="scTerm != null">
-				and sc.scTerm like CONCAT('%', #{scTerm}, '%')
+			<if test="examTerm != null">
+				and sc.examTerm like CONCAT('%', #{examTerm}, '%')
 			</if>
 			<if test="examProperty != null">
 				and sc.examProperty = #{examProperty}
@@ -102,8 +102,8 @@
 			<if test="scLevel != null">
 				sc.scLevel = #{scLevel},
 			</if>
-			<if test="scTerm != null">
-				sc.scTerm = #{scTerm},
+			<if test="examTerm != null">
+				sc.examTerm = #{examTerm},
 			</if>
 			<if test="examProperty != null">
 				sc.examProperty = #{examProperty},
@@ -129,7 +129,7 @@
 		<include refid="studentCourseProperty" />
 		values
 		(#{score}, #{scLevel}, #{scStudent.studentId},
-		#{scCourse.courseId}, #{scTerm}, #{examProperty}, #{scoreMark})
+		#{scCourse.courseId}, #{examTerm}, #{examProperty}, #{scoreMark})
 	</insert>
 
 	<!-- 通过 studentCourse 删除指定学生课程信息: public void deleteStudentCourseByEntity(StudentCourse 
@@ -152,7 +152,7 @@
 
 
 
-	<!-- ======下面为前端展示需要用到的接口的实现======== -->
+	<!-- =========================下面为前端展示需要用到的接口的实现========================= -->
 
 	<!-- ======通过 grade 属性获得AC的考试成绩的分布，AC指所有课程，包括：必修课、专业选修课、通识选修课======= -->
 
@@ -167,11 +167,11 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			and sc.scoreMark
+			= 1
 		</where>
 	</select>
 
@@ -185,29 +185,26 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			and sc.scoreMark
+			= 1
 		</where>
 	</select>
 
 	<!-- 通过 grade 获得该年级该学期AC的所有成绩记录数: public Integer getACTotalSocreRecordNumberByGrade(@Param(value 
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
-	<select id="getACTotalSocreRecordNumberByGrade" resultType="java.lang.Integer">
-		select count(*) from student s, course c, studentcourse sc
+	<select id="getACTotalScoreRecordNumberByGrade" resultType="java.lang.Integer">
+		select count(*) from student s, studentcourse sc
 		<where>
 			s.studentId = sc.studentId
-			and c.courseId = sc.courseId
-			and
-			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and s.studentClass like
+			CONCAT(#{grade}, '%')
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			and sc.scoreMark = 1
 		</where>
 	</select>
 
@@ -215,17 +212,14 @@
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
 	<select id="getACExcellentScoreRecordNumberByGrade" resultType="java.lang.Integer">
-		select count(*) from student s, course c, studentcourse sc
+		select count(*) from student s, studentcourse sc
 		<where>
 			s.studentId = sc.studentId
-			and c.courseId = sc.courseId
-			and
-			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and s.studentClass like
+			CONCAT(#{grade}, '%')
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			and sc.scoreMark = 1
 			and sc.score >= 90
 		</where>
 	</select>
@@ -234,17 +228,15 @@
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
 	<select id="getACGoodScoreRecordNumberByGrade" resultType="java.lang.Integer">
-		select count(*) from student s, course c, studentcourse sc
+		select count(*) from student s, studentcourse sc
 		<where>
 			s.studentId = sc.studentId
-			and c.courseId = sc.courseId
+			and s.studentClass like CONCAT(#{grade},
+			'%')
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			sc.examProperty = 1
+			and sc.scoreMark = 1
 			and sc.score >= 80
 			<![CDATA[and sc.score < 90]]>
 		</where>
@@ -254,17 +246,15 @@
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
 	<select id="getACMediumScoreRecordNumberByGrade" resultType="java.lang.Integer">
-		select count(*) from student s, course c, studentcourse sc
+		select count(*) from student s, studentcourse sc
 		<where>
 			s.studentId = sc.studentId
-			and c.courseId = sc.courseId
+			and s.studentClass like CONCAT(#{grade},
+			'%')
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			sc.examProperty = 1
+			and sc.scoreMark = 1
 			and sc.score >= 70
 			<![CDATA[and sc.score < 80]]>
 		</where>
@@ -274,17 +264,15 @@
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
 	<select id="getACPassScoreRecordNumberByGrade" resultType="java.lang.Integer">
-		select count(*) from student s, course c, studentcourse sc
+		select count(*) from student s, studentcourse sc
 		<where>
 			s.studentId = sc.studentId
-			and c.courseId = sc.courseId
+			and s.studentClass like CONCAT(#{grade},
+			'%')
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
-			and sc.scTerm like CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			sc.examProperty = 1
+			and sc.scoreMark = 1
 			and sc.score >= 60
 			<![CDATA[and sc.score < 70]]>
 		</where>
@@ -300,10 +288,9 @@
 		select sum(sc.score * c.courseCredits) from course c,studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
+			and c.courseType = #{courseType}
 			and
-			c.courseType = #{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
@@ -316,10 +303,9 @@
 		select sum(c.courseCredits) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
+			and c.courseType = #{courseType}
 			and
-			c.courseType = #{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
@@ -332,10 +318,9 @@
 		select count(*) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
+			and c.courseType = #{courseType}
 			and
-			c.courseType = #{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
@@ -349,10 +334,9 @@
 		select count(*) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
+			and c.courseType = #{courseType}
 			and
-			c.courseType = #{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >= 90
@@ -366,12 +350,10 @@
 		select count(*) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
-			and c.courseType =
-			#{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and c.courseType = #{courseType}
 			and
-			sc.examProperty = 1
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >= 80
 			<![CDATA[ and sc.score < 90]]>
@@ -386,12 +368,10 @@
 		select count(*) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
-			and c.courseType =
-			#{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and c.courseType = #{courseType}
 			and
-			sc.examProperty = 1
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >= 70
 			<![CDATA[ and sc.score < 80]]>
@@ -405,12 +385,10 @@
 		select count(*) from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
-			and c.courseTerm = #{term}
-			and c.courseType =
-			#{courseType}
-			and sc.scTerm like CONCAT(#{year}, '%')
+			and c.courseType = #{courseType}
 			and
-			sc.examProperty = 1
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >= 60
 			<![CDATA[ and sc.score < 70]]>
@@ -431,11 +409,10 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
 	</select>
@@ -451,11 +428,10 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
 	</select>
@@ -471,11 +447,10 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
 	</select>
@@ -492,14 +467,12 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			sc.score >= 90
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 90
 		</where>
 	</select>
 
@@ -514,14 +487,12 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			sc.score >= 80
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 80
 			<![CDATA[and sc.score < 90]]>
 		</where>
 	</select>
@@ -537,14 +508,12 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			sc.score >= 70
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 70
 			<![CDATA[and sc.score < 80]]>
 		</where>
 	</select>
@@ -560,14 +529,12 @@
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
 			and (c.courseType = 1 or
-			c.courseType =2)
-			and c.courseTerm = #{term}
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
-			and sc.scoreMark = 1
+			c.courseType = 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			sc.score >= 60
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.score >= 60
 			<![CDATA[and sc.score < 70]]>
 		</where>
 	</select>
@@ -587,13 +554,11 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 		</where>
 	</select>
 
@@ -611,13 +576,11 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 		</where>
 	</select>
 
@@ -636,13 +599,11 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 		</where>
 	</select>
 
@@ -661,16 +622,12 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
-			and sc.score
-			>= 90
+			and sc.scoreMark = 1
+			and sc.score >= 90
 		</where>
 	</select>
 
@@ -689,16 +646,12 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
-			and sc.score
-			>= 80
+			and sc.scoreMark = 1
+			and sc.score >= 80
 			<![CDATA[and sc.score < 90]]>
 		</where>
 	</select>
@@ -718,16 +671,12 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
-			and sc.score
-			>= 70
+			and sc.scoreMark = 1
+			and sc.score >= 70
 			<![CDATA[and sc.score < 80]]>
 		</where>
 	</select>
@@ -747,16 +696,12 @@
 			s.studentClass like CONCAT(#{grade}, '%')
 			and s.departmentId =
 			#{departmentId}
-			and c.courseTerm = #{term}
-			and (c.courseType = 1 or
-			c.courseType = 2)
+			and (c.courseType = 1 or c.courseType = 2)
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
-			and sc.score
-			>= 60
+			and sc.scoreMark = 1
+			and sc.score >= 60
 			<![CDATA[and sc.score < 70]]>
 		</where>
 	</select>
@@ -783,12 +728,11 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass = #{classNumber}
-			and c.courseTerm = #{term}
+			and (c.courseType = 1 or c.courseType
+			= 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			(c.courseType = 1 or c.courseType = 2)
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
 	</select>
@@ -804,15 +748,13 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass = #{classNumber}
-			and c.courseTerm = #{term}
+			and (c.courseType = 1 or c.courseType
+			= 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			(c.courseType = 1 or c.courseType = 2)
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.score >= 90
+			and sc.score >= 90
 		</where>
 	</select>
 
@@ -827,12 +769,11 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass = #{classNumber}
-			and c.courseTerm = #{term}
+			and (c.courseType = 1 or c.courseType
+			= 2)
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and
-			(c.courseType = 1 or c.courseType = 2)
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
 		</where>
@@ -851,7 +792,7 @@
 		</where>
 	</select>
 
-	<!-- 通过 grade 获得不及格学生的studentId列表: public List<Integer> getRCFailStudentIdListByGrade(@Param(value 
+	<!-- 通过 grade 获得RC不及格学生的studentId列表: public List<Integer> getRCFailStudentIdListByGrade(@Param(value 
 		= "grade") Integer grade, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->
 	<select id="getRCFailStudentIdListByGrade" resultType="java.lang.Integer">
@@ -861,11 +802,10 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
 			and c.courseType = 1
-			and sc.scTerm like CONCAT(#{year}, '%')
 			and
-			sc.examProperty = 1
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
 		</where>
@@ -885,7 +825,7 @@
 		</where>
 	</select>
 
-	<!-- 通过 departmentId 获得不及格学生的studentId列表: public List<Integer> getRCFailStudentIdListByDepartmentId(@Param(value 
+	<!-- 通过 departmentId 获得RC不及格学生的studentId列表: public List<Integer> getRCFailStudentIdListByDepartmentId(@Param(value 
 		= "departmentId") Integer departmentId, @Param(value = "year") String year, 
 		@Param(value = "term") Integer term); -->
 	<select id="getRCFailStudentIdListByDepartmentId" resultType="java.lang.Integer">
@@ -895,13 +835,12 @@
 			and c.courseId = sc.courseId
 			and
 			s.departmentId = #{departmentId}
-			and c.courseTerm = #{term}
-			and
-			c.courseType = 1
-			and sc.scTerm like CONCAT(#{year}, '%')
-			and
-			sc.examProperty = 1
-			and sc.scoreMark = 1
+			and c.courseType = 1
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
+			and sc.scoreMark
+			= 1
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
@@ -929,13 +868,11 @@
 			and c.courseId = sc.courseId
 			and s.studentId
 			= #{studentId}
-			and c.courseTerm = #{term}
 			and c.courseType = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm = CONCAT(#{year},
+			'-', #{term})
 			and sc.examProperty = 1
-			and
-			sc.scoreMark = 1
+			and sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
@@ -954,13 +891,12 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass = #{classNumber}
-			and c.courseTerm = #{term}
-			and
-			c.courseType = 1
+			and c.courseType = 1
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
-			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.scoreMark
+			= 1
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
@@ -986,12 +922,12 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
 			and c.courseType = 1
-			and sc.examProperty = 1
-			and sc.scoreMark = 2
 			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			sc.examProperty = 1
+			and sc.scoreMark = 2
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1005,12 +941,12 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
 			and c.courseType = 2
-			and sc.examProperty = 1
-			and sc.scoreMark = 2
 			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			sc.examProperty = 1
+			and sc.scoreMark = 2
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1024,12 +960,12 @@
 			and c.courseId = sc.courseId
 			and
 			s.studentClass like CONCAT(#{grade}, '%')
-			and c.courseTerm = #{term}
 			and c.courseType = 3
-			and sc.examProperty = 1
-			and sc.scoreMark = 2
 			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			sc.examProperty = 1
+			and sc.scoreMark = 2
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1045,12 +981,10 @@
 			and c.courseId = sc.courseId
 			and
 			c.courseName = #{courseName}
-			and c.courseTerm = #{term}
-			and
-			sc.examProperty = 1
-			and sc.scoreMark = 1
-			and sc.scTerm like
-			CONCAT(#{year}, '%')
+			and sc.examProperty = 1
+			and sc.scoreMark =
+			1
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1063,11 +997,10 @@
 			c.courseId = sc.courseId
 			and c.courseName = #{courseName}
 			and
-			c.courseTerm = #{term}
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1080,11 +1013,10 @@
 			c.courseId = sc.courseId
 			and c.courseName = #{courseName}
 			and
-			c.courseTerm = #{term}
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 			and sc.score >= 90
 		</where>
 	</select>
@@ -1098,11 +1030,10 @@
 			c.courseId = sc.courseId
 			and c.courseName = #{courseName}
 			and
-			c.courseTerm = #{term}
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
@@ -1116,11 +1047,10 @@
 			c.courseId = sc.courseId
 			and c.courseName = #{courseName}
 			and
-			c.courseTerm = #{term}
-			and sc.examProperty = 1
+			sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
 		</where>
 	</select>
 
@@ -1136,15 +1066,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.departmentId = #{departmentId}
+			and s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm = #{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 		</where>
 	</select>
 
@@ -1158,15 +1084,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.departmentId = #{departmentId}
+			and s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm = #{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 			and sc.score >= 90
 		</where>
 	</select>
@@ -1181,15 +1103,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.departmentId = #{departmentId}
+			and s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm = #{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
@@ -1205,18 +1123,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.studentClass =
-			#{classNumber}
+			and s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm =
-			#{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like
-			CONCAT(#{year}, '%')
 		</where>
 	</select>
 
@@ -1229,15 +1140,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.studentClass = #{classNumber}
+			and s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm = #{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 			and sc.score >=90
 		</where>
 	</select>
@@ -1251,21 +1158,18 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and
-			s.studentClass = #{classNumber}
+			and s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and
-			c.courseTerm = #{term}
+			and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
-			and
-			sc.scTerm like CONCAT(#{year}, '%')
 			<![CDATA[and sc.score < 60]]>
 		</where>
 	</select>
 
 	<sql id="studentCourseProperty">
-		(score, scLevel, studentId, courseId, scTerm, examProperty,
+		(score, scLevel, studentId, courseId, examTerm,
+		examProperty,
 		scoreMark)
 	</sql>
 

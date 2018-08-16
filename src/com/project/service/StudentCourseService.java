@@ -78,8 +78,8 @@ public class StudentCourseService {
 		return studentCourseMapper.getStudentCourseListByEntityForLike(studentcourse);
 	}
 
-	/**
-	 * 下面为前端展示数据需要的接口
+	/*
+	 * ===========================下面为前端展示数据需要的接口==================================
 	 */
 
 	/*
@@ -95,7 +95,7 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public double getACTotalScoreByGrade(Integer grade, String year, Integer term) {
-		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term);
+		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalScoreRecordNumberByGrade(grade, year, term);
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getACTotalScoreByGrade(grade, year, term);
 		} else {
@@ -112,7 +112,7 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public double getACTotalCreditsByGrade(Integer grade, String year, Integer term) {
-		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term);
+		Integer totalScoreRecordNumber = studentCourseMapper.getACTotalScoreRecordNumberByGrade(grade, year, term);
 		if (totalScoreRecordNumber != 0) {
 			return studentCourseMapper.getACTotalCreditsByGrade(grade, year, term);
 		} else {
@@ -173,7 +173,7 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public OverallDistribution getACOverallDistributionByGrade(Integer grade, String year, Integer term) {
-		Integer totalNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term); // 成绩记录总数
+		Integer totalNumber = studentCourseMapper.getACTotalScoreRecordNumberByGrade(grade, year, term); // 成绩记录总数
 		Integer excellentNumber = studentCourseMapper.getACExcellentScoreRecordNumberByGrade(grade, year, term); // 优秀成绩记录数
 		Integer goodNumber = studentCourseMapper.getACGoodScoreRecordNumberByGrade(grade, year, term); // 良好成绩记录数
 		Integer mediumNumber = studentCourseMapper.getACMediumScoreRecordNumberByGrade(grade, year, term); // 中等成绩记录数
@@ -789,8 +789,8 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public DepartmentDistribution getRPECDepartmentDistributionByGradeAndDepartmentId(Integer departmentId, Integer grade,
-			String year, Integer term) {
+	public DepartmentDistribution getRPECDepartmentDistributionByGradeAndDepartmentId(Integer departmentId,
+			Integer grade, String year, Integer term) {
 		Integer totalNumber, excellentNumber, goodNumber, mediumNumber, passNumber;
 		if (departmentId != 6) {
 			totalNumber = studentCourseMapper.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(departmentId, grade,
@@ -875,7 +875,8 @@ public class StudentCourseService {
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
 		for (Integer departmentId = 0; departmentId <= 18; departmentId++) { // 总共18个学院，把20，21学院归为6学院
-			DepartmentDistribution dd = getRPECDepartmentDistributionByGradeAndDepartmentId(departmentId, grade, year, term);
+			DepartmentDistribution dd = getRPECDepartmentDistributionByGradeAndDepartmentId(departmentId, grade, year,
+					term);
 			ddList.add(dd);
 			totalNumber += dd.getTotalNumber();
 			excellentNumber += dd.getExcellentNumber();
@@ -1004,7 +1005,7 @@ public class StudentCourseService {
 	 */
 
 	/**
-	 * 通过 grade departmentId 获得该年级该学院RPEC的成绩记录总数
+	 * 通过 grade和departmentId 获得该年级该学院RPEC的成绩记录总数
 	 * 
 	 * @param grade
 	 * @param departmentId
@@ -1018,7 +1019,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 通过 grade 和 deparementId 获得该年级该学院的平均成绩和差值
+	 * 通过 grade和deparementId 获得该年级该学院的平均成绩和差值
 	 * 
 	 * @param grade
 	 * @param gradeAverageScore
@@ -1088,10 +1089,6 @@ public class StudentCourseService {
 		}
 		return dascListList;
 	}
-
-	/*
-	 * ======获得所有专业所有年级的平均成绩和差值====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能
-	 */
 
 	/*
 	 * ======获得全校各年级本科生RC的不及格整体情况，RC指必修课======
@@ -1838,22 +1835,26 @@ public class StudentCourseService {
 	 * 
 	 * @return
 	 */
-	public List<String> getBasicCourseOverallList() {
+	public List<String> getBasicCourseOverallListByTerm(Integer term) {
 		List<String> bcoList = new ArrayList<>();
-		bcoList.add("自动控制原理");
-		bcoList.add("电磁场");
-		bcoList.add("机械设计");
-		bcoList.add("数字电子技术");
-		bcoList.add("大学英语（三）");
-		bcoList.add("大学物理下A");
-		bcoList.add("大学物理下B");
-		bcoList.add("大学物理实验（二）");
-		bcoList.add("复变函数与积分变换");
-		bcoList.add("大学英语（一）");
-		bcoList.add("大学计算机基础A");
-		bcoList.add("普通化学");
-		bcoList.add("线性代数与解析几何A");
-		bcoList.add("微积分A（一）");
+		if (term == 1) {
+			bcoList.add("自动控制原理");
+			bcoList.add("电磁场");
+			bcoList.add("机械设计");
+			bcoList.add("数字电子技术");
+			bcoList.add("大学英语（三）");
+			bcoList.add("大学物理下A");
+			bcoList.add("大学物理下B");
+			bcoList.add("大学物理实验（二）");
+			bcoList.add("复变函数与积分变换");
+			bcoList.add("大学英语（一）");
+			bcoList.add("大学计算机基础A");
+			bcoList.add("普通化学");
+			bcoList.add("线性代数与解析几何A");
+			bcoList.add("微积分A（一）");
+		} else if (term == 2) {
+			// bcoList中加入下学期的课程
+		}
 		return bcoList;
 	}
 
@@ -1866,7 +1867,7 @@ public class StudentCourseService {
 	 */
 	public List<BasicCourseOverallDistribution> getBasicCourseOverallDistributionList(String year, Integer term) {
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
-		List<String> bcoList = getBasicCourseOverallList();
+		List<String> bcoList = getBasicCourseOverallListByTerm(term);
 		for (String courseName : bcoList) {
 			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
 			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
@@ -1958,18 +1959,22 @@ public class StudentCourseService {
 	 * 
 	 * @return
 	 */
-	public List<String> getBasicCourseDetailList() {
+	public List<String> getBasicCourseDetailListByTerm(Integer term) {
 		List<String> bcdList = new ArrayList<>();
-		bcdList.add("大学英语（三）");
-		bcdList.add("大学物理下A");
-		bcdList.add("大学物理下B");
-		bcdList.add("大学物理实验（二）");
-		bcdList.add("复变函数与积分变换");
-		bcdList.add("大学英语（一）");
-		bcdList.add("大学计算机基础A");
-		bcdList.add("普通化学");
-		bcdList.add("线性代数与解析几何A");
-		bcdList.add("微积分A（一）");
+		if (term == 1) {
+			bcdList.add("大学英语（三）");
+			bcdList.add("大学物理下A");
+			bcdList.add("大学物理下B");
+			bcdList.add("大学物理实验（二）");
+			bcdList.add("复变函数与积分变换");
+			bcdList.add("大学英语（一）");
+			bcdList.add("大学计算机基础A");
+			bcdList.add("普通化学");
+			bcdList.add("线性代数与解析几何A");
+			bcdList.add("微积分A（一）");
+		} else if (term == 2) {
+			// bcdList中加入下学期的课程
+		}
 		return bcdList;
 	}
 
@@ -1982,7 +1987,7 @@ public class StudentCourseService {
 	 */
 	public List<List<BasicCourseDetailDistribution>> getBasicCourseDetailDistributionListList(String year,
 			Integer term) {
-		List<String> bcdList = getBasicCourseDetailList();
+		List<String> bcdList = getBasicCourseDetailListByTerm(term);
 		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
 		for (String courseName : bcdList) {
 			List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
@@ -2065,7 +2070,7 @@ public class StudentCourseService {
 	 */
 	public List<List<BasicCourseClassDistribution>> getBasicCourseClassDistributionListList(String year, Integer term) {
 		List<List<BasicCourseClassDistribution>> bccdListList = new ArrayList<>();
-		List<String> bcdList = getBasicCourseDetailList();
+		List<String> bcdList = getBasicCourseDetailListByTerm(term);
 		for (String courseName : bcdList) {
 			List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
 			bccdList = getBasicCourseClassDistributionListByCourseName(courseName, year, term);

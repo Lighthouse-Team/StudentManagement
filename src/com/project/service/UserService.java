@@ -123,7 +123,8 @@ public class UserService {
 			for (int j = 0; j < courseList.size(); j++) {
 				course = new Course();
 				course = courseList.get(j);
-				if (course.getCourseTerm() == term) {
+//				if (course.getCourseTerm() == term) 
+				{
 					studentCourse.setScStudent(student);
 					studentCourse.setScCourse(course);
 					studentCourse.setExamProperty(1);
@@ -220,7 +221,8 @@ public class UserService {
 				courseList = student.getCourseList();
 				for (int k = 0; k < courseList.size(); k++) {
 					course = courseList.get(k);
-					if (course.getCourseTerm() == term) {
+//					if (course.getCourseTerm() == term) 
+					{
 						studentCourse.setScStudent(student);
 						studentCourse.setScCourse(course);
 						studentCourse.setExamProperty(1);

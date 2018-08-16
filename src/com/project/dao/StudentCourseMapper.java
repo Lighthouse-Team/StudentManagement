@@ -55,8 +55,8 @@ public interface StudentCourseMapper {
 	 */
 	public void deleteStudentCourseByEntity(StudentCourse studentCourse);
 
-	/**
-	 * 下面为前端展示数据需要的接口
+	/*
+	 * =========================下面为前端展示数据需要的接口==============================
 	 */
 
 	/*
@@ -93,7 +93,7 @@ public interface StudentCourseMapper {
 	 * @param term
 	 * @return
 	 */
-	public Integer getACTotalSocreRecordNumberByGrade(@Param(value = "grade") Integer grade,
+	public Integer getACTotalScoreRecordNumberByGrade(@Param(value = "grade") Integer grade,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
@@ -459,7 +459,7 @@ public interface StudentCourseMapper {
 	public Integer getTotalStudentNumberByGrade(@Param(value = "grade") Integer grade);
 
 	/**
-	 * 通过 grade 获得不及格学生的studentId列表
+	 * 通过 grade 获得RC不及格学生的studentId列表
 	 * 
 	 * @param grade
 	 * @param year
@@ -484,7 +484,7 @@ public interface StudentCourseMapper {
 			@Param(value = "departmentId") Integer departmentId);
 
 	/**
-	 * 通过 departmentId 获得不及格学生的studentId列表
+	 * 通过 departmentId 获得RC不及格学生的studentId列表
 	 * 
 	 * @param departmentId
 	 * @param year

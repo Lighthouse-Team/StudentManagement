@@ -109,10 +109,6 @@ public class InsertIntoDB {
 					course.setCourseCredits(courseCredits);
 					String courseDepartment = readsheet.getCell(15, i).getContents(); // 开课单位
 					course.setCourseDepartment(courseDepartment);
-					String strCourseTerm = readsheet.getCell(3, i).getContents();
-					Integer courseTerm = Integer // 开课学期:1、2
-							.parseInt(strCourseTerm.substring(strCourseTerm.length() - 1, strCourseTerm.length()));
-					course.setCourseTerm(courseTerm);
 					courseService.insertCourse(course);
 				}
 
@@ -121,8 +117,8 @@ public class InsertIntoDB {
 				Course scCourse = courseService.getCourseByCourseNumber(courseNumber);
 				sc.setScStudent(scStudent);
 				sc.setScCourse(scCourse);
-				String scTerm = readsheet.getCell(3, i).getContents(); // 选课学期
-				sc.setScTerm(scTerm);
+				String examTerm = readsheet.getCell(3, i).getContents(); // 选课学期
+				sc.setExamTerm(examTerm);
 				String examProperty = readsheet.getCell(17, i).getContents(); // 考试性质
 				if (examProperty.equals("正常考试")) {
 					sc.setExamProperty(1);
