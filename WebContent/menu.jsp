@@ -197,13 +197,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="getUniversityRPECScoreDistributedPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>成绩分布情况</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="getDepartmentRPECScoreDistributionListByGradePage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>各年级成绩分布</p>
                 </a>
