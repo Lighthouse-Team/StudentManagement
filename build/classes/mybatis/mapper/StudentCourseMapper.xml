@@ -763,9 +763,9 @@
 
 	<!-- ======通过 classNumber 获得该班级RPEC的优秀率、不及格情况，RPEC指必修课和专业选修课======== -->
 
-	<!-- 通过 grade 获得该年级的所有班级: public List<String> getAllClassNumberListByGrade(@Param(value 
+	<!-- 通过 grade 获得该年级的所有班级: public List<String> getClassNumberListByGrade(@Param(value 
 		= "grade") Integer grade); -->
-	<select id="getAllClassNumberListByGrade" resultType="java.lang.String">
+	<select id="getClassNumberListByGrade" resultType="java.lang.String">
 		select studentClass from student
 		<where>
 			studentClass like CONCAT(#{grade}, '%')

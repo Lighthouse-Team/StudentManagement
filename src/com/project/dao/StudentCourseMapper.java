@@ -407,7 +407,7 @@ public interface StudentCourseMapper {
 	 * @param grade
 	 * @return
 	 */
-	public List<String> getAllClassNumberListByGrade(@Param(value = "grade") Integer grade);
+	public List<String> getClassNumberListByGrade(@Param(value = "grade") Integer grade);
 
 	/**
 	 * 通过 classNumber 获得该班级RPEC的成绩记录总数

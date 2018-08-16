@@ -172,7 +172,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public OverallDistribution getACScoreDistributionByGrade(Integer grade, String year, Integer term) {
+	public OverallDistribution getACOverallDistributionByGrade(Integer grade, String year, Integer term) {
 		Integer totalNumber = studentCourseMapper.getACTotalSocreRecordNumberByGrade(grade, year, term); // 成绩记录总数
 		Integer excellentNumber = studentCourseMapper.getACExcellentScoreRecordNumberByGrade(grade, year, term); // 优秀成绩记录数
 		Integer goodNumber = studentCourseMapper.getACGoodScoreRecordNumberByGrade(grade, year, term); // 良好成绩记录数
@@ -222,7 +222,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getUniversityACScoreDistributionList(String year, Integer term) {
+	public List<OverallDistribution> getACOverallDistributionList(String year, Integer term) {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		List<OverallDistribution> odList = new ArrayList<>();
@@ -232,7 +232,7 @@ public class StudentCourseService {
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			OverallDistribution od = getACScoreDistributionByGrade(gradeI, year, term);
+			OverallDistribution od = getACOverallDistributionByGrade(gradeI, year, term);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -345,7 +345,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public OverallDistribution getAGScoreDistributionByCourseType(Integer courseType, String year, Integer term) {
+	public OverallDistribution getAGOverallDistributionByCourseType(Integer courseType, String year, Integer term) {
 		Integer totalNumber = studentCourseMapper.getAGTotalSocreRecordNumberByCourseType(courseType, year, term);
 		Integer excellentNumber = studentCourseMapper.getAGExcellentScoreRecordNumberByCourseType(courseType, year,
 				term);
@@ -406,7 +406,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getUniversityAGScoreDistributionList(String year, Integer term) {
+	public List<OverallDistribution> getAGOverallDistributionList(String year, Integer term) {
 		List<OverallDistribution> odList = new ArrayList<>();
 		Integer totalNumber = 0;
 		Integer excellentNumber = 0;
@@ -414,7 +414,7 @@ public class StudentCourseService {
 		Integer mediumNumber = 0;
 		Integer passNumber = 0;
 		for (Integer courseType = 1; courseType <= 3; courseType++) {
-			OverallDistribution od = getAGScoreDistributionByCourseType(courseType, year, term);
+			OverallDistribution od = getAGOverallDistributionByCourseType(courseType, year, term);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -549,7 +549,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public OverallDistribution getRPECScoreDistributionByGrade(Integer grade, String year, Integer term) {
+	public OverallDistribution getRPECOverallDistributionByGrade(Integer grade, String year, Integer term) {
 		Integer totalNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(grade, year, term); // 成绩记录总数
 		Integer excellentNumber = studentCourseMapper.getRPECExcellentScoreRecordNumberByGrade(grade, year, term); // 优秀成绩记录数
 		Integer goodNumber = studentCourseMapper.getRPECGoodScoreRecordNumberByGrade(grade, year, term); // 良好成绩记录数
@@ -599,7 +599,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<OverallDistribution> getUniversityRPECScoreDistributionList(String year, Integer term) {
+	public List<OverallDistribution> getRPECOverallDistributionList(String year, Integer term) {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		List<OverallDistribution> odList = new ArrayList<>();
@@ -609,7 +609,7 @@ public class StudentCourseService {
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			OverallDistribution od = getRPECScoreDistributionByGrade(gradeI, year, term);
+			OverallDistribution od = getRPECOverallDistributionByGrade(gradeI, year, term);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -789,7 +789,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public DepartmentDistribution getRPECScoreDistributionByGradeAndDepartmentId(Integer departmentId, Integer grade,
+	public DepartmentDistribution getRPECDepartmentDistributionByGradeAndDepartmentId(Integer departmentId, Integer grade,
 			String year, Integer term) {
 		Integer totalNumber, excellentNumber, goodNumber, mediumNumber, passNumber;
 		if (departmentId != 6) {
@@ -866,7 +866,7 @@ public class StudentCourseService {
 	 * @param term
 	 * @return
 	 */
-	public List<DepartmentDistribution> getDepartmentRPECScoreDistributionListByGrade(Integer grade, String year,
+	public List<DepartmentDistribution> getRPECDepartmentDistributionListByGrade(Integer grade, String year,
 			Integer term) {
 		List<DepartmentDistribution> ddList = new ArrayList<>();
 		Integer totalNumber = 0; // 成绩记录总数
@@ -875,7 +875,7 @@ public class StudentCourseService {
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
 		for (Integer departmentId = 0; departmentId <= 18; departmentId++) { // 总共18个学院，把20，21学院归为6学院
-			DepartmentDistribution dd = getRPECScoreDistributionByGradeAndDepartmentId(departmentId, grade, year, term);
+			DepartmentDistribution dd = getRPECDepartmentDistributionByGradeAndDepartmentId(departmentId, grade, year, term);
 			ddList.add(dd);
 			totalNumber += dd.getTotalNumber();
 			excellentNumber += dd.getExcellentNumber();
@@ -932,8 +932,8 @@ public class StudentCourseService {
 	 * @param grade
 	 * @return
 	 */
-	public List<String> getAllClassNumberListByGrade(Integer grade) {
-		List<String> classNumberList = studentCourseMapper.getAllClassNumberListByGrade(grade);
+	public List<String> getClassNumberListByGrade(Integer grade) {
+		List<String> classNumberList = studentCourseMapper.getClassNumberListByGrade(grade);
 		List<String> classNumberUniqueList = new ArrayList<>();
 		Map<String, Integer> flagMap = new HashedMap<>();
 		for (String classNumber : classNumberList) {
@@ -988,7 +988,7 @@ public class StudentCourseService {
 	 */
 	public List<ClassExcellentFailDistribution> getRPECClassExcellentFailDistributionListByGrade(Integer grade,
 			String year, Integer term) {
-		List<String> classNumberList = getAllClassNumberListByGrade(grade);
+		List<String> classNumberList = getClassNumberListByGrade(grade);
 		List<ClassExcellentFailDistribution> cefdList = new ArrayList<>();
 		for (String classNumber : classNumberList) {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
@@ -1649,7 +1649,7 @@ public class StudentCourseService {
 	 */
 	public List<ClassFailDistribution> getRCClassFailDistributionListByGrade(Integer grade, String year, Integer term) {
 		List<ClassFailDistribution> cfdList = new ArrayList<>();
-		List<String> classNumberList = getAllClassNumberListByGrade(grade);
+		List<String> classNumberList = getClassNumberListByGrade(grade);
 		for (String classNumber : classNumberList) {
 			ClassFailDistribution classFailDistribution = new ClassFailDistribution();
 			classFailDistribution = getRCClassFailDistributionByClassNumber(classNumber, year, term);
@@ -2045,7 +2045,7 @@ public class StudentCourseService {
 		String strGrade = getGradeByCourseName(courseName, year, term);
 		if (!strGrade.equals("--")) {
 			Integer grade = Integer.parseInt(strGrade);
-			List<String> classNumberList = getAllClassNumberListByGrade(grade);
+			List<String> classNumberList = getClassNumberListByGrade(grade);
 			for (String classNumber : classNumberList) {
 				BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 				basicCourseClassDistribution = getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName,
