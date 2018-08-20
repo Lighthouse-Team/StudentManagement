@@ -9,6 +9,7 @@ public class BasicCourseDetailDistribution implements Serializable{
 	 */
 	private static final long serialVersionUID = -9136010051949633226L;
 
+	private Integer id; 				// 序号
 	private String courseName;			// 课程名称
 	private String departmentName;		// 院系名称
 	private Integer excellentNumber;	// 优秀学生数量
@@ -19,7 +20,6 @@ public class BasicCourseDetailDistribution implements Serializable{
 	
 	public BasicCourseDetailDistribution() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.excellentNumber = 0;
 		this.failNumber = 0;
 		this.totalStudentNumber = 0;
@@ -27,9 +27,10 @@ public class BasicCourseDetailDistribution implements Serializable{
 		this.failRate = "0.00%";
 	}
 
-	public BasicCourseDetailDistribution(String courseName, String departmentName, Integer excellentNumber,
+	public BasicCourseDetailDistribution(Integer id, String courseName, String departmentName, Integer excellentNumber,
 			Integer failNumber, Integer totalStudentNumber, String excellentRate, String failRate) {
 		super();
+		this.id = id;
 		this.courseName = courseName;
 		this.departmentName = departmentName;
 		this.excellentNumber = excellentNumber;
@@ -37,6 +38,14 @@ public class BasicCourseDetailDistribution implements Serializable{
 		this.totalStudentNumber = totalStudentNumber;
 		this.excellentRate = excellentRate;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCourseName() {
@@ -101,10 +110,10 @@ public class BasicCourseDetailDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BasicCourseDetailDistribution [courseName=" + courseName + ", departmentName=" + departmentName
-				+ ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber + ", totalStudentNumber="
-				+ totalStudentNumber + ", excellentRate=" + excellentRate + ", failRate=" + failRate + "]";
+		return "BasicCourseDetailDistribution [id=" + id + ", courseName=" + courseName + ", departmentName="
+				+ departmentName + ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber
+				+ ", totalStudentNumber=" + totalStudentNumber + ", excellentRate=" + excellentRate + ", failRate="
+				+ failRate + "]";
 	}
-
 	
 }

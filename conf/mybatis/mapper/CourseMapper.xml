@@ -222,7 +222,7 @@
 		</where>
 	</update>
 
-	<!-- 设置通识选修课的 courseType = 2: public void setCourseTypeOfGeneralElectiveCourse(); -->
+	<!-- 设置通识选修课的 courseType = 3: public void setCourseTypeOfGeneralElectiveCourse(); -->
 	<update id="setCourseTypeOfGeneralElectiveCourse">
 		update course
 		<trim prefix="set" suffixOverrides=",">

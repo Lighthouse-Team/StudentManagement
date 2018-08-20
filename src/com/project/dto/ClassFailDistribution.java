@@ -2,33 +2,43 @@ package com.project.dto;
 
 import java.io.Serializable;
 
-public class ClassFailDistribution implements Serializable{
+public class ClassFailDistribution implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3193638017424670917L;
 
-	private String classNumber;			// 班号
-	private Integer totalFailNumber;	// 不及格学生人数
+	private Integer id; 				// 序号
+	private String classNumber; 		// 班号
+	private Integer totalFailNumber; 	// 不及格学生人数
 	private Integer totalStudentNumber;	// 学生总数
-	private String failRate;			// 不及格率
-	
+	private String failRate; 			// 不及格率
+
 	public ClassFailDistribution() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
-		this.failRate = "0%";
+		this.failRate = "0.00%";
 	}
 
-	public ClassFailDistribution(String classNumber, Integer totalFailNumber, Integer totalStudentNumber,
+	public ClassFailDistribution(Integer id, String classNumber, Integer totalFailNumber, Integer totalStudentNumber,
 			String failRate) {
 		super();
+		this.id = id;
 		this.classNumber = classNumber;
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getClassNumber() {
@@ -69,7 +79,8 @@ public class ClassFailDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ClassFailDistribution [classNumber=" + classNumber + ", totalFailNumber=" + totalFailNumber
-				+ ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
+		return "ClassFailDistribution [id=" + id + ", classNumber=" + classNumber + ", totalFailNumber="
+				+ totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
 	}
+
 }

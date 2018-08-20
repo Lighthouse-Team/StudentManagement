@@ -2,36 +2,45 @@ package com.project.dto;
 
 import java.io.Serializable;
 
-public class GradeAbsenceDistribution implements Serializable{
+public class GradeAbsenceDistribution implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5924185519894548252L;
 
-	private String grade;				// 年级
-	private Integer rcAbsenceNumber;	// 必修课缺考人次
-	private Integer pecAbsenceNumber;	// 专业选修课缺考人次
-	private Integer gecAbsenceNumber;	// 通识选修课缺考人次
-	private Integer totalAbsenceNumber;	// 缺考总人次
-	
+	private Integer id; 				// 序号
+	private String grade; 				// 年级
+	private Integer rcAbsenceNumber; 	// 必修课缺考人次
+	private Integer pecAbsenceNumber; 	// 专业选修课缺考人次
+	private Integer gecAbsenceNumber; 	// 通识选修课缺考人次
+	private Integer totalAbsenceNumber; // 缺考总人次
+
 	public GradeAbsenceDistribution() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.rcAbsenceNumber = 0;
 		this.pecAbsenceNumber = 0;
 		this.gecAbsenceNumber = 0;
 		this.totalAbsenceNumber = 0;
 	}
 
-	public GradeAbsenceDistribution(String grade, Integer rcAbsenceNumber, Integer pecAbsenceNumber,
+	public GradeAbsenceDistribution(Integer id, String grade, Integer rcAbsenceNumber, Integer pecAbsenceNumber,
 			Integer gecAbsenceNumber, Integer totalAbsenceNumber) {
 		super();
+		this.id = id;
 		this.grade = grade;
 		this.rcAbsenceNumber = rcAbsenceNumber;
 		this.pecAbsenceNumber = pecAbsenceNumber;
 		this.gecAbsenceNumber = gecAbsenceNumber;
 		this.totalAbsenceNumber = totalAbsenceNumber;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getGrade() {
@@ -80,8 +89,9 @@ public class GradeAbsenceDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GradeAbsenceDistribution [grade=" + grade + ", rcAbsenceNumber=" + rcAbsenceNumber
+		return "GradeAbsenceDistribution [id=" + id + ", grade=" + grade + ", rcAbsenceNumber=" + rcAbsenceNumber
 				+ ", pecAbsenceNumber=" + pecAbsenceNumber + ", gecAbsenceNumber=" + gecAbsenceNumber
 				+ ", totalAbsenceNumber=" + totalAbsenceNumber + "]";
 	}
+
 }

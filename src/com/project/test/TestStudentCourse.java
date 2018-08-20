@@ -4,8 +4,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Before;
@@ -21,6 +23,8 @@ import com.project.dto.BasicCourseDetailDistribution;
 import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
+import com.project.dto.DepartmentAllGradeAverageScoreCompare;
+import com.project.dto.DepartmentAllGradeFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
 import com.project.dto.GradeDepartmentFailDistribution;
 import com.project.dto.DepartmentDistribution;
@@ -86,6 +90,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getACOverallDistributionListTest() {
+		// 3.2秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
@@ -134,6 +139,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECOverallDistributionListTest() {
+		// 4.4秒
 		String year = "2017-2018";
 		Integer term = 1;
 		List<OverallDistribution> odList = studentCourseService.getRPECOverallDistributionList(year, term);
@@ -221,7 +227,7 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getDepartmentAverageScoreCompareListByGradeTest() {
+	public void getRPECDepartmentAverageScoreCompareListByGradeTest() {
 		// 11.3秒，速度有点慢
 		Integer grade = 2015;
 		String year = "2017-2018";
@@ -234,16 +240,29 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getDepartmentAverageScoreCompareListListTest() {
+	public void getRPECDepartmentAverageScoreCompareListListTest() {
 		// 在只计算一届的情况下17.1秒，计算四届的情况估计60秒，速度有点慢，需改善
 		String year = "2017-2018";
 		Integer term = 1;
-		List<List<GradeDepartmentAverageScoreCompare>> dascListList = studentCourseService
+		List<List<GradeDepartmentAverageScoreCompare>> gdascListList = studentCourseService
 				.getRPECGradeDepartmentAverageScoreCompareListList(year, term);
-		for (List<GradeDepartmentAverageScoreCompare> dascList : dascListList) {
-			for (GradeDepartmentAverageScoreCompare dasc : dascList) {
-				System.out.println(dasc);
+		for (List<GradeDepartmentAverageScoreCompare> gdascList : gdascListList) {
+			for (GradeDepartmentAverageScoreCompare gdasc : gdascList) {
+				System.out.println(gdasc);
 			}
+		}
+	}
+
+	@Test
+	public void getRPECDepartmentAllGradeAverageScoreCompareMapByGradeDepartmentAverageScoreCompareListListTest() {
+		// 将ListList变成一个横向List
+		// 18.1秒，加上了计算的时间
+		String year = "2017-2018";
+		Integer term = 1;
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService
+				.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+		for (DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare : dagascList) {
+			System.out.println(departmentAllGradeAverageScoreCompare);
 		}
 	}
 
@@ -278,7 +297,7 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getDepartmentFailDistributionByDepartmentIdTest() {
+	public void getRCDepartmentFailDistributionByDepartmentIdTest() {
 		// 1.5秒
 		Integer departmentId = 6;
 		String year = "2017-2018";
@@ -289,7 +308,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void testDepartmentFailDistributionByDepartmentIdTest() {
+	public void testGetRCDepartmentFailDistributionByDepartmentIdTest() {
 		// 10.4秒
 		// 验证结果和原方法一致
 		// 这个用于验证上面写的方法的正确性，不用于处理正式数据传给前端
@@ -304,7 +323,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRCDepartmentFailDistributionListTest() {
+	public void getRCDepartmentFailDistributionListgTest() {
 		// 2.3秒
 		String year = "2017-2018";
 		Integer term = 1;
@@ -321,12 +340,12 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCGradeDepartmentFailDistributionListByGradeTest() {
-		// 2.2秒
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 1;
-		List<GradeDepartmentFailDistribution> gdfdList = studentCourseService.getRCGradeDepartmentFailDistributionListByGrade(grade, year, term);
-		for(GradeDepartmentFailDistribution gradeDepartmentFailDistribution : gdfdList) {
+		List<GradeDepartmentFailDistribution> gdfdList = studentCourseService
+				.getRCGradeDepartmentFailDistributionListByGrade(grade, year, term);
+		for (GradeDepartmentFailDistribution gradeDepartmentFailDistribution : gdfdList) {
 			System.out.println(gradeDepartmentFailDistribution);
 		}
 	}
@@ -342,6 +361,19 @@ public class TestStudentCourse {
 			for (GradeDepartmentFailDistribution gradeDepartmentFailDistribution : gdfdList) {
 				System.out.println(gradeDepartmentFailDistribution);
 			}
+		}
+	}
+
+	@Test
+	public void getRCDepartmentAllGradeFailDistributionListByGradeDepartmentFailDistributionListListTest() {
+		// 将ListList变成了横向的List
+		// 2.7秒
+		String year = "2017-2018";
+		Integer term = 1;
+		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+				.getRCDepartmentAllGradeFailDistributionList(year, term);
+		for (DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution : dagfdList) {
+			System.out.println(departmentAllGradeFailDistribution);
 		}
 	}
 
@@ -419,7 +451,7 @@ public class TestStudentCourse {
 	 */
 
 	@Test
-	public void getBasicCourseDetailDistributionListTest() {
+	public void getBasicCourseDetailDistributionListByCourseNameTest() {
 		// 5.3秒
 		String courseName = "操作系统";
 		String year = "2017-2018";

@@ -9,15 +9,16 @@ public class GradeDepartmentAverageScoreCompare implements Serializable{
 	 */
 	private static final long serialVersionUID = 3381304321018919091L;
 
-	String grade;			// 年级
-	String departmentName;	// 专业名称
-	String averageScore;	// 年级平均分
-	String difference;		// 平均分差值（院系平均分-年级平均分）
+	private Integer id;				// 序号
+	private String grade;			// 年级
+	private String departmentName;	// 专业名称
+	private String averageScore;	// 年级平均分
+	private String difference;		// 平均分差值（院系平均分-年级平均分）
 	
 	public GradeDepartmentAverageScoreCompare() {
 		super();
-		this.averageScore = "0";
-		this.difference = "0";
+		this.averageScore = "0.00";
+		this.difference = "0.00";
 	}
 
 	public GradeDepartmentAverageScoreCompare(String grade, String departmentName, String averageScore, String difference) {

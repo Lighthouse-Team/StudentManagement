@@ -28,6 +28,8 @@ import com.project.dto.BasicCourseDetailDistribution;
 import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
+import com.project.dto.DepartmentAllGradeAverageScoreCompare;
+import com.project.dto.DepartmentAllGradeFailDistribution;
 import com.project.dto.GradeDepartmentAverageScoreCompare;
 import com.project.dto.GradeDepartmentFailDistribution;
 import com.project.dto.DepartmentDistribution;
@@ -41,6 +43,10 @@ public class StudentCourseService {
 
 	@Autowired
 	private StudentCourseMapper studentCourseMapper;
+
+	/*
+	 * ===========================下面为插入数据库需要的接口==================================
+	 */
 
 	/**
 	 * 通过 studentCourse 属性查询选课信息
@@ -231,8 +237,10 @@ public class StudentCourseService {
 		Integer goodNumber = 0; // 良好成绩记录数
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
+		Integer id = 1; // 序号
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			OverallDistribution od = getACOverallDistributionByGrade(gradeI, year, term);
+			od.setId(id++);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -242,6 +250,7 @@ public class StudentCourseService {
 		}
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setId(id);
 		overallDistribution.setGrade("全校");
 		if (totalNumber != 0) {
 			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
@@ -413,8 +422,10 @@ public class StudentCourseService {
 		Integer goodNumber = 0;
 		Integer mediumNumber = 0;
 		Integer passNumber = 0;
+		Integer id = 1;
 		for (Integer courseType = 1; courseType <= 3; courseType++) {
 			OverallDistribution od = getAGOverallDistributionByCourseType(courseType, year, term);
+			od.setId(id++);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -424,6 +435,7 @@ public class StudentCourseService {
 		}
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber;
 		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setId(id);
 		overallDistribution.setCourseType("全校");
 		if (totalNumber != 0) {
 			double excellentRate = (double) excellentNumber / totalNumber;
@@ -608,8 +620,10 @@ public class StudentCourseService {
 		Integer goodNumber = 0; // 良好成绩记录数
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
+		Integer id = 1; // 序号
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			OverallDistribution od = getRPECOverallDistributionByGrade(gradeI, year, term);
+			od.setId(id++);
 			odList.add(od);
 			totalNumber += od.getTotalNumber();
 			excellentNumber += od.getExcellentNumber();
@@ -619,6 +633,7 @@ public class StudentCourseService {
 		}
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		OverallDistribution overallDistribution = new OverallDistribution();
+		overallDistribution.setId(id);
 		overallDistribution.setGrade("全校");
 		if (totalNumber != 0) {
 			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
@@ -665,9 +680,7 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public String getDepartmentNameByDepartmentId(Integer departmentId) {
-		if (departmentId == 0) {
-			return "陈赓班";
-		} else if (departmentId == 1) {
+		if (departmentId == 1) {
 			return "船舶学院";
 		} else if (departmentId == 2) {
 			return "航建学院";
@@ -703,6 +716,8 @@ public class StudentCourseService {
 			return "马克思学院";
 		} else if (departmentId == 18) {
 			return "国防学院";
+		} else if (departmentId == 19) {
+			return "陈赓班";
 		} else {
 			return null; // 学院异常
 		}
@@ -874,9 +889,11 @@ public class StudentCourseService {
 		Integer goodNumber = 0; // 良好成绩记录数
 		Integer mediumNumber = 0; // 中等成绩记录数
 		Integer passNumber = 0; // 及格成绩记录数
-		for (Integer departmentId = 0; departmentId <= 18; departmentId++) { // 总共18个学院，把20，21学院归为6学院
+		Integer id = 1; // 序号
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) { // 总共18个学院，另加陈赓班，把20，21学院归为6学院
 			DepartmentDistribution dd = getRPECDepartmentDistributionByGradeAndDepartmentId(departmentId, grade, year,
 					term);
+			dd.setId(id++);
 			ddList.add(dd);
 			totalNumber += dd.getTotalNumber();
 			excellentNumber += dd.getExcellentNumber();
@@ -887,6 +904,7 @@ public class StudentCourseService {
 		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
 		DepartmentDistribution departmentDistribution = new DepartmentDistribution();
 		String strGrade = String.valueOf(grade);
+		departmentDistribution.setId(id);
 		departmentDistribution.setGrade(strGrade);
 		departmentDistribution.setDepartmentName(strGrade + "级全校");
 		if (totalNumber != 0) {
@@ -991,9 +1009,11 @@ public class StudentCourseService {
 			String year, Integer term) {
 		List<String> classNumberList = getClassNumberListByGrade(grade);
 		List<ClassExcellentFailDistribution> cefdList = new ArrayList<>();
+		Integer id = 1; // 序号
 		for (String classNumber : classNumberList) {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
 					classNumber, year, term);
+			classExcellentFailDistribution.setId(id++);
 			classExcellentFailDistribution.setClassNumber(classNumber);
 			cefdList.add(classExcellentFailDistribution);
 		}
@@ -1062,7 +1082,7 @@ public class StudentCourseService {
 			String year, Integer term) {
 		List<GradeDepartmentAverageScoreCompare> dascList = new ArrayList<>();
 		double gradeAverageScore = getRPECAverageScoreByGrade(grade, year, term);
-		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = getRPECDepartmentAverageScoreCompareByGradeAndDepartmentId(
 					grade, gradeAverageScore, departmentId, year, term);
 			dascList.add(departmentAverageScoreCompare);
@@ -1071,7 +1091,7 @@ public class StudentCourseService {
 	}
 
 	/**
-	 * 获得所有年级所有学院RPEC的平均成绩和差值
+	 * 获得各学院各年级RPEC的平均成绩和差值
 	 * 
 	 * @param year
 	 * @param term
@@ -1088,6 +1108,81 @@ public class StudentCourseService {
 			dascListList.add(dascList);
 		}
 		return dascListList;
+	}
+
+	/**
+	 * 通过 GradeDepartmentAverageScoreCompareListList 获得
+	 * DepartmentAverageScoreCompareList
+	 * 
+	 * @param gdascListList
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<DepartmentAllGradeAverageScoreCompare> getRPECDepartmentAllGradeAverageScoreCompareListByGradeDepartmentAverageScoreCompareListList(
+			List<List<GradeDepartmentAverageScoreCompare>> gdascListList, String year) {
+		Map<Integer, DepartmentAllGradeAverageScoreCompare> dagascMap = new HashMap<>();
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+			DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = new DepartmentAllGradeAverageScoreCompare();
+			String departmentName = getDepartmentNameByDepartmentId(departmentId);
+			departmentAllGradeAverageScoreCompare.setId(departmentId);
+			departmentAllGradeAverageScoreCompare.setDepartmentName(departmentName);
+			dagascMap.put(departmentId, departmentAllGradeAverageScoreCompare);
+		}
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+				Integer grade = gradeOne - gradeI + 1;
+				GradeDepartmentAverageScoreCompare gradeDepartmentAverageScoreCompare = gdascListList.get(grade - 1)
+						.get(departmentId - 1);
+				DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = dagascMap
+						.get(departmentId);
+				String averageScore = gradeDepartmentAverageScoreCompare.getAverageScore();
+				String difference = gradeDepartmentAverageScoreCompare.getDifference();
+				switch (grade) {
+				case 1:
+					departmentAllGradeAverageScoreCompare.setGradeOneAverageScore(averageScore);
+					departmentAllGradeAverageScoreCompare.setGradeOneDifference(difference);
+					break;
+				case 2:
+					departmentAllGradeAverageScoreCompare.setGradeTwoAverageScore(averageScore);
+					departmentAllGradeAverageScoreCompare.setGradeTwoDifference(difference);
+					break;
+				case 3:
+					departmentAllGradeAverageScoreCompare.setGradeThreeAverageScore(averageScore);
+					departmentAllGradeAverageScoreCompare.setGradeThreeDifference(difference);
+					break;
+				case 4:
+					departmentAllGradeAverageScoreCompare.setGradeFourAverageScore(averageScore);
+					departmentAllGradeAverageScoreCompare.setGradeFourDifference(difference);
+					break;
+				} // switch
+				dagascMap.put(departmentId, departmentAllGradeAverageScoreCompare);
+			} // for
+		} // for
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = new ArrayList<>();
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+			DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = dagascMap.get(departmentId);
+			dagascList.add(departmentAllGradeAverageScoreCompare);
+		}
+		return dagascList;
+	}
+
+	/**
+	 * 获得各学院所有年级的平均成绩和差值
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<DepartmentAllGradeAverageScoreCompare> getRPECDepartmentAllGradeAverageScoreCompareList(String year,
+			Integer term) {
+		List<List<GradeDepartmentAverageScoreCompare>> gdascListList = getRPECGradeDepartmentAverageScoreCompareListList(
+				year, term);
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = getRPECDepartmentAllGradeAverageScoreCompareListByGradeDepartmentAverageScoreCompareListList(
+				gdascListList, year);
+		return dagascList;
 	}
 
 	/*
@@ -1203,9 +1298,11 @@ public class StudentCourseService {
 		Integer eightFailNumber = 0;
 		Integer totalFailNumber = 0;
 		Integer totalStudentNumber = 0;
+		Integer id = 1;
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
 			gradeFailDistribution = getRCGradeFailDistributionByGrade(gradeI, year, term);
+			gradeFailDistribution.setId(id++);
 			gfdList.add(gradeFailDistribution);
 			oneFailNumber += gradeFailDistribution.getOneFailNumber();
 			twoFailNumber += gradeFailDistribution.getTwoFailNumber();
@@ -1219,6 +1316,7 @@ public class StudentCourseService {
 			totalStudentNumber += gradeFailDistribution.getTotalStudentNumber();
 		}
 		GradeFailDistribution gradeFailDistribution = new GradeFailDistribution();
+		gradeFailDistribution.setId(id);
 		gradeFailDistribution.setGrade("合计");
 		if (totalStudentNumber != 0) {
 			double failRate = (double) totalFailNumber / totalStudentNumber;
@@ -1352,9 +1450,11 @@ public class StudentCourseService {
 		Integer geFourFailNumber = 0;
 		Integer totalFailNumber = 0;
 		Integer totalStudentNumber = 0;
-		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+		Integer id = 1;
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
 			departmentFailDistribution = getRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
+			departmentFailDistribution.setId(id++);
 			dfdList.add(departmentFailDistribution);
 			oneFailNumber += departmentFailDistribution.getOneFailNumber();
 			twoFailNumber += departmentFailDistribution.getTwoFailNumber();
@@ -1364,6 +1464,7 @@ public class StudentCourseService {
 			totalStudentNumber += departmentFailDistribution.getTotalStudentNumber();
 		}
 		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
+		departmentFailDistribution.setId(id);
 		departmentFailDistribution.setDepartmentName("全校");
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
@@ -1557,7 +1658,7 @@ public class StudentCourseService {
 		List<GradeDepartmentFailDistribution> gdfdList = new ArrayList<>();
 		Integer totalFailNumber = 0;
 		Integer totalStudentNumber = 0;
-		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			GradeDepartmentFailDistribution gradeDepartmentFailDistribution = new GradeDepartmentFailDistribution();
 			gradeDepartmentFailDistribution = getRCGradeDepartmentFailDistributionByGradeAndDepartmentId(grade,
 					departmentId, year, term);
@@ -1601,6 +1702,84 @@ public class StudentCourseService {
 			gdfdListList.add(gdfdList);
 		}
 		return gdfdListList;
+	}
+
+	/**
+	 * 通过 GradeDepartmentFailDistributionListList 获得
+	 * DepartmentAllGradeFailDistributionList
+	 * 
+	 * @param gdfdListList
+	 * @param year
+	 * @return
+	 */
+	public List<DepartmentAllGradeFailDistribution> getRCDepartmentAllGradeFailDistributionListByGradeDepartmentFailDistributionListList(
+			List<List<GradeDepartmentFailDistribution>> gdfdListList, String year) {
+		Map<Integer, DepartmentAllGradeFailDistribution> dagfdMap = new HashMap<>();
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+			DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution = new DepartmentAllGradeFailDistribution();
+			String departmentName = getDepartmentNameByDepartmentId(departmentId);
+			departmentAllGradeFailDistribution.setId(departmentId);
+			departmentAllGradeFailDistribution.setDepartmentName(departmentName);
+			dagfdMap.put(departmentId, departmentAllGradeFailDistribution);
+		}
+		String strGradeOne = year.substring(0, 4);
+		Integer gradeOne = Integer.parseInt(strGradeOne);
+		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+			Integer grade = gradeOne - gradeI + 1;
+			for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+				GradeDepartmentFailDistribution gradeDepartmentFailDistribution = gdfdListList.get(grade - 1)
+						.get(departmentId - 1);
+				DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution = dagfdMap.get(departmentId);
+				Integer totalStudentNumber = gradeDepartmentFailDistribution.getTotalStudentNumber();
+				Integer totalFailNumber = gradeDepartmentFailDistribution.getTotalFailNumber();
+				String failRate = gradeDepartmentFailDistribution.getFailRate();
+				switch (grade) {
+				case 1:
+					departmentAllGradeFailDistribution.setGradeOneStudentNumber(totalStudentNumber);
+					departmentAllGradeFailDistribution.setGradeOneFailNumber(totalFailNumber);
+					departmentAllGradeFailDistribution.setGradeOneFailRate(failRate);
+					break;
+				case 2:
+					departmentAllGradeFailDistribution.setGradeTwoStudentNumber(totalStudentNumber);
+					departmentAllGradeFailDistribution.setGradeTwoFailNumber(totalFailNumber);
+					departmentAllGradeFailDistribution.setGradeTwoFailRate(failRate);
+					break;
+				case 3:
+					departmentAllGradeFailDistribution.setGradeThreeStudentNumber(totalStudentNumber);
+					departmentAllGradeFailDistribution.setGradeThreeFailNumber(totalFailNumber);
+					departmentAllGradeFailDistribution.setGradeThreeFailRate(failRate);
+					break;
+				case 4:
+					departmentAllGradeFailDistribution.setGradeFourStudentNumber(totalStudentNumber);
+					departmentAllGradeFailDistribution.setGradeFourFailNumber(totalFailNumber);
+					departmentAllGradeFailDistribution.setGradeFourFailRate(failRate);
+					break;
+				} // switch
+				dagfdMap.put(departmentId, departmentAllGradeFailDistribution);
+			} // for
+		} // for
+		List<DepartmentAllGradeFailDistribution> dagfdList = new ArrayList<>();
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
+			DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution = dagfdMap.get(departmentId);
+			dagfdList.add(departmentAllGradeFailDistribution);
+		}
+		return dagfdList;
+	}
+
+	/**
+	 * 获得各院系所有年级RC的不及格情况
+	 * 
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<DepartmentAllGradeFailDistribution> getRCDepartmentAllGradeFailDistributionList(String year,
+			Integer term) {
+		List<List<GradeDepartmentFailDistribution>> gdfdListList = getRCGradeDepartmentFailDistributionListList(year,
+				term);
+		List<DepartmentAllGradeFailDistribution> dagfdList = getRCDepartmentAllGradeFailDistributionListByGradeDepartmentFailDistributionListList(
+				gdfdListList, year);
+		return dagfdList;
 	}
 
 	/*
@@ -1647,9 +1826,11 @@ public class StudentCourseService {
 	public List<ClassFailDistribution> getRCClassFailDistributionListByGrade(Integer grade, String year, Integer term) {
 		List<ClassFailDistribution> cfdList = new ArrayList<>();
 		List<String> classNumberList = getClassNumberListByGrade(grade);
+		Integer id = 1;
 		for (String classNumber : classNumberList) {
 			ClassFailDistribution classFailDistribution = new ClassFailDistribution();
 			classFailDistribution = getRCClassFailDistributionByClassNumber(classNumber, year, term);
+			classFailDistribution.setId(id++);
 			cfdList.add(classFailDistribution);
 		}
 		return cfdList;
@@ -1701,9 +1882,11 @@ public class StudentCourseService {
 		Integer rcAbsenceNumber = 0;
 		Integer pecAbsenceNumber = 0;
 		Integer gecAbsenceNumber = 0;
+		Integer id = 1;
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			GradeAbsenceDistribution gradeAbsenceDistribution = new GradeAbsenceDistribution();
 			gradeAbsenceDistribution = getGradeAbsenceDistributionByGrade(gradeI, year, term);
+			gradeAbsenceDistribution.setId(id++);
 			gadList.add(gradeAbsenceDistribution);
 			rcAbsenceNumber += gradeAbsenceDistribution.getRcAbsenceNumber();
 			pecAbsenceNumber += gradeAbsenceDistribution.getPecAbsenceNumber();
@@ -1711,6 +1894,7 @@ public class StudentCourseService {
 		}
 		Integer totalAbsenceNumber = rcAbsenceNumber + pecAbsenceNumber + gecAbsenceNumber;
 		GradeAbsenceDistribution gradeAbsenceDistribution = new GradeAbsenceDistribution();
+		gradeAbsenceDistribution.setId(id);
 		gradeAbsenceDistribution.setGrade("全校");
 		gradeAbsenceDistribution.setRcAbsenceNumber(rcAbsenceNumber);
 		gradeAbsenceDistribution.setPecAbsenceNumber(pecAbsenceNumber);
@@ -1868,9 +2052,11 @@ public class StudentCourseService {
 	public List<BasicCourseOverallDistribution> getBasicCourseOverallDistributionList(String year, Integer term) {
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
 		List<String> bcoList = getBasicCourseOverallListByTerm(term);
+		Integer id = 1;
 		for (String courseName : bcoList) {
 			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
 			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
+			basicCourseOverallDistribution.setId(id++);
 			bcodList.add(basicCourseOverallDistribution);
 		}
 		return bcodList;
@@ -1945,10 +2131,12 @@ public class StudentCourseService {
 	public List<BasicCourseDetailDistribution> getBasicCourseDetailDistributionListByCourseName(String courseName,
 			String year, Integer term) {
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
-		for (Integer departmentId = 0; departmentId <= 18; departmentId++) {
+		Integer id = 1;
+		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
 			basicCourseDetailDistribution = getBasicCourseDetailDistributionByCourseNameAndDepartmentId(courseName,
 					departmentId, year, term);
+			basicCourseDetailDistribution.setId(id++);
 			bcddList.add(basicCourseDetailDistribution);
 		}
 		return bcddList;
@@ -2051,10 +2239,12 @@ public class StudentCourseService {
 		if (!strGrade.equals("--")) {
 			Integer grade = Integer.parseInt(strGrade);
 			List<String> classNumberList = getClassNumberListByGrade(grade);
+			Integer id = 1;
 			for (String classNumber : classNumberList) {
 				BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 				basicCourseClassDistribution = getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName,
 						classNumber, year, term);
+				basicCourseClassDistribution.setId(id++);
 				bccdList.add(basicCourseClassDistribution);
 			}
 		}

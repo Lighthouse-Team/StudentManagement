@@ -9,6 +9,7 @@ public class BasicCourseOverallDistribution implements Serializable{
 	 */
 	private static final long serialVersionUID = -843603307733414933L;
 
+	private Integer id;					// 序号
 	private String grade;				// 年级
 	private String courseName;			// 课程名称
 	private Integer excellentNumber;	// 优秀学生数量
@@ -20,7 +21,6 @@ public class BasicCourseOverallDistribution implements Serializable{
 	
 	public BasicCourseOverallDistribution() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.excellentNumber = 0;
 		this.failNumber = 0;
 		this.totalNumber = 0;
@@ -29,9 +29,10 @@ public class BasicCourseOverallDistribution implements Serializable{
 		this.averageScore = "0.00";
 	}
 
-	public BasicCourseOverallDistribution(String grade, String courseName, Integer excellentNumber, Integer failNumber,
-			Integer totalNumber, String excellentRate, String failRate, String averageScore) {
+	public BasicCourseOverallDistribution(Integer id, String grade, String courseName, Integer excellentNumber,
+			Integer failNumber, Integer totalNumber, String excellentRate, String failRate, String averageScore) {
 		super();
+		this.id = id;
 		this.grade = grade;
 		this.courseName = courseName;
 		this.excellentNumber = excellentNumber;
@@ -40,6 +41,14 @@ public class BasicCourseOverallDistribution implements Serializable{
 		this.excellentRate = excellentRate;
 		this.failRate = failRate;
 		this.averageScore = averageScore;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getGrade() {
@@ -112,8 +121,10 @@ public class BasicCourseOverallDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BasicCourseOverallDistribution [grade=" + grade + ", courseName=" + courseName + ", excellentNumber="
-				+ excellentNumber + ", failNumber=" + failNumber + ", totalNumber=" + totalNumber + ", excellentRate="
-				+ excellentRate + ", failRate=" + failRate + ", averageScore=" + averageScore + "]";
+		return "BasicCourseOverallDistribution [id=" + id + ", grade=" + grade + ", courseName=" + courseName
+				+ ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber + ", totalNumber=" + totalNumber
+				+ ", excellentRate=" + excellentRate + ", failRate=" + failRate + ", averageScore=" + averageScore
+				+ "]";
 	}
+
 }

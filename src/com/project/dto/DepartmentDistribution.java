@@ -9,20 +9,21 @@ public class DepartmentDistribution implements Serializable {
 	 */
 	private static final long serialVersionUID = -2867490890837158905L;
 
-	private String grade; // 年级
-	private String departmentName; // 院系名称
-	private Integer totalNumber; // 成绩记录总数
-	private Integer excellentNumber; // 优秀记录数
-	private Integer goodNumber; // 良好记录数
-	private Integer mediumNumber; // 中等记录数
-	private Integer passNumber; // 及格记录数
-	private Integer failNumber; // 不及格记录数
-	private String averageScore; // 平均分
-	private String excellentRate; // 优秀率
-	private String goodRate; // 良好率
-	private String mediumRate; // 中等率
-	private String passRate; // 及格率
-	private String failRate; // 不及格率
+	private Integer id; 				// 序号
+	private String grade; 				// 年级
+	private String departmentName; 		// 院系名称
+	private Integer totalNumber; 		// 成绩记录总数
+	private Integer excellentNumber; 	// 优秀记录数
+	private Integer goodNumber; 		// 良好记录数
+	private Integer mediumNumber; 		// 中等记录数
+	private Integer passNumber; 		// 及格记录数
+	private Integer failNumber; 		// 不及格记录数
+	private String averageScore; 		// 平均分
+	private String excellentRate; 		// 优秀率
+	private String goodRate; 			// 良好率
+	private String mediumRate; 			// 中等率
+	private String passRate; 			// 及格率
+	private String failRate; 			// 不及格率
 
 	public DepartmentDistribution() {
 		super();
@@ -32,18 +33,20 @@ public class DepartmentDistribution implements Serializable {
 		this.mediumNumber = 0;
 		this.passNumber = 0;
 		this.failNumber = 0;
-		this.averageScore = "0";
-		this.excellentRate = "0%";
-		this.goodRate = "0%";
-		this.mediumRate = "0%";
-		this.passRate = "0%";
-		this.failRate = "0%";
+		this.averageScore = "0.00";
+		this.excellentRate = "0.00%";
+		this.goodRate = "0.00%";
+		this.mediumRate = "0.00%";
+		this.passRate = "0.00%";
+		this.failRate = "0.00%";
 	}
-	
-	public DepartmentDistribution(String grade, String departmentName, Integer totalNumber, Integer excellentNumber,
-			Integer goodNumber, Integer mediumNumber, Integer passNumber, Integer failNumber, String averageScore,
-			String excellentRate, String goodRate, String mediumRate, String passRate, String failRate) {
+
+	public DepartmentDistribution(Integer id, String grade, String departmentName, Integer totalNumber,
+			Integer excellentNumber, Integer goodNumber, Integer mediumNumber, Integer passNumber, Integer failNumber,
+			String averageScore, String excellentRate, String goodRate, String mediumRate, String passRate,
+			String failRate) {
 		super();
+		this.id = id;
 		this.grade = grade;
 		this.departmentName = departmentName;
 		this.totalNumber = totalNumber;
@@ -58,6 +61,14 @@ public class DepartmentDistribution implements Serializable {
 		this.mediumRate = mediumRate;
 		this.passRate = passRate;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getGrade() {
@@ -178,8 +189,8 @@ public class DepartmentDistribution implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DepartmentDistribution [grade=" + grade + ", departmentName=" + departmentName + ", totalNumber="
-				+ totalNumber + ", excellentNumber=" + excellentNumber + ", goodNumber=" + goodNumber
+		return "DepartmentDistribution [id=" + id + ", grade=" + grade + ", departmentName=" + departmentName
+				+ ", totalNumber=" + totalNumber + ", excellentNumber=" + excellentNumber + ", goodNumber=" + goodNumber
 				+ ", mediumNumber=" + mediumNumber + ", passNumber=" + passNumber + ", failNumber=" + failNumber
 				+ ", averageScore=" + averageScore + ", excellentRate=" + excellentRate + ", goodRate=" + goodRate
 				+ ", mediumRate=" + mediumRate + ", passRate=" + passRate + ", failRate=" + failRate + "]";

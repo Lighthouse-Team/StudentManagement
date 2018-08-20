@@ -9,6 +9,7 @@ public class GradeFailDistribution implements Serializable{
 	 */
 	private static final long serialVersionUID = 4781441940900414013L;
 
+	private Integer id; 				// 序号
 	private String grade;				// 年级
 	private Integer oneFailNumber;		// 不及格门数为1的学生人数
 	private Integer twoFailNumber;		// 不及格门数为2的学生人数
@@ -34,13 +35,15 @@ public class GradeFailDistribution implements Serializable{
 		this.eightFailNumber = 0;
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
-		this.failRate = "0%";
+		this.failRate = "0.00%";
 	}
 
-	public GradeFailDistribution(String grade, Integer oneFailNumber, Integer twoFailNumber, Integer threeFailNumber,
-			Integer fourFailNumber, Integer fiveFailNumber, Integer sixFailNumber, Integer sevenFailNumber,
-			Integer eightFailNumber, Integer totalFailNumber, Integer totalStudentNumber, String failRate) {
+	public GradeFailDistribution(Integer id, String grade, Integer oneFailNumber, Integer twoFailNumber,
+			Integer threeFailNumber, Integer fourFailNumber, Integer fiveFailNumber, Integer sixFailNumber,
+			Integer sevenFailNumber, Integer eightFailNumber, Integer totalFailNumber, Integer totalStudentNumber,
+			String failRate) {
 		super();
+		this.id = id;
 		this.grade = grade;
 		this.oneFailNumber = oneFailNumber;
 		this.twoFailNumber = twoFailNumber;
@@ -53,6 +56,14 @@ public class GradeFailDistribution implements Serializable{
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getGrade() {
@@ -157,12 +168,11 @@ public class GradeFailDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GradeFailDistribution [grade=" + grade + ", oneFailNumber=" + oneFailNumber + ", twoFailNumber="
-				+ twoFailNumber + ", threeFailNumber=" + threeFailNumber + ", fourFailNumber=" + fourFailNumber
-				+ ", fiveFailNumber=" + fiveFailNumber + ", sixFailNumber=" + sixFailNumber + ", sevenFailNumber="
-				+ sevenFailNumber + ", eightFailNumber=" + eightFailNumber + ", totalFailNumber=" + totalFailNumber
-				+ ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
+		return "GradeFailDistribution [id=" + id + ", grade=" + grade + ", oneFailNumber=" + oneFailNumber
+				+ ", twoFailNumber=" + twoFailNumber + ", threeFailNumber=" + threeFailNumber + ", fourFailNumber="
+				+ fourFailNumber + ", fiveFailNumber=" + fiveFailNumber + ", sixFailNumber=" + sixFailNumber
+				+ ", sevenFailNumber=" + sevenFailNumber + ", eightFailNumber=" + eightFailNumber + ", totalFailNumber="
+				+ totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
 	}
 
-	
 }

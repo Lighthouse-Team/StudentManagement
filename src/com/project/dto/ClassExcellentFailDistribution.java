@@ -9,6 +9,7 @@ public class ClassExcellentFailDistribution implements Serializable{
 	 */
 	private static final long serialVersionUID = 1983569788932187142L;
 	
+	private Integer id; 					// 序号
 	private String classNumber;				// 班级编号
 	private Integer totalNumber;			// 成绩记录总数
 	private Integer excellentNumber;		// 优秀成绩数
@@ -21,8 +22,28 @@ public class ClassExcellentFailDistribution implements Serializable{
 		totalNumber = 0;
 		excellentNumber = 0;
 		failNumber = 0;
-		excellentRate = "0";
-		failRate = "0";
+		excellentRate = "0.00%";
+		failRate = "0.00%";
+	}
+
+	public ClassExcellentFailDistribution(Integer id, String classNumber, Integer totalNumber, Integer excellentNumber,
+			Integer failNumber, String excellentRate, String failRate) {
+		super();
+		this.id = id;
+		this.classNumber = classNumber;
+		this.totalNumber = totalNumber;
+		this.excellentNumber = excellentNumber;
+		this.failNumber = failNumber;
+		this.excellentRate = excellentRate;
+		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getClassNumber() {
@@ -79,10 +100,9 @@ public class ClassExcellentFailDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ClassExcellentFailDistribution [classNumber=" + classNumber + ", totalNumber=" + totalNumber
-				+ ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber + ", excellentRate="
-				+ excellentRate + ", failRate=" + failRate + "]";
+		return "ClassExcellentFailDistribution [id=" + id + ", classNumber=" + classNumber + ", totalNumber="
+				+ totalNumber + ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber
+				+ ", excellentRate=" + excellentRate + ", failRate=" + failRate + "]";
 	}
 
-	
 }

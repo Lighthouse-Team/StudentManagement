@@ -49,8 +49,6 @@
 			<result column="courseDepartment" property="courseDepartment" />
 			<result column="courseAttribute" property="courseAttribute" />
 			<result column="courseProperty" property="courseProperty" />
-			<result column="courseTerm" property="courseTerm" />
-			<!-- <result column="score" property="score"/> -->
 		</collection>
 
 	</resultMap>

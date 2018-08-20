@@ -2,35 +2,44 @@ package com.project.dto;
 
 import java.io.Serializable;
 
-public class BasicCourseClassDistribution implements Serializable{
+public class BasicCourseClassDistribution implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -887900102106066590L;
 
-	private String courseName;		// 课程名称
-	private String classNumber;		// 班号
-	private Integer totalNumber;	// 总人数
+	private Integer id; 			// 序号
+	private String courseName; 		// 课程名称
+	private String classNumber; 	// 班号
+	private Integer totalNumber; 	// 总人数
 	private String excellentRate;	// 优秀率
 	private String failRate;		// 不及格率
-	
+
 	public BasicCourseClassDistribution() {
 		super();
-		// TODO Auto-generated constructor stub
 		this.totalNumber = 0;
 		this.excellentRate = "0.00%";
 		this.failRate = "0.00%";
 	}
 
-	public BasicCourseClassDistribution(String courseName, String classNumber, Integer totalNumber,
+	public BasicCourseClassDistribution(Integer id, String courseName, String classNumber, Integer totalNumber,
 			String excellentRate, String failRate) {
 		super();
+		this.id = id;
 		this.courseName = courseName;
 		this.classNumber = classNumber;
 		this.totalNumber = totalNumber;
 		this.excellentRate = excellentRate;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCourseName() {
@@ -79,7 +88,8 @@ public class BasicCourseClassDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BasicCourseClassDistribution [courseName=" + courseName + ", classNumber=" + classNumber
+		return "BasicCourseClassDistribution [id=" + id + ", courseName=" + courseName + ", classNumber=" + classNumber
 				+ ", totalNumber=" + totalNumber + ", excellentRate=" + excellentRate + ", failRate=" + failRate + "]";
 	}
+
 }

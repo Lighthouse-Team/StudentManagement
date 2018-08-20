@@ -9,6 +9,7 @@ public class GradeDepartmentFailDistribution implements Serializable{
 	 */
 	private static final long serialVersionUID = 6737905433215947383L;
 
+	private Integer id; 				// 序号
 	private String grade;				// 年级
 	private String departmentName;		// 院系名称
 	private Integer totalFailNumber;	// 不及格学生数
@@ -19,17 +20,26 @@ public class GradeDepartmentFailDistribution implements Serializable{
 		super();
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
-		this.failRate = "0%";
+		this.failRate = "0.00%";
 	}
 
-	public GradeDepartmentFailDistribution(String grade, String departmentName, Integer totalFailNumber,
+	public GradeDepartmentFailDistribution(Integer id, String grade, String departmentName, Integer totalFailNumber,
 			Integer totalStudentNumber, String failRate) {
 		super();
+		this.id = id;
 		this.grade = grade;
 		this.departmentName = departmentName;
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
 		this.failRate = failRate;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getGrade() {
@@ -78,8 +88,9 @@ public class GradeDepartmentFailDistribution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GradeDepartmentFailDistribution [grade=" + grade + ", departmentName=" + departmentName
+		return "GradeDepartmentFailDistribution [id=" + id + ", grade=" + grade + ", departmentName=" + departmentName
 				+ ", totalFailNumber=" + totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate="
 				+ failRate + "]";
 	}
+
 }
