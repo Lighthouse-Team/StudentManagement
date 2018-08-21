@@ -617,6 +617,7 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
+										<th>序号</th>
 										<th>课程种类</th>
 										<th>成绩记录总数</th>
 										<th>优秀(90-100)</th>
@@ -635,6 +636,7 @@
 								<tbody>
 									<c:forEach items="${odList}" var="OverallDistribution">
 										<tr>
+											<td>${OverallDistribution.id }</td>
 											<td>${OverallDistribution.courseType }</td>
 											<td>${OverallDistribution.totalNumber }</td>
 											<td>${OverallDistribution.excellentNumber }</td>

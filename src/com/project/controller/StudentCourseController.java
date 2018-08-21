@@ -205,7 +205,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 跳转页面至各年级必修专业选修课程成绩总体分布情况页面
+	 * 跳转页面至各年级必修专业选修课程成绩总体分布情况(按院系查询)页面
 	 * @param session
 	 * @param map
 	 * @return
@@ -223,7 +223,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 返回各年级必修专业选修课程成绩总体分布情况
+	 * 返回各年级必修专业选修课程成绩总体分布情况(按院系查询)
 	 * @param session
 	 * @param map
 	 * @param year
@@ -242,22 +242,57 @@ public class StudentCourseController {
 		
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
-	/*	System.out.println(year);
-		System.out.println(term);
-		System.out.println(submitMethod);*/
 		if(year != null) {
-//			if (submitMethod.equals("按院系查询")) {
-//				List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
-//				map.put("ddList", ddList);
-//			}
-//			else {
-//				List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
-//				map.put("cefdList", cefdList);
-//			}
 			List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
-//			map.put("ddList", ddList);
+			map.put("ddList", ddList);
 			
 		}
 		return "getDepartmentRPECScoreDistributionListByGrade";
+	}
+	
+	/**
+	 * 跳转页面至各年级必修专业选修课程成绩总体分布情况(按班级查询)页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getRPECClassExcellentFailDistributionListByGradePage")
+	public String getRPECClassExcellentFailDistributionListByGradePage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getRPECClassExcellentFailDistributionListByGrade";
+	}
+	
+	/**
+	 * 返回各年级必修专业选修课程成绩总体分布情况(按班级查询)
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getRPECClassExcellentFailDistributionListByGrade")
+	public String getRPECClassExcellentFailDistributionListByGrade(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "grade", required = false) Integer grade,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
+			map.put("cefdList", cefdList);
+			
+		}
+		return "getRPECClassExcellentFailDistributionListByGrade";
 	}
 }

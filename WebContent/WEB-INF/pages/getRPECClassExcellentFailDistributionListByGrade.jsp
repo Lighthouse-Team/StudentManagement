@@ -175,7 +175,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="getDepartmentRPECScoreDistributionListByGrade" method="post">
+						<form action="getRPECClassExcellentFailDistributionListByGrade" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -239,29 +239,25 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th> 
-										<th>院系</th>
+										<th>序号</th>  
+										<th>班级</th>
 										<th>成绩记录总数</th>
-										<th>平均分</th>
+										<th>优秀成绩数</th>
+										<th>不及格成绩数</th>
 										<th>优秀率</th>
-										<th>良好率</th>
-										<th>中等率</th>
-										<th>及格率</th>
 										<th>不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${ddList }"  var="DepartmentDistribution">
+									<c:forEach items="${cefdList }"  var="ClassExcellentFailDistribution">
 										<tr>
-											<td>${DepartmentDistribution.id }</td>
-											<td>${DepartmentDistribution.departmentName }</td>
-											<td>${DepartmentDistribution.totalNumber }</td>
-											<td>${DepartmentDistribution.averageScore }</td>
-											<td>${DepartmentDistribution.excellentRate }</td>
-											<td>${DepartmentDistribution.goodRate }</td>
-											<td>${DepartmentDistribution.mediumRate }</td>
-											<td>${DepartmentDistribution.passRate }</td>
-											<td>${DepartmentDistribution.failRate }</td>
+											<td>${ClassExcellentFailDistribution.id }</td>
+											<td>${ClassExcellentFailDistribution.classNumber }</td>
+											<td>${ClassExcellentFailDistribution.totalNumber }</td>
+											<td>${ClassExcellentFailDistribution.excellentNumber }</td>
+											<td>${ClassExcellentFailDistribution.failNumber }</td>
+											<td>${ClassExcellentFailDistribution.excellentRate }</td>
+											<td>${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

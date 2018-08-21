@@ -215,7 +215,7 @@
                 </a>
               	</li>
               	<li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="getRPECClassExcellentFailDistributionListByGradePage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>按班级查询</p>
                 </a>
