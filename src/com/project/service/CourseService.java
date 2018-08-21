@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,10 @@ public class CourseService {
 	 */
 	public Course getCourseByCourseNumber(String courseNumber) {
 		return courseMapper.getCourseByCourseNumber(courseNumber);
+	}
+
+	public List<Course> getCourseListByStudentId(Integer studentId, String year, Integer term){
+		return courseMapper.getCourseListByStudentId(studentId, year, term);
 	}
 
 	/**
@@ -75,8 +80,8 @@ public class CourseService {
 	 * @param course
 	 * @return
 	 */
-	public List<Course> getCourseDetailsByEntityForLike(Course course) {
-		return courseMapper.getCourseDetailsByEntityForLike(course);
+	public List<Course> getCourseDetailsByEntityForLike(Course course, String year, Integer term) {
+		return courseMapper.getCourseDetailsByEntityForLike(course, year, term);
 	}
 
 	/**

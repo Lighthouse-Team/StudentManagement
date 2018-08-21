@@ -70,8 +70,9 @@
 		</where>
 	</select>
 
-	<!-- 通过 courseId 获得选该课程的学生列表: public List<Student> getStudentListByCourseId(Integer 
-		courseId); -->
+	<!-- 通过 courseId 获得选该课程的学生列表: public List<Student> getStudentListByCourseId(@Param(value 
+		= "courseId") Integer courseId, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getStudentListByCourseId" resultMap="studentMap">
 		select s.* from student s, studentcourse sc
 		<where>
@@ -79,6 +80,9 @@
 			and sc.courseId = #{courseId}
 			and
 			sc.examProperty = 1
+			<if test="year != null and term != null">
+				and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			</if>
 		</where>
 	</select>
 
@@ -225,9 +229,9 @@
 		</where>
 	</select>
 
-
-	<!-- 查询学生选课情况: public List<Student> getStudentDetailsByEntityForLike(Student 
-		student); -->
+	<!-- 查询学生选课情况: public List<Student> getStudentDetailsByEntityForLike(@Param(value 
+		= "student") Student student, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getStudentDetailsByEntityForLike" resultMap="studentCourseMap">
 		select * from Student s, Course c, StudentCourse sc, Department d
 		<where>
@@ -235,34 +239,40 @@
 			and c.courseId = sc.courseId
 			and
 			s.departmentId = d.departmentId
-			<if test="studentId != null">
-				and s.studentId = #{studentId}
+			and sc.examTerm = CONCAT(#{year}, '-',
+			#{term})
+			and sc.examProperty = 1
+			<if test="student.studentId != null">
+				and s.studentId = #{student.studentId}
 			</if>
-			<if test="studentNumber != null">
-				and s.studentNumber like CONCAT('%', #{studentNumber},
-				'%')
+			<if test="student.studentNumber != null">
+				and s.studentNumber like CONCAT('%',
+				#{student.studentNumber}, '%')
 			</if>
-			<if test="studentName != null">
-				and s.studentName like CONCAT('%', #{studentName}, '%')
+			<if test="student.studentName != null">
+				and s.studentName like CONCAT('%',
+				#{student.studentName}, '%')
 			</if>
-			<if test="studentSex != null">
-				and s.studentSex = #{studentSex}
+			<if test="student.studentSex != null">
+				and s.studentSex = #{student.studentSex}
 			</if>
-			<if test="studentIDCard != null">
-				and s.studentIDCard like CONCAT('%', #{studentIDCard},
-				'%')
+			<if test="student.studentIDCard != null">
+				and s.studentIDCard like CONCAT('%',
+				#{student.studentIDCard}, '%')
 			</if>
-			<if test="studentBirth != null">
-				and s.studentBirth like CONCAT('%', #{strStudentBirth},
-				'%')
+			<if test="student.studentBirth != null">
+				and s.studentBirth like CONCAT('%',
+				#{student.strStudentBirth}, '%')
 			</if>
-			<if test="enrollment != null">
-				and s.enrollment like CONCAT('%', #{strEnrollment}, '%')
+			<if test="student.enrollment != null">
+				and s.enrollment like CONCAT('%',
+				#{student.strEnrollment}, '%')
 			</if>
-			<if test="studentClass != null">
-				and s.studentClass like CONCAT('%', #{studentClass}, '%')
+			<if test="student.studentClass != null">
+				and s.studentClass like CONCAT('%',
+				#{student.studentClass}, '%')
 			</if>
-			<if test="sDepartment != null">
+			<if test="student.sDepartment != null">
 				and s.departmentId = #{sDepartment.departmentId}
 			</if>
 		</where>

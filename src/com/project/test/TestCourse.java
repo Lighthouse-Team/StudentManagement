@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.project.beans.Course;
+import com.project.beans.Student;
 import com.project.service.CourseService;
 
 public class TestCourse {
@@ -48,18 +49,38 @@ public class TestCourse {
 	}
 
 	@Test
-	public void integerDoubleInitializeTest() {
-		Course course = new Course();
-		System.out.println(course);
-		course.setCourseCredits(10);
-		// course.setCourseId(10);
-		System.out.println(course);
-		List<Course> courseList = courseService.getCourseListByEntityForLike(course);
-		System.out.println(courseList);
-	}
-
-	@Test
 	public void setCourseTypeTest() {
 		courseService.setCourseType();
 	}
+
+	@Test
+	public void getCourseDetailByEntityForLikeTest() {
+		Course course = new Course();
+		course.setCourseId(1);
+		String year = "2017-2018";
+		Integer term = 1;
+		List<Course> courseList = courseService.getCourseDetailsByEntityForLike(course, year, term);
+		System.out.println("courseList.size():" + courseList.size());
+		for (Integer index = 0; index < courseList.size(); index++) {
+			System.out.println(courseList.get(index));
+			List<Student> studentList = courseList.get(index).getStudentList();
+			System.out.println("studentList.size():" + studentList.size());
+			for (Integer index2 = 0; index2 < studentList.size(); index2++) {
+				System.out.println(studentList.get(index2));
+			}
+		}
+	}
+
+	@Test
+	public void getCourseListByStudentId() {
+		Integer studentId = 1;
+		String year = "2017-2018";
+		Integer term = 1;
+		List<Course> courseList = courseService.getCourseListByStudentId(studentId, year, term);
+		System.out.println("courseList.size():" + courseList.size());
+		for (Integer index = 0; index < courseList.size(); index++) {
+			System.out.println(courseList.get(index));
+		}
+	}
+
 }

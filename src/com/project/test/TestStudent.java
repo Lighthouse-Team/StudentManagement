@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.project.beans.Course;
 import com.project.beans.Department;
 import com.project.beans.Student;
 import com.project.service.StudentService;
@@ -26,12 +27,22 @@ public class TestStudent {
 	}
 
 	@Test
-	public void getStudentByStudentNumberTest() { // 这里和下面找到学生对象必须要求数据库中该学生具有departmentId
-		// String studentNumber = "2015061524";
-		// String studentNumber = "20171101JX";
+	public void getStudentByStudentNumberTest() {
 		String studentNumber = "2014061525";
 		Student student = studentService.getStudentByStudentNumber(studentNumber);
 		System.out.println(student);
+	}
+	
+	@Test
+	public void getStudentListByCourseIdTest() {
+		Integer courseId = 1;
+		String year = null;
+		Integer term = 1;
+		List<Student> studentList = studentService.getStudentListByCourseId(courseId, year, term);
+		System.out.println("studentList.size():" + studentList.size());
+		for(Integer index = 0; index < studentList.size(); index++) {
+			System.out.println(studentList.get(index));
+		}
 	}
 
 	@Test
@@ -43,20 +54,20 @@ public class TestStudent {
 	}
 
 	@Test
-	public void getStudentDetailsTest() {
+	public void getStudentDetailsByEntityForLikeTest() {
 		Student student = new Student();
-		student.setStudentId(57545);
-
-		List<Student> studentList = studentService.getStudentDetailsByEntityForLike(student);
-
-		System.out.println(studentList);
-	}
-
-	@Test
-	public void getAllStudentTest() {
-		List<Student> studentList = studentService.getAllStudent();
-		for (int i = 0; i < studentList.size(); i++) {
-			System.out.println(studentList.get(i));
+		student.setStudentId(1);
+		String year = "2017-2018";
+		Integer term = 1;
+		List<Student> studentList = studentService.getStudentDetailsByEntityForLike(student, year, term);
+		System.out.println("studentList.size():" + studentList.size());
+		for(Integer index = 0; index < studentList.size(); index++) {
+			System.out.println(studentList.get(index));
+			List<Course> courseList = studentList.get(index).getCourseList();
+			System.out.println("courseList.size():" + courseList.size());
+			for(Integer index2 = 0; index2 < courseList.size(); index2++) {
+				System.out.println(courseList.get(index2));
+			}
 		}
 	}
 

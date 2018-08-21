@@ -34,7 +34,8 @@ public interface StudentMapper {
 	 * @param courseId
 	 * @return
 	 */
-	public List<Student> getStudentListByCourseId(Integer courseId);
+	public List<Student> getStudentListByCourseId(@Param(value = "courseId") Integer courseId,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 student 对象属性查询学生信息
@@ -93,7 +94,10 @@ public interface StudentMapper {
 	 * 查询学生选课情况
 	 * 
 	 * @param student
+	 * @param year
+	 * @param term
 	 * @return
 	 */
-	public List<Student> getStudentDetailsByEntityForLike(Student student);
+	public List<Student> getStudentDetailsByEntityForLike(@Param(value = "student") Student student,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 }

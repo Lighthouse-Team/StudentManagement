@@ -54,6 +54,18 @@ public class StudentService {
 	}
 
 	/**
+	 * 通过 courseId 获得选修该课程的所有学生列表
+	 * 
+	 * @param courseId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Student> getStudentListByCourseId(Integer courseId, String year, Integer term) {
+		return studentMapper.getStudentListByCourseId(courseId, year, term);
+	}
+
+	/**
 	 * 添加学生信息并返回主键值
 	 * 
 	 * @param student
@@ -135,8 +147,8 @@ public class StudentService {
 	 * @param student
 	 * @return
 	 */
-	public List<Student> getStudentDetailsByEntityForLike(Student student) {
-		List<Student> tmpList = studentMapper.getStudentDetailsByEntityForLike(student);
+	public List<Student> getStudentDetailsByEntityForLike(Student student, String year, Integer term) {
+		List<Student> tmpList = studentMapper.getStudentDetailsByEntityForLike(student, year, term);
 		List<Student> resultList = new ArrayList<>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for (Student resultStudent : tmpList) {

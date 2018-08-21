@@ -54,14 +54,19 @@
 		</where>
 	</select>
 
-	<!-- 通过 studengId 获取该学生的选课列表: public List<Course> getCourseListByStudentId(Integer 
-		studentId); -->
+	<!-- 通过 studengId 获取该学生的选课列表: public List<Course> getCourseListByStudentId(@Param(value 
+		= "studentId") Integer studentId, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getCourseListByStudentId" resultMap="courseMap">
 		select c.* from course c, studentcourse sc
 		<where>
 			c.courseId = sc.courseId
 			and sc.studentId = #{studentId}
-			and sc.examProperty = 1
+			and
+			sc.examProperty = 1
+			<if test="year != null and term != null">
+				and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			</if>
 		</where>
 	</select>
 
@@ -136,37 +141,45 @@
 		</where>
 	</select>
 
-	<!-- 根据课程属性查询学生选课情况: public List<Course> getCourseDetailsByEntityForLike(Course 
-		course); -->
+	<!-- 根据课程属性查询学生选课情况: public List<Course> public List<Course> getCourseDetailsByEntityForLike(@Param(value 
+		= "course") Course course, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
 	<select id="getCourseDetailsByEntityForLike" resultMap="courseStudentMap">
 		select s.*, c.*
 		from Student s, Course c, StudentCourse sc
 		<where>
-			s.studentId = sc.studentId and c.courseId = sc.courseId
-			<if test="courseId != null">
-				and c.courseId = #{courseId}
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and sc.examProperty = 1
+			<if test="course.courseId != null">
+				and c.courseId = #{course.courseId}
 			</if>
-			<if test="courseName != null">
-				and c.courseNumber like CONCAT('%', #{courseName}, '%')
-			</if>
-			<if test="coursePeriod != null">
-				and c.coursePeriod like CONCAT('%', #{coursePeriod}, '%')
-			</if>
-			<if test="courseCredits != 0">
-				and c.courseCredits like CONCAT('%', #{courseCredits},
+			<if test="course.courseName != null">
+				and c.courseNumber like CONCAT('%', #{course.courseName},
 				'%')
 			</if>
-			<if test="courseDepartment != null">
+			<if test="course.coursePeriod != null">
+				and c.coursePeriod like CONCAT('%',
+				#{course.coursePeriod}, '%')
+			</if>
+			<if test="course.courseCredits != 0">
+				and c.courseCredits like CONCAT('%',
+				#{course.courseCredits}, '%')
+			</if>
+			<if test="course.courseDepartment != null">
 				and c.courseDepartment like CONCAT('%',
-				#{courseDepartment}, '%')
+				#{course.courseDepartment}, '%')
 			</if>
-			<if test="courseAttribute != null">
+			<if test="course.courseAttribute != null">
 				and c.courseAttribute like CONCAT('%',
-				#{courseAttribute}, '%')
+				#{course.courseAttribute}, '%')
 			</if>
-			<if test="courseProperty != null">
-				and c.courseProperty like CONCAT('%', #{courseProperty},
-				'%')
+			<if test="course.courseProperty != null">
+				and c.courseProperty like CONCAT('%',
+				#{course.courseProperty}, '%')
+			</if>
+			<if test="year != null and term != null">
+				and sc.examTerm = CONCAT(#{year}, '-', #{term})
 			</if>
 		</where>
 	</select>

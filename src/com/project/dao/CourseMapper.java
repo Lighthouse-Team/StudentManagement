@@ -2,6 +2,7 @@ package com.project.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.stereotype.Repository;
 
@@ -20,20 +21,21 @@ public interface CourseMapper {
 	public Course getCourseByCourseId(Integer courseId);
 
 	/**
-	 * 通过 studengId 获取该学生的选课列表
-	 * 
-	 * @param studentId
-	 * @return
-	 */
-	public List<Course> getCourseListByStudentId(Integer studentId);
-
-	/**
 	 * 通过 courseNumber 获取指定课程信息
 	 * 
 	 * @param courseNumber
 	 * @return
 	 */
 	public Course getCourseByCourseNumber(String courseNumber);
+
+	/**
+	 * 通过 studengId 获取该学生的选课列表
+	 * 
+	 * @param studentId
+	 * @return
+	 */
+	public List<Course> getCourseListByStudentId(@Param(value = "studentId") Integer studentId,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 course 属性查询课程信息
@@ -84,14 +86,15 @@ public interface CourseMapper {
 	 * 根据课程属性查询学生选课情况
 	 * 
 	 * @param course
+	 * @param year
+	 * @param term
 	 * @return
 	 */
-	public List<Course> getCourseDetailsByEntityForLike(Course course);
+	public List<Course> getCourseDetailsByEntityForLike(@Param(value = "course") Course course,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
-	/**
+	/*
 	 * 这里设置 courseType
-	 * 
-	 * @author xiapeng 2018年7月26日09:40:23
 	 */
 
 	/**
