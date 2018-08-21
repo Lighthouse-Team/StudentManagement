@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.beans.User;
-import com.project.dto.SCDistribution;
 import com.project.service.UserService;
 
 @Controller

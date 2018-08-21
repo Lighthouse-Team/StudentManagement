@@ -48,32 +48,6 @@ public class TestStudentCourse {
 		studentCourseService = (StudentCourseService) applicationContext.getBean("studentCourseService");
 	}
 
-	@Test
-	public void decimalTest() {
-		double d = 1.212;
-		NumberFormat nf = NumberFormat.getPercentInstance();
-		System.out.println(nf.format(d)); // 121%
-
-		DecimalFormat df = new DecimalFormat("0.00%"); // 系统可以识别这里的%
-		System.out.println(df.format(d)); // 121.20%
-
-		DecimalFormat df2 = new DecimalFormat("0%");
-		System.out.println(df2.format(d)); // 121%
-	}
-
-	@Test
-	public void integerDoubleTest() {
-		Integer b = 3;
-		double a = 4;
-		double c = a / b;
-		System.out.println(c); // 1.3333333333
-		Integer a2 = 4;
-		double c2 = a2 / b;
-		System.out.println(c2); // 1.0
-		c2 = (double) a2 / b;
-		System.out.println(c2); // 1.3333333333
-	}
-
 	/*
 	 * 测试第1章第1个功能
 	 */

@@ -25,8 +25,15 @@
 		<result column="courseAttribute" property="courseAttribute" />
 		<result column="courseProperty" property="courseProperty" />
 
-		<collection property="studentList"
-			select="com.project.dao.StudentMapper.getStudentByStudentId" column="studentId">
+		<collection property="studentList" ofType="com.project.beans.Student">
+			<id column="studentId" property="studentId" />
+			<result column="studentNumber" property="studentNumber" />
+			<result column="studentName" property="studentName" />
+			<result column="studentSex" property="studentSex" />
+			<result column="studentIDCard" property="studentIDCard" />
+			<result column="studentBirth" property="studentBirth" />
+			<result column="enrollment" property="enrollment" />
+			<result column="studentClass" property="studentClass" />
 		</collection>
 	</resultMap>
 
@@ -44,6 +51,17 @@
 		select * from Course c
 		<where>
 			courseNumber = #{courseNumber}
+		</where>
+	</select>
+
+	<!-- 通过 studengId 获取该学生的选课列表: public List<Course> getCourseListByStudentId(Integer 
+		studentId); -->
+	<select id="getCourseListByStudentId" resultMap="courseMap">
+		select c.* from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and sc.studentId = #{studentId}
+			and sc.examProperty = 1
 		</where>
 	</select>
 
@@ -89,7 +107,7 @@
 		select * from Course c
 		<where>
 			<if test="courseId != null">
-				courseId like CONCAT('%', #{courseId}, '%')
+				courseId = #{courseId}
 			</if>
 			<if test="courseNumber != null">
 				and courseNumber like CONCAT('%', #{courseNumber}, '%')
@@ -126,7 +144,7 @@
 		<where>
 			s.studentId = sc.studentId and c.courseId = sc.courseId
 			<if test="courseId != null">
-				and c.courseId like CONCAT('%', #{courseId}, '%')
+				and c.courseId = #{courseId}
 			</if>
 			<if test="courseName != null">
 				and c.courseNumber like CONCAT('%', #{courseName}, '%')

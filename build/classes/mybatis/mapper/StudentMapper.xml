@@ -37,9 +37,6 @@
 			column="departmentId">
 		</association>
 
-		<!-- <collection property="courseList" select="com.project.dao.CourseMapper.getCourseByCourseId" 
-			column="courseId"> </collection> -->
-
 		<collection property="courseList" ofType="com.project.beans.Course">
 			<id column="courseId" property="courseId" />
 			<result column="courseNumber" property="courseNumber" />
@@ -50,7 +47,6 @@
 			<result column="courseAttribute" property="courseAttribute" />
 			<result column="courseProperty" property="courseProperty" />
 		</collection>
-
 	</resultMap>
 
 	<!-- 通过 studentId 获取指定学生信息: public Student getStudentByStudentId(Integer 
@@ -71,7 +67,18 @@
 			s.departmentId = d.departmentId
 			and studentNumber =
 			#{studentNumber}
+		</where>
+	</select>
 
+	<!-- 通过 courseId 获得选该课程的学生列表: public List<Student> getStudentListByCourseId(Integer 
+		courseId); -->
+	<select id="getStudentListByCourseId" resultMap="studentMap">
+		select s.* from student s, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and sc.courseId = #{courseId}
+			and
+			sc.examProperty = 1
 		</where>
 	</select>
 
@@ -126,29 +133,31 @@
 		<where>
 			s.departmentId = d.departmentId
 			<if test="studentId != null">
-				and studentId like CONCAT('%', #{studentId}, '%')
+				and s.studentId = #{studentId}
 			</if>
 			<if test="studentNumber != null">
-				and studentNumber like CONCAT('%', #{studentNumber}, '%')
+				and s.studentNumber like CONCAT('%', #{studentNumber},
+				'%')
 			</if>
 			<if test="studentName != null">
-				and studentName like CONCAT('%', #{studentName}, '%')
+				and s.studentName like CONCAT('%', #{studentName}, '%')
 			</if>
 			<if test="studentSex != null">
-				and studentSex = #{studentSex}
+				and s.studentSex = #{studentSex}
 			</if>
 			<if test="studentIDCard != null">
-				and studentIDCard like CONCAT('%', #{studentIDCard}, '%')
+				and s.studentIDCard like CONCAT('%', #{studentIDCard},
+				'%')
 			</if>
 			<if test="studentBirth != null">
-				and studentBirth like CONCAT('%', #{strStudentBirth},
+				and s.studentBirth like CONCAT('%', #{strStudentBirth},
 				'%')
 			</if>
 			<if test="enrollment != null">
-				and enrollment like CONCAT('%', #{strEnrollment}, '%')
+				and s.enrollment like CONCAT('%', #{strEnrollment}, '%')
 			</if>
 			<if test="studentClass != null">
-				and studentClass like CONCAT('%', #{studentClass}, '%')
+				and s.studentClass like CONCAT('%', #{studentClass}, '%')
 			</if>
 			<if test="sDepartment != null">
 				and s.departmentId = #{sDepartment.departmentId}
@@ -222,32 +231,36 @@
 	<select id="getStudentDetailsByEntityForLike" resultMap="studentCourseMap">
 		select * from Student s, Course c, StudentCourse sc, Department d
 		<where>
-			s.studentId = sc.studentId and c.courseId = sc.courseId and
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
 			s.departmentId = d.departmentId
 			<if test="studentId != null">
-				and studentId like CONCAT('%', #{studentId}, '%')
+				and s.studentId = #{studentId}
 			</if>
 			<if test="studentNumber != null">
-				and studentNumber like CONCAT('%', #{studentNumber}, '%')
+				and s.studentNumber like CONCAT('%', #{studentNumber},
+				'%')
 			</if>
 			<if test="studentName != null">
-				and studentName like CONCAT('%', #{studentName}, '%')
+				and s.studentName like CONCAT('%', #{studentName}, '%')
 			</if>
 			<if test="studentSex != null">
-				and studentSex = #{studentSex}
+				and s.studentSex = #{studentSex}
 			</if>
 			<if test="studentIDCard != null">
-				and studentIDCard like CONCAT('%', #{studentIDCard}, '%')
+				and s.studentIDCard like CONCAT('%', #{studentIDCard},
+				'%')
 			</if>
 			<if test="studentBirth != null">
-				and studentBirth like CONCAT('%', #{strStudentBirth},
+				and s.studentBirth like CONCAT('%', #{strStudentBirth},
 				'%')
 			</if>
 			<if test="enrollment != null">
-				and enrollment like CONCAT('%', #{strEnrollment}, '%')
+				and s.enrollment like CONCAT('%', #{strEnrollment}, '%')
 			</if>
 			<if test="studentClass != null">
-				and studentClass like CONCAT('%', #{studentClass}, '%')
+				and s.studentClass like CONCAT('%', #{studentClass}, '%')
 			</if>
 			<if test="sDepartment != null">
 				and s.departmentId = #{sDepartment.departmentId}

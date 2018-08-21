@@ -106,6 +106,5 @@ public class StudentCourse {
 				+ ", examProperty=" + examProperty + ", scoreMark=" + scoreMark + ", scStudent=" + scStudent
 				+ ", scCourse=" + scCourse + "]";
 	}
-
-
+	
 }

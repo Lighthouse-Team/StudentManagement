@@ -20,6 +20,14 @@ public interface CourseMapper {
 	public Course getCourseByCourseId(Integer courseId);
 
 	/**
+	 * 通过 studengId 获取该学生的选课列表
+	 * 
+	 * @param studentId
+	 * @return
+	 */
+	public List<Course> getCourseListByStudentId(Integer studentId);
+
+	/**
 	 * 通过 courseNumber 获取指定课程信息
 	 * 
 	 * @param courseNumber
@@ -79,24 +87,23 @@ public interface CourseMapper {
 	 * @return
 	 */
 	public List<Course> getCourseDetailsByEntityForLike(Course course);
-	
-	
+
 	/**
 	 * 这里设置 courseType
 	 * 
 	 * @author xiapeng 2018年7月26日09:40:23
 	 */
-	
+
 	/**
 	 * 设置必修课的 courseType = 1
 	 */
 	public void setCourseTypeOfRequierdCourse();
-	
+
 	/**
 	 * 设置专业选修课的 courseType = 2
 	 */
 	public void setCourseTypeOfProfessionalElectiveCourse();
-	
+
 	/**
 	 * 设置通识选修课的 courseType = 3
 	 */

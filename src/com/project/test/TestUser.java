@@ -9,18 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.project.dto.SCDistribution;
+import com.project.beans.Course;
+import com.project.beans.Student;
 import com.project.service.UserService;
 
 public class TestUser {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Before
 	public void before() {
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		userService = (UserService) applicationContext.getBean("userService");
 	}
+	
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.beans.User;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.OverallDistribution;
-import com.project.dto.SCDistribution;
 import com.project.service.StudentCourseService;
 
 @Controller
