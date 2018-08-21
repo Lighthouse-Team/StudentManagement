@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.beans.User;
+import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
@@ -232,7 +234,8 @@ public class StudentCourseController {
 	public String getDepartmentRPECScoreDistributionListByGrade(HttpSession session, Map<String, Object> map,
 			@RequestParam(value = "grade", required = false) Integer grade,
 			@RequestParam(value = "year", required = false) String year,
-			@RequestParam(value = "term", required = false) Integer term) {
+			@RequestParam(value = "term", required = false) Integer term,
+			@RequestParam(value = "submitMethod", required = false) String submitMethod) {
 		User user = (User) session.getAttribute("user");
 		if(user == null) {
 			return "redirect:/login.jsp";
@@ -240,9 +243,18 @@ public class StudentCourseController {
 		
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
+	/*	System.out.println(year);
+		System.out.println(term);
+		System.out.println(submitMethod);*/
 		if(year != null) {
-			List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
-			map.put("ddList", ddList);
+			if (submitMethod.equals("按院系查询")) {
+				List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
+				map.put("ddList", ddList);
+			}
+			else {
+				List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
+				map.put("cefdList", cefdList);
+			}
 		}
 		return "getDepartmentRPECScoreDistributionListByGrade";
 	}

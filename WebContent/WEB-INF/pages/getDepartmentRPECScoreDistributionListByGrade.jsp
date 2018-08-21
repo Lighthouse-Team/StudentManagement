@@ -23,7 +23,7 @@
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="<%=path%>/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="<%=path%>/dist/css/adminlte.css">
 <!-- iCheck -->
 <link rel="stylesheet" href="<%=path%>/plugins/iCheck/flat/blue.css">
 <!-- Morris chart -->
@@ -44,6 +44,15 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+	
+<link href="<%=path%>/table/css/font-awesome.css" rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href="<%=path%>/table/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
+	
 
 <!-- jQuery -->
 <script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
@@ -131,6 +140,7 @@
 			grade.appendChild(option);
 		} 
 	};
+	
 </script>
 
 
@@ -204,6 +214,18 @@
 								</div>
 								<!-- /.form-group -->
 							</div>
+							<div class="col-md-6">
+								<!-- /.form-group -->
+								<div class="form-group">
+									<label>查询方式</label> 
+									<select id = "submitMethod" class="form-control select2" name="submitMethod"
+										data-placeholder="Select a State" style="width: 100%;">
+										<option value="按院系查询">按院系查询</option>
+										<option>按班级查询</option>
+									</select>
+								</div>
+								<!-- /.form-group -->
+							</div>
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
@@ -222,7 +244,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">所有课程成绩分布</h3> 
+							<h3 class="card-title">所有课程成绩分布（按院系）</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -264,6 +286,47 @@
 			</div>
 			<!-- /.row --> 
 			</section>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">所有课程成绩分布（按班级）</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<!-- <th>序号</th>  -->
+										<th>班级</th>
+										<th>成绩记录总数</th>
+										<th>优秀率</th>
+										<th>不及格率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${cefdList }"  var="ClassExcellentFailDistribution">
+										<tr>
+											<td>${ClassExcellentFailDistribution.classNumber }</td>
+											<td>${ClassExcellentFailDistribution.totalNumber }</td>
+											<td>${ClassExcellentFailDistribution.excellentRate }</td>
+											<td>${ClassExcellentFailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
 		</div>
 	</div>
 	
@@ -295,5 +358,22 @@
 			});
 		});
 	</script>
+	
+	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
+	<!-- Bootstrap Js -->
+	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="<%=path%>/table/js/jquery.metisMenu.js"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="<%=path%>/table/js/dataTables/jquery.dataTables.js"></script>
+	<script src="<%=path%>/table/js/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	<!-- Custom Js -->
+	<script src="<%=path%>/table/js/custom-scripts.js"></script>
+	
 </body>
 </html>

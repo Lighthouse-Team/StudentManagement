@@ -23,7 +23,7 @@
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="<%=path%>/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="<%=path%>/dist/css/adminlte.css">
 <!-- iCheck -->
 <link rel="stylesheet" href="<%=path%>/plugins/iCheck/flat/blue.css">
 <!-- Morris chart -->
@@ -44,6 +44,15 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+	
+<link href="<%=path%>/table/css/font-awesome.css" rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href="<%=path%>/table/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />	
+	
 
 <!-- jQuery -->
 <script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
@@ -741,5 +750,22 @@
 			});
 		});
 	</script>
+	
+	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
+	<!-- Bootstrap Js -->
+	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="<%=path%>/table/js/jquery.metisMenu.js"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="<%=path%>/table/js/dataTables/jquery.dataTables.js"></script>
+	<script src="<%=path%>/table/js/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').dataTable();
+		});
+	</script>
+	<!-- Custom Js -->
+	<script src="<%=path%>/table/js/custom-scripts.js"></script>
+	
 </body>
 </html>
