@@ -234,8 +234,7 @@ public class StudentCourseController {
 	public String getDepartmentRPECScoreDistributionListByGrade(HttpSession session, Map<String, Object> map,
 			@RequestParam(value = "grade", required = false) Integer grade,
 			@RequestParam(value = "year", required = false) String year,
-			@RequestParam(value = "term", required = false) Integer term,
-			@RequestParam(value = "submitMethod", required = false) String submitMethod) {
+			@RequestParam(value = "term", required = false) Integer term) {
 		User user = (User) session.getAttribute("user");
 		if(user == null) {
 			return "redirect:/login.jsp";
@@ -247,14 +246,17 @@ public class StudentCourseController {
 		System.out.println(term);
 		System.out.println(submitMethod);*/
 		if(year != null) {
-			if (submitMethod.equals("按院系查询")) {
-				List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
-				map.put("ddList", ddList);
-			}
-			else {
-				List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
-				map.put("cefdList", cefdList);
-			}
+//			if (submitMethod.equals("按院系查询")) {
+//				List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
+//				map.put("ddList", ddList);
+//			}
+//			else {
+//				List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
+//				map.put("cefdList", cefdList);
+//			}
+			List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
+//			map.put("ddList", ddList);
+			
 		}
 		return "getDepartmentRPECScoreDistributionListByGrade";
 	}

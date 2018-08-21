@@ -101,8 +101,8 @@
 <script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 
-	// 选中seclet值刷新页面不更改 *
-/* 	$(function() {         
+ /* 	$(function() {    
+	
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
 					true);
@@ -117,8 +117,8 @@
 		}
 		$("#term").on('change', function() {
 			localStorage.setItem('term', $('option:selected', this).index());
-		});
-	}); */
+		}); 
+	});  */
 	
 	function setSelect(){
 		var yearSelected =document.getElementById("year").value;
@@ -140,6 +140,7 @@
 			grade.appendChild(option);
 		} 
 	};
+	
 	
 </script>
 
@@ -214,22 +215,10 @@
 								</div>
 								<!-- /.form-group -->
 							</div>
-							<div class="col-md-6">
-								<!-- /.form-group -->
-								<div class="form-group">
-									<label>查询方式</label> 
-									<select id = "submitMethod" class="form-control select2" name="submitMethod"
-										data-placeholder="Select a State" style="width: 100%;">
-										<option value="按院系查询">按院系查询</option>
-										<option>按班级查询</option>
-									</select>
-								</div>
-								<!-- /.form-group -->
-							</div>
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
+						<input  type="submit" class="btn btn-info float-left" value="查询" onclick = "tableHandler()"/> 
 						</form>
 						
 					</div>
@@ -240,7 +229,7 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
+			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -273,46 +262,6 @@
 											<td>${DepartmentDistribution.mediumRate }</td>
 											<td>${DepartmentDistribution.passRate }</td>
 											<td>${DepartmentDistribution.failRate }</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
-			</div>
-			<!-- /.row --> 
-			</section>
-			
-			<section class="content">
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">所有课程成绩分布（按班级）</h3> 
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body" style="margin: 0">
-							<table id="example1" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<!-- <th>序号</th>  -->
-										<th>班级</th>
-										<th>成绩记录总数</th>
-										<th>优秀率</th>
-										<th>不及格率</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${cefdList }"  var="ClassExcellentFailDistribution">
-										<tr>
-											<td>${ClassExcellentFailDistribution.classNumber }</td>
-											<td>${ClassExcellentFailDistribution.totalNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentRate }</td>
-											<td>${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
