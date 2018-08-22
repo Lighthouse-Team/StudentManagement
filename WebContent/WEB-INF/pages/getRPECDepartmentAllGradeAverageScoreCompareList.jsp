@@ -251,7 +251,6 @@
 		$.post(url, args, function(dagascList){
 			
 			for(var i=0; i<dagascList.length ; i++){
-				alert(dagascList[i].departmentName);
 				option1.xAxis.data[i] = dagascList[i].departmentName;
 				
 /*  				if(odList[i].grade != "全校"){

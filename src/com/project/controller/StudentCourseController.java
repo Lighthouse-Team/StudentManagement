@@ -340,7 +340,6 @@ public class StudentCourseController {
 			for(int i=0; i<4; i++) {
 				gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
 			}
-			System.out.println(gradeList);
 			map.put("gradeList", gradeList);
 			
 			List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
