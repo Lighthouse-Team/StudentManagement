@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.beans.User;
 import com.project.dto.ClassExcellentFailDistribution;
+import com.project.dto.DepartmentAllGradeAverageScoreCompare;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
@@ -295,4 +296,88 @@ public class StudentCourseController {
 		}
 		return "getRPECClassExcellentFailDistributionListByGrade";
 	}
+	
+	/**
+	 * 跳转至各院系分年级成绩平均分比较页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getRPECDepartmentAllGradeAverageScoreCompareListPage")
+	public String getRPECDepartmentAllGradeAverageScoreCompareListPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getRPECDepartmentAllGradeAverageScoreCompareList";
+	}
+	
+	/**
+	 * 返回各院系分年级成绩平均分比较情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getRPECDepartmentAllGradeAverageScoreCompareList")
+	public String getRPECDepartmentAllGradeAverageScoreCompareList(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			int yearSelected = Integer.parseInt(year.substring(0,4));
+			List<String> gradeList = new ArrayList<>();
+			for(int i=0; i<4; i++) {
+				gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
+			}
+			System.out.println(gradeList);
+			map.put("gradeList", gradeList);
+			
+			List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+			map.put("dagascList", dagascList);
+			
+		}
+		return "getRPECDepartmentAllGradeAverageScoreCompareList";
+	}
+	
+	/**
+	 * 返回各院系分年级成绩平均分比较情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getRPECDepartmentAllGradeAverageScoreCompareListData")
+	public List<DepartmentAllGradeAverageScoreCompare> sendRPECDepartmentAllGradeAverageScoreCompareListData(String year, Integer term){
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+		return dagascList;
+	}
+	
+	/**
+	 * 根据学年返回4个年级(画图)
+	 * @param year
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getGradeListData")
+	public List<String> sendGradeList(String year){
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<String> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
+		}
+		return gradeList;
+	}
+	
+	
 }

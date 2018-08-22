@@ -224,7 +224,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="getRPECDepartmentAllGradeAverageScoreCompareListPage" class="nav-link">
                   <i class="nav-icon fa fa-book"></i>
                   <p>各院系成绩对比</p>
                 </a>
