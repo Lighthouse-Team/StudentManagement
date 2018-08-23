@@ -348,7 +348,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="" method="post">
+						<form action="getAllCourseDistributed" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">

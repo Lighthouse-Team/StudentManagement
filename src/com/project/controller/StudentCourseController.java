@@ -45,7 +45,26 @@ public class StudentCourseController {
 		return years;
 	}
 	
-
+	/**
+	 * 跳转至所有课程成绩分布情况页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getAllCourseDistributedPgae")
+	public String getAllCourseDistributedPgae(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		
+		map.put("yearList", yearList);
+		
+		return "getAllCourseDistributed";
+	}
+	
 
 	/**
 	 * 返回所有课程成绩分布情况

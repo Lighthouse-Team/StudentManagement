@@ -159,7 +159,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!-- <a href="./index.html" class="nav-link active"> -->
-                <a href="getAllCourseDistributed" class="nav-link">
+                <a href="getAllCourseDistributedPgae" class="nav-link">
                   <i class="nav-icon fa fa-book"></i>
                   <p>所有课程成绩分布情况</p>
                 </a>
@@ -202,7 +202,7 @@
                   <p>成绩分布情况</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fa fa-book"></i>
                   <p>各年级成绩分布</p>
@@ -220,7 +220,6 @@
                   <p>按班级查询</p>
                 </a>
               </li>
-                
                 </ul>
               </li>
               <li class="nav-item">
