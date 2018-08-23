@@ -131,7 +131,7 @@
 	});
 	
 	/* 显示分析图 */
-	function getUniversityRPECScoreDistributedData() {
+	function getRPECDepartmentAllGradeAverageScoreCompareListData() {
 		
 	 	if($("#picTitle").css('display')=='none'){
             $("#picTitle").css("display","block");
@@ -373,13 +373,13 @@
 						<div class="card-body" style="margin: 0">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
-										<tr>
-											<th rowspan="2"><center>序号</center></th>
-											<th rowspan="2"><center>院系</center></th>
-											<c:forEach items="${gradeList}" var="keyword" varStatus="id">	
-												<th colspan="2"><center>${keyword}</center></th>
-											</c:forEach>	
-										</tr>
+									<tr>
+										<th rowspan="2"><center>序号</center></th>
+										<th rowspan="2"><center>院系</center></th>
+										<c:forEach items="${gradeList}" var="keyword" varStatus="id">	
+											<th colspan="2"><center>${keyword}</center></th>
+										</c:forEach>	
+									</tr>
 									<tr>
 										<td>平均分</td>
 										<td>差值</td>
@@ -411,7 +411,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  class="btn btn-info float-left" onclick = "getUniversityRPECScoreDistributedData()">显示成绩分析图</button>
+							<button  class="btn btn-info float-left" onclick = "getRPECDepartmentAllGradeAverageScoreCompareListData()">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>

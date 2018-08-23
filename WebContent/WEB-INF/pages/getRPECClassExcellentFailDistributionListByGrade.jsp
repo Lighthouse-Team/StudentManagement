@@ -232,7 +232,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">所有课程成绩分布（按院系）</h3> 
+							<h3 class="card-title">所有课程成绩分布（按班级）</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">

@@ -160,13 +160,13 @@
               <li class="nav-item">
                 <!-- <a href="./index.html" class="nav-link active"> -->
                 <a href="getAllCourseDistributedPgae" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>所有课程成绩分布情况</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="getVariousCourseDistributedPage" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各类课程成绩分布情况</p>
                 </a>
               </li>
@@ -198,33 +198,25 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="getUniversityRPECScoreDistributedPage" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>成绩分布情况</p>
                 </a>
               </li>
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
-                  <p>各年级成绩分布</p>
-                </a>
-                <ul class="nav nav-treeview">
-                <li class="nav-item">
                 <a href="getDepartmentRPECScoreDistributionListByGradePage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>按院系查询</p>
-                </a>
-              	</li>
-              	<li class="nav-item">
-                <a href="getRPECClassExcellentFailDistributionListByGradePage" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>按班级查询</p>
+                  <p>各年级成绩分布(按院系)</p>
                 </a>
               </li>
-                </ul>
+              <li class="nav-item">
+                <a href="getRPECClassExcellentFailDistributionListByGradePage" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>各年级成绩分布(按班级)</p>
+                </a>
               </li>
               <li class="nav-item">
                 <a href="getRPECDepartmentAllGradeAverageScoreCompareListPage" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各院系成绩对比</p>
                 </a>
               </li>
@@ -241,25 +233,25 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>整体情况分析</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                <a href="getRCDepartmentFailDistributionListPage" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各院系整体情况统计</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/UI/buttons.html" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各院系分年级情况统计</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/UI/sliders.html" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各年级缺考情况统计</p>
                 </a>
               </li>
@@ -276,7 +268,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/forms/general.html" class="nav-link">
-                  <i class="nav-icon fa fa-book"></i>
+                  <i class="fa fa-circle-o nav-icon"></i>
                   <p>各年级成绩情况分析</p>
                 </a>
               </li>
