@@ -1102,7 +1102,7 @@ public class StudentCourseService {
 		List<List<GradeDepartmentAverageScoreCompare>> dascListList = new ArrayList<>();
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
-		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+		for (Integer gradeI = gradeOne; gradeI >= gradeOne - 3; gradeI--) { // 几乎所有的List都是按大四->大三->大二->大一存储的，这里因为是中间步骤，而且为了最后的显示操作，将顺序反过来了
 			List<GradeDepartmentAverageScoreCompare> dascList = getRPECGradeDepartmentAverageScoreCompareListByGrade(
 					gradeI, year, term);
 			dascListList.add(dascList);
@@ -1133,7 +1133,7 @@ public class StudentCourseService {
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
 			for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
-				Integer grade = gradeOne - gradeI + 1;
+				Integer grade = gradeOne - gradeI + 1; // grade为本科的年级，取值1，2，3，4
 				GradeDepartmentAverageScoreCompare gradeDepartmentAverageScoreCompare = gdascListList.get(grade - 1)
 						.get(departmentId - 1);
 				DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = dagascMap
@@ -1696,7 +1696,7 @@ public class StudentCourseService {
 		List<List<GradeDepartmentFailDistribution>> gdfdListList = new ArrayList<>();
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
-		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+		for (Integer gradeI = gradeOne; gradeI >= gradeOne - 3; gradeI--) { // 几乎所有的List都是按大四->大三->大二->大一存储的，这里因为是中间步骤，而且为了最后的显示操作，将顺序反过来了
 			List<GradeDepartmentFailDistribution> gdfdList = new ArrayList<>();
 			gdfdList = getRCGradeDepartmentFailDistributionListByGrade(gradeI, year, term);
 			gdfdListList.add(gdfdList);
@@ -1725,7 +1725,7 @@ public class StudentCourseService {
 		String strGradeOne = year.substring(0, 4);
 		Integer gradeOne = Integer.parseInt(strGradeOne);
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			Integer grade = gradeOne - gradeI + 1;
+			Integer grade = gradeOne - gradeI + 1; // grade为本科的年级，取值1，2，3，4
 			for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 				GradeDepartmentFailDistribution gradeDepartmentFailDistribution = gdfdListList.get(grade - 1)
 						.get(departmentId - 1);

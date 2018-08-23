@@ -9,7 +9,6 @@ public class GradeDepartmentAverageScoreCompare implements Serializable{
 	 */
 	private static final long serialVersionUID = 3381304321018919091L;
 
-	private Integer id;				// 序号
 	private String grade;			// 年级
 	private String departmentName;	// 专业名称
 	private String averageScore;	// 年级平均分

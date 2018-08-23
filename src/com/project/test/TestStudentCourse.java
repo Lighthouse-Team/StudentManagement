@@ -228,7 +228,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRPECDepartmentAllGradeAverageScoreCompareMapByGradeDepartmentAverageScoreCompareListListTest() {
+	public void getRPECDepartmentAllGradeAverageScoreCompareListTest() {
 		// 将ListList变成一个横向List
 		// 18.1秒，加上了计算的时间
 		String year = "2017-2018";

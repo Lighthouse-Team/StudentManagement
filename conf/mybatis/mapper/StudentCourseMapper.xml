@@ -1063,9 +1063,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.departmentId = #{departmentId}
+			and
+			s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
@@ -1081,9 +1083,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.departmentId = #{departmentId}
+			and
+			s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >= 90
@@ -1100,9 +1104,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.departmentId = #{departmentId}
+			and
+			s.departmentId = #{departmentId}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
@@ -1120,9 +1126,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.studentClass = #{classNumber}
+			and
+			s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 		</where>
@@ -1137,9 +1145,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.studentClass = #{classNumber}
+			and
+			s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			and sc.score >=90
@@ -1155,9 +1165,11 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and s.studentClass = #{classNumber}
+			and
+			s.studentClass = #{classNumber}
 			and c.courseName = #{courseName}
-			and sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
 			and sc.examProperty = 1
 			and sc.scoreMark = 1
 			<![CDATA[and sc.score < 60]]>
@@ -1166,8 +1178,7 @@
 
 	<sql id="studentCourseProperty">
 		(score, scLevel, studentId, courseId, examTerm,
-		examProperty,
-		scoreMark)
+		examProperty, scoreMark)
 	</sql>
 
 </mapper>
