@@ -232,7 +232,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+                <a href="getRCGradeFailDistributionListPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>整体情况分析</p>
                 </a>

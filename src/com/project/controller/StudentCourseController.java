@@ -21,6 +21,7 @@ import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.DepartmentAllGradeAverageScoreCompare;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.DepartmentFailDistribution;
+import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
 
@@ -399,7 +400,66 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 跳转至各院系各院系分年级学生不及格情况统计页面
+	 * 跳转至全校本科生不及格整体情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getRCGradeFailDistributionListPage")
+	public String getRCGradeFailDistributionListPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getRCGradeFailDistributionList";
+	}
+	
+	/**
+	 * 返回全校本科生不及格整体情况统计情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getRCGradeFailDistributionList")
+	public String getRCGradeFailDistributionList(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			List<GradeFailDistribution> gfdList = new ArrayList<>();
+			gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
+			map.put("gfdList", gfdList);
+		}
+		return "getRCGradeFailDistributionList";
+	}
+	
+	/**
+	 * 返回全校本科生不及格整体情况统计情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getRCGradeFailDistributionListData")
+	public List<GradeFailDistribution> sendRCGradeFailDistributionListData(String year, Integer term){
+		List<GradeFailDistribution> gfdList = new ArrayList<>();
+		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
+		return gfdList;
+	}
+	
+	/**
+	 * 跳转至各院系分年级学生不及格情况统计页面
 	 * @param session
 	 * @param map
 	 * @return
@@ -417,7 +477,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 返回各院系各院系分年级学生不及格情况
+	 * 返回各院系分年级学生不及格情况
 	 * @param session
 	 * @param map
 	 * @param year
