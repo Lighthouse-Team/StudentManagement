@@ -15,9 +15,13 @@ public class DepartmentFailDistribution implements Serializable {
 	private Integer twoFailNumber; 		// 不及格门数为2的学生人数
 	private Integer threeFailNumber; 	// 不及格门数为3的学生人数
 	private Integer geFourFailNumber; 	// 不及格门数>=4的学生人数，ge代表（great than or equal）
+	private String oneFailRate;			// 不及格门数为1的学生比例
+	private String twoFailRate;			// 不及格门数为2的学生比例
+	private String threeFailRate;		// 不及格门数为3的学生比例
+	private String geFourFailRate;		// 不及格门数>=4的学生比例
 	private Integer totalFailNumber; 	// 不及格人数合计
 	private Integer totalStudentNumber; // 院系总人数
-	private String failRate;			// 学生不及格率
+	private String totalFailRate;		// 学生不及格率
 
 	public DepartmentFailDistribution() {
 		super();
@@ -25,14 +29,19 @@ public class DepartmentFailDistribution implements Serializable {
 		this.twoFailNumber = 0;
 		this.threeFailNumber = 0;
 		this.geFourFailNumber = 0;
+		this.oneFailRate = "0.00%";
+		this.twoFailRate = "0.00%";
+		this.threeFailRate = "0.00%";
+		this.geFourFailRate = "0.00%";
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
-		this.failRate = "0.00%";
+		this.totalFailRate = "0.00%";
 	}
 
 	public DepartmentFailDistribution(Integer id, String departmentName, Integer oneFailNumber, Integer twoFailNumber,
-			Integer threeFailNumber, Integer geFourFailNumber, Integer totalFailNumber, Integer totalStudentNumber,
-			String failRate) {
+			Integer threeFailNumber, Integer geFourFailNumber, String oneFailRate, String twoFailRate,
+			String threeFailRate, String geFourFailRate, Integer totalFailNumber, Integer totalStudentNumber,
+			String totalFailRate) {
 		super();
 		this.id = id;
 		this.departmentName = departmentName;
@@ -40,9 +49,13 @@ public class DepartmentFailDistribution implements Serializable {
 		this.twoFailNumber = twoFailNumber;
 		this.threeFailNumber = threeFailNumber;
 		this.geFourFailNumber = geFourFailNumber;
+		this.oneFailRate = oneFailRate;
+		this.twoFailRate = twoFailRate;
+		this.threeFailRate = threeFailRate;
+		this.geFourFailRate = geFourFailRate;
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
-		this.failRate = failRate;
+		this.totalFailRate = totalFailRate;
 	}
 
 	public Integer getId() {
@@ -93,6 +106,38 @@ public class DepartmentFailDistribution implements Serializable {
 		this.geFourFailNumber = geFourFailNumber;
 	}
 
+	public String getOneFailRate() {
+		return oneFailRate;
+	}
+
+	public void setOneFailRate(String oneFailRate) {
+		this.oneFailRate = oneFailRate;
+	}
+
+	public String getTwoFailRate() {
+		return twoFailRate;
+	}
+
+	public void setTwoFailRate(String twoFailRate) {
+		this.twoFailRate = twoFailRate;
+	}
+
+	public String getThreeFailRate() {
+		return threeFailRate;
+	}
+
+	public void setThreeFailRate(String threeFailRate) {
+		this.threeFailRate = threeFailRate;
+	}
+
+	public String getGeFourFailRate() {
+		return geFourFailRate;
+	}
+
+	public void setGeFourFailRate(String geFourFailRate) {
+		this.geFourFailRate = geFourFailRate;
+	}
+
 	public Integer getTotalFailNumber() {
 		return totalFailNumber;
 	}
@@ -109,12 +154,12 @@ public class DepartmentFailDistribution implements Serializable {
 		this.totalStudentNumber = totalStudentNumber;
 	}
 
-	public String getFailRate() {
-		return failRate;
+	public String getTotalFailRate() {
+		return totalFailRate;
 	}
 
-	public void setFailRate(String failRate) {
-		this.failRate = failRate;
+	public void setTotalFailRate(String totalFailRate) {
+		this.totalFailRate = totalFailRate;
 	}
 
 	public static long getSerialversionuid() {
@@ -125,8 +170,10 @@ public class DepartmentFailDistribution implements Serializable {
 	public String toString() {
 		return "DepartmentFailDistribution [id=" + id + ", departmentName=" + departmentName + ", oneFailNumber="
 				+ oneFailNumber + ", twoFailNumber=" + twoFailNumber + ", threeFailNumber=" + threeFailNumber
-				+ ", geFourFailNumber=" + geFourFailNumber + ", totalFailNumber=" + totalFailNumber
-				+ ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
+				+ ", geFourFailNumber=" + geFourFailNumber + ", oneFailRate=" + oneFailRate + ", twoFailRate="
+				+ twoFailRate + ", threeFailRate=" + threeFailRate + ", geFourFailRate=" + geFourFailRate
+				+ ", totalFailNumber=" + totalFailNumber + ", totalStudentNumber=" + totalStudentNumber
+				+ ", totalFailRate=" + totalFailRate + "]";
 	}
 
 }

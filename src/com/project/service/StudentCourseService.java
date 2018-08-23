@@ -1419,18 +1419,30 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double failRate = (double) totalFailNumber / totalStudentNumber;
+			double oneFailRate = (double) oneFailNumber / totalFailNumber;
+			double twoFailRate = (double) twoFailNumber / totalFailNumber;
+			double threeFailRate = (double) threeFailNumber / totalFailNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
-			String strFailRate = rateDF.format(failRate);
+			String strOneFailRate = rateDF.format(oneFailRate);
+			String strTwoFailRate = rateDF.format(twoFailRate);
+			String strThreeFailRate = rateDF.format(threeFailRate);
+			String strGeFourFailRate = rateDF.format(geFourFailRate);
+			String strTotalFailRate = rateDF.format(totalFailRate);
 
 			departmentFailDistribution.setOneFailNumber(oneFailNumber);
 			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
 			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
 			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setOneFailRate(strOneFailRate);
+			departmentFailDistribution.setTwoFailRate(strTwoFailRate);
+			departmentFailDistribution.setThreeFailRate(strThreeFailRate);
+			departmentFailDistribution.setGeFourFailRate(strGeFourFailRate);
 			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
 			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
-			departmentFailDistribution.setFailRate(strFailRate);
+			departmentFailDistribution.setTotalFailRate(strTotalFailRate);
 		}
 		return departmentFailDistribution;
 	}
@@ -1469,18 +1481,30 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double failRate = (double) totalFailNumber / totalStudentNumber;
+			double oneFailRate = (double) oneFailNumber / totalFailNumber;
+			double twoFailRate = (double) twoFailNumber / totalFailNumber;
+			double threeFailRate = (double) threeFailNumber / totalFailNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
-			String strFailRate = rateDF.format(failRate);
+			String strOneFailRate = rateDF.format(oneFailRate);
+			String strTwoFailRate = rateDF.format(twoFailRate);
+			String strThreeFailRate = rateDF.format(threeFailRate);
+			String strGeFourFailRate = rateDF.format(geFourFailRate);
+			String strTotalFailRate = rateDF.format(totalFailRate);
 
 			departmentFailDistribution.setOneFailNumber(oneFailNumber);
 			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
 			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
 			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setOneFailRate(strOneFailRate);
+			departmentFailDistribution.setTwoFailRate(strTwoFailRate);
+			departmentFailDistribution.setThreeFailRate(strThreeFailRate);
+			departmentFailDistribution.setGeFourFailRate(strGeFourFailRate);
 			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
 			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
-			departmentFailDistribution.setFailRate(strFailRate);
+			departmentFailDistribution.setTotalFailRate(strTotalFailRate);
 		}
 		dfdList.add(departmentFailDistribution);
 		return dfdList;
@@ -1571,18 +1595,30 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double failRate = (double) totalFailNumber / totalStudentNumber;
+			double oneFailRate = (double) oneFailNumber / totalFailNumber;
+			double twoFailRate = (double) twoFailNumber / totalFailNumber;
+			double threeFailRate = (double) threeFailNumber / totalFailNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
-			String strFailRate = rateDF.format(failRate);
+			String strOneFailRate = rateDF.format(oneFailRate);
+			String strTwoFailRate = rateDF.format(twoFailRate);
+			String strThreeFailRate = rateDF.format(threeFailRate);
+			String strGeFourFailRate = rateDF.format(geFourFailRate);
+			String strTotalFailRate = rateDF.format(totalFailRate);
 
 			departmentFailDistribution.setOneFailNumber(oneFailNumber);
 			departmentFailDistribution.setTwoFailNumber(twoFailNumber);
 			departmentFailDistribution.setThreeFailNumber(threeFailNumber);
 			departmentFailDistribution.setGeFourFailNumber(geFourFailNumber);
+			departmentFailDistribution.setOneFailRate(strOneFailRate);
+			departmentFailDistribution.setTwoFailRate(strTwoFailRate);
+			departmentFailDistribution.setThreeFailRate(strThreeFailRate);
+			departmentFailDistribution.setGeFourFailRate(strGeFourFailRate);
 			departmentFailDistribution.setTotalFailNumber(totalFailNumber);
 			departmentFailDistribution.setTotalStudentNumber(totalStudentNumber);
-			departmentFailDistribution.setFailRate(strFailRate);
+			departmentFailDistribution.setTotalFailRate(strTotalFailRate);
 		}
 		return departmentFailDistribution;
 	}
