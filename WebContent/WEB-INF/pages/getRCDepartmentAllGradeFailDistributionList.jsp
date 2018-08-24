@@ -131,14 +131,14 @@
 	});
 	
 	/* 显示分析图 */
-	function getRCDepartmentFailDistributionListData() {
+	function getRCDepartmentAllGradeFailDistributionListData() {
 		
 	 	if($("#picTitle").css('display')=='none'){
             $("#picTitle").css("display","block");
             
 		} 
-		if($("#RCDepartmentFailDistributionListBarPic").css('display')=='none'){
-            $("#RCDepartmentFailDistributionListBarPic").css("display","block");
+		if($("#getRCDepartmentAllGradeFailDistributionListBarPic").css('display')=='none'){
+            $("#getRCDepartmentAllGradeFailDistributionListBarPic").css("display","block");
         } 
 		
 		getBarPic();      //显示柱状图
@@ -327,21 +327,31 @@
 		var bRateList = new Array();
 		var cRateList = new Array();
 		var dRateList = new Array();
-		url = "getRCDepartmentFailDistributionListData";
+		
+		url1 = "getGradeListData";
+		var args1 = {
+			year : $("#year").val()
+		};
+		$.post(url1, args1, function(gradeList){
+			for(var i=0; i<gradeList.length ; i++){
+				option.legend.data[i] = gradeList[i];
+				option.series[i].name = gradeList[i];
+			}
+		}); 
+		
+		url = "getRCDepartmentAllGradeFailDistributionListData";
 		var args = {
 			year : $("#year").val(),
 			term : $("#term").val()
 		};
-
-
-		$.post(url, args, function(dfdList){
-			for(var i = 0; i < dfdList.length ; i++){
-				option.xAxis[0].data[i] = dfdList[i].departmentName;
+		$.post(url, args, function(dagfdList){
+			for(var i = 0; i < dagfdList.length ; i++){
+				option.xAxis[0].data[i] = dagfdList[i].departmentName;
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-				aRateList[i] = parseFloat(dfdList[i].oneFailRate.substring(0,dfdList[i].oneFailRate.length-1));
-				bRateList[i] = parseFloat(dfdList[i].twoFailRate.substring(0,dfdList[i].twoFailRate.length-1));
-				cRateList[i] = parseFloat(dfdList[i].threeFailRate.substring(0,dfdList[i].threeFailRate.length-1));
-				dRateList[i] = parseFloat(dfdList[i].geFourFailRate.substring(0,dfdList[i].geFourFailRate.length-1));
+				aRateList[i] = parseFloat(dagfdList[i].gradeFourFailRate.substring(0,dagfdList[i].gradeFourFailRate.length-1));
+				bRateList[i] = parseFloat(dagfdList[i].gradeThreeFailRate.substring(0,dagfdList[i].gradeThreeFailRate.length-1));
+				cRateList[i] = parseFloat(dagfdList[i].gradeTwoFailRate.substring(0,dagfdList[i].gradeTwoFailRate.length-1));
+				dRateList[i] = parseFloat(dagfdList[i].gradeOneFailRate.substring(0,dagfdList[i].gradeOneFailRate.length-1));
 			}
 			
 			option.series[0].data = aRateList;
@@ -349,7 +359,7 @@
 			option.series[2].data = cRateList;
 			option.series[3].data = dRateList;
 			
-			var dom = document.getElementById("RCDepartmentFailDistributionListBarPic");
+			var dom = document.getElementById("getRCDepartmentAllGradeFailDistributionListBarPic");
 			var myChart = echarts.init(dom);
 			if (option && typeof option === "object") {
 			    myChart.setOption(option, true);
@@ -376,7 +386,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">各院系不及格学生整体情况统计</li>
+							<li class="breadcrumb-item active">各院系分年级学生不及格情况统计</li>
 						</ol>
 					</div>
 				</div>
@@ -392,7 +402,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="getRCDepartmentFailDistributionList" method="post">
+						<form action="getRCDepartmentAllGradeFailDistributionList" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -438,7 +448,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">各院系不及格学生整体情况分布</h3> 
+							<h3 class="card-title">各院系分年级学生不及格情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -447,36 +457,51 @@
 									<tr>
 										<th rowspan="2"><center>序号</center></th>
 										<th rowspan="2"><center>院系</center></th>
-										<th rowspan="2"><center>参与统计学生总数</center></th>
-										<th colspan="5"><center>不及格学生情况</center></th>
-										<th rowspan="2"><center>学生不及格率</center></th>
+										<c:forEach items="${gradeList}" var="keyword" varStatus="id">
+										<th colspan="3"><center>${keyword}</center></th>
+										</c:forEach>
 											
 									</tr>
 									<tr>
-										<td>1门不及格人数</td>
-										<td>2门不及格人数</td>
-										<td>3门不及格人数</td>
-										<td>≥4门不及格人数</td>
-										<td>不及格总人数</td>
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${dfdList}" var="DepartmentFailDistribution">
+									<c:forEach items="${dagfdList}" var="DepartmentAllGradeFailDistribution">
 										<tr>
-											<td>${DepartmentFailDistribution.id }</td>
-											<td>${DepartmentFailDistribution.departmentName }</td>
-											<td>${DepartmentFailDistribution.totalStudentNumber }</td>
-											<td>${DepartmentFailDistribution.oneFailNumber }</td>
-											<td>${DepartmentFailDistribution.twoFailNumber }</td>
-											<td>${DepartmentFailDistribution.threeFailNumber }</td>
-											<td>${DepartmentFailDistribution.geFourFailNumber }</td>
-											<td>${DepartmentFailDistribution.totalFailNumber }</td>
-											<td>${DepartmentFailDistribution.totalFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.id }</td>
+											<td>${DepartmentAllGradeFailDistribution.departmentName }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneFailRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  class="btn btn-info float-left" onclick = "getRCDepartmentFailDistributionListData()">显示成绩分析图</button>
+							<button  class="btn btn-info float-left" onclick = "getRCDepartmentAllGradeFailDistributionListData()">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -493,7 +518,7 @@
 						<div id = "picTitle" class="card-header" style="display:none">
 							<h3 class="card-title">成绩分析图</h3> 
 						</div>
-						<div id="RCDepartmentFailDistributionListBarPic"  style="display:none; height: 400%; width:95%; margin: 0;float:left">
+						<div id="getRCDepartmentAllGradeFailDistributionListBarPic"  style="display:none; height: 400%; width:95%; margin: 0;float:left">
 						</div>
 					</div>
 				</div>

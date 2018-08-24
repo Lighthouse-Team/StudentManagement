@@ -244,7 +244,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
+                <a href="getRCDepartmentAllGradeFailDistributionListPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>各院系分年级情况统计</p>
                 </a>

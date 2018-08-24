@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.beans.User;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.DepartmentAllGradeAverageScoreCompare;
+import com.project.dto.DepartmentAllGradeFailDistribution;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.DepartmentFailDistribution;
 import com.project.dto.GradeFailDistribution;
@@ -459,7 +460,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 跳转至各院系分年级学生不及格情况统计页面
+	 * 跳转至各院系整体学生不及格情况统计页面
 	 * @param session
 	 * @param map
 	 * @return
@@ -477,7 +478,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 返回各院系分年级学生不及格情况
+	 * 返回各院系整体学生不及格情况
 	 * @param session
 	 * @param map
 	 * @param year
@@ -496,22 +497,14 @@ public class StudentCourseController {
 		List<String> yearList = getYearList();
 		map.put("yearList", yearList);
 		if(year != null) {
-			int yearSelected = Integer.parseInt(year.substring(0,4));
-			List<String> gradeList = new ArrayList<>();
-			for(int i=0; i<4; i++) {
-				gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
-			}
-			map.put("gradeList", gradeList);
-			
 			List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
 			map.put("dfdList", dfdList);
-			
 		}
 		return "getRCDepartmentFailDistributionList";
 	}
 	
 	/**
-	 * 返回各院系各院系分年级学生不及格情况(画图)
+	 * 返回各院系整体学生不及格情况(画图)
 	 * @param year
 	 * @param term
 	 * @return
@@ -521,6 +514,73 @@ public class StudentCourseController {
 	public List<DepartmentFailDistribution> sendRCDepartmentFailDistributionListData(String year, Integer term){
 		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
 		return dfdList;
+	}
+	
+	/**
+	 * 跳转至各院系分年级学生不及格情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getRCDepartmentAllGradeFailDistributionListPage")
+	public String getRCDepartmentAllGradeFailDistributionListPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getRCDepartmentAllGradeFailDistributionList";
+	}
+	
+	/**
+	 * 返回各院系整体学生不及格情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getRCDepartmentAllGradeFailDistributionList")
+	public String getRCDepartmentAllGradeFailDistributionList(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			int yearSelected = Integer.parseInt(year.substring(0,4));
+			List<String> gradeList = new ArrayList<>();
+			for(int i=0; i<4; i++) {
+				gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
+			}
+			map.put("gradeList", gradeList);
+			
+			List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+					.getRCDepartmentAllGradeFailDistributionList(year, term);
+			map.put("dagfdList", dagfdList);
+			
+		}
+		return "getRCDepartmentAllGradeFailDistributionList";
+	}
+	
+	/**
+	 * 返回各院系分年级学生不及格情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getRCDepartmentAllGradeFailDistributionListData")
+	public List<DepartmentAllGradeFailDistribution> sendRCDepartmentAllGradeFailDistributionData(String year, Integer term){
+		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+				.getRCDepartmentAllGradeFailDistributionList(year, term);
+		return dagfdList;
 	}
 	
 }
