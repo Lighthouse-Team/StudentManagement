@@ -1419,10 +1419,10 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double oneFailRate = (double) oneFailNumber / totalFailNumber;
-			double twoFailRate = (double) twoFailNumber / totalFailNumber;
-			double threeFailRate = (double) threeFailNumber / totalFailNumber;
-			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double oneFailRate = (double) oneFailNumber / totalStudentNumber;
+			double twoFailRate = (double) twoFailNumber / totalStudentNumber;
+			double threeFailRate = (double) threeFailNumber / totalStudentNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalStudentNumber;
 			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
@@ -1481,10 +1481,10 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double oneFailRate = (double) oneFailNumber / totalFailNumber;
-			double twoFailRate = (double) twoFailNumber / totalFailNumber;
-			double threeFailRate = (double) threeFailNumber / totalFailNumber;
-			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double oneFailRate = (double) oneFailNumber / totalStudentNumber;
+			double twoFailRate = (double) twoFailNumber / totalStudentNumber;
+			double threeFailRate = (double) threeFailNumber / totalStudentNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalStudentNumber;
 			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
@@ -1595,10 +1595,10 @@ public class StudentCourseService {
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
 
-			double oneFailRate = (double) oneFailNumber / totalFailNumber;
-			double twoFailRate = (double) twoFailNumber / totalFailNumber;
-			double threeFailRate = (double) threeFailNumber / totalFailNumber;
-			double geFourFailRate = (double) geFourFailNumber / totalFailNumber;
+			double oneFailRate = (double) oneFailNumber / totalStudentNumber;
+			double twoFailRate = (double) twoFailNumber / totalStudentNumber;
+			double threeFailRate = (double) threeFailNumber / totalStudentNumber;
+			double geFourFailRate = (double) geFourFailNumber / totalStudentNumber;
 			double totalFailRate = (double) totalFailNumber / totalStudentNumber;
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
