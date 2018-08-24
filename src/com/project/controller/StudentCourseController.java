@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.beans.User;
 import com.project.dto.ClassExcellentFailDistribution;
+import com.project.dto.ClassFailDistribution;
 import com.project.dto.DepartmentAllGradeAverageScoreCompare;
 import com.project.dto.DepartmentAllGradeFailDistribution;
 import com.project.dto.DepartmentDistribution;
 import com.project.dto.DepartmentFailDistribution;
+import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
@@ -535,7 +537,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 返回各院系整体学生不及格情况
+	 * 返回各院系分年级学生不及格情况
 	 * @param session
 	 * @param map
 	 * @param year
@@ -582,5 +584,101 @@ public class StudentCourseController {
 				.getRCDepartmentAllGradeFailDistributionList(year, term);
 		return dagfdList;
 	}
+
+	/**
+	 * 跳转至各班级不及格情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getRCClassFailDistributionListByGradePage")
+	public String getRCClassFailDistributionListByGradePage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getRCClassFailDistributionListByGrade";
+	}
+	
+	/**
+	 * 返回各班级学生不及格情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getRCClassFailDistributionListByGrade")
+	public String getRCClassFailDistributionListByGrade(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term,
+			@RequestParam(value = "grade", required = false) Integer grade) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			
+			List<ClassFailDistribution> cfdList = new ArrayList<>();
+			cfdList = studentCourseService.getRCClassFailDistributionListByGrade(grade, year, term);
+			map.put("cfdList", cfdList);
+			
+		}
+		return "getRCClassFailDistributionListByGrade";
+	}
+	
+	/**
+	 * 跳转至各年级缺考情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getGradeAbsenceDistributionListPage")
+	public String getGradeAbsenceDistributionListPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getGradeAbsenceDistributionList";
+	}
+	
+	/**
+	 * 返回各年级缺考情况统计情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getGradeAbsenceDistributionList")
+	public String getGradeAbsenceDistributionList(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			
+			List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+			gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
+			map.put("dagfdList", gadList);
+			
+		}
+		return "getGradeAbsenceDistributionList";
+	}
+	
 	
 }

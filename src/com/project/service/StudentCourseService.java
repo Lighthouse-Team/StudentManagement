@@ -1860,6 +1860,7 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public List<ClassFailDistribution> getRCClassFailDistributionListByGrade(Integer grade, String year, Integer term) {
+		System.out.println(grade);
 		List<ClassFailDistribution> cfdList = new ArrayList<>();
 		List<String> classNumberList = getClassNumberListByGrade(grade);
 		Integer id = 1;

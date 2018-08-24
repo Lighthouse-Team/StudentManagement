@@ -250,7 +250,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/sliders.html" class="nav-link">
+                <a href="getRCClassFailDistributionListByGradePage" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>各班级不及格情况统计</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="getGradeAbsenceDistributionListPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>各年级缺考情况统计</p>
                 </a>
@@ -261,7 +267,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-edit"></i>
               <p>
-                                            基础课成绩情况分析
+                                            基础课程成绩分析
                 <i class="fa fa-angle-left right"></i>
               </p>
             </a>
@@ -269,21 +275,27 @@
               <li class="nav-item">
                 <a href="pages/forms/general.html" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>各年级成绩情况分析</p>
+                  <p>基础课程成绩情况</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="pages/forms/advanced.html" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Advanced Elements</p>
+                  <p>大二基础课程成绩情况</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/forms/editors.html" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Editors</p>
+                  <p>大一基础课程成绩情况</p>
                 </a>
-              </li> -->
+              </li>
+              <li class="nav-item">
+                <a href="pages/forms/editors.html" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>基础课程各班成绩情况</p>
+                </a>
+              </li>
             </ul>
           </li>
           <!-- <li class="nav-item has-treeview">
@@ -425,12 +437,6 @@
             </ul>
           </li>
           <li class="nav-header">MISCELLANEOUS</li> -->
-          <li class="nav-item">
-            <a href="https://adminlte.io/docs" class="nav-link">
-              <i class="nav-icon fa fa-file"></i>
-              <p>各课程情况分析</p>
-            </a>
-          </li>
           <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
