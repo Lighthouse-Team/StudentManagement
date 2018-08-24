@@ -297,7 +297,7 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRCDepartmentFailDistributionListgTest() {
+	public void getRCDepartmentFailDistributionListTest() {
 		// 2.3秒
 		String year = "2017-2018";
 		Integer term = 1;
