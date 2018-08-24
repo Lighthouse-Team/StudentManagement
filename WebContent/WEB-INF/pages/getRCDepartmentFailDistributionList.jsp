@@ -141,7 +141,7 @@
             $("#RCDepartmentFailDistributionListBarPic").css("display","block");
         } 
 		
-		//getBarPic();      //显示柱状图
+		getBarPic();      //显示柱状图
 		
 	/* var options = document.getElementById('year').children;
 		options[0].selected = true;
@@ -234,7 +234,7 @@
 		        align: app.config.align,
 		        verticalAlign: app.config.verticalAlign,
 		        rotate: app.config.rotate,
-		        formatter: '{c}% {name|{a}}',
+		        formatter: '',
 		        fontSize: 16,
 		        rich: {
 		            name: {
@@ -270,7 +270,11 @@
 		    },
 		    calculable: true,
 		    xAxis: [
-		        {
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
 		            type: 'category',
 		            axisTick: {show: false},
 		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
@@ -323,12 +327,6 @@
 		var bRateList = new Array();
 		var cRateList = new Array();
 		var dRateList = new Array();
-		var eRateList = new Array();
-		var firstRateList = new Array();
-		var secondRateList = new Array();
-		var thirdRateList = new Array();
-		var forthRateList = new Array();
-		var fifthRateList = new Array();
 		url = "getRCDepartmentFailDistributionListData";
 		var args = {
 			year : $("#year").val(),
@@ -338,55 +336,18 @@
 
 		$.post(url, args, function(dfdList){
 			for(var i = 0; i < dfdList.length ; i++){
-				option.xAxis.data[i] = dfdList[i].departmentName;
+				option.xAxis[0].data[i] = dfdList[i].departmentName;
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
-				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
-				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
-				var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
-				var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
-				aRateList[i] = aRateNumber;
-				bRateList[i] = bRateNumber;
-				cRateList[i] = cRateNumber;
-				dRateList[i] = dRateNumber;
-				eRateList[i] = eRateNumber;
+				aRateList[i] = parseFloat(dfdList[i].oneFailRate.substring(0,dfdList[i].oneFailRate.length-1));
+				bRateList[i] = parseFloat(dfdList[i].twoFailRate.substring(0,dfdList[i].twoFailRate.length-1));
+				cRateList[i] = parseFloat(dfdList[i].threeFailRate.substring(0,dfdList[i].threeFailRate.length-1));
+				dRateList[i] = parseFloat(dfdList[i].geFourFailRate.substring(0,dfdList[i].geFourFailRate.length-1));
 			}
 			
-			firstRateList[0] = aRateList[0]; //得到必修课成绩的百分比
-			firstRateList[1] = bRateList[0];
-			firstRateList[2] = cRateList[0];
-			firstRateList[3] = dRateList[0];
-			firstRateList[4] = eRateList[0];
-
-			secondRateList[0] = aRateList[1]; //得到专业选修成绩的百分比
-			secondRateList[1] = bRateList[1];
-			secondRateList[2] = cRateList[1];
-			secondRateList[3] = dRateList[1];
-			secondRateList[4] = eRateList[1];
-
-			thirdRateList[0] = aRateList[2]; //得到通识教育成绩的百分比
-			thirdRateList[1] = bRateList[2];
-			thirdRateList[2] = cRateList[2];
-			thirdRateList[3] = dRateList[2];
-			thirdRateList[4] = eRateList[2];
-
-			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
-			forthRateList[1] = bRateList[3];
-			forthRateList[2] = cRateList[3];
-			forthRateList[3] = dRateList[3];
-			forthRateList[4] = eRateList[3];
-			
-			fifthRateList[0] = aRateList[4]; //得到整个学校的成绩百分比
-			fifthRateList[1] = bRateList[4];
-			fifthRateList[2] = cRateList[4];
-			fifthRateList[3] = dRateList[4];
-			fifthRateList[4] = eRateList[4];
-			
-			option.series[0].data = firstRateList;
-			option.series[1].data = secondRateList;
-			option.series[2].data = thirdRateList;
-			option.series[3].data = forthRateList;
-			option.series[4].data = fifthRateList;
+			option.series[0].data = aRateList;
+			option.series[1].data = bRateList;
+			option.series[2].data = cRateList;
+			option.series[3].data = dRateList;
 			
 			var dom = document.getElementById("RCDepartmentFailDistributionListBarPic");
 			var myChart = echarts.init(dom);
@@ -510,7 +471,7 @@
 											<td>${DepartmentFailDistribution.threeFailNumber }</td>
 											<td>${DepartmentFailDistribution.geFourFailNumber }</td>
 											<td>${DepartmentFailDistribution.totalFailNumber }</td>
-											<td>${DepartmentFailDistribution.failRate }</td>
+											<td>${DepartmentFailDistribution.totalFailRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

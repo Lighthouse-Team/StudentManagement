@@ -145,7 +145,7 @@
 	    } 
 		
 		getBarPic();      //显示柱状图
-		//getLinePic();     //显示折线图
+		getLinePic();     //显示折线图
 		
 	/* var options = document.getElementById('year').children;
 		options[0].selected = true;
@@ -369,7 +369,7 @@
 		        trigger: 'axis'
 		    },
 		    legend: {
-		        data:[]
+		        data:['不及格率']
 		    },
 		    grid: {
 		        left: '3%',
@@ -398,34 +398,10 @@
 	          },  
 		    series: [
 		        {
-		            name:'邮件营销',
+		            name:'不及格率',
 		            type:'line',
 		            stack: '总量1',
 		            data:[ 13, 10, 13, 9, 23]
-		        },
-		        {
-		            name:'联盟广告',
-		            type:'line',
-		            stack: '总量2',
-		            data:[20, 18, 19, 24, 20]
-		        },
-		        {
-		            name:'视频广告',
-		            type:'line',
-		            stack: '总量3',
-		            data:[10, 23, 21, 14, 90]
-		        },
-		        {
-		            name:'直接访问',
-		            type:'line',
-		            stack: '总量4',
-		            data:[32, 13, 30, 34, 30]
-		        },
-		        {
-		            name:'直接访问',
-		            type:'line',
-		            stack: '总量5',
-		            data:[32, 13, 30, 34, 30]
 		        }
 		    ]
 		};
@@ -433,15 +409,6 @@
 		
 		/* 与后台连接传递数据 */
 		var aRateList = new Array();
-		var bRateList = new Array();
-		var cRateList = new Array();
-		var dRateList = new Array();
-		var eRateList = new Array();
-		var firstRateList = new Array();
-		var secondRateList = new Array();
-		var thirdRateList = new Array();
-		var forthRateList = new Array();
-		var fifthRateList = new Array();
 		url = "getRCGradeFailDistributionListData";
 		var args = {
 			year : $("#year").val(),
@@ -449,63 +416,16 @@
 		};
 		$.post(url, args, function(gfdList){
 			
-			
 			for(var i=0; i<gfdList.length ; i++){
-				if(odList[i].grade != "全校"){
-					option1.legend.data[i] = gfdList[i].grade + '级';
-					option1.series[i].name = gfdList[i].grade + '级';
+				if(gfdList[i].grade != "合计"){
+					option1.xAxis.data[i] = gfdList[i].grade + '级';
 				}
 				else{
-					option1.legend.data[i] = odList[i].grade ; //得到年级号
-					option1.series[i].name = odList[i].grade ;
+					option1.xAxis.data[i] = "全校" ; //得到年级号
 				} 
-				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
-				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
-				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
-				var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
-				var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
-				aRateList[i] = aRateNumber;
-				bRateList[i] = bRateNumber;
-				cRateList[i] = cRateNumber;
-				dRateList[i] = dRateNumber;
-				eRateList[i] = eRateNumber;
+				aRateList[i] = parseFloat(gfdList[i].failRate.substring(0,gfdList[i].failRate.length-1));
 			}
-			
-			firstRateList[0] = aRateList[0]; //得到必修课成绩的百分比
-			firstRateList[1] = bRateList[0];
-			firstRateList[2] = cRateList[0];
-			firstRateList[3] = dRateList[0];
-			firstRateList[4] = eRateList[0];
-
-			secondRateList[0] = aRateList[1]; //得到专业选修成绩的百分比
-			secondRateList[1] = bRateList[1];
-			secondRateList[2] = cRateList[1];
-			secondRateList[3] = dRateList[1];
-			secondRateList[4] = eRateList[1];
-
-			thirdRateList[0] = aRateList[2]; //得到通识教育成绩的百分比
-			thirdRateList[1] = bRateList[2];
-			thirdRateList[2] = cRateList[2];
-			thirdRateList[3] = dRateList[2];
-			thirdRateList[4] = eRateList[2];
-
-			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
-			forthRateList[1] = bRateList[3];
-			forthRateList[2] = cRateList[3];
-			forthRateList[3] = dRateList[3];
-			forthRateList[4] = eRateList[3];
-			
-			fifthRateList[0] = aRateList[4]; //得到整个学校的成绩百分比
-			fifthRateList[1] = bRateList[4];
-			fifthRateList[2] = cRateList[4];
-			fifthRateList[3] = dRateList[4];
-			fifthRateList[4] = eRateList[4];
-			
-			option1.series[0].data = firstRateList;
-			option1.series[1].data = secondRateList;
-			option1.series[2].data = thirdRateList;
-			option1.series[3].data = forthRateList;
-			option1.series[4].data = fifthRateList;
+			option1.series[0].data = aRateList;
 			
 			var dom1 = document.getElementById("linePic");
 			var myChart1 = echarts.init(dom1);
@@ -513,7 +433,6 @@
 			    myChart1.setOption(option1, true);
 			}
 		});
-		
 	
 	}
 	
