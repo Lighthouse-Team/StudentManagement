@@ -273,21 +273,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="getBasicCourseOverallDistributionListPage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>基础课程成绩情况</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="getBasicCourseDetailDistributionListByCourseName" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>大二基础课程成绩情况</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>大一基础课程成绩情况</p>
+                  <p>各年级基础课程成绩情况</p>
                 </a>
               </li>
               <li class="nav-item">

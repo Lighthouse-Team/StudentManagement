@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.beans.User;
+import com.project.dto.BasicCourseDetailDistribution;
+import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
 import com.project.dto.DepartmentAllGradeAverageScoreCompare;
@@ -680,5 +682,127 @@ public class StudentCourseController {
 		return "getGradeAbsenceDistributionList";
 	}
 	
+	/**
+	 * 跳转至主要基础课程成绩基本情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseOverallDistributionListPage")
+	public String getBasicCourseOverallDistributionListPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getBasicCourseOverallDistributionList";
+	}
+	
+	/**
+	 * 返回主要基础课程成绩基本情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseOverallDistributionList")
+	public String getBasicCourseOverallDistributionList(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			
+			List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+			bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+			map.put("bcodList", bcodList);
+			
+		}
+		return "getBasicCourseOverallDistributionList";
+	}
+	
+	/**
+	 * 返回各院系分年级学生不及格情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getBasicCourseOverallDistributionListData")
+	public List<BasicCourseOverallDistribution> sendBasicCourseOverallDistributionListData(String year, Integer term){
+		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+		return bcodList;
+	}
+	
+	/**
+	 * 跳转至大二主要基础课程成绩基本情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseDetailDistributionListByCourseNamePage")
+	public String getBasicCourseDetailDistributionListByCourseNamePage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getBasicCourseDetailDistributionListByCourseName";
+	}
+	
+	/**
+	 * 返回大一大二主要基础课程成绩基本情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseDetailDistributionListByCourseName")
+	public String getBasicCourseDetailDistributionListByCourseName(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term,
+			@RequestParam(value = "courseName", required = false) String courseName) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			
+			List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
+			bcddList = studentCourseService.getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
+			map.put("bcddList", bcddList);
+			
+		}
+		return "getBasicCourseDetailDistributionListByCourseName";
+	}
+	
+	/**
+	 * 返回大一大二主要基础课程成绩基本情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getBasicCourseDetailDistributionListByCourseNameData")
+	public List<BasicCourseDetailDistribution> sendBasicCourseDetailDistributionListByCourseNameData(String year, Integer term , String courseName){
+		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
+		bcddList = studentCourseService.getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
+		return bcddList;
+	}
 	
 }
