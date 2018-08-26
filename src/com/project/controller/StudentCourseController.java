@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.beans.User;
+import com.project.dto.BasicCourseClassDistribution;
 import com.project.dto.BasicCourseDetailDistribution;
 import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
@@ -744,7 +745,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 跳转至大二主要基础课程成绩基本情况统计页面
+	 * 跳转至大一大二主要基础课程成绩基本情况统计页面
 	 * @param session
 	 * @param map
 	 * @return
@@ -803,6 +804,54 @@ public class StudentCourseController {
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
 		bcddList = studentCourseService.getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
 		return bcddList;
+	}
+	
+	/**
+	 * 跳转至主要基础课程各班成绩情况统计页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseClassDistributionListByCourseNamePage")
+	public String getBasicCourseClassDistributionListByCourseNamePage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "getBasicCourseClassDistributionListByCourseName";
+	}
+	
+	/**
+	 * 返回主要基础课程各班成绩基本情况
+	 * @param session
+	 * @param map
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@RequestMapping("/getBasicCourseClassDistributionListByCourseName")
+	public String getBasicCourseClassDistributionListByCourseName(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term,
+			@RequestParam(value = "courseName", required = false) String courseName) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		if(year != null) {
+			
+			List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
+			bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
+			map.put("bccdList", bccdList);
+			
+		}
+		return "getBasicCourseClassDistributionListByCourseName";
 	}
 	
 }

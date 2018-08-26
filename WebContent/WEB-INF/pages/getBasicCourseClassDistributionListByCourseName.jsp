@@ -138,223 +138,10 @@
 			localStorage.setItem('courseName', $('option:selected', this).index());
 		});
 		
-	 	var courseNameSelected =document.getElementById("courseName").value;
-		document.getElementById("head").innerHTML=courseNameSelected + "成绩情况";
-				
-		
-	 	
-	});
-	
-	/* 显示分析图 */
-	function getBasicCourseDetailDistributionListByCourseNameData() {
-		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#basicCourseDetailDistributionListByCourseNameBarPic").css('display')=='none'){
-            $("#basicCourseDetailDistributionListByCourseNameBarPic").css("display","block");
-        } 
-		
-		getBarPic();      //显示柱状图
-		
-	/* var options = document.getElementById('year').children;
-		options[0].selected = true;
-	var options = document.getElementById('term').children;
-		options[0].selected = true;  */
-	/* 	$("#year").get(0).selectedIndex=0;
-		$("#term").get(0).selectedIndex=0; */
+	 	 var courseNameSelected =document.getElementById("courseName").value;
+		 document.getElementById("head").innerHTML=courseNameSelected + "成绩情况";
 		 
-	};
-	
-	
-	
-	/* 显示柱状图 */
-	function getBarPic(){
-		var app = {};
-		option = null;
-		var posList = [
-		    'left', 'right', 'top', 'bottom',
-		    'inside',
-		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-		];
-
-		app.configParameters = {
-		    rotate: {
-		        min: -90,
-		        max: 90
-		    },
-		    align: {
-		        options: {
-		            left: 'left',
-		            center: 'center',
-		            right: 'right'
-		        }
-		    },
-		    verticalAlign: {
-		        options: {
-		            top: 'top',
-		            middle: 'middle',
-		            bottom: 'bottom'
-		        }
-		    },
-		    position: {
-		        options: echarts.util.reduce(posList, function (map, pos) {
-		            map[pos] = pos;
-		            return map;
-		        }, {})
-		    },
-		    distance: {
-		        min: 0,
-		        max: 100
-		    }
-		};
-
-		app.config = {
-		    rotate: 90,
-		    align: 'left',
-		    verticalAlign: 'middle',
-		    position: 'insideBottom',
-		    distance: 15,
-		    onChange: function () {
-		        var labelOption = {
-		            normal: {
-		                rotate: app.config.rotate,
-		                align: app.config.align,
-		                verticalAlign: app.config.verticalAlign,
-		                position: app.config.position,
-		                distance: app.config.distance
-		            }
-		        };
-		        myChart.setOption({
-		            series: [{
-		                label: labelOption
-		            }, {
-		                label: labelOption
-		            }, {
-		                label: labelOption
-		            }, {
-		                label: labelOption
-		            }]
-		        });
-		    }
-		};
-
-
-		var labelOption = {
-		    normal: {
-		        show: true,
-		        position: app.config.position,
-		        distance: app.config.distance,
-		        align: app.config.align,
-		        verticalAlign: app.config.verticalAlign,
-		        rotate: app.config.rotate,
-		        formatter: '',
-		        fontSize: 16,
-		        rich: {
-		            name: {
-		                textBorderColor: '#fff'
-		            }
-		        }
-		    }
-		};
-
-		option = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
-		    tooltip: {
-		        trigger: 'axis',
-		        axisPointer: {
-		            type: 'shadow'
-		        }
-		    },
-		    legend: {
-		        data: ['优秀率', '不及格率']
-		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
-		    calculable: true,
-		    xAxis: [
-		        {	
-		        	axisLabel: {
-                        interval:0,
-                        rotate:20
-                    },
-		            type: 'category',
-		            axisTick: {show: false},
-		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
-		        }
-		    ],
-		    yAxis: [
-		    	  {  
-		              type: 'value',  
-		              axisLabel: {  
-		                    show: true,  
-		                    interval: 'auto',  
-		                    formatter: '{value}%'  
-		                  },  
-		              show: true  
-		          }  
-		    ],
-		    series: [
-		        {
-		            name: '优秀率',
-		            type: 'bar',
-		            barGap: 0,
-		            label: labelOption,
-		            data: [320, 332, 301, 334, 390]
-		        },
-		        {
-		            name: '不及格率',
-		            type: 'bar',
-		            label: labelOption,
-		            data: [220, 182, 191, 234, 290]
-		        }
-		    ]
-		};;
-		
-		
-
-		/* 与后台连接传递数据 */
-		var aRateList = new Array();
-		var bRateList = new Array();
-		url = "getBasicCourseDetailDistributionListByCourseNameData";
-		var args = {
-			year : $("#year").val(),
-			term : $("#term").val(),
-			courseName : $("#courseName").val()
-		};
-
-		$.post(url, args, function(bcddList){
-			for(var i = 0; i < bcddList.length ; i++){
-				option.xAxis[0].data[i] = bcddList[i].departmentName;
-				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-				aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-				bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
-			}
-			
-			option.series[0].data = aRateList;
-			option.series[1].data = bRateList;
-			
-			var dom = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic");
-			var myChart = echarts.init(dom);
-			if (option && typeof option === "object") {
-			    myChart.setOption(option, true);
-			}
-		});
-		
-	}
+	});
 	
 </script>
 
@@ -374,7 +161,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">主要基础课程成绩情况统计分布</li>
+							<li class="breadcrumb-item active">主要基础课程各班成绩情况统计分布</li>
 						</ol>
 					</div>
 				</div>
@@ -390,7 +177,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="getBasicCourseDetailDistributionListByCourseName" method="post">
+						<form action="getBasicCourseClassDistributionListByCourseName" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -457,7 +244,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 class="card-title" id = "head">主要基础课程各班成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -465,11 +252,9 @@
 								<thead>
 									<tr>
 										<th><center>序号</center></th>
-										<th><center>院系</center></th>
-										<th><center>成绩数</center></th>
-										<th><center>优秀人数</center></th>
+										<th><center>班级</center></th>
+										<th><center>考试人数</center></th>
 										<th><center>优秀率</center></th>
-										<th><center>不及格人数</center></th>
 										<th><center>不及格率</center></th>
 									</tr>
 								</thead>
@@ -477,17 +262,14 @@
 									<c:forEach items="${bcddList}" var="BasicCourseDetailDistribution">
 										<tr>
 											<td>${BasicCourseDetailDistribution.id }</td>
-											<td>${BasicCourseDetailDistribution.departmentName }</td>
-											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
-											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.classNumber }</td>
+											<td>${BasicCourseDetailDistribution.totalNumber }</td>
 											<td>${BasicCourseDetailDistribution.excellentRate }</td>
-											<td>${BasicCourseDetailDistribution.failNumber }</td>
 											<td>${BasicCourseDetailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  class="btn btn-info float-left" onclick = "getBasicCourseDetailDistributionListByCourseNameData()">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -497,18 +279,6 @@
 			</div>
 			<!-- /.row --> 
 			</section>
-			
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div id = "picTitle" class="card-header" style="display:none">
-							<h3 class="card-title">成绩分析图</h3> 
-						</div>
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic"  style="display:none; height: 400%; width:95%; margin: 0;float:left">
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 

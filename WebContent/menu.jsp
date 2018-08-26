@@ -281,11 +281,11 @@
               <li class="nav-item">
                 <a href="getBasicCourseDetailDistributionListByCourseName" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>各年级基础课程成绩情况</p>
+                  <p>主要基础课程成绩分析</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
+                <a href="getBasicCourseClassDistributionListByCourseNamePage" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>基础课程各班成绩情况</p>
                 </a>
