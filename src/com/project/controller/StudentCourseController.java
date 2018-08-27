@@ -854,4 +854,40 @@ public class StudentCourseController {
 		return "getBasicCourseClassDistributionListByCourseName";
 	}
 	
+	/**
+	 * 跳转至打印准备页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/readyPrint")
+	public String readyPrint(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "readyPrint";
+	}
+	
+	/**
+	 * 跳转至打印页面
+	 */
+	@RequestMapping("/print")
+	public String print(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+		map.put("odList", odList);  //第一章第一个功能
+		
+		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+		map.put("odList1", odList1); //第一章第二个功能
+		
+		return "print";
+	}
+	
 }
