@@ -431,11 +431,11 @@
             </ul>
           </li>
           <li class="nav-header">MISCELLANEOUS</li> -->
-          <li class="nav-header">LABELS</li>
+          <li class="nav-header">管理员功能</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="readyPrint" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-danger"></i>
-              <p class="text">Important</p>
+              <p class="text">打印分析报告</p>
             </a>
           </li>
           <li class="nav-item">

@@ -112,7 +112,8 @@
 <script type="text/javascript">
 
 	/* 选中seclet值刷新页面不更改 */
-	$(function() {         
+	$(function() {   
+		alert(odList);
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
 					true);
