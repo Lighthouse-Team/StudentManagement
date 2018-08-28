@@ -30,6 +30,7 @@ import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
+import com.project.tools.Tools;
 
 @Controller
 public class StudentCourseController {
@@ -853,5 +854,59 @@ public class StudentCourseController {
 		}
 		return "getBasicCourseClassDistributionListByCourseName";
 	}
+	
+	/**
+	 * 跳转至打印准备页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/readyPrint")
+	public String readyPrint(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "readyPrint";
+	}
+	
+	/**
+	 * 跳转至打印页面
+	 */
+	@RequestMapping("/print")
+	public String print(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+		map.put("odList", odList);  //第一章第一个功能
+		
+		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+		map.put("odList1", odList1); //第一章第二个功能
+		
+		return "print";
+	}
+	
+	/**
+	 * 返回所有分析图数据(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getRequest")
+	public List<List<Object>> getRequest(String year, Integer term , String courseName){
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+		List<Object> objList = Tools.toObject(odList);
+		List<List<Object>> resultList = new ArrayList<>();
+		resultList.add(objList);
+		return resultList;
+	}
+	
 	
 }
