@@ -120,7 +120,6 @@
     </ul>
   </nav>
   <!-- /.navbar -->
-<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >手机网站模板</a></div>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->

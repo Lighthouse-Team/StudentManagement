@@ -29,14 +29,6 @@ public class Tools {
 //		System.out.println(GetJson(resultList));
 //	}
 	
-	public static <OverallDistribution> List<Object> toObject(List<OverallDistribution> list){
-		List<Object> objlist = new ArrayList<Object>();
-		for(Object e : list){
-			Object obj = (Object)e;
-			objlist.add(obj);
-		}
-		return objlist;
-	}
 
 	
 }

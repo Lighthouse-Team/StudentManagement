@@ -888,24 +888,20 @@ public class StudentCourseController {
 		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
 		map.put("odList1", odList1); //第一章第二个功能
 		
+		List<OverallDistribution> odList3 = studentCourseService.getRPECOverallDistributionList(year, term);
+		map.put("odList3", odList3); //第一章第三个功能
+		
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<String> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
+		}
+		map.put("gradeList", gradeList);
+		
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+		map.put("dagascList", dagascList);  //第二章最后一个功能
+		
 		return "print";
-	}
-	
-	/**
-	 * 返回所有分析图数据(画图)
-	 * @param year
-	 * @param term
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("/getRequest")
-	public List<List<Object>> getRequest(String year, Integer term , String courseName){
-		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
-		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
-		List<Object> objList = Tools.toObject(odList);
-		List<List<Object>> resultList = new ArrayList<>();
-		resultList.add(objList);
-		return resultList;
 	}
 	
 	
