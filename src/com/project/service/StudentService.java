@@ -161,4 +161,14 @@ public class StudentService {
 		return resultList;
 	}
 
+	/**
+	 * 判断数据库中是否有该学生
+	 * 
+	 * @param studentNumber
+	 * @return
+	 */
+	public Integer hasStudent(String studentNumber) {
+		return studentMapper.hasStudent(studentNumber);
+	}
+
 }

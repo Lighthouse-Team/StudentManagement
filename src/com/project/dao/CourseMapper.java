@@ -93,6 +93,14 @@ public interface CourseMapper {
 	public List<Course> getCourseDetailsByEntityForLike(@Param(value = "course") Course course,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
+	/**
+	 * 判断数据库中是否有该课程
+	 * 
+	 * @param courseNumber
+	 * @return
+	 */
+	public Integer hasCourse(String courseNumber);
+
 	/*
 	 * 这里设置 courseType
 	 */

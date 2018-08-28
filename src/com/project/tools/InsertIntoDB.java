@@ -51,7 +51,8 @@ public class InsertIntoDB {
 			Workbook readxls = Workbook.getWorkbook(input);
 			Sheet readsheet = readxls.getSheet(0); // 表索引从0开始,取xls的第一张表
 			int rsRows = readsheet.getRows(); // 获得表格的行数
-			System.out.println(rsRows);
+			System.out.println("本次导入记录总数：" + rsRows);
+			System.out.println("Inserting, please wait...");
 
 			// 学生插入标识，以学号为键，值默认为null，插入学生之后设置为1
 			Map<String, Integer> studentFlagMap = new HashMap<String, Integer>();
@@ -63,53 +64,61 @@ public class InsertIntoDB {
 				Course course = new Course();
 				StudentCourse sc = new StudentCourse();
 				Department department = new Department();
-				
+
 				// 插入学生信息
 				String studentNumber = readsheet.getCell(0, i).getContents(); // 学号
 				if (studentFlagMap.get(studentNumber) == null) {
 					studentFlagMap.put(studentNumber, 1); // 设置学生标识
-					student.setStudentNumber(studentNumber);
-					String studentName = readsheet.getCell(1, i).getContents(); // 姓名
-					student.setStudentName(studentName);
-					String studentClass = readsheet.getCell(6, i).getContents(); // 班级名称
-					student.setStudentClass(studentClass);
-					String departmentName = readsheet.getCell(4, i).getContents(); // 上课院系，学生所属院系
-					department.setDepartmentName(departmentName);
-					List<Department> departmentList = departmentService.getDepartmentListByEntityForLike(department);
-					if (departmentList.size() > 0) {
-						Department sDepartment = departmentService.getDepartmentListByEntityForLike(department).get(0);
-						student.setsDepartment(sDepartment); // 插入学生所属院系
+					Integer studentFlag = studentService.hasStudent(studentNumber); // 学生标识
+					if (studentFlag == 0) {
+						student.setStudentNumber(studentNumber);
+						String studentName = readsheet.getCell(1, i).getContents(); // 姓名
+						student.setStudentName(studentName);
+						String studentClass = readsheet.getCell(6, i).getContents(); // 班级名称
+						student.setStudentClass(studentClass);
+						String departmentName = readsheet.getCell(4, i).getContents(); // 上课院系，学生所属院系
+						department.setDepartmentName(departmentName);
+						List<Department> departmentList = departmentService
+								.getDepartmentListByEntityForLike(department);
+						if (departmentList.size() > 0) {
+							Department sDepartment = departmentService.getDepartmentListByEntityForLike(department)
+									.get(0);
+							student.setsDepartment(sDepartment); // 插入学生所属院系
+						}
+						try {
+							DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+							String strEnrollment = studentNumber.substring(0, 4) + "-9-1";
+							Date enrollment = df.parse(strEnrollment);
+							student.setEnrollment(enrollment);
+						} catch (Exception e) {
+							System.out.println("日期导入出错");
+						}
+						studentService.insertStudent(student);
 					}
-					try {
-						DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-						String strEnrollment = studentNumber.substring(0, 4) + "-9-1";
-						Date enrollment = df.parse(strEnrollment);
-						student.setEnrollment(enrollment);
-					} catch (Exception e) {
-						System.out.println("日期导入出错");
-					}
-					studentService.insertStudent(student);
 				}
 
 				// 插入课程信息
 				String courseNumber = readsheet.getCell(7, i).getContents(); // 课程编号
 				if (courseFlagMap.get(courseNumber) == null) {
 					courseFlagMap.put(courseNumber, 1); // 设置课程标识
-					course.setCourseNumber(courseNumber);
-					String courseName = readsheet.getCell(8, i).getContents(); // 课程名称
-					course.setCourseName(courseName);
-					String courseProperty = readsheet.getCell(11, i).getContents(); // 课程性质
-					course.setCourseProperty(courseProperty);
-					String courseAttribute = readsheet.getCell(12, i).getContents(); // 课程属性
-					course.setCourseAttribute(courseAttribute);
-					String coursePeriod = readsheet.getCell(13, i).getContents(); // 学时
-					course.setCoursePeriod(coursePeriod);
-					String strCourseCredits = readsheet.getCell(14, i).getContents(); // 学分
-					double courseCredits = Double.parseDouble(strCourseCredits);
-					course.setCourseCredits(courseCredits);
-					String courseDepartment = readsheet.getCell(15, i).getContents(); // 开课单位
-					course.setCourseDepartment(courseDepartment);
-					courseService.insertCourse(course);
+					Integer courseFlag = courseService.hasCourse(courseNumber);
+					if (courseFlag == 0) {
+						course.setCourseNumber(courseNumber);
+						String courseName = readsheet.getCell(8, i).getContents(); // 课程名称
+						course.setCourseName(courseName);
+						String courseProperty = readsheet.getCell(11, i).getContents(); // 课程性质
+						course.setCourseProperty(courseProperty);
+						String courseAttribute = readsheet.getCell(12, i).getContents(); // 课程属性
+						course.setCourseAttribute(courseAttribute);
+						String coursePeriod = readsheet.getCell(13, i).getContents(); // 学时
+						course.setCoursePeriod(coursePeriod);
+						String strCourseCredits = readsheet.getCell(14, i).getContents(); // 学分
+						double courseCredits = Double.parseDouble(strCourseCredits);
+						course.setCourseCredits(courseCredits);
+						String courseDepartment = readsheet.getCell(15, i).getContents(); // 开课单位
+						course.setCourseDepartment(courseDepartment);
+						courseService.insertCourse(course);
+					}
 				}
 
 				// 插入选课信息

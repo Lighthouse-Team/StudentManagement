@@ -278,6 +278,14 @@
 		</where>
 	</select>
 
+	<!-- 判断数据库中是否有该学生: public Integer hasStudent(String studentNumber); -->
+	<select id="hasStudent" resultType="java.lang.Integer">
+		select COUNT(*) from student
+		<where>
+			studentNumber = #{studentNumber}
+		</where>
+	</select>
+
 	<sql id="studentProperty">
 		(studentNumber, studentName, studentSex, studentIDCard,
 		studentBirth, enrollment, studentClass, departmentId)

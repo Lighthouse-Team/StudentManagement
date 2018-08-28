@@ -100,4 +100,13 @@ public interface StudentMapper {
 	 */
 	public List<Student> getStudentDetailsByEntityForLike(@Param(value = "student") Student student,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
+
+	/**
+	 * 判断数据库中是否有该学生
+	 * 
+	 * @param studentId
+	 * @return
+	 */
+	public Integer hasStudent(String studentNumber);
+
 }

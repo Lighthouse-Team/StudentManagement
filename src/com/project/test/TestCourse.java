@@ -83,4 +83,11 @@ public class TestCourse {
 		}
 	}
 
+	@Test
+	public void hasCourse() {
+		String courseNumber = "123456";
+		Integer courseFlag = courseService.hasCourse(courseNumber);
+		System.out.println(courseFlag);
+	}
+
 }

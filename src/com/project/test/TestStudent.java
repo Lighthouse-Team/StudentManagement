@@ -32,7 +32,7 @@ public class TestStudent {
 		Student student = studentService.getStudentByStudentNumber(studentNumber);
 		System.out.println(student);
 	}
-	
+
 	@Test
 	public void getStudentListByCourseIdTest() {
 		Integer courseId = 1;
@@ -40,7 +40,7 @@ public class TestStudent {
 		Integer term = 1;
 		List<Student> studentList = studentService.getStudentListByCourseId(courseId, year, term);
 		System.out.println("studentList.size():" + studentList.size());
-		for(Integer index = 0; index < studentList.size(); index++) {
+		for (Integer index = 0; index < studentList.size(); index++) {
 			System.out.println(studentList.get(index));
 		}
 	}
@@ -61,11 +61,11 @@ public class TestStudent {
 		Integer term = 1;
 		List<Student> studentList = studentService.getStudentDetailsByEntityForLike(student, year, term);
 		System.out.println("studentList.size():" + studentList.size());
-		for(Integer index = 0; index < studentList.size(); index++) {
+		for (Integer index = 0; index < studentList.size(); index++) {
 			System.out.println(studentList.get(index));
 			List<Course> courseList = studentList.get(index).getCourseList();
 			System.out.println("courseList.size():" + courseList.size());
-			for(Integer index2 = 0; index2 < courseList.size(); index2++) {
+			for (Integer index2 = 0; index2 < courseList.size(); index2++) {
 				System.out.println(courseList.get(index2));
 			}
 		}
@@ -80,6 +80,13 @@ public class TestStudent {
 		student.setsDepartment(department);
 		student = studentService.getStudentByEntity(student);
 		System.out.println(student);
+	}
+
+	@Test
+	public void hasStudentTest() {
+		String studentNumber = "2013011602";
+		Integer studentFlag = studentService.hasStudent(studentNumber);
+		System.out.println(studentFlag);
 	}
 
 }

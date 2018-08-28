@@ -34,7 +34,7 @@ public class CourseService {
 		return courseMapper.getCourseByCourseNumber(courseNumber);
 	}
 
-	public List<Course> getCourseListByStudentId(Integer studentId, String year, Integer term){
+	public List<Course> getCourseListByStudentId(Integer studentId, String year, Integer term) {
 		return courseMapper.getCourseListByStudentId(studentId, year, term);
 	}
 
@@ -82,6 +82,16 @@ public class CourseService {
 	 */
 	public List<Course> getCourseDetailsByEntityForLike(Course course, String year, Integer term) {
 		return courseMapper.getCourseDetailsByEntityForLike(course, year, term);
+	}
+
+	/**
+	 * 判断数据库中时候有该课程
+	 * 
+	 * @param courseNumber
+	 * @return
+	 */
+	public Integer hasCourse(String courseNumber) {
+		return courseMapper.hasCourse(courseNumber);
 	}
 
 	/**

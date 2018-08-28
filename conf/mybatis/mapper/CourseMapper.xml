@@ -150,7 +150,8 @@
 		<where>
 			s.studentId = sc.studentId
 			and c.courseId = sc.courseId
-			and sc.examProperty = 1
+			and
+			sc.examProperty = 1
 			<if test="course.courseId != null">
 				and c.courseId = #{course.courseId}
 			</if>
@@ -227,6 +228,14 @@
 	<delete id="deleteCourseByCourseId">
 		delete from course where courseId = #{courseId}
 	</delete>
+
+	<!-- 判断数据库中是否有该课程: public Integer hasCourse(String courseNumber); -->
+	<select id="hasCourse" resultType="java.lang.Integer">
+		select count(*) from course
+		<where>
+			courseNumber = #{courseNumber}
+		</where>
+	</select>
 
 	<!-- 在这里设置课程的 courseType -->
 	<!-- 设置必修课的 courseType = 1: public void setCourseTypeOfRequierdCourse(); -->
