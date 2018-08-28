@@ -117,6 +117,17 @@
 	
 	/* 显示分析图 */
 	function getDistributedData() {
+	  	$.ajax({
+            type:'POST',
+            dataType: "json",
+            url:"getRequest",
+            success:function(data){
+                $("p").html(data[1][10000]);
+            },
+            error:function(){
+                alert("发生错误");
+            }
+        });
 		var odList = $('odList').id;
 		alert(odList);
 		var app = {};

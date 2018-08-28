@@ -30,6 +30,7 @@ import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
 import com.project.service.StudentCourseService;
+import com.project.tools.Tools;
 
 @Controller
 public class StudentCourseController {
@@ -889,5 +890,23 @@ public class StudentCourseController {
 		
 		return "print";
 	}
+	
+	/**
+	 * 返回所有分析图数据(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getRequest")
+	public List<List<Object>> getRequest(String year, Integer term , String courseName){
+		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+		List<Object> objList = Tools.toObject(odList);
+		List<List<Object>> resultList = new ArrayList<>();
+		resultList.add(objList);
+		return resultList;
+	}
+	
 	
 }
