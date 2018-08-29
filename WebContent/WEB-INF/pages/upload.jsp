@@ -50,7 +50,7 @@
 						</div> -->
 						<!-- /.col -->
 						<div class="col-12">
-							<input type="submit" value="上传" class="btn btn-primary btn-block btn-flat"/>
+							<input type="submit" value="确认上传" class="btn btn-primary btn-block btn-flat"/>
 						</div>
 						<!-- /.col -->
 					</div>

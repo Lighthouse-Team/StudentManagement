@@ -51,7 +51,9 @@ public class InsertIntoDB {
 			Workbook readxls = Workbook.getWorkbook(input);
 			Sheet readsheet = readxls.getSheet(0); // 表索引从0开始,取xls的第一张表
 			int rsRows = readsheet.getRows(); // 获得表格的行数
-			System.out.println("本次导入记录总数：" + rsRows);
+			int startRow = 0; // 智能识别数据从第几行开始
+			while(!readsheet.getCell(0, startRow++).getContents().equals("学号"));
+			System.out.println("本次导入记录总数：" + (rsRows - startRow));
 			System.out.println("Inserting, please wait...");
 
 			// 学生插入标识，以学号为键，值默认为null，插入学生之后设置为1
@@ -59,7 +61,7 @@ public class InsertIntoDB {
 			// 课程插入标识，以课程编号为键，值默认为null，插入课程之后设置为1
 			Map<String, Integer> courseFlagMap = new HashMap<String, Integer>();
 
-			for (int i = 1; i < rsRows; i++) { // 标题为第0行，数据从第1行开始
+			for (int i = startRow; i < rsRows; i++) {
 				Student student = new Student();
 				Course course = new Course();
 				StudentCourse sc = new StudentCourse();

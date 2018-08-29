@@ -426,10 +426,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseDetailDistributionListByCourseNameTest() {
-		// 5.3秒
-		String courseName = "操作系统";
+		// 13秒
+		String courseName = "大学英语（二）";
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
 		bcddList = studentCourseService.getBasicCourseDetailDistributionListByCourseName(courseName, year, term);
 		for (BasicCourseDetailDistribution basicCourseDetailDistribution : bcddList) {
@@ -440,8 +440,9 @@ public class TestStudentCourse {
 	@Test
 	public void getBasicCourseDetailDistributionListListTest() {
 		// 30秒，还是在多数课程学生人数为0的情况，太慢了
+		// 97秒，在导入2017-2018-2学期的所有数据
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
 		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
 		for (List<BasicCourseDetailDistribution> bcddList : bcddListList) {
@@ -457,7 +458,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseClassDistributionByCourseNameAndClassNumberTest() {
-		String courseName = "操作系统";
+		String courseName = "大学英语（二）";
 		String classNumber = "20150615";
 		String year = "2017-2018";
 		Integer term = 1;
@@ -469,10 +470,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseClassDistributionListByCourseNameTest() {
-		// 15.5秒
-		String courseName = "操作系统";
+		// 90秒
+		String courseName = "大学英语（二）";
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
 		bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
 		for (BasicCourseClassDistribution basicCourseClassDistribution : bccdList) {
@@ -480,17 +481,4 @@ public class TestStudentCourse {
 		}
 	}
 
-	@Test
-	public void getBasicCourseClassDistributionListListTest() {
-		// 一个课程140+个班，10个课目前只有3个有成绩，共400+班，35.8秒
-		String year = "2017-2018";
-		Integer term = 1;
-		List<List<BasicCourseClassDistribution>> bccdListList = new ArrayList<>();
-		bccdListList = studentCourseService.getBasicCourseClassDistributionListList(year, term);
-		for (List<BasicCourseClassDistribution> bccdList : bccdListList) {
-			for (BasicCourseClassDistribution basicCourseClassDistribution : bccdList) {
-				System.out.println(basicCourseClassDistribution);
-			}
-		}
-	}
 }
