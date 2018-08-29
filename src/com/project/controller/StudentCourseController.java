@@ -882,6 +882,9 @@ public class StudentCourseController {
 			@RequestParam(value = "year", required = false) String year,
 			@RequestParam(value = "term", required = false) Integer term) {
 		
+		map.put("year", year);
+		map.put("term", term);
+		
 		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 		map.put("odList", odList);  //第一章第一个功能
 		
