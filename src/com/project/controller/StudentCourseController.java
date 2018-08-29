@@ -902,7 +902,7 @@ public class StudentCourseController {
 		map.put("gradeList", gradeList);
 		
 		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
-		map.put("dagascList", dagascList);  //第二章最后一个功能
+		map.put("dagascList", dagascList);  //第二章最后一个功能 
 		
 		return "print";
 	}
