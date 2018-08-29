@@ -2075,6 +2075,20 @@ public class StudentCourseService {
 			bcoList.add("微积分A（一）");
 		} else if (term == 2) {
 			// bcoList中加入下学期的课程
+			bcoList.add("大学英语（六）");
+			bcoList.add("电子电路综合实验");
+			bcoList.add("管理学B");
+			bcoList.add("工程实践A");
+			bcoList.add("机械设计基础B");
+			bcoList.add("大学英语（四）");
+			bcoList.add("模拟电子技术");
+			bcoList.add("材料力学B");
+			bcoList.add("大学英语（二）");
+			bcoList.add("程序设计基础");
+			bcoList.add("大学物理上");
+			bcoList.add("概率论与数量统计");
+			bcoList.add("微积分A（二）");
+			bcoList.add("工程图学基础");
 		}
 		return bcoList;
 	}
@@ -2199,6 +2213,15 @@ public class StudentCourseService {
 			bcdList.add("微积分A（一）");
 		} else if (term == 2) {
 			// bcdList中加入下学期的课程
+			bcdList.add("工程实践A");
+			bcdList.add("机械设计基础B");
+			bcdList.add("大学英语（四）");
+			bcdList.add("大学英语（二）");
+			bcdList.add("程序设计基础");
+			bcdList.add("大学物理上");
+			bcdList.add("概率论与数理统计");
+			bcdList.add("微积分A（二）");
+			bcdList.add("工程图学基础");
 		}
 		return bcdList;
 	}
