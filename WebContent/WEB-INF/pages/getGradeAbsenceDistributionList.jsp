@@ -195,10 +195,10 @@
 									<c:forEach items="${dagfdList }" var="GradeAbsenceDistribution">
 										<tr>
 											<td>${GradeAbsenceDistribution.grade }</td>
+											<td>${GradeAbsenceDistribution.totalAbsenceNumber }</td>
 											<td>${GradeAbsenceDistribution.rcAbsenceNumber }</td>
 											<td>${GradeAbsenceDistribution.pecAbsenceNumber }</td>
 											<td>${GradeAbsenceDistribution.gecAbsenceNumber }</td>
-											<td>${GradeAbsenceDistribution.totalAbsenceNumber }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

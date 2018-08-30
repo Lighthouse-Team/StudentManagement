@@ -677,7 +677,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${odList3}" var="OverallDistribution">
+									<c:forEach items="${odList}" var="OverallDistribution">
 										<tr>
 											<td>${OverallDistribution.grade }</td>
 											<td>${OverallDistribution.totalNumber }</td>
