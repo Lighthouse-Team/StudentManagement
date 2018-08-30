@@ -874,7 +874,30 @@
 		</where>
 	</select>
 
-	<!-- ======获得各院系分年级本科生RC的不及格情况，RC指必修课程====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能 -->
+	<!-- ======获得各院系分年级本科生RC的不及格情况，RC指必修课程====== -->
+
+	<!-- 通过 grade和departmentId 获得该年级该学院RC不及格的studentId列表: public List<Integer> 
+		getRCFailStudentIdListByGradeAndDepartmentId(@Param(value = "grade") Integer 
+		grade, @Param(value = "departmentId") Integer departmentId, @Param(value 
+		= "year") String year, @Param(value = "term") Integer term); -->
+	<select id="getRCFailStudentIdListByGradeAndDepartmentId"
+		resultType="java.lang.Integer">
+		select s.studentId from student s, course c, studentcourse sc
+		<where>
+			s.studentId = sc.studentId
+			and c.courseId = sc.courseId
+			and
+			s.studentClass like CONCAT(#{grade}, '%')
+			and s.departmentId =
+			#{departmentId}
+			and c.courseType = 1
+			and sc.examTerm = CONCAT(#{year},
+			'-', #{term})
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+			<![CDATA[and sc.score < 60]]>
+		</where>
+	</select>
 
 	<!-- ======获得各班级不及格情况====== -->
 

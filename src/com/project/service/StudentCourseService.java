@@ -1014,7 +1014,6 @@ public class StudentCourseService {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
 					classNumber, year, term);
 			classExcellentFailDistribution.setId(id++);
-			classExcellentFailDistribution.setClassNumber(classNumber);
 			cefdList.add(classExcellentFailDistribution);
 		}
 		return cefdList;
@@ -1464,8 +1463,8 @@ public class StudentCourseService {
 		Integer totalStudentNumber = 0;
 		Integer id = 1;
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
-			DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
-			departmentFailDistribution = getRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
+			DepartmentFailDistribution departmentFailDistribution = getRCDepartmentFailDistributionByDepartmentId(
+					departmentId, year, term);
 			departmentFailDistribution.setId(id++);
 			dfdList.add(departmentFailDistribution);
 			oneFailNumber += departmentFailDistribution.getOneFailNumber();
@@ -1559,10 +1558,10 @@ public class StudentCourseService {
 							break;
 						default:
 							geFourFailNumber++;
-						} // switch
-					} // if
-				} // for
-			} // for
+						}
+					}
+				} // for(studentId)
+			} // for(departmentId)
 		} else {
 			List<Integer> departmentIdList = Arrays.asList(6, 20, 21);
 			for (Integer id : departmentIdList) {
@@ -1588,9 +1587,9 @@ public class StudentCourseService {
 								geFourFailNumber++;
 							}
 						}
-					}
-				}
-			}
+					} // for(studentId)
+				} // for(grade)
+			} // for(departmentId)
 		} // else
 		if (totalStudentNumber != 0) {
 			totalFailNumber = oneFailNumber + twoFailNumber + threeFailNumber + geFourFailNumber;
@@ -1649,7 +1648,8 @@ public class StudentCourseService {
 			totalStudentNumber = studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(grade, departmentId);
 			if (totalStudentNumber != 0) {
 				List<Integer> failStudentIdList = new ArrayList<>();
-				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(departmentId, year, term);
+				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByGradeAndDepartmentId(grade,
+						departmentId, year, term);
 				totalFailNumber = getTotalStudentNumberByStudentIdList(failStudentIdList);
 				double failRate = (double) totalFailNumber / totalStudentNumber;
 
@@ -1665,7 +1665,8 @@ public class StudentCourseService {
 			for (Integer id : departmentIdList) {
 				totalStudentNumber += studentCourseMapper.getTotalStudentNumberByGradeAndDepartmentId(grade, id);
 				List<Integer> failStudentIdList = new ArrayList<>();
-				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByDepartmentId(id, year, term);
+				failStudentIdList = studentCourseMapper.getRCFailStudentIdListByGradeAndDepartmentId(grade, id, year,
+						term);
 				totalFailNumber += getTotalStudentNumberByStudentIdList(failStudentIdList);
 			}
 			if (totalStudentNumber != 0) {
@@ -1860,7 +1861,6 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public List<ClassFailDistribution> getRCClassFailDistributionListByGrade(Integer grade, String year, Integer term) {
-		System.out.println(grade);
 		List<ClassFailDistribution> cfdList = new ArrayList<>();
 		List<String> classNumberList = getClassNumberListByGrade(grade);
 		Integer id = 1;
@@ -2086,7 +2086,7 @@ public class StudentCourseService {
 			bcoList.add("大学英语（二）");
 			bcoList.add("程序设计基础");
 			bcoList.add("大学物理上");
-			bcoList.add("概率论与数量统计");
+			bcoList.add("概率论与数理统计");
 			bcoList.add("微积分A（二）");
 			bcoList.add("工程图学基础");
 		}

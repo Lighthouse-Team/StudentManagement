@@ -520,8 +520,21 @@ public interface StudentCourseMapper {
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/*
-	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程====== 这里没有定义新的接口，使用之前定义的接口可以实现预期功能
+	 * ======获得各院系分年级本科生RC的不及格情况，RC指必修课程======
 	 */
+
+	/**
+	 * 通过 grade和departmentId 获得该年级该学院RC不及格的studentId列表
+	 * 
+	 * @param grade
+	 * @param departmentId
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Integer> getRCFailStudentIdListByGradeAndDepartmentId(@Param(value = "grade") Integer grade,
+			@Param(value = "departmentId") Integer departmentId, @Param(value = "year") String year,
+			@Param(value = "term") Integer term);
 
 	/*
 	 * ======获得各班级不及格情况======

@@ -64,9 +64,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getACOverallDistributionListTest() {
-		// 3.2秒
+		// 12秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
@@ -89,8 +89,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getAGOverallDistributionListtTest() {
+		// 8秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<OverallDistribution> odList = studentCourseService.getAGOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
@@ -113,9 +114,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECOverallDistributionListTest() {
-		// 4.4秒
+		// 13秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<OverallDistribution> odList = studentCourseService.getRPECOverallDistributionList(year, term);
 		for (OverallDistribution od : odList) {
 			System.out.println(od);
@@ -150,10 +151,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECDepartmentDistributionListByGradeTest() {
-		// 查询19个院系，16.7秒，速度有点慢
+		// 51秒，需要改善！！！
 		Integer grade = 2015;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year,
 				term);
 		for (DepartmentDistribution dd : ddList) {
@@ -185,10 +186,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECClassExcellentFailDistributionListByGradeTest() {
-		// 通识查询143个班，29.2秒，速度有点慢，看是否可以改善
-		Integer grade = 2015;
+		// 102秒，需要改善！！！
+		Integer grade = 2016;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<ClassExcellentFailDistribution> cefdList = studentCourseService
 				.getRPECClassExcellentFailDistributionListByGrade(grade, year, term);
 		for (ClassExcellentFailDistribution cefd : cefdList) {
@@ -202,10 +203,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECDepartmentAverageScoreCompareListByGradeTest() {
-		// 11.3秒，速度有点慢
-		Integer grade = 2015;
+		// 34秒，一个年级所有院系的情况，需要改善！！！
+		Integer grade = 2016;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<GradeDepartmentAverageScoreCompare> dascList = studentCourseService
 				.getRPECGradeDepartmentAverageScoreCompareListByGrade(grade, year, term);
 		for (GradeDepartmentAverageScoreCompare departmentAverageScoreCompare : dascList) {
@@ -215,9 +216,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECDepartmentAverageScoreCompareListListTest() {
-		// 在只计算一届的情况下17.1秒，计算四届的情况估计60秒，速度有点慢，需改善
+		// 136秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<List<GradeDepartmentAverageScoreCompare>> gdascListList = studentCourseService
 				.getRPECGradeDepartmentAverageScoreCompareListList(year, term);
 		for (List<GradeDepartmentAverageScoreCompare> gdascList : gdascListList) {
@@ -230,9 +231,9 @@ public class TestStudentCourse {
 	@Test
 	public void getRPECDepartmentAllGradeAverageScoreCompareListTest() {
 		// 将ListList变成一个横向List
-		// 18.1秒，加上了计算的时间
+		// 134秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService
 				.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
 		for (DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare : dagascList) {
@@ -258,7 +259,7 @@ public class TestStudentCourse {
 	public void getRCGradeFailDistributionListTest() {
 		// 1.7秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<GradeFailDistribution> gfdList = new ArrayList<>();
 		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
 		for (GradeFailDistribution gradeFailDistribution : gfdList) {
@@ -272,10 +273,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCDepartmentFailDistributionByDepartmentIdTest() {
-		// 1.5秒
+		// 1.9秒
 		Integer departmentId = 6;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		DepartmentFailDistribution departmentFailDistribution = studentCourseService
 				.getRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
 		System.out.println(departmentFailDistribution);
@@ -283,13 +284,12 @@ public class TestStudentCourse {
 
 	@Test
 	public void testGetRCDepartmentFailDistributionByDepartmentIdTest() {
-		// 10.4秒
+		// 183秒
 		// 验证结果和原方法一致
 		// 这个用于验证上面写的方法的正确性，不用于处理正式数据传给前端
-		// 按理说，不及格门数为3的学生数应该多于不及格门数>=4的学生人数，但有部分不符合，可能计算误差或者所给数据不完整
 		Integer departmentId = 6;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		DepartmentFailDistribution departmentFailDistribution = new DepartmentFailDistribution();
 		departmentFailDistribution = studentCourseService
 				.testGetRCDepartmentFailDistributionByDepartmentId(departmentId, year, term);
@@ -298,9 +298,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCDepartmentFailDistributionListTest() {
-		// 2.3秒
+		// 4.8秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<DepartmentFailDistribution> dfdList = new ArrayList<>();
 		dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
 		for (DepartmentFailDistribution departmentFailDistribution : dfdList) {
@@ -328,7 +328,7 @@ public class TestStudentCourse {
 	public void getRCGradeDepartmentFailDistributionListListTest() {
 		// 2.7秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<List<GradeDepartmentFailDistribution>> gdfdListList = studentCourseService
 				.getRCGradeDepartmentFailDistributionListList(year, term);
 		for (List<GradeDepartmentFailDistribution> gdfdList : gdfdListList) {
@@ -339,11 +339,11 @@ public class TestStudentCourse {
 	}
 
 	@Test
-	public void getRCDepartmentAllGradeFailDistributionListByGradeDepartmentFailDistributionListListTest() {
+	public void getRCDepartmentAllGradeFailDistributionListTest() {
 		// 将ListList变成了横向的List
-		// 2.7秒
+		// 10秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
 				.getRCDepartmentAllGradeFailDistributionList(year, term);
 		for (DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution : dagfdList) {
@@ -357,7 +357,6 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCClassFailDistributionByClassNumberTest() {
-		// 1.5秒
 		String classNumber = "20150111";
 		String year = "2017-2018";
 		Integer term = 1;
@@ -368,10 +367,10 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRCClassFailDistributionListByGradeTest() {
-		// 6.4秒
-		Integer grade = 2015;
+		// 23秒
+		Integer grade = 2016;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<ClassFailDistribution> cfdList = new ArrayList<>();
 		cfdList = studentCourseService.getRCClassFailDistributionListByGrade(grade, year, term);
 		for (ClassFailDistribution classFailDistribution : cfdList) {
@@ -387,7 +386,7 @@ public class TestStudentCourse {
 	public void getGradeAbsenceDistributionListTest() {
 		// 2秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
 		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
 		for (GradeAbsenceDistribution gradeAbsenceDistribution : gadList) {
@@ -410,9 +409,9 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseOverallDistributionListTest() {
-		// 5.6秒
+		// 26秒
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
 		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
 		for (BasicCourseOverallDistribution basicCourseOverallDistribution : bcodList) {
@@ -439,8 +438,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseDetailDistributionListListTest() {
-		// 30秒，还是在多数课程学生人数为0的情况，太慢了
-		// 97秒，在导入2017-2018-2学期的所有数据
+		// 97秒，在导入2017-2018-2学期的所有数据，这个只有在打印时才会用到
 		String year = "2017-2018";
 		Integer term = 2;
 		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
@@ -470,7 +468,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseClassDistributionListByCourseNameTest() {
-		// 90秒
+		// 90秒，148个班
 		String courseName = "大学英语（二）";
 		String year = "2017-2018";
 		Integer term = 2;
