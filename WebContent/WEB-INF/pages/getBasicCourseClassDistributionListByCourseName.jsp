@@ -112,37 +112,66 @@
 <script type="text/javascript">
 
 	
-	$(function() {       
-		/* 选中seclet值刷新页面不更改 */
-		if (localStorage.getItem('year')) {
-			$("#year option").eq(localStorage.getItem('year')).prop('selected',
-					true);
-		}
-		$("#year").on('change', function() {
-			localStorage.setItem('year', $('option:selected', this).index());
-		}); 
+	function setSelect(){
+		var termSelected =document.getElementById("term").value;
+		var termSelectedNumber = parseInt(termSelected);
 		
-		if (localStorage.getItem('term')) {
-			$("#term option").eq(localStorage.getItem('term')).prop('selected',
-					true);
-		}
-		$("#term").on('change', function() {
-			localStorage.setItem('term', $('option:selected', this).index());
-		});
+		$("#courseName").empty();
 		
-		if (localStorage.getItem('courseName')) {
-			$("#courseName option").eq(localStorage.getItem('courseName')).prop('selected',
-					true);
-		}
-		$("#courseName").on('change', function() {
-			localStorage.setItem('courseName', $('option:selected', this).index());
-		});
+		var firstTermCourse = new Array();
+		var secondTermCourse = new Array();
+		firstTermCourse.push("大学英语（一）");
+		firstTermCourse.push("大学计算机基础A");
+		firstTermCourse.push("普通化学");
+		firstTermCourse.push("线性代数与解析几何A");
+		firstTermCourse.push("微积分A（一）");
+		firstTermCourse.push("大学英语（三）");
+		firstTermCourse.push("大学物理下A");
+		firstTermCourse.push("大学物理下B");
+		firstTermCourse.push("大学物理实验（二）");
+		firstTermCourse.push("复变函数与积分变换");
 		
-	 	 var courseNameSelected =document.getElementById("courseName").value;
-		 document.getElementById("head").innerHTML=courseNameSelected + "成绩情况";
-		 
-	});
+		secondTermCourse.push("大学英语（二）");
+		secondTermCourse.push("程序设计基础");
+		secondTermCourse.push("大学物理上");
+		secondTermCourse.push("概率论与数理统计");
+		secondTermCourse.push("微积分A（二）");
+		secondTermCourse.push("工程图学基础");
+		secondTermCourse.push("工程实践A");
+		secondTermCourse.push("机械设计基础B");
+		secondTermCourse.push("大学英语（四）");
+		secondTermCourse.push("大学英语（六）");
+		secondTermCourse.push("电子电路综合实验");
+		secondTermCourse.push("管理学B");
+		secondTermCourse.push("模拟电子技术");
+
 	
+
+		if (termSelectedNumber == 1) {
+			for (var i = 0; i < firstTermCourse.length; i++) {
+				//先创建好select里面的option元素
+				var option = document.createElement("option");
+				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+				option.val = firstTermCourse[i];
+				//给option的text赋值,这就是你点开下拉框能够看到的东西
+				option.text = firstTermCourse[i];
+				//获取select 下拉框对象,并将option添加进select
+				courseName.appendChild(option);
+			}
+		} else if (termSelectedNumber == 2) {
+			for (var i = 0; i < secondTermCourse.length; i++) {
+				//先创建好select里面的option元素
+				var option = document.createElement("option");
+				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+				option.val = secondTermCourse[i];
+				//给option的text赋值,这就是你点开下拉框能够看到的东西
+				option.text = secondTermCourse[i];
+				//获取select 下拉框对象,并将option添加进select
+				courseName.appendChild(option);
+			}
+		}
+		
+	};
 </script>
 
 
@@ -183,7 +212,7 @@
 								<div class="form-group">
 									<label>学年</label> 
 									<select id = "year" class="form-control select2" name="year"
-										data-placeholder="Select a State" style="width: 100%;" onchange = "setSelect()">
+										data-placeholder="Select a State" style="width: 100%;" >
 										<option value="">选择学年</option>
 										<c:forEach items="${yearList}" var="year">
 											<option value="${year}">${year }</option>
@@ -197,7 +226,7 @@
 								<div class="form-group">
 									<label>学期</label> 
 									<select id = "term" class="form-control select2" name="term"
-										data-placeholder="Select a State" style="width: 100%;" onchange = "setCourseSelect()">
+										data-placeholder="Select a State" style="width: 100%;" onchange = "setSelect()">
 										<option value="">选择学期</option>
 										<option>1</option>
 										<option>2</option>
@@ -212,16 +241,6 @@
 									<select id = "courseName" class="form-control select2" name="courseName"
 										data-placeholder="Select a State" style="width: 100%;">
 										<option value="">选择课程名称</option>
-										<option>大学英语（一）</option>
-										<option>大学计算机基础A</option>
-										<option>普通化学</option>
-										<option>线性代数与解析几何A</option>
-										<option>微积分A（一）</option>
-										<option>大学英语（三）</option>
-										<option>大学物理下A</option>
-										<option>大学物理下B</option>
-										<option>大学物理实验（二）</option>
-										<option>复变函数与积分变换</option>
 									</select>
 								</div>
 								<!-- /.form-group -->
@@ -259,13 +278,13 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${bcddList}" var="BasicCourseDetailDistribution">
+									<c:forEach items="${bccdList}" var="BasicCourseClassDistribution">
 										<tr>
-											<td>${BasicCourseDetailDistribution.id }</td>
-											<td>${BasicCourseDetailDistribution.classNumber }</td>
-											<td>${BasicCourseDetailDistribution.totalNumber }</td>
-											<td>${BasicCourseDetailDistribution.excellentRate }</td>
-											<td>${BasicCourseDetailDistribution.failRate }</td>
+											<td>${BasicCourseClassDistribution.id }</td>
+											<td>${BasicCourseClassDistribution.classNumber }</td>
+											<td>${BasicCourseClassDistribution.totalNumber }</td>
+											<td>${BasicCourseClassDistribution.excellentRate }</td>
+											<td>${BasicCourseClassDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

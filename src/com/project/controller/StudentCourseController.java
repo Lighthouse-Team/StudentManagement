@@ -732,7 +732,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 返回各院系分年级学生不及格情况(画图)
+	 * 返回主要基础课程成绩基本情况(画图)
 	 * @param year
 	 * @param term
 	 * @return
@@ -850,7 +850,7 @@ public class StudentCourseController {
 			List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
 			bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
 			map.put("bccdList", bccdList);
-			
+			System.out.println(bccdList);
 		}
 		return "getBasicCourseClassDistributionListByCourseName";
 	}

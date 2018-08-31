@@ -469,7 +469,7 @@ public class TestStudentCourse {
 	@Test
 	public void getBasicCourseClassDistributionListByCourseNameTest() {
 		// 90秒，148个班
-		String courseName = "大学英语（二）";
+		String courseName = "管理学B";
 		String year = "2017-2018";
 		Integer term = 2;
 		List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
