@@ -151,7 +151,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECDepartmentDistributionListByGradeTest() {
-		// 51秒，需要改善！！！
+		// 38秒，需要改善！！！
 		Integer grade = 2015;
 		String year = "2017-2018";
 		Integer term = 2;
@@ -186,7 +186,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getRPECClassExcellentFailDistributionListByGradeTest() {
-		// 102秒，需要改善！！！
+		// 95秒，需要改善！！！
 		Integer grade = 2016;
 		String year = "2017-2018";
 		Integer term = 2;
@@ -231,7 +231,7 @@ public class TestStudentCourse {
 	@Test
 	public void getRPECDepartmentAllGradeAverageScoreCompareListTest() {
 		// 将ListList变成一个横向List
-		// 134秒
+		// 94秒
 		String year = "2017-2018";
 		Integer term = 2;
 		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService
@@ -409,7 +409,7 @@ public class TestStudentCourse {
 
 	@Test
 	public void getBasicCourseOverallDistributionListTest() {
-		// 26秒
+		// 18秒
 		String year = "2017-2018";
 		Integer term = 2;
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
