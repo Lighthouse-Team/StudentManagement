@@ -159,15 +159,19 @@ public class StudentCourseService {
 		double totalScore = 0;
 		double totalCredits = 0;
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			totalScore += getACTotalScoreByGrade(gradeI, year, term);
-			totalCredits += getACTotalCreditsByGrade(gradeI, year, term);
+			Integer totalScoreRecordNumber = studentCourseMapper.getACTotalScoreRecordNumberByGrade(gradeI, year, term);
+			if (totalScoreRecordNumber != 0) {
+				totalScore += studentCourseMapper.getACTotalScoreByGrade(gradeI, year, term);
+				totalCredits += studentCourseMapper.getACTotalCreditsByGrade(gradeI, year, term);
+			}
 		}
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -518,8 +522,13 @@ public class StudentCourseService {
 	 * @return
 	 */
 	public double getRPECAverageScoreByGrade(Integer grade, String year, Integer term) {
-		double totalScore = getRPECTotalScoreByGrade(grade, year, term); // 加权总分
-		double totalCredits = getRPECTotalCreditsByGrade(grade, year, term); // 总学分
+		double totalScore = 0; // 加权总分
+		double totalCredits = 0; // 总学分
+		Integer totalScoreRecordNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(grade, year, term);
+		if (totalScoreRecordNumber != 0) {
+			totalScore = studentCourseMapper.getRPECTotalScoreByGrade(grade, year, term);
+			totalCredits = studentCourseMapper.getRPECTotalCreditsByGrade(grade, year, term);
+		}
 		double averageScore = 0;
 		if (totalCredits != 0) {
 			averageScore = totalScore / totalCredits;
@@ -542,15 +551,20 @@ public class StudentCourseService {
 		double totalScore = 0;
 		double totalCredits = 0;
 		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
-			totalScore += getRPECTotalScoreByGrade(gradeI, year, term);
-			totalCredits += getRPECTotalCreditsByGrade(gradeI, year, term);
+			Integer totalScoreRecordNumber = studentCourseMapper.getRPECTotalSocreRecordNumberByGrade(gradeI, year,
+					term);
+			if (totalScoreRecordNumber != 0) {
+				totalScore += studentCourseMapper.getRPECTotalScoreByGrade(gradeI, year, term);
+				totalCredits += studentCourseMapper.getRPECTotalCreditsByGrade(gradeI, year, term);
+			}
 		}
+		double averageScore = 0;
 		if (totalCredits != 0) {
-			double averageScore = totalScore / totalCredits;
-			return averageScore;
+			averageScore = totalScore / totalCredits;
 		} else {
-			return -1; // 除数异常
+			averageScore = -1; // 除数异常
 		}
+		return averageScore;
 	}
 
 	/**
@@ -774,16 +788,27 @@ public class StudentCourseService {
 	 */
 	public double getRPECAverageScoreByGradeAndDepartmentId(Integer departmentId, Integer grade, String year,
 			Integer term) {
-		double totalScore, totalCredits;
-		totalScore = totalCredits = 0;
+		double totalScore = 0;
+		double totalCredits = 0;
 		if (departmentId != 6) {
-			totalScore = getRPECTotalScoreByGradeAndDepartmentId(departmentId, grade, year, term); // 加权总分
-			totalCredits = getRPECTotalCreditsByGradeAndDepartmentId(departmentId, grade, year, term); // 总学分
+			Integer totalScoreRecordNumber = studentCourseMapper
+					.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(departmentId, grade, year, term);
+			if (totalScoreRecordNumber != 0) {
+				totalScore = studentCourseMapper.getRPECTotalScoreByGradeAndDepartmentId(departmentId, grade, year,
+						term); // 加权总分
+				totalCredits = studentCourseMapper.getRPECTotalCreditsByGradeAndDepartmentId(departmentId, grade, year,
+						term); // 总学分
+			}
 		} else {
 			List<Integer> departmentIdList = new ArrayList<>(Arrays.asList(6, 20, 21));
 			for (Integer id : departmentIdList) {
-				totalScore += getRPECTotalScoreByGradeAndDepartmentId(id, grade, year, term);
-				totalCredits += getRPECTotalCreditsByGradeAndDepartmentId(id, grade, year, term);
+				Integer totalScoreRecordNumber = studentCourseMapper
+						.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(id, grade, year, term);
+				if (totalScoreRecordNumber != 0) {
+					totalScore += studentCourseMapper.getRPECTotalScoreByGradeAndDepartmentId(id, grade, year, term); // 加权总分
+					totalCredits += studentCourseMapper.getRPECTotalCreditsByGradeAndDepartmentId(id, grade, year,
+							term); // 总学分
+				}
 			}
 		}
 		double averageScore = 0;
@@ -1024,20 +1049,6 @@ public class StudentCourseService {
 	 */
 
 	/**
-	 * 通过 grade和departmentId 获得该年级该学院RPEC的成绩记录总数
-	 * 
-	 * @param grade
-	 * @param departmentId
-	 * @param year
-	 * @param term
-	 * @return
-	 */
-	public Integer getRPECTotalScoreRecordNumberByGradeAndDepartmentId(Integer grade, Integer departmentId, String year,
-			Integer term) {
-		return studentCourseMapper.getRPECTotalScoreRecordNumberByGradeAndDepartmentId(departmentId, grade, year, term);
-	}
-
-	/**
 	 * 通过 grade和deparementId 获得该年级该学院的平均成绩和差值
 	 * 
 	 * @param grade
@@ -1054,18 +1065,16 @@ public class StudentCourseService {
 		GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = new GradeDepartmentAverageScoreCompare();
 		departmentAverageScoreCompare.setGrade(strGrade);
 		departmentAverageScoreCompare.setDepartmentName(departmentName);
-		Integer totalNumber = getRPECTotalScoreRecordNumberByGradeAndDepartmentId(grade, departmentId, year, term);
-		if (totalNumber != 0) {
-			double averageScore = getRPECAverageScoreByGradeAndDepartmentId(departmentId, grade, year, term);
-			double difference = averageScore - gradeAverageScore;
 
-			DecimalFormat scoreDF = new DecimalFormat("0.00");
-			String strAverageScore = scoreDF.format(averageScore);
-			String strDifference = scoreDF.format(difference);
+		double averageScore = getRPECAverageScoreByGradeAndDepartmentId(departmentId, grade, year, term);
+		double difference = averageScore - gradeAverageScore;
 
-			departmentAverageScoreCompare.setAverageScore(strAverageScore);
-			departmentAverageScoreCompare.setDifference(strDifference);
-		}
+		DecimalFormat scoreDF = new DecimalFormat("0.00");
+		String strAverageScore = scoreDF.format(averageScore);
+		String strDifference = scoreDF.format(difference);
+
+		departmentAverageScoreCompare.setAverageScore(strAverageScore);
+		departmentAverageScoreCompare.setDifference(strDifference);
 		return departmentAverageScoreCompare;
 	}
 
@@ -1080,7 +1089,7 @@ public class StudentCourseService {
 	public List<GradeDepartmentAverageScoreCompare> getRPECGradeDepartmentAverageScoreCompareListByGrade(Integer grade,
 			String year, Integer term) {
 		List<GradeDepartmentAverageScoreCompare> dascList = new ArrayList<>();
-		double gradeAverageScore = getRPECAverageScoreByGrade(grade, year, term);
+		double gradeAverageScore = getRPECAverageScoreByGrade(grade, year, term); // 19个院系共用一个平均分
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			GradeDepartmentAverageScoreCompare departmentAverageScoreCompare = getRPECDepartmentAverageScoreCompareByGradeAndDepartmentId(
 					grade, gradeAverageScore, departmentId, year, term);
@@ -2004,7 +2013,7 @@ public class StudentCourseService {
 		Integer totalNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseName(courseName, year, term);
 		double averageScore = 0;
 		if (totalNumber != 0) {
-			double totalScore = getCourseTotalScoreByCourseName(courseName, year, term);
+			double totalScore = studentCourseMapper.getCourseTotalScoreByCourseName(courseName, year, term);
 			averageScore = totalScore / totalNumber;
 		} else {
 			averageScore = -1; // 除数异常
