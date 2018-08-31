@@ -236,7 +236,7 @@
 							</div>
 							<div class="col-md-6">
 								<!-- /.form-group -->
-								<div class="form-group">
+								<div class="form-group"> 
 									<label>课程名称</label> 
 									<select id = "courseName" class="form-control select2" name="courseName"
 										data-placeholder="Select a State" style="width: 100%;">
