@@ -1970,13 +1970,13 @@ public class StudentCourseService {
 		}
 		Set<String> gradeSet = new HashSet<>(gradeList);
 		Iterator<String> gradeIt = gradeSet.iterator();
+		// 取具有修该课程最多班级个数所在的年级
 		String resultGrade = "--";
 		if (gradeIt.hasNext()) {
 			resultGrade = gradeIt.next();
 			while (gradeIt.hasNext()) {
 				String tmpGrade = gradeIt.next();
-				if (Collections.frequency(classNumberList, resultGrade) < Collections.frequency(classNumberList,
-						tmpGrade)) {
+				if (Collections.frequency(gradeList, resultGrade) < Collections.frequency(gradeList, tmpGrade)) {
 					resultGrade = tmpGrade;
 				}
 			}
