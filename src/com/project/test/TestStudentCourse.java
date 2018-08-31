@@ -459,7 +459,7 @@ public class TestStudentCourse {
 		String courseName = "大学英语（二）";
 		String classNumber = "20150615";
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 1; 
 		BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 		basicCourseClassDistribution = studentCourseService
 				.getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName, classNumber, year, term);

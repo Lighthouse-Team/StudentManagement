@@ -810,7 +810,7 @@ public class StudentCourseController {
 	/**
 	 * 跳转至主要基础课程各班成绩情况统计页面
 	 * @param session
-	 * @param map
+	 * @param map 
 	 * @return
 	 */
 	@RequestMapping("/getBasicCourseClassDistributionListByCourseNamePage")

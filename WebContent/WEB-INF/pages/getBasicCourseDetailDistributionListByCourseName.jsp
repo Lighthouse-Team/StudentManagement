@@ -559,7 +559,7 @@
 										<th><center>院系</center></th>
 										<th><center>成绩数</center></th>
 										<th><center>优秀人数</center></th>
-										<th><center>优秀率</center></th>
+										<th><center>优秀率</center></th> 
 										<th><center>不及格人数</center></th>
 										<th><center>不及格率</center></th>
 									</tr>

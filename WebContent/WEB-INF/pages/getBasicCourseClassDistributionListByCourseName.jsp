@@ -265,7 +265,7 @@
 						<div class="card-header">
 							<h3 class="card-title" id = "head">主要基础课程各班成绩情况统计分布</h3> 
 						</div>
-						<!-- /.card-header -->
+						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
