@@ -99,6 +99,12 @@
 
 <!-- jQuery -->
 <script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="http://malsup.github.io/min/jquery.blockUI.min.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
 
 </head>
 <body class="hold-transition sidebar-mini">

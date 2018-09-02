@@ -107,8 +107,13 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
+
+
+
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<%-- <script src="<%=path%>/plugins/jquery/jquery.min.js"></script> --%>
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 
 	/* 选中seclet值刷新页面不更改 */
@@ -130,190 +135,191 @@
 		});
 	});
 	
+	
+	$(function() {
+		$('#demo1').click(function() {
+			$.blockUI();
+			if($("#picTitle").css('display')=='none'){
+	            $("#picTitle").css("display","block");
+	            
+			} 
+			if($("#scNumberPic").css('display')=='none'){
+	            $("#scNumberPic").css("display","block");
+	        } 
+			if($("#scRatePic").css('display')=='none'){
+		        $("#scRatePic").css("display","block");
+		    } 
+			var aNumberList = new Array();
+			var bNumberList = new Array();
+			var cNumberList = new Array();
+			var dNumberList = new Array();
+			var eNumberList = new Array();
+			var firstNumberList = new Array();
+			var secondNumberList = new Array();
+			var thirdNumberList = new Array();
+			var forthNumberList = new Array();
+			url = "getAllCourseDistributedData";
+			var args = {
+				year : $("#year").val(),
+				term : $("#term").val()
+			};
+			$.post(url, args, function(odList) {
+				for (var i = 0; i < odList.length - 1; i++) {
+					option.legend.data[i] = odList[i].grade + '级'; //得到年级号
+					option.series[i].name = odList[i].grade + '级';
+					aNumberList[i] = odList[i].excellentNumber;
+					bNumberList[i] = odList[i].goodNumber;
+					cNumberList[i] = odList[i].mediumNumber;
+					dNumberList[i] = odList[i].passNumber;
+					eNumberList[i] = odList[i].failNumber;
+
+				}
+				firstNumberList[0] = aNumberList[0]; //得到第1个年级各个成绩的数量
+				firstNumberList[1] = bNumberList[0];
+				firstNumberList[2] = cNumberList[0];
+				firstNumberList[3] = dNumberList[0];
+				firstNumberList[4] = eNumberList[0];
+
+				secondNumberList[0] = aNumberList[1]; //得到第2个年级各个成绩的数量
+				secondNumberList[1] = bNumberList[1];
+				secondNumberList[2] = cNumberList[1];
+				secondNumberList[3] = dNumberList[1];
+				secondNumberList[4] = eNumberList[1];
+
+				thirdNumberList[0] = aNumberList[2]; //得到第3个年级各个成绩的数量
+				thirdNumberList[1] = bNumberList[2];
+				thirdNumberList[2] = cNumberList[2];
+				thirdNumberList[3] = dNumberList[2];
+				thirdNumberList[4] = eNumberList[2];
+
+				forthNumberList[0] = aNumberList[3]; //得到第4个年级各个成绩的数量
+				forthNumberList[1] = bNumberList[3];
+				forthNumberList[2] = cNumberList[3];
+				forthNumberList[3] = dNumberList[3];
+				forthNumberList[4] = eNumberList[3];
+
+				/* 赋值给图表 */
+				option.series[0].data = firstNumberList;
+				option.series[1].data = secondNumberList;
+				option.series[2].data = thirdNumberList;
+				option.series[3].data = forthNumberList;
+				
+				option.series[4].name = '';  //将第五个类别设置为空
+				option.series[4].data = [];
+				
+				option.xAxis[0].data[0] = '优秀(90-100)';
+				option.xAxis[0].data[1] = '良好(80-89)';
+				option.xAxis[0].data[2] = '中等(70-79)';
+				option.xAxis[0].data[3] = '及格(60-69)';
+				option.xAxis[0].data[4] = '不及格(0-59)';
+				option.yAxis[0].axisLabel.formatter = '{value}';  //只显示数字
+				labelOption.normal.formatter = '{c} {name|{a}}';
+				
+				var dom1 = document.getElementById("scNumberPic");   //显示第一张图
+				var myChart1 = echarts.init(dom1);
+				if (option && typeof option === "object") {
+					myChart1.setOption(option, true);
+				}
+			});
+			
+			
+			//选择第二张图
+			var aRateList = new Array();
+			var bRateList = new Array();
+			var cRateList = new Array();
+			var dRateList = new Array();
+			var eRateList = new Array();
+			var firstRateList = new Array();
+			var secondRateList = new Array();
+			var thirdRateList = new Array();
+			var forthRateList = new Array();
+			var fifthRateList = new Array();
+			
+			$.post(url, args, function(odList) {
+				for (var i = 0; i < odList.length ; i++) {
+					if(odList[i].grade != "全校"){
+						option.legend.data[i] = odList[i].grade + '级';
+						option.series[i].name = odList[i].grade + '级';
+					}
+					else{
+						option.legend.data[i] = odList[i].grade ; //得到年级号
+						option.series[i].name = odList[i].grade ;
+					}
+					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+					var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
+					var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
+					var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
+					var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
+					var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
+					aRateList[i] = aRateNumber;
+					bRateList[i] = bRateNumber;
+					cRateList[i] = cRateNumber;
+					dRateList[i] = dRateNumber;
+					eRateList[i] = eRateNumber;
+
+				}
+				firstRateList[0] = aRateList[0]; //得到第1个年级各个等级成绩的百分比
+				firstRateList[1] = bRateList[0];
+				firstRateList[2] = cRateList[0];
+				firstRateList[3] = dRateList[0];
+				firstRateList[4] = eRateList[0];
+
+				secondRateList[0] = aRateList[1]; //得到第2个年级各个等级成绩的百分比
+				secondRateList[1] = bRateList[1];
+				secondRateList[2] = cRateList[1];
+				secondRateList[3] = dRateList[1];
+				secondRateList[4] = eRateList[1];
+
+				thirdRateList[0] = aRateList[2]; //得到第3个年级各个等级成绩的百分比
+				thirdRateList[1] = bRateList[2];
+				thirdRateList[2] = cRateList[2];
+				thirdRateList[3] = dRateList[2];
+				thirdRateList[4] = eRateList[2];
+
+				forthRateList[0] = aRateList[3]; //得到第4个年级各个等级成绩的百分比
+				forthRateList[1] = bRateList[3];
+				forthRateList[2] = cRateList[3];
+				forthRateList[3] = dRateList[3];
+				forthRateList[4] = eRateList[3];
+				
+				fifthRateList[0] = aRateList[4]; //得到整个学校的成绩百分比
+				fifthRateList[1] = bRateList[4];
+				fifthRateList[2] = cRateList[4];
+				fifthRateList[3] = dRateList[4];
+				fifthRateList[4] = eRateList[4];
+
+				option.series[0].data = firstRateList;
+				option.series[1].data = secondRateList;
+				option.series[2].data = thirdRateList;
+				option.series[3].data = forthRateList;
+				option.series[4].data = fifthRateList;
+				
+				option.xAxis[0].data[0] = '优秀率';
+				option.xAxis[0].data[1] = '良好率';
+				option.xAxis[0].data[2] = '中等率';
+				option.xAxis[0].data[3] = '及格率';
+				option.xAxis[0].data[4] = '不及格率';
+				option.yAxis[0].axisLabel.formatter = '{value}%';    //显示百分比
+				labelOption.normal.formatter = '{c}% {name|{a}}';
+				
+				
+				var dom2 = document.getElementById("scRatePic");     //显示第二张图
+				var myChart2 = echarts.init(dom2);
+				
+				if (option && typeof option === "object") {
+					myChart2.setOption(option, true);
+				}
+				$.unblockUI();
+			});
+		});
+	})
+	
 	/* 显示分析图 */
 	function getDistributedData() {
+	 	
 		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#scNumberPic").css('display')=='none'){
-            $("#scNumberPic").css("display","block");
-        } 
-		if($("#scRatePic").css('display')=='none'){
-	        $("#scRatePic").css("display","block");
-	    } 
-		
-		var aNumberList = new Array();
-		var bNumberList = new Array();
-		var cNumberList = new Array();
-		var dNumberList = new Array();
-		var eNumberList = new Array();
-		var firstNumberList = new Array();
-		var secondNumberList = new Array();
-		var thirdNumberList = new Array();
-		var forthNumberList = new Array();
-		url = "getAllCourseDistributedData";
-		var args = {
-			year : $("#year").val(),
-			term : $("#term").val()
-		};
-		$.post(url, args, function(odList) {
-			for (var i = 0; i < odList.length - 1; i++) {
-				option.legend.data[i] = odList[i].grade + '级'; //得到年级号
-				option.series[i].name = odList[i].grade + '级';
-				aNumberList[i] = odList[i].excellentNumber;
-				bNumberList[i] = odList[i].goodNumber;
-				cNumberList[i] = odList[i].mediumNumber;
-				dNumberList[i] = odList[i].passNumber;
-				eNumberList[i] = odList[i].failNumber;
-
-			}
-			firstNumberList[0] = aNumberList[0]; //得到第1个年级各个成绩的数量
-			firstNumberList[1] = bNumberList[0];
-			firstNumberList[2] = cNumberList[0];
-			firstNumberList[3] = dNumberList[0];
-			firstNumberList[4] = eNumberList[0];
-
-			secondNumberList[0] = aNumberList[1]; //得到第2个年级各个成绩的数量
-			secondNumberList[1] = bNumberList[1];
-			secondNumberList[2] = cNumberList[1];
-			secondNumberList[3] = dNumberList[1];
-			secondNumberList[4] = eNumberList[1];
-
-			thirdNumberList[0] = aNumberList[2]; //得到第3个年级各个成绩的数量
-			thirdNumberList[1] = bNumberList[2];
-			thirdNumberList[2] = cNumberList[2];
-			thirdNumberList[3] = dNumberList[2];
-			thirdNumberList[4] = eNumberList[2];
-
-			forthNumberList[0] = aNumberList[3]; //得到第4个年级各个成绩的数量
-			forthNumberList[1] = bNumberList[3];
-			forthNumberList[2] = cNumberList[3];
-			forthNumberList[3] = dNumberList[3];
-			forthNumberList[4] = eNumberList[3];
-
-			/* 赋值给图表 */
-			option.series[0].data = firstNumberList;
-			option.series[1].data = secondNumberList;
-			option.series[2].data = thirdNumberList;
-			option.series[3].data = forthNumberList;
-			
-			option.series[4].name = '';  //将第五个类别设置为空
-			option.series[4].data = [];
-			
-			option.xAxis[0].data[0] = '优秀(90-100)';
-			option.xAxis[0].data[1] = '良好(80-89)';
-			option.xAxis[0].data[2] = '中等(70-79)';
-			option.xAxis[0].data[3] = '及格(60-69)';
-			option.xAxis[0].data[4] = '不及格(0-59)';
-			option.yAxis[0].axisLabel.formatter = '{value}';  //只显示数字
-			labelOption.normal.formatter = '{c} {name|{a}}';
-			
-			var dom1 = document.getElementById("scNumberPic");   //显示第一张图
-			var myChart1 = echarts.init(dom1);
-			if (option && typeof option === "object") {
-				myChart1.setOption(option, true);
-			}
-		});
-		
-		
-		//选择第二张图
-		var aRateList = new Array();
-		var bRateList = new Array();
-		var cRateList = new Array();
-		var dRateList = new Array();
-		var eRateList = new Array();
-		var firstRateList = new Array();
-		var secondRateList = new Array();
-		var thirdRateList = new Array();
-		var forthRateList = new Array();
-		var fifthRateList = new Array();
-		
-		$.post(url, args, function(odList) {
-			for (var i = 0; i < odList.length ; i++) {
-				if(odList[i].grade != "全校"){
-					option.legend.data[i] = odList[i].grade + '级';
-					option.series[i].name = odList[i].grade + '级';
-				}
-				else{
-					option.legend.data[i] = odList[i].grade ; //得到年级号
-					option.series[i].name = odList[i].grade ;
-				}
-				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
-				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
-				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
-				var dRateNumber = parseFloat(odList[i].passRate.substring(0,odList[i].passRate.length-1));
-				var eRateNumber = parseFloat(odList[i].failRate.substring(0,odList[i].failRate.length-1));
-				aRateList[i] = aRateNumber;
-				bRateList[i] = bRateNumber;
-				cRateList[i] = cRateNumber;
-				dRateList[i] = dRateNumber;
-				eRateList[i] = eRateNumber;
-
-			}
-			firstRateList[0] = aRateList[0]; //得到第1个年级各个等级成绩的百分比
-			firstRateList[1] = bRateList[0];
-			firstRateList[2] = cRateList[0];
-			firstRateList[3] = dRateList[0];
-			firstRateList[4] = eRateList[0];
-
-			secondRateList[0] = aRateList[1]; //得到第2个年级各个等级成绩的百分比
-			secondRateList[1] = bRateList[1];
-			secondRateList[2] = cRateList[1];
-			secondRateList[3] = dRateList[1];
-			secondRateList[4] = eRateList[1];
-
-			thirdRateList[0] = aRateList[2]; //得到第3个年级各个等级成绩的百分比
-			thirdRateList[1] = bRateList[2];
-			thirdRateList[2] = cRateList[2];
-			thirdRateList[3] = dRateList[2];
-			thirdRateList[4] = eRateList[2];
-
-			forthRateList[0] = aRateList[3]; //得到第4个年级各个等级成绩的百分比
-			forthRateList[1] = bRateList[3];
-			forthRateList[2] = cRateList[3];
-			forthRateList[3] = dRateList[3];
-			forthRateList[4] = eRateList[3];
-			
-			fifthRateList[0] = aRateList[4]; //得到整个学校的成绩百分比
-			fifthRateList[1] = bRateList[4];
-			fifthRateList[2] = cRateList[4];
-			fifthRateList[3] = dRateList[4];
-			fifthRateList[4] = eRateList[4];
-
-			option.series[0].data = firstRateList;
-			option.series[1].data = secondRateList;
-			option.series[2].data = thirdRateList;
-			option.series[3].data = forthRateList;
-			option.series[4].data = fifthRateList;
-			
-			option.xAxis[0].data[0] = '优秀率';
-			option.xAxis[0].data[1] = '良好率';
-			option.xAxis[0].data[2] = '中等率';
-			option.xAxis[0].data[3] = '及格率';
-			option.xAxis[0].data[4] = '不及格率';
-			option.yAxis[0].axisLabel.formatter = '{value}%';    //显示百分比
-			labelOption.normal.formatter = '{c}% {name|{a}}';
-			
-			
-			var dom2 = document.getElementById("scRatePic");     //显示第二张图
-			var myChart2 = echarts.init(dom2);
-			
-			if (option && typeof option === "object") {
-				myChart2.setOption(option, true);
-			} 
-		});
-		
-	/* var options = document.getElementById('year').children;
-		options[0].selected = true;
-	var options = document.getElementById('term').children;
-		options[0].selected = true;  */
-	/* 	$("#year").get(0).selectedIndex=0;
-		$("#term").get(0).selectedIndex=0; */
-		 
 	};
+	
 </script>
 
 
@@ -338,7 +344,6 @@
 				</div>
 			</div>
 			<!-- /.container-fluid --> </section>
-			
 			<section class="content-header">
 			<div class="container-fluid">
 				<!-- SELECT2 EXAMPLE -->
@@ -379,7 +384,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
+						<input  type="submit" class="btn btn-info float-left" value="查询"/> 
 						</form>
 						
 					</div>
@@ -437,7 +442,8 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button class="btn btn-info float-left" onclick = "getDistributedData()">显示成绩分析图</button>
+							<button id="demo1" class="btn btn-info float-left">显示成绩分析图</button>
+							<!-- onclick = "getDistributedData()" -->
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -447,7 +453,6 @@
 			</div>
 			<!-- /.row --> 
 			</section>
-			
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -670,7 +675,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->

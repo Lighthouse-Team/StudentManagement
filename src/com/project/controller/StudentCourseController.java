@@ -907,5 +907,4 @@ public class StudentCourseController {
 		return "print";
 	}
 	
-	
 }

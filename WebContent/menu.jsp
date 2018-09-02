@@ -438,13 +438,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="redirectUploadPage" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-warning"></i>
               <p>上传成绩数据</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="testPage" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-info"></i>
               <p>Informational</p>
             </a>
