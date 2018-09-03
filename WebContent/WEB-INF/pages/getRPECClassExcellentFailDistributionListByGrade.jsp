@@ -98,27 +98,10 @@
 <script src="<%=path%>/dist/js/demo.js"></script>
 
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 
- /* 	$(function() {    
-	
-		if (localStorage.getItem('year')) {
-			$("#year option").eq(localStorage.getItem('year')).prop('selected',
-					true);
-		}
-		$("#year").on('change', function() {
-			localStorage.setItem('year', $('option:selected', this).index());
-		}); 
-		
-		if (localStorage.getItem('term')) {
-			$("#term option").eq(localStorage.getItem('term')).prop('selected',
-					true);
-		}
-		$("#term").on('change', function() {
-			localStorage.setItem('term', $('option:selected', this).index());
-		}); 
-	});  */
+<script type="text/javascript">
 	
 	function setSelect(){
 		var yearSelected =document.getElementById("year").value;
@@ -140,6 +123,13 @@
 			grade.appendChild(option);
 		} 
 	};
+	
+	
+	$(function() {
+		$('#getData').click(function(){
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+	});
 	
 </script>
 
@@ -217,7 +207,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" onclick = "tableHandler()"/> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="查询"/> 
 						</form>
 						
 					</div>
@@ -304,7 +294,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->

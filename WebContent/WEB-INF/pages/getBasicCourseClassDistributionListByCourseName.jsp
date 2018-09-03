@@ -108,9 +108,16 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 
+
+	$(function() {
+		$('#getData').click(function(){
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+	});
 	
 	function setSelect(){
 		var termSelected =document.getElementById("term").value;
@@ -248,7 +255,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -329,7 +336,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->

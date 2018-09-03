@@ -108,7 +108,8 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 
 	/* 选中seclet值刷新页面不更改 */
@@ -130,8 +131,30 @@
 		});
 	});
 	
+	$(function() {
+		$('#getData').click(function(){
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+	});
+	
+	$(function() {
+		$('#getPic').click(function(){
+		 	if($("#picTitle").css('display')=='none'){
+	            $("#picTitle").css("display","block");
+	            
+			} 
+			if($("#RPECDepartmentAllGradeAverageScoreComparePic").css('display')=='none'){
+		        $("#RPECDepartmentAllGradeAverageScoreComparePic").css("display","block");
+		    } 
+			
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+			getLinePic();     //显示折线图
+			$.unblockUI;
+		});
+	});
+	
 	/* 显示分析图 */
-	function getRPECDepartmentAllGradeAverageScoreCompareListData() {
+/* 	function getRPECDepartmentAllGradeAverageScoreCompareListData() {
 		
 	 	if($("#picTitle").css('display')=='none'){
             $("#picTitle").css("display","block");
@@ -142,15 +165,8 @@
 	    } 
 		
 		getLinePic();     //显示折线图
-		
-	/* var options = document.getElementById('year').children;
-		options[0].selected = true;
-	var options = document.getElementById('term').children;
-		options[0].selected = true;  */
-	/* 	$("#year").get(0).selectedIndex=0;
-		$("#term").get(0).selectedIndex=0; */
 		 
-	};
+	}; */
 	
 	function getLinePic(){
 		var app1 = {};
@@ -343,7 +359,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -402,7 +418,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  class="btn btn-info float-left" onclick = "getRPECDepartmentAllGradeAverageScoreCompareListData()">显示成绩分析图</button>
+							<button id="getPic" class="btn btn-info float-left" >显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -455,7 +471,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->

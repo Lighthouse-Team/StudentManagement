@@ -443,12 +443,12 @@
               <p>上传成绩数据</p>
             </a>
           </li>
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a href="testPage" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-info"></i>
               <p>Informational</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

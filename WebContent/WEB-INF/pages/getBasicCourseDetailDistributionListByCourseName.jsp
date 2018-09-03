@@ -108,7 +108,9 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
+
 <script type="text/javascript">
 
 	
@@ -189,6 +191,13 @@
 	 	
 	});
 	
+
+	$(function() {
+		$('#getData').click(function(){
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+	});
+	
 	function setSelect(){
 		var termSelected =document.getElementById("term").value;
 		var termSelectedNumber = parseInt(termSelected);
@@ -245,9 +254,23 @@
 		
 	};
 	
+	$(function() {
+		$('#getPic').click(function(){
+			if($("#picTitle").css('display')=='none'){
+	            $("#picTitle").css("display","block");
+	            
+			} 
+			if($("#basicCourseDetailDistributionListByCourseNameBarPic").css('display')=='none'){
+	            $("#basicCourseDetailDistributionListByCourseNameBarPic").css("display","block");
+	        } 
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+			getBarPic();      //显示柱状图
+			$.unblockUI;
+		});
+	});
 	
 	/* 显示分析图 */
-	function getBasicCourseDetailDistributionListByCourseNameData() {
+/* 	function getBasicCourseDetailDistributionListByCourseNameData() {
 		
 	 	if($("#picTitle").css('display')=='none'){
             $("#picTitle").css("display","block");
@@ -259,14 +282,8 @@
 		
 		getBarPic();      //显示柱状图
 		
-	/* var options = document.getElementById('year').children;
-		options[0].selected = true;
-	var options = document.getElementById('term').children;
-		options[0].selected = true;  */
-	/* 	$("#year").get(0).selectedIndex=0;
-		$("#term").get(0).selectedIndex=0; */
 		 
-	};
+	}; */
 	
 	
 	
@@ -533,7 +550,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询" /> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -578,7 +595,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button  class="btn btn-info float-left" onclick = "getBasicCourseDetailDistributionListByCourseNameData()">显示成绩分析图</button>
+							<button id="getPic" class="btn btn-info float-left" >显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -631,7 +648,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->

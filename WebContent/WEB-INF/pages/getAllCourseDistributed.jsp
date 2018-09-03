@@ -111,7 +111,6 @@
 
 
 <!-- jQuery -->
-<%-- <script src="<%=path%>/plugins/jquery/jquery.min.js"></script> --%>
 <script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
 <script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
@@ -135,10 +134,16 @@
 		});
 	});
 	
+	$(function() {
+		$('#getData').click(function(){
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+	});
+	
 	
 	$(function() {
-		$('#demo1').click(function() {
-			$.blockUI();
+		$('#getPic').click(function() {
+			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 			if($("#picTitle").css('display')=='none'){
 	            $("#picTitle").css("display","block");
 	            
@@ -384,7 +389,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input  type="submit" class="btn btn-info float-left" value="查询"/> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="查询" /> 
 						</form>
 						
 					</div>
@@ -442,7 +447,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button id="demo1" class="btn btn-info float-left">显示成绩分析图</button>
+							<button id="getPic" class="btn btn-info float-left">显示成绩分析图</button>
 							<!-- onclick = "getDistributedData()" -->
 						</div>
 						<!-- /.card-body -->
