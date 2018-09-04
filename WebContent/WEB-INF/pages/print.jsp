@@ -111,6 +111,14 @@
 <script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 
+
+	$(function() {
+		$('#getPic').click(function(){
+			alert("22222");
+			window.print();
+		});
+	});
+	
 	$(function() {     
 		var year1 = "${year}";
 		var term1 = "${term}";
@@ -565,10 +573,10 @@
 							<h3 class="card-title">成绩分析图</h3>
 						</div>
 						<div id="scNumberPic"
-							style="display: none; height: 400%; width: 95%; margin: 0; float: left">
+							style="display: none; height: 400%; width: 95%; margin: 0;">
 						</div>
 						<div id="scRatePic"
-							style="display: none; height: 400%; width: 95%; margin: 0; float: left">
+							style="display: none; height: 400%; width: 95%; margin: 0; ">
 						</div>
 					</div>
 				</div>
@@ -680,6 +688,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<button id="getPic" class="btn btn-info float-left" >打印</button>
 						</div>
 						<!-- /.card-body -->
 					</div>

@@ -224,7 +224,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->
