@@ -1306,7 +1306,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">所有课程成绩分布</li>
+							<li class="breadcrumb-item active">打印页面</li>
 						</ol>
 					</div>
 				</div>
