@@ -319,12 +319,6 @@
 		});
 	})
 	
-	/* 显示分析图 */
-	function getDistributedData() {
-	 	
-		
-	};
-	
 </script>
 
 

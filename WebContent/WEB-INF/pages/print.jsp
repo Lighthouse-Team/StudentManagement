@@ -108,19 +108,23 @@
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
-<script src="<%=path%>/plugins/jquery/jquery.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
-
-
+	
+	$(function() {     
+		getFirstPic();
+	});
+	
 	$(function() {
 		$('#getPic').click(function(){
-			alert("22222");
 			window.print();
 		});
 	});
 	
-	$(function() {     
-		var year1 = "${year}";
+ 	function getFirstPic(){
+ 		$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+ 		var year1 = "${year}";
 		var term1 = "${term}";
 		
 		var app = {};
@@ -295,10 +299,6 @@
 		};
 		
 			
-		 	if($("#picTitle").css('display')=='none'){
-	            $("#picTitle").css("display","block");
-	            
-			} 
 			if($("#scNumberPic").css('display')=='none'){
 	            $("#scNumberPic").css("display","block");
 	        } 
@@ -466,23 +466,14 @@
 				if (option && typeof option === "object") {
 					myChart2.setOption(option, true);
 				} 
+				$.unblockUI();
 			});
-		
-	});
-	
-/* function getDistributedData() {
-	
-	
-		
-	/* var options = document.getElementById('year').children;
-		options[0].selected = true;
-	var options = document.getElementById('term').children;
-		options[0].selected = true;  */
-	/* 	$("#year").get(0).selectedIndex=0;
-		$("#term").get(0).selectedIndex=0; */
+			
+ 	}
 		 
 
 </script>
+
 
 
 </head>
@@ -497,6 +488,7 @@
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<h1>成绩数据</h1>
+						<button id="getPic" class="btn btn-info float-left" >打印</button>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -569,14 +561,11 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="picTitle" class="card-header" style="display: none">
-							<h3 class="card-title">成绩分析图</h3>
+						<div id="scNumberPic"  
+							style="display: none; height: 400%; width: 95%;  position:relative; left:-50px;">
 						</div>
-						<div id="scNumberPic"
-							style="display: none; height: 400%; width: 95%; margin: 0;">
-						</div>
-						<div id="scRatePic"
-							style="display: none; height: 400%; width: 95%; margin: 0; ">
+						<div id="scRatePic"    
+							style="display: none; height: 400%; width: 95%;  position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
@@ -688,7 +677,6 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button id="getPic" class="btn btn-info float-left" >打印</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -795,7 +783,6 @@
 		});
 	</script>
 	
-	<script src="<%=path%>/table/js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="<%=path%>/table/js/bootstrap.min.js"></script>
 	<!-- Metis Menu Js -->
