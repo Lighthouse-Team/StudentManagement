@@ -114,6 +114,8 @@
 
 	/* 选中seclet值刷新页面不更改 */
 	$(function() {         
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
 					true);
@@ -149,10 +151,8 @@
 			if($("#RPECScoreRateLinePic").css('display')=='none'){
 		        $("#RPECScoreRateLinePic").css("display","block");
 		    } 
-			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 			getBarPic();      //显示柱状图
 			getLinePic();     //显示折线图
-			$.unblockUI;
 		});
 	});
 	

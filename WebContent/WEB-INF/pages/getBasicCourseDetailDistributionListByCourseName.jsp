@@ -115,6 +115,8 @@
 
 	
 	$(function() {       
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 		/* 选中seclet值刷新页面不更改 */
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
@@ -263,29 +265,9 @@
 			if($("#basicCourseDetailDistributionListByCourseNameBarPic").css('display')=='none'){
 	            $("#basicCourseDetailDistributionListByCourseNameBarPic").css("display","block");
 	        } 
-			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 			getBarPic();      //显示柱状图
-			$.unblockUI;
 		});
 	});
-	
-	/* 显示分析图 */
-/* 	function getBasicCourseDetailDistributionListByCourseNameData() {
-		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#basicCourseDetailDistributionListByCourseNameBarPic").css('display')=='none'){
-            $("#basicCourseDetailDistributionListByCourseNameBarPic").css("display","block");
-        } 
-		
-		getBarPic();      //显示柱状图
-		
-		 
-	}; */
-	
-	
 	
 	/* 显示柱状图 */
 	function getBarPic(){

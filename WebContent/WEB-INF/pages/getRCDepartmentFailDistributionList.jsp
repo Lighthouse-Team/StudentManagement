@@ -113,7 +113,9 @@
 <script type="text/javascript">
 
 	/* 选中seclet值刷新页面不更改 */
-	$(function() {         
+	$(function() {        
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
 					true);
@@ -148,9 +150,7 @@
 	            $("#RCDepartmentFailDistributionListBarPic").css("display","block");
 	        } 
 			
-			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 			getBarPic();      //显示柱状图
-			$.unblockUI;
 		});
 	});
 	

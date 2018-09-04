@@ -116,7 +116,9 @@
 <script type="text/javascript">
 
 	/* 选中seclet值刷新页面不更改 */
-	$(function() {   
+	$(function() {  
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 		if (localStorage.getItem('year')) {
 			$("#year option").eq(localStorage.getItem('year')).prop('selected',
 					true);
@@ -143,7 +145,6 @@
 	
 	$(function() {
 		$('#getPic').click(function() {
-			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 			if($("#picTitle").css('display')=='none'){
 	            $("#picTitle").css("display","block");
 	            
@@ -314,7 +315,6 @@
 				if (option && typeof option === "object") {
 					myChart2.setOption(option, true);
 				}
-				$.unblockUI();
 			});
 		});
 	})

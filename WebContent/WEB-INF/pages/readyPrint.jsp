@@ -183,7 +183,7 @@
 							<!-- /.col -->
 						</div>
 						<!-- /.row -->
-						<input id="getData" type="submit" class="btn btn-info float-left" value="打印" /> 
+						<input id="getData" type="submit" class="btn btn-info float-left" value="打印预览" /> 
 						</form>
 						
 					</div>

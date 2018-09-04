@@ -888,11 +888,11 @@ public class StudentCourseController {
 		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
 		map.put("odList", odList);  //第一章第一个功能
 		
-//		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
-//		map.put("odList1", odList1); //第一章第二个功能
-//		
-//		List<OverallDistribution> odList3 = studentCourseService.getRPECOverallDistributionList(year, term);
-//		map.put("odList3", odList3); //第一章第三个功能
+		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+		map.put("odList1", odList1); //第一章第二个功能
+		
+		List<OverallDistribution> odList2 = studentCourseService.getRPECOverallDistributionList(year, term);
+		map.put("odList2", odList2); //第二章第一个功能
 		
 		int yearSelected = Integer.parseInt(year.substring(0,4));
 		List<String> gradeList = new ArrayList<>();
