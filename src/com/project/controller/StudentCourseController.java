@@ -895,14 +895,42 @@ public class StudentCourseController {
 		map.put("odList2", odList2); //第二章第一个功能
 		
 		int yearSelected = Integer.parseInt(year.substring(0,4));
-		List<String> gradeList = new ArrayList<>();
+		List<Integer> gradeList = new ArrayList<>();
 		for(int i=0; i<4; i++) {
-			gradeList.add(String.valueOf(yearSelected - 3 + i) + "级");
+			gradeList.add(yearSelected - 3 + i);
 		}
-		map.put("gradeList", gradeList);
 		
-//		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
-//		map.put("dagascList", dagascList);  //第二章最后一个功能 
+		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
+		map.put("ddList", ddList);
+		
+		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
+		map.put("ddList1", ddList1);
+		
+		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
+		map.put("ddList2", ddList2);
+		
+		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
+		map.put("ddList3", ddList3);           //第二章第二个功能
+		
+		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+		map.put("dagascList", dagascList);  //第二章第四个功能 
+		
+		List<GradeFailDistribution> gfdList = new ArrayList<>();
+		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
+		map.put("gfdList", gfdList);      //第三章第一个功能
+		
+		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
+		map.put("dfdList", dfdList);     //第三章第二个功能
+		
+		List<String> gradeListString = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeListString.add(String.valueOf(yearSelected - 3 + i) + "级");
+		}
+		map.put("gradeListString", gradeListString);
+		
+		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+				.getRCDepartmentAllGradeFailDistributionList(year, term);
+		map.put("dagfdList", dagfdList);
 		
 		return "print";
 	}

@@ -580,7 +580,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<button id="getPic" class="btn btn-info float-left" onclick = "getRCGradeFailDistributionListData()">显示成绩分析图</button>
+							<button id="getPic" class="btn btn-info float-left" >显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>

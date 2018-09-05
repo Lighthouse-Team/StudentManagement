@@ -113,6 +113,25 @@
 <script type="text/javascript">
 	
 	$(function() {     
+		
+ 		var year1 = "${year}";
+		var yearSelected = parseInt(year1.substring(0,4));
+		
+		var gradeList = new Array();
+		for( var i=0; i<4; i++){
+			gradeList[i] = (yearSelected - 3 + i).toString();
+		}
+		
+  		var firstGradeTitle=document.getElementById("firstGradeDepartmentRPEC");  // 找到元素
+  		firstGradeTitle.innerHTML= gradeList[0] + "级各院系必修、专业选修课程成绩情况";    // 改变内容  
+  		var secondGradeTitle=document.getElementById("secondGradeDepartmentRPEC");  // 找到元素
+  		secondGradeTitle.innerHTML= gradeList[1] + "级各院系必修、专业选修课程成绩情况";    // 改变内容  
+  		var thirdGradeTitle=document.getElementById("thirdGradeDepartmentRPEC");  // 找到元素
+  		thirdGradeTitle.innerHTML= gradeList[2] + "级各院系必修、专业选修课程成绩情况";    // 改变内容  
+  		var forthGradeTitle=document.getElementById("forthGradeDepartmentRPEC");  // 找到元素
+  		forthGradeTitle.innerHTML= gradeList[3] + "级各院系必修、专业选修课程成绩情况";    // 改变内容  
+  		
+		
 		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
 		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 	    $('#example1').dataTable({
@@ -121,32 +140,17 @@
 	        "paging" : false, //去掉底部分页框
 	        "info": false, //去掉表格底部信息
 	    });
-	    
-		if($("#scNumberPic").css('display')=='none'){
-            $("#scNumberPic").css("display","block");
-        } 
-		if($("#scRatePic").css('display')=='none'){
-	        $("#scRatePic").css("display","block");
-	    } 
-	    
-	    if($("#variousScRateBarPic").css('display')=='none'){
-            $("#variousScRateBarPic").css("display","block");
-        } 
-		if($("#variousScRateLinePic").css('display')=='none'){
-	        $("#variousScRateLinePic").css("display","block");
-	    } 
-		
-		if($("#RPECScoreRateBarPic").css('display')=='none'){
-            $("#RPECScoreRateBarPic").css("display","block");
-        } 
-		if($("#RPECScoreRateLinePic").css('display')=='none'){
-	        $("#RPECScoreRateLinePic").css("display","block");
-	    } 
-		getFirstPic();
+	  
+/*   		getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
-		getSecondPic2();
+		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
-		getThirdPic2();
+		getThirdPic2();		//第二章第一个功能两张成绩分析图 
+		getForthPic(); 
+ 		getFifthPic1();
+		getFifthPic2();     //第三章第一个功能 
+		getSixthPic();      //第三章第二个功能 */
+		getSeventhPic();
 	});
 	
 	$(function() {
@@ -1127,7 +1131,7 @@
  	}
  	
  	function getThirdPic2(){
- 		var app1 = {};
+ 		var app5 = {};
 		option5 = null;
 		option5 = {
 			color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
@@ -1285,6 +1289,829 @@
 			}
 		});
  	}
+ 	
+ 	function getForthPic(){
+ 		var app = {};
+		option6 = null;
+		option6 = {
+			color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+		    title: {
+		        text: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:[]
+		    },
+		    grid: {
+		        left: '8%',
+		        right: '12%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    toolbox: {
+		        feature: {
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis: {
+		    	axisLabel: {                                //让x轴坐标文字竖直显示
+		        	interval: 0,
+		        	formatter:function(value){
+		            	return value.split("").join("\n");
+		                }
+		        },
+		        type: 'category',
+		        boundaryGap: false,
+		        data: ['优秀率','良好率','中等率','及格率','不及格率']
+		    },
+		    yAxis: {  
+	              type: 'value',  
+	              axisLabel: {  
+	                    show: true,  
+	                    interval: 'auto',  
+	                    formatter: '{value}'  
+	                  },  
+	              show: true  
+	          },  
+		    series: [
+		        {
+		            name:'邮件营销',
+		            type:'line',
+		            stack: '总量1',
+		            data:[ 13, 10, 13, 9, 23]
+		        },
+		        {
+		            name:'联盟广告',
+		            type:'line',
+		            stack: '总量2',
+		            data:[20, 18, 19, 24, 20]
+		        },
+		        {
+		            name:'视频广告',
+		            type:'line',
+		            stack: '总量3',
+		            data:[10, 23, 21, 14, 90]
+		        },
+		        {
+		            name:'直接访问',
+		            type:'line',
+		            stack: '总量4',
+		            data:[32, 13, 30, 34, 30]
+		        }
+		    ]
+		};
+		;
+		
+		var year1 = "${year}";
+		var term1 = "${term}";
+		
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		
+		url1 = "getGradeListData";
+		var args1 = {
+			year : year1
+		};
+		$.post(url1, args1, function(gradeList){
+			for(var i=0; i<gradeList.length ; i++){
+				option6.legend.data[i] = gradeList[i];
+				option6.series[i].name = gradeList[i];
+			}
+		}); 
+		
+		url = "getRPECDepartmentAllGradeAverageScoreCompareListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+		$.post(url, args, function(dagascList){
+			
+			for(var i=0; i<dagascList.length ; i++){
+				option6.xAxis.data[i] = dagascList[i].departmentName;
+				var aNumber = parseFloat(dagascList[i].gradeFourDifference);
+				var bNumber = parseFloat(dagascList[i].gradeThreeDifference);
+				var cNumber = parseFloat(dagascList[i].gradeTwoDifference);
+				var dNumber = parseFloat(dagascList[i].gradeOneDifference);
+				aRateList[i] = aNumber;
+				bRateList[i] = bNumber;
+				cRateList[i] = cNumber;
+				dRateList[i] = dNumber;
+			}
+			
+			option6.series[0].data = aRateList;
+			option6.series[1].data = bRateList;
+			option6.series[2].data = cRateList;
+			option6.series[3].data = dRateList;
+			
+			var dom6 = document.getElementById("RPECDepartmentAllGradeAverageScoreComparePic");
+			var myChart6 = echarts.init(dom6);
+			if (option6 && typeof option6 === "object") {
+			    myChart6.setOption(option6, true);
+			}
+		
+		});
+		
+ 	}
+ 	
+ 	function getFifthPic1(){
+ 		var app = {};
+		option7 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '{name|{a}} {c}',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option7 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '1门不及格',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '2门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '3门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '≥4门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		var year1 = "${year}";
+		var term1 = "${term}";
+
+		/* 与后台连接传递数据 */
+		var aList = new Array();
+		var bList = new Array();
+		var cList = new Array();
+		var dList = new Array();
+		url = "getRCGradeFailDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+
+		$.post(url, args, function(gfdList){
+			for(var i = 0; i < gfdList.length - 1 ; i++){
+				option7.xAxis[0].data[i] = gfdList[i].grade + "级"; 
+				/*分别得到每一个年级几门不及格的人数 */
+				aList[i] = gfdList[i].oneFailNumber;
+				bList[i] = gfdList[i].twoFailNumber;
+				cList[i] = gfdList[i].threeFailNumber;
+				dList[i] = gfdList[i].fourFailNumber + gfdList[i].fiveFailNumber + gfdList[i].sixFailNumber + gfdList[i].sevenFailNumber + gfdList[i].eightFailNumber;
+			}
+			
+			
+			option7.series[0].data = aList;
+			option7.series[1].data = bList;
+			option7.series[2].data = cList;
+			option7.series[3].data = dList;
+			
+			var dom7 = document.getElementById("barPic");
+			var myChart7 = echarts.init(dom7);
+			if (option7 && typeof option7 === "object") {
+			    myChart7.setOption(option7, true);
+			}
+		});
+ 	}
+ 	
+ 	function getFifthPic2(){
+ 		var app8 = {};
+		option8 = null;
+		option8 = {
+			color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    title: {
+		        text: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['不及格率']
+		    },
+		    grid: {
+		        left: '8%',
+		        right: '12%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    toolbox: {
+		        feature: {
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis: {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: ['优秀率','良好率','中等率','及格率','不及格率']
+		    },
+		    yAxis: {  
+	              type: 'value',  
+	              axisLabel: {  
+	                    show: true,  
+	                    interval: 'auto',  
+	                    formatter: '{value}%'  
+	                  },  
+	              show: true  
+	          },  
+		    series: [
+		        {
+		            name:'不及格率',
+		            type:'line',
+		            stack: '总量1',
+		            data:[ 13, 10, 13, 9, 23]
+		        }
+		    ]
+		};
+		;
+		
+		var year1 = "${year}";
+		var term1 = "${term}";
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		url = "getRCGradeFailDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+		$.post(url, args, function(gfdList){
+			
+			for(var i=0; i<gfdList.length ; i++){
+				if(gfdList[i].grade != "合计"){
+					option8.xAxis.data[i] = gfdList[i].grade + '级';
+				}
+				else{
+					option8.xAxis.data[i] = "全校" ; //得到年级号
+				} 
+				aRateList[i] = parseFloat(gfdList[i].failRate.substring(0,gfdList[i].failRate.length-1));
+			}
+			option8.series[0].data = aRateList;
+			
+			var dom8 = document.getElementById("linePic");
+			var myChart8 = echarts.init(dom8);
+			if (option8 && typeof option8 === "object") {
+			    myChart8.setOption(option8, true);
+			}
+		});
+	
+ 	}
+ 	
+ 	function getSixthPic(){
+ 		var app = {};
+		option9 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option9 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '1门不及格',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '2门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '3门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '≥4门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		var year1 = "${year}";
+		var term1 = "${term}";		
+
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		url = "getRCDepartmentFailDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+
+
+		$.post(url, args, function(dfdList){
+			for(var i = 0; i < dfdList.length ; i++){
+				option9.xAxis[0].data[i] = dfdList[i].departmentName;
+				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+				aRateList[i] = parseFloat(dfdList[i].oneFailRate.substring(0,dfdList[i].oneFailRate.length-1));
+				bRateList[i] = parseFloat(dfdList[i].twoFailRate.substring(0,dfdList[i].twoFailRate.length-1));
+				cRateList[i] = parseFloat(dfdList[i].threeFailRate.substring(0,dfdList[i].threeFailRate.length-1));
+				dRateList[i] = parseFloat(dfdList[i].geFourFailRate.substring(0,dfdList[i].geFourFailRate.length-1));
+			}
+			
+			option9.series[0].data = aRateList;
+			option9.series[1].data = bRateList;
+			option9.series[2].data = cRateList;
+			option9.series[3].data = dRateList;
+			
+			var dom9 = document.getElementById("RCDepartmentFailDistributionListBarPic");
+			var myChart9 = echarts.init(dom9);
+			if (option9 && typeof option9 === "object") {
+			    myChart9.setOption(option9, true);
+			}
+		});
+ 	}
+ 	
+ 	function getSeventhPic(){
+ 		var app = {};
+		option10 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option10 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '1门不及格',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '2门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '3门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '≥4门不及格',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		var year1 = "${year}";
+		var term1 = "${term}";			
+
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		
+		url1 = "getGradeListData";
+		var args1 = {
+			year : year1
+		};
+		$.post(url1, args1, function(gradeList){
+			for(var i=0; i<gradeList.length ; i++){
+				option10.legend.data[i] = gradeList[i];
+				option10.series[i].name = gradeList[i];
+			}
+		}); 
+		url = "getRCDepartmentAllGradeFailDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+		$.post(url, args, function(dagfdList){
+			for(var i = 0; i < dagfdList.length ; i++){
+				option10.xAxis[0].data[i] = dagfdList[i].departmentName;
+				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+				aRateList[i] = parseFloat(dagfdList[i].gradeFourFailRate.substring(0,dagfdList[i].gradeFourFailRate.length-1));
+				bRateList[i] = parseFloat(dagfdList[i].gradeThreeFailRate.substring(0,dagfdList[i].gradeThreeFailRate.length-1));
+				cRateList[i] = parseFloat(dagfdList[i].gradeTwoFailRate.substring(0,dagfdList[i].gradeTwoFailRate.length-1));
+				dRateList[i] = parseFloat(dagfdList[i].gradeOneFailRate.substring(0,dagfdList[i].gradeOneFailRate.length-1));
+			}
+			
+			option10.series[0].data = aRateList;
+			option10.series[1].data = bRateList;
+			option10.series[2].data = cRateList;
+			option10.series[3].data = dRateList;
+			
+			var dom10 = document.getElementById("getRCDepartmentAllGradeFailDistributionListBarPic");
+			var myChart10 = echarts.init(dom10);
+			if (option10 && typeof option10 === "object") {
+			    myChart10.setOption(option10, true);
+			}
+		});
+ 	}
 
 </script>
 
@@ -1375,10 +2202,10 @@
 				<div class="col-12">
 					<div class="card">
 						<div id="scNumberPic"  
-							style="display: none; height: 400%; width: 70%;  position:relative; left:-50px;">
+							style="display:block; height: 400%; width: 70%;  position:relative; left:-50px;">
 						</div>
 						<div id="scRatePic"    
-							style="display: none; height: 400%; width: 70%;  position:relative; left:-50px;">
+							style="display:block; height: 400%; width: 70%;  position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
@@ -1446,9 +2273,9 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="variousScRateBarPic"  style="display:none; height: 400%; width:70%; position:relative; left:-50px;">
+						<div id="variousScRateBarPic"  style="display:block; height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
-						<div id="variousScRateLinePic"  style="display:none;  height: 400%; width:70%; position:relative; left:-50px;">
+						<div id="variousScRateLinePic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
@@ -1515,13 +2342,209 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="RPECScoreRateBarPic"  style="display:none; height: 400%; width:70%; position:relative; left:-50px;">
+						<div id="RPECScoreRateBarPic"  style="display:block; height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
-						<div id="RPECScoreRateLinePic"  style="display:none;  height: 400%; width:70%; position:relative; left:-50px;">
+						<div id="RPECScoreRateLinePic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<section class="content">
+			<div id = "table1" class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 id = "firstGradeDepartmentRPEC" class="card-title">大四各院系必修、专业选修课程成绩情况</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>序号</th> 
+										<th>院系</th>
+										<th>成绩记录总数</th>
+										<th>平均分</th>
+										<th>优秀率</th>
+										<th>良好率</th>
+										<th>中等率</th>
+										<th>及格率</th>
+										<th>不及格率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${ddList }"  var="DepartmentDistribution">
+										<tr>
+											<td>${DepartmentDistribution.id }</td>
+											<td>${DepartmentDistribution.departmentName }</td>
+											<td>${DepartmentDistribution.totalNumber }</td>
+											<td>${DepartmentDistribution.averageScore }</td>
+											<td>${DepartmentDistribution.excellentRate }</td>
+											<td>${DepartmentDistribution.goodRate }</td>
+											<td>${DepartmentDistribution.mediumRate }</td>
+											<td>${DepartmentDistribution.passRate }</td>
+											<td>${DepartmentDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<section class="content">
+			<div id = "table1" class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 id = "secondGradeDepartmentRPEC" class="card-title">大三各院系必修、专业选修课程成绩情况</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>序号</th> 
+										<th>院系</th>
+										<th>成绩记录总数</th>
+										<th>平均分</th>
+										<th>优秀率</th>
+										<th>良好率</th>
+										<th>中等率</th>
+										<th>及格率</th>
+										<th>不及格率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${ddList1 }"  var="DepartmentDistribution">
+										<tr>
+											<td>${DepartmentDistribution.id }</td>
+											<td>${DepartmentDistribution.departmentName }</td>
+											<td>${DepartmentDistribution.totalNumber }</td>
+											<td>${DepartmentDistribution.averageScore }</td>
+											<td>${DepartmentDistribution.excellentRate }</td>
+											<td>${DepartmentDistribution.goodRate }</td>
+											<td>${DepartmentDistribution.mediumRate }</td>
+											<td>${DepartmentDistribution.passRate }</td>
+											<td>${DepartmentDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<section class="content">
+			<div id = "table1" class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 id = "thirdGradeDepartmentRPEC" class="card-title">大二各院系必修、专业选修课程成绩情况</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>序号</th> 
+										<th>院系</th>
+										<th>成绩记录总数</th>
+										<th>平均分</th>
+										<th>优秀率</th>
+										<th>良好率</th>
+										<th>中等率</th>
+										<th>及格率</th>
+										<th>不及格率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${ddList2 }"  var="DepartmentDistribution">
+										<tr>
+											<td>${DepartmentDistribution.id }</td>
+											<td>${DepartmentDistribution.departmentName }</td>
+											<td>${DepartmentDistribution.totalNumber }</td>
+											<td>${DepartmentDistribution.averageScore }</td>
+											<td>${DepartmentDistribution.excellentRate }</td>
+											<td>${DepartmentDistribution.goodRate }</td>
+											<td>${DepartmentDistribution.mediumRate }</td>
+											<td>${DepartmentDistribution.passRate }</td>
+											<td>${DepartmentDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<section class="content">
+			<div id = "table1" class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 id = "forthGradeDepartmentRPEC" class="card-title">大一各院系必修、专业选修课程成绩情况</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>序号</th> 
+										<th>院系</th>
+										<th>成绩记录总数</th>
+										<th>平均分</th>
+										<th>优秀率</th>
+										<th>良好率</th>
+										<th>中等率</th>
+										<th>及格率</th>
+										<th>不及格率</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${ddList3 }"  var="DepartmentDistribution">
+										<tr>
+											<td>${DepartmentDistribution.id }</td>
+											<td>${DepartmentDistribution.departmentName }</td>
+											<td>${DepartmentDistribution.totalNumber }</td>
+											<td>${DepartmentDistribution.averageScore }</td>
+											<td>${DepartmentDistribution.excellentRate }</td>
+											<td>${DepartmentDistribution.goodRate }</td>
+											<td>${DepartmentDistribution.mediumRate }</td>
+											<td>${DepartmentDistribution.passRate }</td>
+											<td>${DepartmentDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
 			
 			<section class="content">
 			<div class="row">
@@ -1581,6 +2604,224 @@
 			</div>
 			<!-- /.row --> 
 			</section>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="RPECDepartmentAllGradeAverageScoreComparePic"
+							style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">全校本科生不及格整体情况</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th rowspan="2"><center>年级</center></th>
+										<th colspan="8"><center>不及格学生情况（人数）</center></th>
+										<th rowspan="2"><center>不及格人数合计</center></th>
+										<th rowspan="2"><center>年级人数</center></th>
+										<th rowspan="2"><center>学生不及格率</center></th>
+									</tr>
+									<tr>
+										<td>1门不及格</td>
+										<td>2门不及格</td>
+										<td>3门不及格</td>
+										<td>4门不及格</td>
+										<td>5门不及格</td>
+										<td>6门不及格</td>
+										<td>7门不及格</td>
+										<td>8门不及格</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${gfdList}" var="GradeFailDistribution">
+										<tr>
+											<td>${GradeFailDistribution.grade }</td>
+											<td>${GradeFailDistribution.oneFailNumber }</td>
+											<td>${GradeFailDistribution.twoFailNumber }</td>
+											<td>${GradeFailDistribution.threeFailNumber }</td>
+											<td>${GradeFailDistribution.fourFailNumber }</td>
+											<td>${GradeFailDistribution.fiveFailNumber }</td>
+											<td>${GradeFailDistribution.sixFailNumber }</td>
+											<td>${GradeFailDistribution.sevenFailNumber }</td>
+											<td>${GradeFailDistribution.eightFailNumber }</td>
+											<td>${GradeFailDistribution.totalFailNumber }</td>
+											<td>${GradeFailDistribution.totalStudentNumber }</td>
+											<td>${GradeFailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="barPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+						<div id="linePic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">各院系不及格学生整体情况分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th rowspan="2"><center>序号</center></th>
+										<th rowspan="2"><center>院系</center></th>
+										<th rowspan="2"><center>参与统计学生总数</center></th>
+										<th colspan="5"><center>不及格学生情况</center></th>
+										<th rowspan="2"><center>学生不及格率</center></th>
+											
+									</tr>
+									<tr>
+										<td>1门不及格人数</td>
+										<td>2门不及格人数</td>
+										<td>3门不及格人数</td>
+										<td>≥4门不及格人数</td>
+										<td>不及格总人数</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${dfdList}" var="DepartmentFailDistribution">
+										<tr>
+											<td>${DepartmentFailDistribution.id }</td>
+											<td>${DepartmentFailDistribution.departmentName }</td>
+											<td>${DepartmentFailDistribution.totalStudentNumber }</td>
+											<td>${DepartmentFailDistribution.oneFailNumber }</td>
+											<td>${DepartmentFailDistribution.twoFailNumber }</td>
+											<td>${DepartmentFailDistribution.threeFailNumber }</td>
+											<td>${DepartmentFailDistribution.geFourFailNumber }</td>
+											<td>${DepartmentFailDistribution.totalFailNumber }</td>
+											<td>${DepartmentFailDistribution.totalFailRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="RCDepartmentFailDistributionListBarPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">各院系分年级学生不及格情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th rowspan="2"><center>序号</center></th>
+										<th rowspan="2"><center>院系</center></th>
+										<c:forEach items="${gradeListString}" var="keyword" varStatus="id">
+										<th colspan="3"><center>${keyword}</center></th>
+										</c:forEach>
+											
+									</tr>
+									<tr>
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+										
+										<td>学生数</td>
+										<td>不及格数</td>
+										<td>不及格率</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${dagfdList}" var="DepartmentAllGradeFailDistribution">
+										<tr>
+											<td>${DepartmentAllGradeFailDistribution.id }</td>
+											<td>${DepartmentAllGradeFailDistribution.departmentName }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeFourFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailRate }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneStudentNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneFailNumber }</td>
+											<td>${DepartmentAllGradeFailDistribution.gradeOneFailRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="getRCDepartmentAllGradeFailDistributionListBarPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
 			
 		</div>
 	</div>
