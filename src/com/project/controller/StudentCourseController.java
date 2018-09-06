@@ -850,7 +850,6 @@ public class StudentCourseController {
 			List<BasicCourseClassDistribution> bccdList = new ArrayList<>();
 			bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
 			map.put("bccdList", bccdList);
-			System.out.println(bccdList);
 		}
 		return "getBasicCourseClassDistributionListByCourseName";
 	}
@@ -874,27 +873,37 @@ public class StudentCourseController {
 		return "readyPrint";
 	}
 	
-//	firstTermCourse.push("大学英语（一）");
-//	firstTermCourse.push("大学计算机基础A");
-//	firstTermCourse.push("普通化学");
-//	firstTermCourse.push("线性代数与解析几何A");
-//	firstTermCourse.push("微积分A（一）");
-//	firstTermCourse.push("大学英语（三）");
-//	firstTermCourse.push("大学物理下A");
-//	firstTermCourse.push("大学物理下B");
-//	firstTermCourse.push("大学物理实验（二）");
-//	firstTermCourse.push("复变函数与积分变换");
-//	
-//	secondTermCourse.push("大学英语（二）");
-//	secondTermCourse.push("程序设计基础");
-//	secondTermCourse.push("大学物理上");
-//	secondTermCourse.push("概率论与数理统计");
-//	secondTermCourse.push("微积分A（二）");
-//	secondTermCourse.push("工程图学基础");
-//	secondTermCourse.push("工程实践A");
-//	secondTermCourse.push("机械设计基础B");
-//	secondTermCourse.push("大学英语（四）");
-	
+	public List<String> getCourseList(Integer term){
+		List<String> courseList = new ArrayList<>();
+		if (term == 1) {
+			courseList.add("大学英语（三）");
+			courseList.add("大学物理下A");
+			courseList.add("大学物理下B");
+			courseList.add("大学物理实验（二）");
+			courseList.add("复变函数与积分变换");
+			courseList.add("大学英语（一）");
+			courseList.add("大学计算机基础A");
+			courseList.add("普通化学");
+			courseList.add("线性代数与解析几何A");
+			courseList.add("微积分A（一）");
+		}
+		else if(term == 2) {
+			courseList.add("大学英语（六）");
+			courseList.add("电子电路综合实验");
+			courseList.add("管理学B");
+			courseList.add("工程实践A");
+			courseList.add("机械设计基础B");
+			courseList.add("大学英语（四）");
+			courseList.add("模拟电子技术");
+			courseList.add("大学英语（二）");
+			courseList.add("程序设计基础");
+			courseList.add("大学物理上");
+			courseList.add("概率论与数理统计");
+			courseList.add("微积分A（二）");
+			courseList.add("工程图学基础");
+		}
+		return courseList;
+	}
 	
 	/**
 	 * 跳转至打印预览页面
@@ -956,22 +965,75 @@ public class StudentCourseController {
 //		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
 //				.getRCDepartmentAllGradeFailDistributionList(year, term);
 //		map.put("dagfdList", dagfdList);  //第三章第三个功能
-		
+//		
 //		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
 //		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
 //		map.put("gadList", gadList);    //第三章第五个功能
+//		
+//		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+//		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+//		map.put("bcodList", bcodList);  //第四章第一个功能
+//		
+//		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
+//		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
+//		for (int i=0 ; i<bcddListList.size() ; i++) {
+//			String bcddListNumber = "bcddList" + String.valueOf(i);
+//			map.put(bcddListNumber,bcddListList.get(i));
+//		}                                //第四章第二个功能
+//		
+//		List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(0), year, term);
+//		map.put("cefdList", cefdList);
+//		
+//		List<ClassExcellentFailDistribution> cefdList1 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(1), year, term);
+//		map.put("cefdList1", cefdList1);
+//		
+//		List<ClassExcellentFailDistribution> cefdList2 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(2), year, term);
+//		map.put("cefdList2", cefdList2);
+//		
+//		List<ClassExcellentFailDistribution> cefdList3 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(3), year, term);
+//		map.put("cefdList3", cefdList3);      //第二章第三个功能
 		
-		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
-		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
-		map.put("bcodList", bcodList);  //第四章第一个功能
+		List <String> courseList = getCourseList(term);
+		List<BasicCourseClassDistribution> bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(0), year, term);
+		map.put("bccdList", bccdList);
 		
-		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
-		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
-		for (int i=0 ; i<bcddListList.size() ; i++) {
-			String bcddListNumber = "bcddList" + String.valueOf(i);
-			map.put(bcddListNumber,bcddListList.get(i));
+		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
+		map.put("bccdList1", bccdList1);
+		
+		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
+		map.put("bccdList2", bccdList2);
+		
+		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
+		map.put("bccdList3", bccdList3);
+		
+		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
+		map.put("bccdList4", bccdList4);
+		
+		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
+		map.put("bccdList5", bccdList5);
+		
+		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
+		map.put("bccdList6", bccdList6);
+		
+		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
+		map.put("bccdList7", bccdList7);
+		
+		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
+		map.put("bccdList8", bccdList8);
+
+		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
+		map.put("bccdList9", bccdList9);
+		
+		if(term == 2) {
+			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
+			map.put("bccdList10", bccdList10);
+			
+			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
+			map.put("bccdList11", bccdList11);
+
+			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
+			map.put("bccdList12", bccdList12);
 		}
-		
 		
 		return "print";
 	}
