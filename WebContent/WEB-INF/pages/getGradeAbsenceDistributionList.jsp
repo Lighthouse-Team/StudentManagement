@@ -204,7 +204,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${dagfdList }" var="GradeAbsenceDistribution">
+									<c:forEach items="${gadList }" var="GradeAbsenceDistribution">
 										<tr>
 											<td>${GradeAbsenceDistribution.grade }</td>
 											<td>${GradeAbsenceDistribution.totalAbsenceNumber }</td>

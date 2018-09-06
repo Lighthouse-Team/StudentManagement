@@ -678,7 +678,7 @@ public class StudentCourseController {
 			
 			List<GradeAbsenceDistribution> gadList = new ArrayList<>();
 			gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
-			map.put("dagfdList", gadList);
+			map.put("gadList", gadList);
 			
 		}
 		return "getGradeAbsenceDistributionList";
@@ -874,8 +874,30 @@ public class StudentCourseController {
 		return "readyPrint";
 	}
 	
+//	firstTermCourse.push("大学英语（一）");
+//	firstTermCourse.push("大学计算机基础A");
+//	firstTermCourse.push("普通化学");
+//	firstTermCourse.push("线性代数与解析几何A");
+//	firstTermCourse.push("微积分A（一）");
+//	firstTermCourse.push("大学英语（三）");
+//	firstTermCourse.push("大学物理下A");
+//	firstTermCourse.push("大学物理下B");
+//	firstTermCourse.push("大学物理实验（二）");
+//	firstTermCourse.push("复变函数与积分变换");
+//	
+//	secondTermCourse.push("大学英语（二）");
+//	secondTermCourse.push("程序设计基础");
+//	secondTermCourse.push("大学物理上");
+//	secondTermCourse.push("概率论与数理统计");
+//	secondTermCourse.push("微积分A（二）");
+//	secondTermCourse.push("工程图学基础");
+//	secondTermCourse.push("工程实践A");
+//	secondTermCourse.push("机械设计基础B");
+//	secondTermCourse.push("大学英语（四）");
+	
+	
 	/**
-	 * 跳转至打印页面
+	 * 跳转至打印预览页面
 	 */
 	@RequestMapping("/print")
 	public String print(HttpSession session, Map<String, Object> map,
@@ -885,42 +907,11 @@ public class StudentCourseController {
 		map.put("year", year);
 		map.put("term", term);
 		
-		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
-		map.put("odList", odList);  //第一章第一个功能
-		
-		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
-		map.put("odList1", odList1); //第一章第二个功能
-		
-		List<OverallDistribution> odList2 = studentCourseService.getRPECOverallDistributionList(year, term);
-		map.put("odList2", odList2); //第二章第一个功能
-		
 		int yearSelected = Integer.parseInt(year.substring(0,4));
 		List<Integer> gradeList = new ArrayList<>();
 		for(int i=0; i<4; i++) {
 			gradeList.add(yearSelected - 3 + i);
 		}
-		
-		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
-		map.put("ddList", ddList);
-		
-		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
-		map.put("ddList1", ddList1);
-		
-		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
-		map.put("ddList2", ddList2);
-		
-		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
-		map.put("ddList3", ddList3);           //第二章第二个功能
-		
-		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
-		map.put("dagascList", dagascList);  //第二章第四个功能 
-		
-		List<GradeFailDistribution> gfdList = new ArrayList<>();
-		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
-		map.put("gfdList", gfdList);      //第三章第一个功能
-		
-		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
-		map.put("dfdList", dfdList);     //第三章第二个功能
 		
 		List<String> gradeListString = new ArrayList<>();
 		for(int i=0; i<4; i++) {
@@ -928,9 +919,59 @@ public class StudentCourseController {
 		}
 		map.put("gradeListString", gradeListString);
 		
-		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
-				.getRCDepartmentAllGradeFailDistributionList(year, term);
-		map.put("dagfdList", dagfdList);
+		
+//		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+//		map.put("odList", odList);  //第一章第一个功能
+//		
+//		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+//		map.put("odList1", odList1); //第一章第二个功能
+//		
+//		List<OverallDistribution> odList2 = studentCourseService.getRPECOverallDistributionList(year, term);
+//		map.put("odList2", odList2); //第二章第一个功能
+//
+//		
+//		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
+//		map.put("ddList", ddList);
+//		
+//		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
+//		map.put("ddList1", ddList1);
+//		
+//		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
+//		map.put("ddList2", ddList2);
+//		
+//		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
+//		map.put("ddList3", ddList3);           //第二章第二个功能
+//		
+//		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+//		map.put("dagascList", dagascList);  //第二章第四个功能 
+//		
+//		List<GradeFailDistribution> gfdList = new ArrayList<>();
+//		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
+//		map.put("gfdList", gfdList);      //第三章第一个功能
+//		
+//		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
+//		map.put("dfdList", dfdList);     //第三章第二个功能
+//		
+//		
+//		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+//				.getRCDepartmentAllGradeFailDistributionList(year, term);
+//		map.put("dagfdList", dagfdList);  //第三章第三个功能
+		
+//		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+//		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
+//		map.put("gadList", gadList);    //第三章第五个功能
+		
+		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+		map.put("bcodList", bcodList);  //第四章第一个功能
+		
+		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
+		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
+		for (int i=0 ; i<bcddListList.size() ; i++) {
+			String bcddListNumber = "bcddList" + String.valueOf(i);
+			map.put(bcddListNumber,bcddListList.get(i));
+		}
+		
 		
 		return "print";
 	}

@@ -141,7 +141,7 @@
 	        "info": false, //去掉表格底部信息
 	    });
 	  
-/*   		getFirstPic();      //第一章第一个功能成绩分析图
+/*    		getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
@@ -149,8 +149,10 @@
 		getForthPic(); 
  		getFifthPic1();
 		getFifthPic2();     //第三章第一个功能 
-		getSixthPic();      //第三章第二个功能 */
-		getSeventhPic();
+		getSixthPic();      //第三章第二个功能 
+		getSeventhPic();    //第三章第三个功能  */
+		
+/* 		getEighthPic();     //第四章第一个功能 */
 	});
 	
 	$(function() {
@@ -2112,6 +2114,192 @@
 			}
 		});
  	}
+ 	
+ 	function getEighthPic(){
+ 		var app = {};
+		option11 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option11 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;
+		
+		var year1 = "${year}";
+		var term1 = "${term}";			
+
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		url = "getBasicCourseOverallDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+
+		$.post(url, args, function(bcodList){
+			for(var i = 0; i < bcodList.length ; i++){
+				option11.xAxis[0].data[i] = bcodList[i].courseName;
+				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+				aRateList[i] = parseFloat(bcodList[i].excellentRate.substring(0,bcodList[i].excellentRate.length-1));
+				bRateList[i] = parseFloat(bcodList[i].failRate.substring(0,bcodList[i].failRate.length-1));
+			}
+			
+			option11.series[0].data = aRateList;
+			option11.series[1].data = bRateList;
+			
+			var dom11 = document.getElementById("basicCourseOverallDistributionListBarPic");
+			var myChart11 = echarts.init(dom11);
+			if (option11 && typeof option11 === "object") {
+			    myChart11.setOption(option11, true);
+			}
+		});
+		
+ 	}
 
 </script>
 
@@ -2818,6 +3006,106 @@
 				<div class="col-12">
 					<div class="card">
 						<div id="getRCDepartmentAllGradeFailDistributionListBarPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">各年级缺考情况统计</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped" >
+								<thead>
+									<tr>
+										<th>年级</th>
+										<th>缺考总数</th>
+										<th>必修</th>
+										<th>专业选修</th>
+										<th>通识教育</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${gadList }" var="GradeAbsenceDistribution">
+										<tr>
+											<td>${GradeAbsenceDistribution.grade }</td>
+											<td>${GradeAbsenceDistribution.totalAbsenceNumber }</td>
+											<td>${GradeAbsenceDistribution.rcAbsenceNumber }</td>
+											<td>${GradeAbsenceDistribution.pecAbsenceNumber }</td>
+											<td>${GradeAbsenceDistribution.gecAbsenceNumber }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+						<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">主要基础课程成绩情况分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>年级</center></th>
+										<th><center>课程名称</center></th>
+										<th><center>成绩总数</center></th>
+										<th><center>优秀数</center></th>
+										<th><center>优秀率</center></th>
+										<th><center>不及格数</center></th>
+										<th><center>不及格率</center></th>
+										<th><center>平均分</center></th>
+											
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcodList}" var="BasicCourseOverallDistribution">
+										<tr>
+											<td>${BasicCourseOverallDistribution.id }</td>
+											<td>${BasicCourseOverallDistribution.grade }</td>
+											<td>${BasicCourseOverallDistribution.courseName }</td>
+											<td>${BasicCourseOverallDistribution.totalNumber }</td>
+											<td>${BasicCourseOverallDistribution.excellentNumber }</td>
+											<td>${BasicCourseOverallDistribution.excellentRate }</td>
+											<td>${BasicCourseOverallDistribution.failNumber }</td>
+											<td>${BasicCourseOverallDistribution.failRate }</td>
+											<td>${BasicCourseOverallDistribution.averageScore }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseOverallDistributionListBarPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
