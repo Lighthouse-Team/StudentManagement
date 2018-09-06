@@ -112,8 +112,19 @@
 <script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 	
-	$(function() {     
+	$(function() {   
+		alert("2222");
+		/* 基础课程上学期和下学期不一样 判断处理 */
+		var term1 = "${term}";
+		if(term1 == "2"){
+			var firstTermAddCourse = document.getElementById("firstTermAddCourse");
+			firstTermAddCourse.style.display = "none";
+		}
+/* 		else{
+			getNinthPic9(); //如果选择为第一学期，需要显示多一个课程的成绩分析图
+		} */
 		
+		/* 表格标题处理 */
  		var year1 = "${year}";
 		var yearSelected = parseInt(year1.substring(0,4));
 		
@@ -134,8 +145,9 @@
 		
 		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
 		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
-	    $('#example1').dataTable({
-	        bFilter: false,    //去掉搜索框方法三：这种方法可以
+	    /* 处理表格分页搜索底部信息显示搜索方法栏 */
+		$('#example1').dataTable({
+	        bFilter: false,    //去掉搜索框
 	        bLengthChange: false,   //去掉每页显示多少条数据方法
 	        "paging" : false, //去掉底部分页框
 	        "info": false, //去掉表格底部信息
@@ -153,6 +165,16 @@
 		getSeventhPic();    //第三章第三个功能  */
 		
 /* 		getEighthPic();     //第四章第一个功能 */
+		getNinthPic0();
+/* 		getNinthPic1();
+		getNinthPic2();
+		getNinthPic3();
+		getNinthPic4();
+		getNinthPic5();
+		getNinthPic6();
+		getNinthPic7();
+		getNinthPic8(); */
+
 	});
 	
 	$(function() {
@@ -2300,6 +2322,217 @@
 		});
 		
  	}
+ 	
+ 	function getNinthPic0(){
+ 		var app = {};
+		option12 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option12 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;
+		
+		var courseList = new Array();
+		var year1 = "${year}";
+		var term1 = "${term}";	
+		if (term1 == "1"){
+			courseList.push("大学英语（三）");
+			courseList.push("大学物理下A");
+			courseList.push("大学物理下B");
+			courseList.push("大学物理实验（二）");
+			courseList.push("复变函数与积分变换");
+			courseList.push("大学英语（一）");
+			courseList.push("大学计算机基础A");
+			courseList.push("普通化学");
+			courseList.push("线性代数与解析几何A");
+			courseList.push("微积分A（一）");
+		}
+		else{
+			courseList.push("工程实践A");
+			courseList.push("机械设计基础B");
+			courseList.push("大学英语（四）");
+			courseList.push("大学英语（二）");
+			courseList.push("程序设计基础");
+			courseList.push("大学物理上");
+			courseList.push("概率论与数理统计");
+			courseList.push("微积分A（二）");
+			courseList.push("工程图学基础");
+		}
+		alert(courseList[0]);
+		
+		/* 与后台连接传递数据 */
+		var aRateList = new Array();
+		var bRateList = new Array();
+		url = "getBasicCourseDetailDistributionListByCourseNameData";
+		var args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[0]
+		};
+
+		$.post(url, args, function(bcddList){
+			for(var i = 0; i < bcddList.length ; i++){
+				option12.xAxis[0].data[i] = bcddList[i].departmentName;
+				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+				aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+				bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+			}
+			
+			option12.series[0].data = aRateList;
+			option12.series[1].data = bRateList;
+			
+			var dom12 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic0");
+			var myChart12 = echarts.init(dom12);
+			if (option12 && typeof option12 === "object") {
+			    myChart12.setOption(option12, true);
+			}
+		});
+ 	}
 
 </script>
 
@@ -3106,6 +3339,544 @@
 				<div class="col-12">
 					<div class="card">
 						<div id="basicCourseOverallDistributionListBarPic"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList0}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic0"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList1}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic1"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>			
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList2}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic2"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>			
+			
+						<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList3}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic3"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList4}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic4"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList5}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic5"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList6}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic6"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList7}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+		    <div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic7"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList8}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			</section>
+			
+		    <div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic8"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id = "firstTermAddCourse" class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th><center>序号</center></th>
+										<th><center>院系</center></th>
+										<th><center>成绩数</center></th>
+										<th><center>优秀人数</center></th>
+										<th><center>优秀率</center></th> 
+										<th><center>不及格人数</center></th>
+										<th><center>不及格率</center></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${bcddList9}" var="BasicCourseDetailDistribution">
+										<tr>
+											<td>${BasicCourseDetailDistribution.id }</td>
+											<td>${BasicCourseDetailDistribution.departmentName }</td>
+											<td>${BasicCourseDetailDistribution.totalStudentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentNumber }</td>
+											<td>${BasicCourseDetailDistribution.excellentRate }</td>
+											<td>${BasicCourseDetailDistribution.failNumber }</td>
+											<td>${BasicCourseDetailDistribution.failRate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row --> 
+			
+	        <div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic9"  style="display:block;  height: 400%; width:70%; position:relative; left:-50px;">
 						</div>
 					</div>
 				</div>
