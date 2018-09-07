@@ -116,6 +116,28 @@
 		/* 基础课程上学期和下学期不一样 判断处理 */
 		var term1 = "${term}";
 		if(term1 == "1"){
+			
+			var courseDepartmentTitle = document.getElementById("courseDepartmentTitle");
+			courseDepartmentTitle.innerHTML = "大学英语（三）" + "成绩情况";
+			var courseDepartmentTitle1 = document.getElementById("courseDepartmentTitle1");
+			courseDepartmentTitle1.innerHTML = "大学物理下A"+ "成绩情况";
+			var courseDepartmentTitle2 = document.getElementById("courseDepartmentTitle2");
+			id=courseDepartmentTitle2.innerHTML = "大学物理下B"+ "成绩情况";
+			var courseDepartmentTitle3 = document.getElementById("courseDepartmentTitle3");
+			courseDepartmentTitle3.innerHTML = "大学物理实验（二）"+ "成绩情况";
+			var courseDepartmentTitle4 = document.getElementById("courseDepartmentTitle4");
+			courseDepartmentTitle4.innerHTML = "复变函数与积分变换"+ "成绩情况";
+			var courseDepartmentTitle5 = document.getElementById("courseDepartmentTitle5");
+			courseDepartmentTitle5.innerHTML = "大学英语（一）"+ "成绩情况";
+			var courseDepartmentTitle6 = document.getElementById("courseDepartmentTitle6");
+			courseDepartmentTitle6.innerHTML = "大学计算机基础A"+ "成绩情况";
+			var courseDepartmentTitle7 = document.getElementById("courseDepartmentTitle7");
+			courseDepartmentTitle7.innerHTML = "普通化学"+ "成绩情况";
+			var courseDepartmentTitle8 = document.getElementById("courseDepartmentTitle8");
+			courseDepartmentTitle8.innerHTML = "线性代数与解析几何A"+ "成绩情况";
+			var courseDepartmentTitle9 = document.getElementById("courseDepartmentTitle9");
+			courseDepartmentTitle9.innerHTML = "微积分A（一）"+ "成绩情况";
+			
 			var courseTitle = document.getElementById("courseTitle");
 			courseTitle.innerHTML = "大学英语（三）" + "各班级优秀率、不及格率情况";
 			var courseTitle1 = document.getElementById("courseTitle1");
@@ -150,6 +172,25 @@
 		else if(term1 == "2"){
 			var firstTermAddCourse = document.getElementById("firstTermAddCourse");
 			firstTermAddCourse.style.display = "none";
+			
+			var courseDepartmentTitle = document.getElementById("courseDepartmentTitle");
+			courseDepartmentTitle.innerHTML = "工程实践A" + "成绩情况";
+			var courseDepartmentTitle1 = document.getElementById("courseDepartmentTitle1");
+			courseDepartmentTitle1.innerHTML = "机械设计基础B"+ "成绩情况";
+			var courseDepartmentTitle2 = document.getElementById("courseDepartmentTitle2");
+			id=courseDepartmentTitle2.innerHTML = "大学英语（四）"+ "成绩情况";
+			var courseDepartmentTitle3 = document.getElementById("courseDepartmentTitle3");
+			courseDepartmentTitle3.innerHTML = "大学英语（二）"+ "成绩情况";
+			var courseDepartmentTitle4 = document.getElementById("courseDepartmentTitle4");
+			courseDepartmentTitle4.innerHTML = "程序设计基础"+ "成绩情况";
+			var courseDepartmentTitle5 = document.getElementById("courseDepartmentTitle5");
+			courseDepartmentTitle5.innerHTML = "大学物理上"+ "成绩情况";
+			var courseDepartmentTitle6 = document.getElementById("courseDepartmentTitle6");
+			courseDepartmentTitle6.innerHTML = "概率论与数理统计"+ "成绩情况";
+			var courseDepartmentTitle7 = document.getElementById("courseDepartmentTitle7");
+			courseDepartmentTitle7.innerHTML = "微积分A（二）"+ "成绩情况";
+			var courseDepartmentTitle8 = document.getElementById("courseDepartmentTitle8");
+			courseDepartmentTitle8.innerHTML = "工程图学基础"+ "成绩情况";
 			
 			var courseTitle = document.getElementById("courseTitle");
 			courseTitle.innerHTML = "大学英语（六）"+ "各班级优秀率、不及格率情况";
@@ -219,7 +260,7 @@
 	        "info": false, //去掉表格底部信息
 	    });
 	  
-/*    		getFirstPic();      //第一章第一个功能成绩分析图
+ 	    getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
@@ -230,7 +271,7 @@
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图     */
+		getNinthPic();      //第四章第二个功能9张或10张分析图     
 
 	});
 	
@@ -2821,13 +2862,11 @@
 
 
 </head>
-<!-- onload="window.print(); -->
 <body class="hold-transition sidebar-mini" >
 	<div class="wrapper">
 		<%@include file="/menu.jsp"%>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<section class="content-header">
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
@@ -2841,9 +2880,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- /.container-fluid --> </section>
 
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -2899,7 +2936,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 
 			<div class="row">
 				<div class="col-12">
@@ -2914,7 +2950,6 @@
 				</div>
 			</div>
 
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -2971,7 +3006,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -2985,7 +3019,6 @@
 			</div>
 			
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3040,7 +3073,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3053,7 +3085,6 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3100,9 +3131,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
-			<section class="content">
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3149,9 +3178,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
-			<section class="content">
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3198,9 +3225,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
-			<section class="content">
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3247,9 +3272,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3306,7 +3329,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 
 			<div class="row">
 				<div class="col-12">
@@ -3318,7 +3340,6 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3374,7 +3395,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 
 			<div class="row">
 				<div class="col-12">
@@ -3387,7 +3407,6 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3438,7 +3457,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3449,7 +3467,6 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3515,7 +3532,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3526,7 +3542,6 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3565,9 +3580,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
-						<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3615,7 +3628,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3626,12 +3638,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3669,7 +3680,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3680,12 +3690,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle1" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3723,7 +3732,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3734,12 +3742,11 @@
 				</div>
 			</div>			
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle2" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3777,7 +3784,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3788,12 +3794,11 @@
 				</div>
 			</div>			
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle3" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3831,7 +3836,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3842,12 +3846,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle4" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3885,7 +3888,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3896,12 +3898,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle5" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3939,7 +3940,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3950,12 +3950,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle6" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -3993,7 +3992,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 			<div class="row">
 				<div class="col-12">
@@ -4004,12 +4002,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle7" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -4047,7 +4044,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 		    <div class="row">
 				<div class="col-12">
@@ -4058,12 +4054,11 @@
 				</div>
 			</div>
 			
-			<section class="content">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle8" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -4101,7 +4096,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 			
 		    <div class="row">
 				<div class="col-12">
@@ -4116,7 +4110,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
+							<h3 id="courseDepartmentTitle9" class="card-title" id = "head">主要基础课程成绩情况统计分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
