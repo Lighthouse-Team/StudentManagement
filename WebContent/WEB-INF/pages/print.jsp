@@ -260,7 +260,7 @@
 	        "info": false, //去掉表格底部信息
 	    });
 	  
- 	    getFirstPic();      //第一章第一个功能成绩分析图
+/*  	    getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
@@ -271,7 +271,7 @@
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图     
+		getNinthPic();      //第四章第二个功能9张或10张分析图      */
 
 	});
 	
@@ -2884,7 +2884,8 @@
 					</div>
 				</div>
 			</div>
-
+			<h2>第一章 总体成绩分析</h2>
+			<h3>各年级本科生总体分布情况</h3>
 			<div id = "sss" class="row">
 				<div class="col-12">
 					<div class="card">

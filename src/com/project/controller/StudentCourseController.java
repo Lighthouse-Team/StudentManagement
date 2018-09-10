@@ -929,111 +929,111 @@ public class StudentCourseController {
 		map.put("gradeListString", gradeListString);
 		
 		
-		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
-		map.put("odList", odList);  //第一章第一个功能
+//		List<OverallDistribution> odList = studentCourseService.getACOverallDistributionList(year, term);
+//		map.put("odList", odList);  //第一章第一个功能
+//		
+//		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
+//		map.put("odList1", odList1); //第一章第二个功能
+//		
+//		List<OverallDistribution> odList2 = studentCourseService.getRPECOverallDistributionList(year, term);
+//		map.put("odList2", odList2); //第二章第一个功能
+//
+//		
+//		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
+//		map.put("ddList", ddList);
+//		
+//		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
+//		map.put("ddList1", ddList1);
+//		
+//		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
+//		map.put("ddList2", ddList2);
+//		
+//		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
+//		map.put("ddList3", ddList3);           //第二章第二个功能
+//		
+//		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
+//		map.put("dagascList", dagascList);  //第二章第四个功能 
+//		
+//		List<GradeFailDistribution> gfdList = new ArrayList<>();
+//		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
+//		map.put("gfdList", gfdList);      //第三章第一个功能
+//		
+//		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
+//		map.put("dfdList", dfdList);     //第三章第二个功能
+//		
+//		
+//		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
+//				.getRCDepartmentAllGradeFailDistributionList(year, term);
+//		map.put("dagfdList", dagfdList);  //第三章第三个功能
+//		
+//		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+//		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
+//		map.put("gadList", gadList);    //第三章第五个功能
+//		
+//		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+//		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
+//		map.put("bcodList", bcodList);  //第四章第一个功能
+//		
+//		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
+//		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
+//		for (int i=0 ; i<bcddListList.size() ; i++) {
+//			String bcddListNumber = "bcddList" + String.valueOf(i);
+//			map.put(bcddListNumber,bcddListList.get(i));
+//		}                                //第四章第二个功能
 		
-		List<OverallDistribution> odList1 = studentCourseService.getAGOverallDistributionList(year, term);
-		map.put("odList1", odList1); //第一章第二个功能
-		
-		List<OverallDistribution> odList2 = studentCourseService.getRPECOverallDistributionList(year, term);
-		map.put("odList2", odList2); //第二章第一个功能
-
-		
-		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
-		map.put("ddList", ddList);
-		
-		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
-		map.put("ddList1", ddList1);
-		
-		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
-		map.put("ddList2", ddList2);
-		
-		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
-		map.put("ddList3", ddList3);           //第二章第二个功能
-		
-		List<DepartmentAllGradeAverageScoreCompare> dagascList = studentCourseService.getRPECDepartmentAllGradeAverageScoreCompareList(year, term);
-		map.put("dagascList", dagascList);  //第二章第四个功能 
-		
-		List<GradeFailDistribution> gfdList = new ArrayList<>();
-		gfdList = studentCourseService.getRCGradeFailDistributionList(year, term);
-		map.put("gfdList", gfdList);      //第三章第一个功能
-		
-		List<DepartmentFailDistribution> dfdList = studentCourseService.getRCDepartmentFailDistributionList(year, term);
-		map.put("dfdList", dfdList);     //第三章第二个功能
-		
-		
-		List<DepartmentAllGradeFailDistribution> dagfdList = studentCourseService
-				.getRCDepartmentAllGradeFailDistributionList(year, term);
-		map.put("dagfdList", dagfdList);  //第三章第三个功能
-		
-		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
-		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
-		map.put("gadList", gadList);    //第三章第五个功能
-		
-		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
-		bcodList = studentCourseService.getBasicCourseOverallDistributionList(year, term);
-		map.put("bcodList", bcodList);  //第四章第一个功能
-		
-		List<List<BasicCourseDetailDistribution>> bcddListList = new ArrayList<>();
-		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
-		for (int i=0 ; i<bcddListList.size() ; i++) {
-			String bcddListNumber = "bcddList" + String.valueOf(i);
-			map.put(bcddListNumber,bcddListList.get(i));
-		}                                //第四章第二个功能
-		
-		List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(0), year, term);
-		map.put("cefdList", cefdList);
-		
-		List<ClassExcellentFailDistribution> cefdList1 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(1), year, term);
-		map.put("cefdList1", cefdList1);
-		
-		List<ClassExcellentFailDistribution> cefdList2 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(2), year, term);
-		map.put("cefdList2", cefdList2);
-		
-		List<ClassExcellentFailDistribution> cefdList3 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(3), year, term);
-		map.put("cefdList3", cefdList3);      //第二章第三个功能
-		
-		List <String> courseList = getCourseList(term);
-		List<BasicCourseClassDistribution> bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(0), year, term);
-		map.put("bccdList", bccdList);
-		
-		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
-		map.put("bccdList1", bccdList1);
-		
-		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
-		map.put("bccdList2", bccdList2);
-		
-		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
-		map.put("bccdList3", bccdList3);
-		
-		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
-		map.put("bccdList4", bccdList4);
-		
-		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
-		map.put("bccdList5", bccdList5);
-		
-		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
-		map.put("bccdList6", bccdList6);
-		
-		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
-		map.put("bccdList7", bccdList7);
-		
-		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
-		map.put("bccdList8", bccdList8);
-
-		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
-		map.put("bccdList9", bccdList9);
-		
-		if(term == 2) {
-			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
-			map.put("bccdList10", bccdList10);
-			
-			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
-			map.put("bccdList11", bccdList11);
-
-			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
-			map.put("bccdList12", bccdList12);
-		}
+//		List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(0), year, term);
+//		map.put("cefdList", cefdList);
+//		
+//		List<ClassExcellentFailDistribution> cefdList1 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(1), year, term);
+//		map.put("cefdList1", cefdList1);
+//		
+//		List<ClassExcellentFailDistribution> cefdList2 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(2), year, term);
+//		map.put("cefdList2", cefdList2);
+//		
+//		List<ClassExcellentFailDistribution> cefdList3 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(3), year, term);
+//		map.put("cefdList3", cefdList3);      //第二章第三个功能
+//		
+//		List <String> courseList = getCourseList(term);
+//		List<BasicCourseClassDistribution> bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(0), year, term);
+//		map.put("bccdList", bccdList);
+//		
+//		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
+//		map.put("bccdList1", bccdList1);
+//		
+//		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
+//		map.put("bccdList2", bccdList2);
+//		
+//		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
+//		map.put("bccdList3", bccdList3);
+//		
+//		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
+//		map.put("bccdList4", bccdList4);
+//		
+//		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
+//		map.put("bccdList5", bccdList5);
+//		
+//		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
+//		map.put("bccdList6", bccdList6);
+//		
+//		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
+//		map.put("bccdList7", bccdList7);
+//		
+//		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
+//		map.put("bccdList8", bccdList8);
+//
+//		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
+//		map.put("bccdList9", bccdList9);
+//		
+//		if(term == 2) {
+//			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
+//			map.put("bccdList10", bccdList10);
+//			
+//			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
+//			map.put("bccdList11", bccdList11);
+//
+//			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
+//			map.put("bccdList12", bccdList12);
+//		}
 		
 		return "print";
 	}
