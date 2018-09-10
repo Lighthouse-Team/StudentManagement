@@ -277,7 +277,11 @@
 	
 	$(function() {
 		$('#getPic').click(function(){
+/* 			var newstr = document.getElementById("sss").innerHTML;
+			var oldstr = document.body.innerHTML;
+			document.body.innerHTML = newstr; */
 			window.print();
+/* 			document.body.innerHTML = oldstr; */
 		});
 	});
 	
@@ -2881,7 +2885,7 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div id = "sss" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">

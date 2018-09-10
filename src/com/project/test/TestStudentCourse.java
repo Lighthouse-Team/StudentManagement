@@ -56,7 +56,7 @@ public class TestStudentCourse {
 	public void getACOverallDistributionByGradeTest() {
 		Integer grade = 2015;
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		OverallDistribution overallDistribution = studentCourseService.getACOverallDistributionByGrade(grade, year,
 				term);
 		System.out.println(overallDistribution);
