@@ -906,7 +906,7 @@ public class StudentCourseController {
 	}
 	
 	/**
-	 * 跳转至打印预览页面
+	 * 跳转至打印页面
 	 */
 	@RequestMapping("/print")
 	public String print(HttpSession session, Map<String, Object> map,
@@ -981,6 +981,44 @@ public class StudentCourseController {
 			map.put(bcddListNumber,bcddListList.get(i));
 		}                                //第四章第二个功能
 		
+		return "print";
+	}
+	
+	/**
+	 * 跳转至各班级优秀率、不及格率附表打印准备页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/readyPrintFirstAddTable")
+	public String readyPrintFirstAddTable(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "readyPrintFirstAddTable";
+	}
+	
+	/**
+	 * 跳转至各班级优秀率、不及格率附表打印页面
+	 */
+	@RequestMapping("/printFirstAddTable")
+	public String printFirstAddTable(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		
+		map.put("year", year);
+		
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<Integer> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(yearSelected - 3 + i);
+		}
+		
 		List<ClassExcellentFailDistribution> cefdList = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(0), year, term);
 		map.put("cefdList", cefdList);
 		
@@ -993,49 +1031,143 @@ public class StudentCourseController {
 		List<ClassExcellentFailDistribution> cefdList3 = studentCourseService.getRPECClassExcellentFailDistributionListByGrade(gradeList.get(3), year, term);
 		map.put("cefdList3", cefdList3);      //第二章第三个功能
 		
+		return "printFirstAddTable";
+	}
+	
+	
+	/**
+	 * 跳转至各班级不及格情况附表打印准备页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/readyPrintSecondAddTable")
+	public String readyPrintSecondAddTable(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "readyPrintSecondAddTable";
+	}
+	
+	
+	/**
+	 * 跳转至各班级不及格情况附表打印页面
+	 */
+	@RequestMapping("/printSecondAddTable")
+	public String printSecondAddTable(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		
+		map.put("year", year);
+		
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<Integer> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(yearSelected - 3 + i);
+		}
+		
+		List<ClassFailDistribution> cfdList = new ArrayList<>();
+		cfdList = studentCourseService.getRCClassFailDistributionListByGrade(gradeList.get(0), year, term);
+		map.put("cfdList", cfdList);
+		
+		List<ClassFailDistribution> cfdList1 = new ArrayList<>();
+		cfdList1 = studentCourseService.getRCClassFailDistributionListByGrade(gradeList.get(1), year, term);
+		map.put("cfdList1", cfdList1);
+
+		List<ClassFailDistribution> cfdList2 = new ArrayList<>();
+		cfdList2 = studentCourseService.getRCClassFailDistributionListByGrade(gradeList.get(2), year, term);
+		map.put("cfdList2", cfdList2);
+		
+		List<ClassFailDistribution> cfdList3 = new ArrayList<>();
+		cfdList3 = studentCourseService.getRCClassFailDistributionListByGrade(gradeList.get(3), year, term);
+		map.put("cfdList3", cfdList3);       //第三章第四个功能
+		
+		return "printSecondAddTable";
+	}
+	
+	/**
+	 * 跳转至各班级基础课程情况附表打印准备页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/readyPrintThirdAddTable")
+	public String readyPrintThirdAddTable(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		
+		List<String> yearList = getYearList();
+		map.put("yearList", yearList);
+		
+		return "readyPrintThirdAddTable";
+	}
+	
+	/**
+	 * 跳转至各班级不及格情况附表打印页面
+	 */
+	@RequestMapping("/printThirdAddTable")
+	public String printThirdAddTable(HttpSession session, Map<String, Object> map,
+			@RequestParam(value = "year", required = false) String year,
+			@RequestParam(value = "term", required = false) Integer term) {
+		
+		map.put("year", year);
+		map.put("term", term);
+		
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<Integer> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(yearSelected - 3 + i);
+		}
+		
 		List <String> courseList = getCourseList(term);
 		List<BasicCourseClassDistribution> bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(0), year, term);
 		map.put("bccdList", bccdList);
 		
-		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
-		map.put("bccdList1", bccdList1);
+//		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
+//		map.put("bccdList1", bccdList1);
+//		
+//		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
+//		map.put("bccdList2", bccdList2);
+//		
+//		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
+//		map.put("bccdList3", bccdList3);
+//		
+//		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
+//		map.put("bccdList4", bccdList4);
+//		
+//		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
+//		map.put("bccdList5", bccdList5);
+//		
+//		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
+//		map.put("bccdList6", bccdList6);
+//		
+//		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
+//		map.put("bccdList7", bccdList7);
+//		
+//		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
+//		map.put("bccdList8", bccdList8);
+//
+//		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
+//		map.put("bccdList9", bccdList9);
+//		
+//		if(term == 2) {
+//			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
+//			map.put("bccdList10", bccdList10);
+//			
+//			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
+//			map.put("bccdList11", bccdList11);
+//
+//			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
+//			map.put("bccdList12", bccdList12);
+//		}
 		
-		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
-		map.put("bccdList2", bccdList2);
-		
-		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
-		map.put("bccdList3", bccdList3);
-		
-		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
-		map.put("bccdList4", bccdList4);
-		
-		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
-		map.put("bccdList5", bccdList5);
-		
-		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
-		map.put("bccdList6", bccdList6);
-		
-		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
-		map.put("bccdList7", bccdList7);
-		
-		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
-		map.put("bccdList8", bccdList8);
-
-		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
-		map.put("bccdList9", bccdList9);
-		
-		if(term == 2) {
-			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
-			map.put("bccdList10", bccdList10);
-			
-			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
-			map.put("bccdList11", bccdList11);
-
-			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
-			map.put("bccdList12", bccdList12);
-		}
-		
-		return "print";
+		return "printThirdAddTable";
 	}
-	
 }

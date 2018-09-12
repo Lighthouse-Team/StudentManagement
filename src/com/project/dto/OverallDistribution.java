@@ -25,6 +25,7 @@ public class OverallDistribution implements Serializable {
 	private String mediumRate;				// 中等率
 	private String passRate;				// 及格率
 	private String failRate;				// 不及格率
+	private String analysis;                // 分析
 	
 	public OverallDistribution() {
 		super();
@@ -40,28 +41,7 @@ public class OverallDistribution implements Serializable {
 		this.mediumRate = "0.00%";
 		this.passRate = "0.00%";
 		this.failRate = "0.00%";
-	}
-
-	public OverallDistribution(Integer id, String grade, String courseType, Integer totalNumber,
-			Integer excellentNumber, Integer goodNumber, Integer mediumNumber, Integer passNumber, Integer failNumber,
-			String averageScore, String excellentRate, String goodRate, String mediumRate, String passRate,
-			String failRate) {
-		super();
-		this.id = id;
-		this.grade = grade;
-		this.courseType = courseType;
-		this.totalNumber = totalNumber;
-		this.excellentNumber = excellentNumber;
-		this.goodNumber = goodNumber;
-		this.mediumNumber = mediumNumber;
-		this.passNumber = passNumber;
-		this.failNumber = failNumber;
-		this.averageScore = averageScore;
-		this.excellentRate = excellentRate;
-		this.goodRate = goodRate;
-		this.mediumRate = mediumRate;
-		this.passRate = passRate;
-		this.failRate = failRate;
+		this.analysis = "";
 	}
 
 	public Integer getId() {
@@ -184,8 +164,39 @@ public class OverallDistribution implements Serializable {
 		this.failRate = failRate;
 	}
 
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public OverallDistribution(Integer id, String grade, String courseType, Integer totalNumber,
+			Integer excellentNumber, Integer goodNumber, Integer mediumNumber, Integer passNumber, Integer failNumber,
+			String averageScore, String excellentRate, String goodRate, String mediumRate, String passRate,
+			String failRate, String analysis) {
+		super();
+		this.id = id;
+		this.grade = grade;
+		this.courseType = courseType;
+		this.totalNumber = totalNumber;
+		this.excellentNumber = excellentNumber;
+		this.goodNumber = goodNumber;
+		this.mediumNumber = mediumNumber;
+		this.passNumber = passNumber;
+		this.failNumber = failNumber;
+		this.averageScore = averageScore;
+		this.excellentRate = excellentRate;
+		this.goodRate = goodRate;
+		this.mediumRate = mediumRate;
+		this.passRate = passRate;
+		this.failRate = failRate;
+		this.analysis = analysis;
 	}
 
 	@Override
@@ -194,7 +205,10 @@ public class OverallDistribution implements Serializable {
 				+ totalNumber + ", excellentNumber=" + excellentNumber + ", goodNumber=" + goodNumber
 				+ ", mediumNumber=" + mediumNumber + ", passNumber=" + passNumber + ", failNumber=" + failNumber
 				+ ", averageScore=" + averageScore + ", excellentRate=" + excellentRate + ", goodRate=" + goodRate
-				+ ", mediumRate=" + mediumRate + ", passRate=" + passRate + ", failRate=" + failRate + "]";
+				+ ", mediumRate=" + mediumRate + ", passRate=" + passRate + ", failRate=" + failRate + ", analysis="
+				+ analysis + "]";
 	}
+
+
 
 }

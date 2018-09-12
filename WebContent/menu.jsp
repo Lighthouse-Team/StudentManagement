@@ -440,15 +440,35 @@
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-warning"></i>
+              <p>打印附表</p>
+            </a>
+             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="readyPrintFirstAddTable" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>各班级成绩分布情况</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="readyPrintSecondAddTable" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>各班级不及格情况</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="readyPrintThirdAddTable" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>各班级基础课程成绩情况</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="testPage" class="nav-link">
+              <i class="nav-icon fa fa-circle-o text-info"></i>
               <p>上传成绩数据</p>
             </a>
           </li>
-         <!--  <li class="nav-item">
-            <a href="testPage" class="nav-link">
-              <i class="nav-icon fa fa-circle-o text-info"></i>
-              <p>Informational</p>
-            </a>
-          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

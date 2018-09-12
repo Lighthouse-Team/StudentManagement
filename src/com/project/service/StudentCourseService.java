@@ -199,6 +199,7 @@ public class StudentCourseService {
 			double passRate = (double) passNumber / totalNumber; // 及格率
 			double failRate = (double) failNumber / totalNumber; // 不及格率
 			double averageScore = getACAverageScoreByGrade(grade, year, term); // 平均分
+			
 
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
