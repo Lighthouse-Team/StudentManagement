@@ -184,36 +184,6 @@
 			courseDepartmentTitle8.innerHTML = "4.2.2.4&nbsp;&nbsp;线性代数与解析几何A成绩情况";
 			var courseDepartmentTitle9 = document.getElementById("courseDepartmentTitle9");
 			courseDepartmentTitle9.innerHTML = "4.2.2.5&nbsp;&nbsp;微积分A（一）成绩情况";
-			
-/* 			var courseTitle = document.getElementById("courseTitle");
-			courseTitle.innerHTML = "大学英语（三）各班级优秀率、不及格率情况";
-			var courseTitle1 = document.getElementById("courseTitle1");
-			courseTitle1.innerHTML = "大学物理下A各班级优秀率、不及格率情况";
-			var courseTitle2 = document.getElementById("courseTitle2");
-			courseTitle2.innerHTML = "大学物理下B各班级优秀率、不及格率情况";
-			var courseTitle3 = document.getElementById("courseTitle3");
-			courseTitle3.innerHTML = "大学物理实验（二）各班级优秀率、不及格率情况";
-			var courseTitle4 = document.getElementById("courseTitle4");
-			courseTitle4.innerHTML = "复变函数与积分变换各班级优秀率、不及格率情况";
-			var courseTitle5 = document.getElementById("courseTitle5");
-			courseTitle5.innerHTML = "大学英语（一）各班级优秀率、不及格率情况";
-			var courseTitle6 = document.getElementById("courseTitle6");
-			courseTitle6.innerHTML = "大学计算机基础A各班级优秀率、不及格率情况";
-			var courseTitle7 = document.getElementById("courseTitle7");
-			courseTitle7.innerHTML = "普通化学各班级优秀率、不及格率情况";
-			var courseTitle8 = document.getElementById("courseTitle8");
-			courseTitle8.innerHTML = "线性代数与解析几何A各班级优秀率、不及格率情况";
-			var courseTitle9 = document.getElementById("courseTitle9");
-			courseTitle9.innerHTML = "微积分A（一）各班级优秀率、不及格率情况"; */
-			
-/* 			var secondTermAddCourse1 = document.getElementById("secondTermAddCourse1");
-			secondTermAddCourse1.style.display = "none";
-			
-			var secondTermAddCourse2 = document.getElementById("secondTermAddCourse2");
-			secondTermAddCourse2.style.display = "none";
-			
-			var secondTermAddCourse3 = document.getElementById("secondTermAddCourse3");
-			secondTermAddCourse3.style.display = "none"; */
 				
 		}
 		else if(term1 == "2"){
@@ -246,33 +216,6 @@
 			courseDepartmentTitle7.innerHTML = "4.2.2.5&nbsp;&nbsp;微积分A（二）成绩情况";
 			var courseDepartmentTitle8 = document.getElementById("courseDepartmentTitle8");
 			courseDepartmentTitle8.innerHTML = "4.2.2.6&nbsp;&nbsp;工程图学基础成绩情况";
-			
-/* 			var courseTitle = document.getElementById("courseTitle");
-			courseTitle.innerHTML = "大学英语（六）各班级优秀率、不及格率情况";
-			var courseTitle1 = document.getElementById("courseTitle1");
-			courseTitle1.innerHTML = "电子电路综合实验各班级优秀率、不及格率情况";
-			var courseTitle2 = document.getElementById("courseTitle2");
-			courseTitle2.innerHTML = "管理学B各班级优秀率、不及格率情况";
-			var courseTitle3 = document.getElementById("courseTitle3");
-			courseTitle3.innerHTML = "工程实践A各班级优秀率、不及格率情况";
-			var courseTitle4 = document.getElementById("courseTitle4");
-			courseTitle4.innerHTML = "机械设计基础B各班级优秀率、不及格率情况";
-			var courseTitle5 = document.getElementById("courseTitle5");
-			courseTitle5.innerHTML = "大学英语（四）各班级优秀率、不及格率情况";
-			var courseTitle6 = document.getElementById("courseTitle6");
-			courseTitle6.innerHTML = "模拟电子技术各班级优秀率、不及格率情况";
-			var courseTitle7 = document.getElementById("courseTitle7");
-			courseTitle7.innerHTML = "大学英语（二）各班级优秀率、不及格率情况";
-			var courseTitle8 = document.getElementById("courseTitle8");
-			courseTitle8.innerHTML = "程序设计基础各班级优秀率、不及格率情况";
-			var courseTitle9 = document.getElementById("courseTitle9");
-			courseTitle9.innerHTML = "大学物理上各班级优秀率、不及格率情况";
-			var courseTitle10 = document.getElementById("courseTitle10");
-			courseTitle10.innerHTML = "概率论与数理统计各班级优秀率、不及格率情况";
-			var courseTitle11 = document.getElementById("courseTitle11");
-			courseTitle11.innerHTML = "微积分A（二）各班级优秀率、不及格率情况";
-			var courseTitle12 = document.getElementById("courseTitle12");
-			courseTitle12.innerHTML = "工程图学基础各班级优秀率、不及格率情况"; */
 			
 		}
   		
@@ -3347,7 +3290,7 @@
 									<tr>
 										<th rowspan="2"><center>序号</center></th>
 										<th rowspan="2"><center>院系</center></th>
-										<c:forEach items="${gradeList}" var="keyword" varStatus="id">	
+										<c:forEach items="${gradeListString}" var="keyword" varStatus="id">	
 											<th colspan="2"><center>${keyword}</center></th>
 										</c:forEach>	
 									</tr>
