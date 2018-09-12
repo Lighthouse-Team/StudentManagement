@@ -1069,9 +1069,16 @@ public class StudentCourseService {
 		double averageScore = getRPECAverageScoreByGradeAndDepartmentId(departmentId, grade, year, term);
 		double difference = averageScore - gradeAverageScore;
 
-		DecimalFormat scoreDF = new DecimalFormat("0.00");
-		String strAverageScore = scoreDF.format(averageScore);
-		String strDifference = scoreDF.format(difference);
+		String strAverageScore;
+		String strDifference;
+		if(averageScore != -1) {
+			DecimalFormat scoreDF = new DecimalFormat("0.00");
+			strAverageScore = scoreDF.format(averageScore);
+			strDifference = scoreDF.format(difference);
+		} else {
+			strAverageScore = "---";
+			strDifference = "---";
+		}
 
 		departmentAverageScoreCompare.setAverageScore(strAverageScore);
 		departmentAverageScoreCompare.setDifference(strDifference);
@@ -2192,13 +2199,41 @@ public class StudentCourseService {
 			String year, Integer term) {
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
 		Integer id = 1;
+		Integer totalStudentNumber = 0;
+		Integer excellentNumber = 0;
+		Integer failNumber = 0;
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
 			basicCourseDetailDistribution = getBasicCourseDetailDistributionByCourseNameAndDepartmentId(courseName,
 					departmentId, year, term);
+			totalStudentNumber += basicCourseDetailDistribution.getTotalStudentNumber();
+			excellentNumber += basicCourseDetailDistribution.getExcellentNumber();
+			failNumber += basicCourseDetailDistribution.getFailNumber();
 			basicCourseDetailDistribution.setId(id++);
 			bcddList.add(basicCourseDetailDistribution);
 		}
+		String grade = getGradeByCourseName(courseName, year, term);
+		String departmentName = grade + "级";
+		BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
+		basicCourseDetailDistribution.setCourseName(courseName);
+		basicCourseDetailDistribution.setDepartmentName(departmentName);
+		if (totalStudentNumber != 0) {
+			double excellentRate = (double) excellentNumber / totalStudentNumber;
+			double failRate = (double) failNumber / totalStudentNumber;
+
+			DecimalFormat rateDF = new DecimalFormat("0.00%");
+
+			String strExcellentRate = rateDF.format(excellentRate);
+			String strFailRate = rateDF.format(failRate);
+
+			basicCourseDetailDistribution.setExcellentNumber(excellentNumber);
+			basicCourseDetailDistribution.setFailNumber(failNumber);
+			basicCourseDetailDistribution.setTotalStudentNumber(totalStudentNumber);
+			basicCourseDetailDistribution.setExcellentRate(strExcellentRate);
+			basicCourseDetailDistribution.setFailRate(strFailRate);
+			basicCourseDetailDistribution.setId(id++);
+		}
+		bcddList.add(basicCourseDetailDistribution);
 		return bcddList;
 	}
 

@@ -402,7 +402,7 @@ public class TestStudentCourse {
 	public void getGradeByCourseNameTest() {
 		String courseName = "大学英语（三）";
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		String grade = studentCourseService.getGradeByCourseName(courseName, year, term);
 		System.out.println(grade); // 2015
 	}
