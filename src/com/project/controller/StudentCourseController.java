@@ -1130,43 +1130,43 @@ public class StudentCourseController {
 		List<BasicCourseClassDistribution> bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(0), year, term);
 		map.put("bccdList", bccdList);
 		
-//		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
-//		map.put("bccdList1", bccdList1);
-//		
-//		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
-//		map.put("bccdList2", bccdList2);
-//		
-//		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
-//		map.put("bccdList3", bccdList3);
-//		
-//		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
-//		map.put("bccdList4", bccdList4);
-//		
-//		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
-//		map.put("bccdList5", bccdList5);
-//		
-//		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
-//		map.put("bccdList6", bccdList6);
-//		
-//		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
-//		map.put("bccdList7", bccdList7);
-//		
-//		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
-//		map.put("bccdList8", bccdList8);
-//
-//		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
-//		map.put("bccdList9", bccdList9);
-//		
-//		if(term == 2) {
-//			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
-//			map.put("bccdList10", bccdList10);
-//			
-//			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
-//			map.put("bccdList11", bccdList11);
-//
-//			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
-//			map.put("bccdList12", bccdList12);
-//		}
+		List<BasicCourseClassDistribution> bccdList1 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(1), year, term);
+		map.put("bccdList1", bccdList1);
+		
+		List<BasicCourseClassDistribution> bccdList2 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(2), year, term);
+		map.put("bccdList2", bccdList2);
+		
+		List<BasicCourseClassDistribution> bccdList3 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(3), year, term);
+		map.put("bccdList3", bccdList3);
+		
+		List<BasicCourseClassDistribution> bccdList4 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(4), year, term);
+		map.put("bccdList4", bccdList4);
+		
+		List<BasicCourseClassDistribution> bccdList5 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(5), year, term);
+		map.put("bccdList5", bccdList5);
+		
+		List<BasicCourseClassDistribution> bccdList6 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(6), year, term);
+		map.put("bccdList6", bccdList6);
+		
+		List<BasicCourseClassDistribution> bccdList7 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(7), year, term);
+		map.put("bccdList7", bccdList7);
+		
+		List<BasicCourseClassDistribution> bccdList8 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(8), year, term);
+		map.put("bccdList8", bccdList8);
+
+		List<BasicCourseClassDistribution> bccdList9 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(9), year, term);
+		map.put("bccdList9", bccdList9);
+		
+		if(term == 2) {
+			List<BasicCourseClassDistribution> bccdList10 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(10), year, term);
+			map.put("bccdList10", bccdList10);
+			
+			List<BasicCourseClassDistribution> bccdList11 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(11), year, term);
+			map.put("bccdList11", bccdList11);
+
+			List<BasicCourseClassDistribution> bccdList12 = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseList.get(12), year, term);
+			map.put("bccdList12", bccdList12);
+		}
 		
 		return "printThirdAddTable";
 	}
