@@ -11,25 +11,25 @@ public class ClassFailDistribution implements Serializable {
 
 	private Integer id; 				// 序号
 	private String classNumber; 		// 班号
-	private Integer totalFailNumber; 	// 不及格学生人数
 	private Integer totalStudentNumber;	// 学生总数
+	private Integer totalFailNumber; 	// 不及格学生人数
 	private String failRate; 			// 不及格率
 
 	public ClassFailDistribution() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
+		this.totalFailNumber = 0;
 		this.failRate = "0.00%";
 	}
 
-	public ClassFailDistribution(Integer id, String classNumber, Integer totalFailNumber, Integer totalStudentNumber,
+	public ClassFailDistribution(Integer id, String classNumber, Integer totalStudentNumber, Integer totalFailNumber,
 			String failRate) {
 		super();
 		this.id = id;
 		this.classNumber = classNumber;
-		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
+		this.totalFailNumber = totalFailNumber;
 		this.failRate = failRate;
 	}
 
@@ -49,20 +49,20 @@ public class ClassFailDistribution implements Serializable {
 		this.classNumber = classNumber;
 	}
 
-	public Integer getTotalFailNumber() {
-		return totalFailNumber;
-	}
-
-	public void setTotalFailNumber(Integer totalFailNumber) {
-		this.totalFailNumber = totalFailNumber;
-	}
-
 	public Integer getTotalStudentNumber() {
 		return totalStudentNumber;
 	}
 
 	public void setTotalStudentNumber(Integer totalStudentNumber) {
 		this.totalStudentNumber = totalStudentNumber;
+	}
+
+	public Integer getTotalFailNumber() {
+		return totalFailNumber;
+	}
+
+	public void setTotalFailNumber(Integer totalFailNumber) {
+		this.totalFailNumber = totalFailNumber;
 	}
 
 	public String getFailRate() {
@@ -79,8 +79,8 @@ public class ClassFailDistribution implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ClassFailDistribution [id=" + id + ", classNumber=" + classNumber + ", totalFailNumber="
-				+ totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
+		return "ClassFailDistribution [id=" + id + ", classNumber=" + classNumber + ", totalStudentNumber="
+				+ totalStudentNumber + ", totalFailNumber=" + totalFailNumber + ", failRate=" + failRate + "]";
 	}
 
 }

@@ -1405,8 +1405,10 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
 					classNumber, year, term);
-			classExcellentFailDistribution.setId(id++);
-			cefdList.add(classExcellentFailDistribution);
+			if(classExcellentFailDistribution.getTotalNumber() != 0) {
+				classExcellentFailDistribution.setId(id++);
+				cefdList.add(classExcellentFailDistribution);
+			}
 		}
 		return cefdList;
 	}
@@ -1458,13 +1460,9 @@ public class StudentCourseService {
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			strAverageScore = scoreDF.format(averageScore);
 			strDifference = scoreDF.format(difference);
-		} else {
-			strAverageScore = "---";
-			strDifference = "---";
+			departmentAverageScoreCompare.setAverageScore(strAverageScore);
+			departmentAverageScoreCompare.setDifference(strDifference);
 		}
-
-		departmentAverageScoreCompare.setAverageScore(strAverageScore);
-		departmentAverageScoreCompare.setDifference(strDifference);
 		return departmentAverageScoreCompare;
 	}
 
@@ -2830,8 +2828,10 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			ClassFailDistribution classFailDistribution = new ClassFailDistribution();
 			classFailDistribution = getRCClassFailDistributionByClassNumber(classNumber, year, term);
-			classFailDistribution.setId(id++);
-			cfdList.add(classFailDistribution);
+			if(classFailDistribution.getTotalStudentNumber() != 0) {
+				classFailDistribution.setId(id++);
+				cfdList.add(classFailDistribution);
+			}
 		}
 		return cfdList;
 	}
@@ -3540,8 +3540,10 @@ public class StudentCourseService {
 				BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 				basicCourseClassDistribution = getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName,
 						classNumber, year, term);
-				basicCourseClassDistribution.setId(id++);
-				bccdList.add(basicCourseClassDistribution);
+				if(basicCourseClassDistribution.getTotalNumber() != 0) {
+					basicCourseClassDistribution.setId(id++);
+					bccdList.add(basicCourseClassDistribution);
+				}
 			}
 		}
 		return bccdList;
