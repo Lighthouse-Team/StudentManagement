@@ -23,6 +23,7 @@ public class DepartmentAllGradeFailDistribution implements Serializable{
 	private Integer gradeOneStudentNumber;		// 该院系大一学生总数
 	private Integer gradeOneFailNumber;			// 该院系大一不及格人数
 	private String gradeOneFailRate;			// 该院系大一不及格率
+	private String analysis;                    // 情况分析
 	
 	public DepartmentAllGradeFailDistribution() {
 		super();
@@ -38,13 +39,14 @@ public class DepartmentAllGradeFailDistribution implements Serializable{
 		this.gradeOneStudentNumber = 0;
 		this.gradeOneFailNumber = 0;
 		this.gradeOneFailRate = "0.00%";
+		this.analysis = "";
 	}
 
 	public DepartmentAllGradeFailDistribution(Integer id, String departmentName, Integer gradeFourStudentNumber,
 			Integer gradeFourFailNumber, String gradeFourFailRate, Integer gradeThreeStudentNumber,
 			Integer gradeThreeFailNumber, String gradeThreeFailRate, Integer gradeTwoStudentNumber,
 			Integer gradeTwoFailNumber, String gradeTwoFailRate, Integer gradeOneStudentNumber,
-			Integer gradeOneFailNumber, String gradeOneFailRate) {
+			Integer gradeOneFailNumber, String gradeOneFailRate, String analysis) {
 		super();
 		this.id = id;
 		this.departmentName = departmentName;
@@ -60,6 +62,7 @@ public class DepartmentAllGradeFailDistribution implements Serializable{
 		this.gradeOneStudentNumber = gradeOneStudentNumber;
 		this.gradeOneFailNumber = gradeOneFailNumber;
 		this.gradeOneFailRate = gradeOneFailRate;
+		this.analysis = analysis;
 	}
 
 	public Integer getId() {
@@ -174,8 +177,12 @@ public class DepartmentAllGradeFailDistribution implements Serializable{
 		this.gradeOneFailRate = gradeOneFailRate;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
 	}
 
 	@Override
@@ -186,7 +193,10 @@ public class DepartmentAllGradeFailDistribution implements Serializable{
 				+ ", gradeThreeFailNumber=" + gradeThreeFailNumber + ", gradeThreeFailRate=" + gradeThreeFailRate
 				+ ", gradeTwoStudentNumber=" + gradeTwoStudentNumber + ", gradeTwoFailNumber=" + gradeTwoFailNumber
 				+ ", gradeTwoFailRate=" + gradeTwoFailRate + ", gradeOneStudentNumber=" + gradeOneStudentNumber
-				+ ", gradeOneFailNumber=" + gradeOneFailNumber + ", gradeOneFailRate=" + gradeOneFailRate + "]";
+				+ ", gradeOneFailNumber=" + gradeOneFailNumber + ", gradeOneFailRate=" + gradeOneFailRate
+				+ ", analysis=" + analysis + "]";
 	}
+
+	
 	
 }

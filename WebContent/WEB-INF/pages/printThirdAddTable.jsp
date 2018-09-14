@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>学生管理系统</title>
+<title>&nbsp;&nbsp;</title>
 
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -206,15 +206,15 @@
 	
 	$(function() {
 		$('#getPic').click(function(){
-/* 			var newstr = document.getElementById("sss").innerHTML;
-			var oldstr = document.body.innerHTML;
-			document.body.innerHTML = newstr; */
 			window.print();
-/* 			document.body.innerHTML = oldstr; */
 		});
 	});
 
 </script>
+
+<style media=print type="text/css">
+ .noprint{display:none}
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini" >
@@ -222,7 +222,7 @@
 		<%@include file="/menu.jsp"%>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<div class="container-fluid">
+			<div class="container-fluid noprint">
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<button id="getPic" class="btn btn-info float-left" >打印或保存为PDF</button>

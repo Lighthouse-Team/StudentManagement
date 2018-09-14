@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>学生管理系统</title>
+<title>&nbsp;&nbsp;</title>
 
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -116,12 +116,40 @@
 		
 		/* 表格标题处理 */
  		var year1 = "${year}";
+ 		var term1 = "${term}";
 		var yearSelected = parseInt(year1.substring(0,4));
 		
 		var gradeList = new Array();
 		for( var i=0; i<4; i++){
 			gradeList[i] = (yearSelected - 3 + i).toString();
 		}
+		
+		/* 具体的表的标题设置 */
+		var tableTitle1=document.getElementById("table1.1");
+		tableTitle1.innerHTML="表1.1&nbsp;&nbsp;各年级" +  year1 + "学年第" + term1 + "学期所有课程成绩分布情况";
+		var tableTitle2=document.getElementById("table1.2");
+		tableTitle2.innerHTML="表1.2&nbsp;&nbsp;" +  year1 + "学年第" + term1 + "学期各类课程成绩分布情况";
+		var tableTitle3=document.getElementById("table2.1");
+		tableTitle3.innerHTML="表2.1&nbsp;&nbsp;我校本科生" +  year1 + "学年第" + term1 + "必修、专业选修课程成绩分布情况";
+		var tableTitle4=document.getElementById("table2.2");
+		tableTitle4.innerHTML="表2.2&nbsp;&nbsp;" +  gradeList[0] + "级各院系必修、专业选修成绩统计表";
+		var tableTitle5=document.getElementById("table2.3");
+		tableTitle5.innerHTML="表2.3&nbsp;&nbsp;" +  gradeList[1] + "级各院系必修、专业选修成绩统计表";
+		var tableTitle6=document.getElementById("table2.4");
+		tableTitle6.innerHTML="表2.4&nbsp;&nbsp;" +  gradeList[2] + "级各院系必修、专业选修成绩统计表";
+		var tableTitle6=document.getElementById("table2.5");
+		tableTitle6.innerHTML="表2.5&nbsp;&nbsp;" +  gradeList[3] + "级各院系必修、专业选修成绩统计表";
+		
+		/* 具体的图的标题设置 */
+		var picTitle1=document.getElementById("pic1");
+		picTitle1.innerHTML="图1.1-1.2&nbsp;&nbsp;" +  year1 + "学年第" + term1 + "学期本科生成绩整体分布情况图";
+		var picTitle2=document.getElementById("pic2");
+		picTitle2.innerHTML="图1.3-1.4&nbsp;&nbsp;" +  year1 + "学年第" + term1 + "学期各类课程成绩分布情况图";
+		var picTitle3=document.getElementById("pic3");
+		picTitle3.innerHTML="图2.1-2.2&nbsp;&nbsp;" +  year1 + "学年第" + term1 + "学期各院系必修、专业选修课程成绩分布图";
+		var picTitle4=document.getElementById("pic4");
+		picTitle4.innerHTML="图2.3&nbsp;&nbsp;" +  year1 + "学年第" + term1 + "学期各院系分年级必修、专业选修平均分对比";
+		
 		
   		var RPECTitle1=document.getElementById("RPECTitle1");  // 大四
   		RPECTitle1.innerHTML="2.2.1&nbsp;&nbsp;" +  gradeList[0] + "级本科生必修、专业选修课程成绩情况";
@@ -154,7 +182,6 @@
   		termCourseTitle1.innerHTML = "4.2.1&nbsp;&nbsp;" + gradeList[2] + "级主要基础课程成绩情况";
   		
 		/* 基础课程上学期和下学期不一样 判断处理 */
-		var term1 = "${term}";
 		if(term1 == "1"){
 			
 			var firstTermCourseTitle2 = document.getElementById("firstTermCourseTitle2");
@@ -184,7 +211,48 @@
 			courseDepartmentTitle8.innerHTML = "4.2.2.4&nbsp;&nbsp;线性代数与解析几何A成绩情况";
 			var courseDepartmentTitle9 = document.getElementById("courseDepartmentTitle9");
 			courseDepartmentTitle9.innerHTML = "4.2.2.5&nbsp;&nbsp;微积分A（一）成绩情况";
-				
+			
+			var tableTitle7=document.getElementById("table4.2");
+			tableTitle7.innerHTML="表4.2&nbsp;&nbsp;大学英语（三）成绩情况";
+			var tableTitle8=document.getElementById("table4.3");
+			tableTitle8.innerHTML="表4.3&nbsp;&nbsp;大学物理下A成绩情况";
+			var tableTitle9=document.getElementById("table4.4");
+			tableTitle9.innerHTML="表4.4&nbsp;&nbsp;大学物理下B成绩情况";
+			var tableTitle10=document.getElementById("table4.5");
+			tableTitle10.innerHTML="表4.5&nbsp;&nbsp;大学物理实验（二）成绩情况";
+			var tableTitle11=document.getElementById("table4.6");
+			tableTitle11.innerHTML="表4.6&nbsp;&nbsp;复变函数与积分变换成绩情况";
+			var tableTitle12=document.getElementById("table4.7");
+			tableTitle12.innerHTML="表4.7&nbsp;&nbsp;大学英语（一）成绩情况";
+			var tableTitle13=document.getElementById("table4.8");
+			tableTitle13.innerHTML="表4.8&nbsp;&nbsp;大学计算机基础A成绩情况";
+			var tableTitle14=document.getElementById("table4.9");
+			tableTitle14.innerHTML="表4.9&nbsp;&nbsp;普通化学成绩情况";
+			var tableTitle15=document.getElementById("table4.10");
+			tableTitle15.innerHTML="表4.10&nbsp;&nbsp;线性代数与解析几何A成绩情况";
+			var tableTitle16=document.getElementById("table4.11");
+			tableTitle16.innerHTML="表4.11&nbsp;&nbsp;微积分A（一）成绩情况";
+			
+			var pic9=document.getElementById("pic9");
+			pic9.innerHTML="图4.2&nbsp;&nbsp;各院系大学英语（三）成绩情况";
+			var pic10=document.getElementById("pic10");
+			pic10.innerHTML="图4.3&nbsp;&nbsp;各院系大学物理下A成绩情况";
+			var pic11=document.getElementById("pic11");
+			pic11.innerHTML="图4.4&nbsp;&nbsp;各院系大学物理下B成绩情况";
+			var pic12=document.getElementById("pic12");
+			pic12.innerHTML="图4.5&nbsp;&nbsp;各院系大学物理实验（二）成绩情况";
+			var pic13=document.getElementById("pic13");
+			pic13.innerHTML="图4.6&nbsp;&nbsp;各院系复变函数与积分变换成绩情况";
+			var pic14=document.getElementById("pic14");
+			pic14.innerHTML="图4.7&nbsp;&nbsp;各院系大学英语（一）成绩情况";
+			var pic15=document.getElementById("pic15");
+			pic15.innerHTML="图4.8&nbsp;&nbsp;各院系大学计算机基础A成绩情况";
+			var pic16=document.getElementById("pic16");
+			pic16.innerHTML="图4.9&nbsp;&nbsp;各院系普通化学成绩情况";
+			var pic17=document.getElementById("pic17");
+			pic17.innerHTML="图4.10&nbsp;&nbsp;各院系线性代数与解析几何A成绩情况";
+			var pic18=document.getElementById("pic18");
+			pic18.innerHTML="图4.11&nbsp;&nbsp;各院系微积分A（一）成绩情况";	
 		}
 		else if(term1 == "2"){
 			
@@ -217,6 +285,44 @@
 			var courseDepartmentTitle8 = document.getElementById("courseDepartmentTitle8");
 			courseDepartmentTitle8.innerHTML = "4.2.2.6&nbsp;&nbsp;工程图学基础成绩情况";
 			
+			var tableTitle7=document.getElementById("table4.2");
+			tableTitle7.innerHTML="表4.2&nbsp;&nbsp;工程实践A成绩情况";
+			var tableTitle8=document.getElementById("table4.3");
+			tableTitle8.innerHTML="表4.3&nbsp;&nbsp;机械设计基础B成绩情况";
+			var tableTitle9=document.getElementById("table4.4");
+			tableTitle9.innerHTML="表4.4&nbsp;&nbsp;大学英语（四）成绩情况";
+			var tableTitle10=document.getElementById("table4.5");
+			tableTitle10.innerHTML="表4.5&nbsp;&nbsp;大学英语（二）成绩情况";
+			var tableTitle11=document.getElementById("table4.6");
+			tableTitle11.innerHTML="表4.6&nbsp;&nbsp;程序设计基础成绩情况";
+			var tableTitle12=document.getElementById("table4.7");
+			tableTitle12.innerHTML="表4.7&nbsp;&nbsp;大学物理上成绩情况";
+			var tableTitle13=document.getElementById("table4.8");
+			tableTitle13.innerHTML="表4.8&nbsp;&nbsp;概率论与数理统计成绩情况";
+			var tableTitle14=document.getElementById("table4.9");
+			tableTitle14.innerHTML="表4.9&nbsp;&nbsp;微积分A（二）成绩情况";
+			var tableTitle15=document.getElementById("table4.10");
+			tableTitle15.innerHTML="表4.10&nbsp;&nbsp;工程图学基础成绩情况";
+			
+			var pic9=document.getElementById("pic9");
+			pic9.innerHTML="图4.2&nbsp;&nbsp;各院系工程实践A成绩情况";
+			var pic10=document.getElementById("pic10");
+			pic10.innerHTML="图4.3&nbsp;&nbsp;各院系机械设计基础B成绩情况";
+			var pic11=document.getElementById("pic11");
+			pic11.innerHTML="图4.4&nbsp;&nbsp;各院系大学英语（四）成绩情况";
+			var pic12=document.getElementById("pic12");
+			pic12.innerHTML="图4.5&nbsp;&nbsp;各院系大学英语（二）成绩情况";
+			var pic13=document.getElementById("pic13");
+			pic13.innerHTML="图4.6&nbsp;&nbsp;各院系程序设计基础成绩情况";
+			var pic14=document.getElementById("pic14");
+			pic14.innerHTML="图4.7&nbsp;&nbsp;各院系大学物理上成绩情况";
+			var pic15=document.getElementById("pic15");
+			pic15.innerHTML="图4.8&nbsp;&nbsp;各院系概率论与数理统计成绩情况";
+			var pic16=document.getElementById("pic16");
+			pic16.innerHTML="图4.9&nbsp;&nbsp;各院系微积分A（二）成绩情况";
+			var pic17=document.getElementById("pic17");
+			pic17.innerHTML="图4.10&nbsp;&nbsp;各院系工程图学基础成绩情况";
+			
 		}
   		
 		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
@@ -229,7 +335,7 @@
 	        "info": false, //去掉表格底部信息
 	    });
 	  
- 	    getFirstPic();      //第一章第一个功能成绩分析图
+/*  	    getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
@@ -240,17 +346,13 @@
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图      
+		getNinthPic();      //第四章第二个功能9张或10张分析图       */
 
 	});
 	
 	$(function() {
 		$('#getPic').click(function(){
-/* 			var newstr = document.getElementById("sss").innerHTML;
-			var oldstr = document.body.innerHTML;
-			document.body.innerHTML = newstr; */
 			window.print();
-/* 			document.body.innerHTML = oldstr; */
 		});
 	});
 	
@@ -1199,7 +1301,7 @@
 			thirdRateList[3] = dRateList[2];
 			thirdRateList[4] = eRateList[2];
 
-			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
+			forthRateList[0] = aRateList[3]; //得到全校成绩的百分比
 			forthRateList[1] = bRateList[3];
 			forthRateList[2] = cRateList[3];
 			forthRateList[3] = dRateList[3];
@@ -2826,13 +2928,12 @@
 		}
 				
  	}
- 	
-		
-		
 
 </script>
 
-
+<style media=print type="text/css">
+ .noprint{display:none}
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini" >
@@ -2840,7 +2941,7 @@
 		<%@include file="/menu.jsp"%>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<div class="container-fluid">
+			<div class="container-fluid noprint">
 				<div class="row mb-2">
 					<div class="col-sm-6">
 						<button id="getPic" class="btn btn-info float-left" >打印或保存为PDF</button>
@@ -2859,10 +2960,11 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h3> 
+							<h5>1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table1.1" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -2923,7 +3025,16 @@
 					</div>
 				</div>
 			</div>
-
+			<h5 id = "pic1" style="text-align:center"></h5> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${firstAnalysis.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -2932,6 +3043,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table1.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -2991,6 +3103,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic2" style="text-align:center"></h5> 
 			
 			<h2 style="text-align:center">第二章&nbsp;&nbsp;必修、专业选修课程成绩整体情况分析</h2>
 			<h4>2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
@@ -3002,6 +3115,7 @@
 						</div> -->
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.1" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3059,6 +3173,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic3" style="text-align:center"></h5>
 			
 			<h4>2.2&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h4>
 			<h5 id = "RPECTitle1">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
@@ -3066,10 +3181,11 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "firstGradeDepartmentRPEC" class="card-title">大四各院系必修、专业选修课程成绩情况</h3> 
+							<h3 id = "firstGradeDepartmentRPEC" class="card-title"></h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3120,10 +3236,11 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "secondGradeDepartmentRPEC" class="card-title">大三各院系必修、专业选修课程成绩情况</h3> 
+							<h3 id = "secondGradeDepartmentRPEC" class="card-title"></h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.3" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3174,10 +3291,11 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "thirdGradeDepartmentRPEC" class="card-title">大二各院系必修、专业选修课程成绩情况</h3> 
+							<h3 id = "thirdGradeDepartmentRPEC" class="card-title"></h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.4" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3228,10 +3346,11 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "forthGradeDepartmentRPEC" class="card-title">大一各院系必修、专业选修课程成绩情况</h3> 
+							<h3 id = "forthGradeDepartmentRPEC" class="card-title"></h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.5" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3285,6 +3404,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table2.6" style="text-align:center">表2.6&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3343,6 +3463,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic4" style="text-align:center"></h5>
 			
 			<h2 style="text-align:center">第三章&nbsp;&nbsp;不及格成绩情况分析</h2>
 			<h4>3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
@@ -3351,6 +3472,7 @@
 					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table3.1" style="text-align:center">表3.1&nbsp;&nbsp;各年级不及格门数统计</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3409,6 +3531,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic5" style="text-align:center">图3.1&nbsp;&nbsp;各年级不及格学生情况</h5>
 			
 			<h4>3.2&nbsp;&nbsp;各院系不及格学生情况比较分析</h4> 
 			<div class="row">
@@ -3419,6 +3542,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table3.2" style="text-align:center">表3.2&nbsp;&nbsp;各院系不及格学生情况统计表</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3470,6 +3594,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic6" style="text-align:center">图3.2&nbsp;&nbsp;各院系学生不及格率情况</h5>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3479,6 +3604,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table3.3" style="text-align:center">表3.3&nbsp;&nbsp;各院系分年级不及格情况统计</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3545,6 +3671,8 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic7" style="text-align:center">图3.3&nbsp;&nbsp; 各院系分年级不及格情况</h5>
+			
 			<h4>3.3&nbsp;&nbsp; 各班级不及格情况统计</h4> 
 			<div class="card">
 				<div class="card-header">
@@ -3558,6 +3686,7 @@
 					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table3.4" style="text-align:center">表3.4&nbsp;&nbsp;各年级缺考情况统计表</h5> 
 							<table id="example1" class="table table-bordered table-striped" >
 								<thead>
 									<tr>
@@ -3596,6 +3725,7 @@
 					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.1" style="text-align:center">表4.1&nbsp;&nbsp;主要基础课程成绩情况</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3644,6 +3774,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic8" style="text-align:center">图4.1&nbsp;&nbsp;主要基础课程成绩优秀率、不及格率情况</h5>
 			
 			<h4>4.2&nbsp;&nbsp;主要基础课程成绩具体分析</h4> 
 			<h5 id = "termCourseTitle1" ></h5> 
@@ -3655,6 +3786,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3698,6 +3830,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic9" style="text-align:center"></h5>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3707,6 +3840,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.3" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3749,7 +3883,8 @@
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>		
+			<h5 id = "pic10" style="text-align:center"></h5>	
 			
 			<div class="row">
 				<div class="col-12">
@@ -3759,6 +3894,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.4" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3801,7 +3937,8 @@
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>		
+			<h5 id = "pic11" style="text-align:center"></h5>		
 			
 			<h5 id = "secondTermCourseTitle2"></h5> 
 			<div class="row">
@@ -3812,6 +3949,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.5" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3855,6 +3993,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic12" style="text-align:center"></h5>		
 			
 			<div class="row">
 				<div class="col-12">
@@ -3864,6 +4003,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.6" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3907,6 +4047,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic13" style="text-align:center"></h5>	
 			
 			<h5 id = "firstTermCourseTitle2"></h5> 
 			<div class="row">
@@ -3917,6 +4058,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.7" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3960,6 +4102,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic14" style="text-align:center"></h5>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3969,6 +4112,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.8" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4012,6 +4156,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic15" style="text-align:center"></h5>
 			
 			<div class="row">
 				<div class="col-12">
@@ -4021,6 +4166,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.9" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4064,6 +4210,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic16" style="text-align:center"></h5>
 			
 			<div class="row">
 				<div class="col-12">
@@ -4073,6 +4220,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.10" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4116,6 +4264,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic17" style="text-align:center"></h5>
 			
 			<div id = "firstTermAddCourse" class="row">
 				<div class="col-12">
@@ -4125,6 +4274,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
+						<h5 id = "table4.11" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4168,6 +4318,7 @@
 					</div>
 				</div>
 			</div>
+			<h5 id = "pic18" style="text-align:center"></h5>
 			
 			<div class="card">
 				<div class="card-header"> 

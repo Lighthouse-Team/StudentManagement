@@ -18,6 +18,7 @@ public class BasicCourseOverallDistribution implements Serializable{
 	private String excellentRate;		// 优秀率
 	private String failRate;			// 不及格率
 	private String averageScore;		// 平均分
+	private String analysis;            //分析
 	
 	public BasicCourseOverallDistribution() {
 		super();
@@ -27,10 +28,12 @@ public class BasicCourseOverallDistribution implements Serializable{
 		this.excellentRate = "0.00%";
 		this.failRate = "0.00%";
 		this.averageScore = "0.00";
+		this.analysis = "";
 	}
 
 	public BasicCourseOverallDistribution(Integer id, String grade, String courseName, Integer excellentNumber,
-			Integer failNumber, Integer totalNumber, String excellentRate, String failRate, String averageScore) {
+			Integer failNumber, Integer totalNumber, String excellentRate, String failRate, String averageScore,
+			String analysis) {
 		super();
 		this.id = id;
 		this.grade = grade;
@@ -41,6 +44,7 @@ public class BasicCourseOverallDistribution implements Serializable{
 		this.excellentRate = excellentRate;
 		this.failRate = failRate;
 		this.averageScore = averageScore;
+		this.analysis = analysis;
 	}
 
 	public Integer getId() {
@@ -115,8 +119,12 @@ public class BasicCourseOverallDistribution implements Serializable{
 		this.averageScore = averageScore;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
 	}
 
 	@Override
@@ -124,7 +132,10 @@ public class BasicCourseOverallDistribution implements Serializable{
 		return "BasicCourseOverallDistribution [id=" + id + ", grade=" + grade + ", courseName=" + courseName
 				+ ", excellentNumber=" + excellentNumber + ", failNumber=" + failNumber + ", totalNumber=" + totalNumber
 				+ ", excellentRate=" + excellentRate + ", failRate=" + failRate + ", averageScore=" + averageScore
-				+ "]";
+				+ ", analysis=" + analysis + "]";
 	}
+
+	
+
 
 }

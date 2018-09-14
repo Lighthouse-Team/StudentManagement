@@ -19,6 +19,7 @@ public class DepartmentAllGradeAverageScoreCompare implements Serializable{
 	private String gradeTwoDifference;		// 该院系大二平均分和年级平均分的差值
 	private String gradeOneAverageScore;	// 该院系大一平均分
 	private String gradeOneDifference;		// 该院系大一平均分和年级平均分的差值
+	private String analysis;                // 分析
 	
 	public DepartmentAllGradeAverageScoreCompare() {
 		super();
@@ -30,11 +31,13 @@ public class DepartmentAllGradeAverageScoreCompare implements Serializable{
 		this.gradeTwoDifference = "0.00";
 		this.gradeOneAverageScore = "0.00";
 		this.gradeOneDifference = "0.00";
+		this.analysis = "";
 	}
+
 	public DepartmentAllGradeAverageScoreCompare(Integer id, String departmentName, String gradeFourAverageScore,
 			String gradeFourDifference, String gradeThreeAverageScore, String gradeThreeDifference,
 			String gradeTwoAverageScore, String gradeTwoDifference, String gradeOneAverageScore,
-			String gradeOneDifference) {
+			String gradeOneDifference, String analysis) {
 		super();
 		this.id = id;
 		this.departmentName = departmentName;
@@ -46,78 +49,110 @@ public class DepartmentAllGradeAverageScoreCompare implements Serializable{
 		this.gradeTwoDifference = gradeTwoDifference;
 		this.gradeOneAverageScore = gradeOneAverageScore;
 		this.gradeOneDifference = gradeOneDifference;
+		this.analysis = analysis;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getDepartmentName() {
 		return departmentName;
 	}
+
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
+
 	public String getGradeFourAverageScore() {
 		return gradeFourAverageScore;
 	}
+
 	public void setGradeFourAverageScore(String gradeFourAverageScore) {
 		this.gradeFourAverageScore = gradeFourAverageScore;
 	}
+
 	public String getGradeFourDifference() {
 		return gradeFourDifference;
 	}
+
 	public void setGradeFourDifference(String gradeFourDifference) {
 		this.gradeFourDifference = gradeFourDifference;
 	}
+
 	public String getGradeThreeAverageScore() {
 		return gradeThreeAverageScore;
 	}
+
 	public void setGradeThreeAverageScore(String gradeThreeAverageScore) {
 		this.gradeThreeAverageScore = gradeThreeAverageScore;
 	}
+
 	public String getGradeThreeDifference() {
 		return gradeThreeDifference;
 	}
+
 	public void setGradeThreeDifference(String gradeThreeDifference) {
 		this.gradeThreeDifference = gradeThreeDifference;
 	}
+
 	public String getGradeTwoAverageScore() {
 		return gradeTwoAverageScore;
 	}
+
 	public void setGradeTwoAverageScore(String gradeTwoAverageScore) {
 		this.gradeTwoAverageScore = gradeTwoAverageScore;
 	}
+
 	public String getGradeTwoDifference() {
 		return gradeTwoDifference;
 	}
+
 	public void setGradeTwoDifference(String gradeTwoDifference) {
 		this.gradeTwoDifference = gradeTwoDifference;
 	}
+
 	public String getGradeOneAverageScore() {
 		return gradeOneAverageScore;
 	}
+
 	public void setGradeOneAverageScore(String gradeOneAverageScore) {
 		this.gradeOneAverageScore = gradeOneAverageScore;
 	}
+
 	public String getGradeOneDifference() {
 		return gradeOneDifference;
 	}
+
 	public void setGradeOneDifference(String gradeOneDifference) {
 		this.gradeOneDifference = gradeOneDifference;
 	}
+
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	@Override
 	public String toString() {
-		return "DepartmentAverageScoreCompare [id=" + id + ", departmentName=" + departmentName
+		return "DepartmentAllGradeAverageScoreCompare [id=" + id + ", departmentName=" + departmentName
 				+ ", gradeFourAverageScore=" + gradeFourAverageScore + ", gradeFourDifference=" + gradeFourDifference
 				+ ", gradeThreeAverageScore=" + gradeThreeAverageScore + ", gradeThreeDifference="
 				+ gradeThreeDifference + ", gradeTwoAverageScore=" + gradeTwoAverageScore + ", gradeTwoDifference="
 				+ gradeTwoDifference + ", gradeOneAverageScore=" + gradeOneAverageScore + ", gradeOneDifference="
-				+ gradeOneDifference + "]";
+				+ gradeOneDifference + ", analysis=" + analysis + "]";
 	}
+	
 	
 }

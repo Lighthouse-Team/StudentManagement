@@ -114,6 +114,7 @@
 
 	/* 选中seclet值刷新页面不更改 */
 	$(function() {  
+		
 		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
 		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 		if (localStorage.getItem('year')) {
@@ -157,26 +158,6 @@
 			getLinePic();     //显示折线图
 		});
 	});
-	
-	/* 显示分析图 */
-/* 	function getRCGradeFailDistributionListData() {
-		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#barPic").css('display')=='none'){
-            $("#barPic").css("display","block");
-        } 
-		if($("#linePic").css('display')=='none'){
-	        $("#linePic").css("display","block");
-	    } 
-		
-		getBarPic();      //显示柱状图
-		getLinePic();     //显示折线图
-		 
-	}; */
-	
 	
 	/* 显示柱状图 */
 	function getBarPic(){
@@ -459,7 +440,6 @@
 	
 </script>
 
-
 </head>
 <body class="hold-transition sidebar-mini">
 	<div class="wrapper">
@@ -531,7 +511,7 @@
 				<!-- /.card -->
 			</div>
 			</section>
-
+			
 			<section class="content">
 			<div class="row">
 				<div class="col-12">
