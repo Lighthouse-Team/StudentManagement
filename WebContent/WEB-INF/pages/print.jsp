@@ -3030,7 +3030,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					${firstAnalysis.split("#")[0] } 
+					${analysis1.split("#")[0] } 
 					</div>
 				</div>
 			</div>
@@ -3105,6 +3105,14 @@
 			</div>
 			<h5 id = "pic2" style="text-align:center"></h5> 
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis2.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h2 style="text-align:center">第二章&nbsp;&nbsp;必修、专业选修课程成绩整体情况分析</h2>
 			<h4>2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
 			<div class="row">
@@ -3175,6 +3183,14 @@
 			</div>
 			<h5 id = "pic3" style="text-align:center"></h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis3.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h4>2.2&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h4>
 			<h5 id = "RPECTitle1">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
 			<div id = "table1" class="row">
@@ -3224,6 +3240,15 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis4.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle1" class="card-title"></h3> 
@@ -3279,6 +3304,15 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis5.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle2" class="card-title"></h3> 
@@ -3334,6 +3368,15 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis6.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle3" class="card-title"></h3> 
@@ -3389,6 +3432,15 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis7.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle4" class="card-title"></h3> 
@@ -3465,6 +3517,14 @@
 			</div>
 			<h5 id = "pic4" style="text-align:center"></h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis8.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h2 style="text-align:center">第三章&nbsp;&nbsp;不及格成绩情况分析</h2>
 			<h4>3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
 			<div class="row">
@@ -3533,6 +3593,14 @@
 			</div>
 			<h5 id = "pic5" style="text-align:center">图3.1&nbsp;&nbsp;各年级不及格学生情况</h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis9.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h4>3.2&nbsp;&nbsp;各院系不及格学生情况比较分析</h4> 
 			<div class="row">
 				<div class="col-12">
@@ -3595,6 +3663,14 @@
 				</div>
 			</div>
 			<h5 id = "pic6" style="text-align:center">图3.2&nbsp;&nbsp;各院系学生不及格率情况</h5>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis10.split("#")[0] } 
+					</div>
+				</div>
+			</div>
 			
 			<div class="row">
 				<div class="col-12">
@@ -3673,6 +3749,14 @@
 			</div>
 			<h5 id = "pic7" style="text-align:center">图3.3&nbsp;&nbsp; 各院系分年级不及格情况</h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis11.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h4>3.3&nbsp;&nbsp; 各班级不及格情况统计</h4> 
 			<div class="card">
 				<div class="card-header">
@@ -3717,6 +3801,13 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis12.split("#")[0] } 
+					</div>
+				</div>
+			</div>
 			
 			<h2 style="text-align:center">第四章&nbsp;&nbsp;基础课程成绩情况分析</h2>
 			<h4>4.1&nbsp;&nbsp;主要基础课程成绩情况分布</h4> 
@@ -3775,6 +3866,13 @@
 				</div>
 			</div>
 			<h5 id = "pic8" style="text-align:center">图4.1&nbsp;&nbsp;主要基础课程成绩优秀率、不及格率情况</h5>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis13.split("#")[0] } 
+					</div>
+				</div>
+			</div>
 			
 			<h4>4.2&nbsp;&nbsp;主要基础课程成绩具体分析</h4> 
 			<h5 id = "termCourseTitle1" ></h5> 
