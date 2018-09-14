@@ -1076,13 +1076,9 @@ public class StudentCourseService {
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			strAverageScore = scoreDF.format(averageScore);
 			strDifference = scoreDF.format(difference);
-		} else {
-			strAverageScore = "---";
-			strDifference = "---";
+			departmentAverageScoreCompare.setAverageScore(strAverageScore);
+			departmentAverageScoreCompare.setDifference(strDifference);
 		}
-
-		departmentAverageScoreCompare.setAverageScore(strAverageScore);
-		departmentAverageScoreCompare.setDifference(strDifference);
 		return departmentAverageScoreCompare;
 	}
 
