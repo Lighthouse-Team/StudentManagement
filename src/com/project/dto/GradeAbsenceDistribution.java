@@ -15,6 +15,7 @@ public class GradeAbsenceDistribution implements Serializable {
 	private Integer pecAbsenceNumber; 	// 专业选修课缺考人次
 	private Integer gecAbsenceNumber; 	// 通识选修课缺考人次
 	private Integer totalAbsenceNumber; // 缺考总人次
+	private String analysis;            //分析
 
 	public GradeAbsenceDistribution() {
 		super();
@@ -22,10 +23,11 @@ public class GradeAbsenceDistribution implements Serializable {
 		this.pecAbsenceNumber = 0;
 		this.gecAbsenceNumber = 0;
 		this.totalAbsenceNumber = 0;
+		this.analysis = "";
 	}
 
 	public GradeAbsenceDistribution(Integer id, String grade, Integer rcAbsenceNumber, Integer pecAbsenceNumber,
-			Integer gecAbsenceNumber, Integer totalAbsenceNumber) {
+			Integer gecAbsenceNumber, Integer totalAbsenceNumber, String analysis) {
 		super();
 		this.id = id;
 		this.grade = grade;
@@ -33,6 +35,7 @@ public class GradeAbsenceDistribution implements Serializable {
 		this.pecAbsenceNumber = pecAbsenceNumber;
 		this.gecAbsenceNumber = gecAbsenceNumber;
 		this.totalAbsenceNumber = totalAbsenceNumber;
+		this.analysis = analysis;
 	}
 
 	public Integer getId() {
@@ -83,15 +86,20 @@ public class GradeAbsenceDistribution implements Serializable {
 		this.totalAbsenceNumber = totalAbsenceNumber;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
 	}
 
 	@Override
 	public String toString() {
 		return "GradeAbsenceDistribution [id=" + id + ", grade=" + grade + ", rcAbsenceNumber=" + rcAbsenceNumber
 				+ ", pecAbsenceNumber=" + pecAbsenceNumber + ", gecAbsenceNumber=" + gecAbsenceNumber
-				+ ", totalAbsenceNumber=" + totalAbsenceNumber + "]";
+				+ ", totalAbsenceNumber=" + totalAbsenceNumber + ", analysis=" + analysis + "]";
 	}
 
+	
 }

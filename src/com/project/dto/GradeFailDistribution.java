@@ -22,6 +22,7 @@ public class GradeFailDistribution implements Serializable{
 	private Integer totalFailNumber;	// 不及格人数合计
 	private Integer totalStudentNumber;	// 年级总人数
 	private String failRate;			// 学生不及格率
+	private String analysis;            //分析
 	
 	public GradeFailDistribution() {
 		super();
@@ -36,12 +37,13 @@ public class GradeFailDistribution implements Serializable{
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
 		this.failRate = "0.00%";
+		this.analysis = "";
 	}
 
 	public GradeFailDistribution(Integer id, String grade, Integer oneFailNumber, Integer twoFailNumber,
 			Integer threeFailNumber, Integer fourFailNumber, Integer fiveFailNumber, Integer sixFailNumber,
 			Integer sevenFailNumber, Integer eightFailNumber, Integer totalFailNumber, Integer totalStudentNumber,
-			String failRate) {
+			String failRate, String analysis) {
 		super();
 		this.id = id;
 		this.grade = grade;
@@ -56,6 +58,7 @@ public class GradeFailDistribution implements Serializable{
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
 		this.failRate = failRate;
+		this.analysis = analysis;
 	}
 
 	public Integer getId() {
@@ -162,6 +165,14 @@ public class GradeFailDistribution implements Serializable{
 		this.failRate = failRate;
 	}
 
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -172,7 +183,9 @@ public class GradeFailDistribution implements Serializable{
 				+ ", twoFailNumber=" + twoFailNumber + ", threeFailNumber=" + threeFailNumber + ", fourFailNumber="
 				+ fourFailNumber + ", fiveFailNumber=" + fiveFailNumber + ", sixFailNumber=" + sixFailNumber
 				+ ", sevenFailNumber=" + sevenFailNumber + ", eightFailNumber=" + eightFailNumber + ", totalFailNumber="
-				+ totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate + "]";
+				+ totalFailNumber + ", totalStudentNumber=" + totalStudentNumber + ", failRate=" + failRate
+				+ ", analysis=" + analysis + "]";
 	}
 
+	
 }

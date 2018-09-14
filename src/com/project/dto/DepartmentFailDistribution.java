@@ -22,6 +22,7 @@ public class DepartmentFailDistribution implements Serializable {
 	private Integer totalFailNumber; 	// 不及格人数合计
 	private Integer totalStudentNumber; // 院系总人数
 	private String totalFailRate;		// 学生不及格率
+	private String analysis;            //分析
 
 	public DepartmentFailDistribution() {
 		super();
@@ -36,12 +37,13 @@ public class DepartmentFailDistribution implements Serializable {
 		this.totalFailNumber = 0;
 		this.totalStudentNumber = 0;
 		this.totalFailRate = "0.00%";
+		this.analysis = "";
 	}
 
 	public DepartmentFailDistribution(Integer id, String departmentName, Integer oneFailNumber, Integer twoFailNumber,
 			Integer threeFailNumber, Integer geFourFailNumber, String oneFailRate, String twoFailRate,
 			String threeFailRate, String geFourFailRate, Integer totalFailNumber, Integer totalStudentNumber,
-			String totalFailRate) {
+			String totalFailRate, String analysis) {
 		super();
 		this.id = id;
 		this.departmentName = departmentName;
@@ -56,6 +58,7 @@ public class DepartmentFailDistribution implements Serializable {
 		this.totalFailNumber = totalFailNumber;
 		this.totalStudentNumber = totalStudentNumber;
 		this.totalFailRate = totalFailRate;
+		this.analysis = analysis;
 	}
 
 	public Integer getId() {
@@ -162,8 +165,12 @@ public class DepartmentFailDistribution implements Serializable {
 		this.totalFailRate = totalFailRate;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(String analysis) {
+		this.analysis = analysis;
 	}
 
 	@Override
@@ -173,7 +180,8 @@ public class DepartmentFailDistribution implements Serializable {
 				+ ", geFourFailNumber=" + geFourFailNumber + ", oneFailRate=" + oneFailRate + ", twoFailRate="
 				+ twoFailRate + ", threeFailRate=" + threeFailRate + ", geFourFailRate=" + geFourFailRate
 				+ ", totalFailNumber=" + totalFailNumber + ", totalStudentNumber=" + totalStudentNumber
-				+ ", totalFailRate=" + totalFailRate + "]";
+				+ ", totalFailRate=" + totalFailRate + ", analysis=" + analysis + "]";
 	}
 
+	
 }
