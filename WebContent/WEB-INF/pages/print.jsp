@@ -184,12 +184,14 @@
 		/* 基础课程上学期和下学期不一样 判断处理 */
 		if(term1 == "1"){
 			
+			document.getElementById("ssj").style.display = "none";
+			
 			var firstTermCourseTitle2 = document.getElementById("firstTermCourseTitle2");
 			firstTermCourseTitle2.innerHTML = "4.2.2&nbsp;&nbsp;" + gradeList[3] + "级主要基础课程成绩情况";
 			document.getElementById("secondTermCourseTitle2").style.display="none";
 			
 			var basicCourseClass = document.getElementById("basicCourseClass");
-			basicCourseClass.innerHTML = "详见附表9-附表18。";
+			basicCourseClass.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表18。";
 			
 			var courseDepartmentTitle = document.getElementById("courseDepartmentTitle");
 			courseDepartmentTitle.innerHTML = "4.2.1.1&nbsp;&nbsp;大学英语（三）成绩情况";
@@ -256,12 +258,15 @@
 		}
 		else if(term1 == "2"){
 			
+			document.getElementById("zlq").style.display = "none";
+			
+			
 			var secondTermCourseTitle2 = document.getElementById("secondTermCourseTitle2");
 			secondTermCourseTitle2.innerHTML = "4.2.2&nbsp;&nbsp;" + gradeList[3] + "级主要基础课程成绩情况";
 			document.getElementById("firstTermCourseTitle2").style.display="none";
 			
 			var basicCourseClass = document.getElementById("basicCourseClass");
-			basicCourseClass.innerHTML = "详见附表9-附表21。";
+			basicCourseClass.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表21。";
 			
  			var firstTermAddCourse = document.getElementById("firstTermAddCourse");
 			firstTermAddCourse.style.display = "none"; 
@@ -335,7 +340,7 @@
 	        "info": false, //去掉表格底部信息
 	    });
 	  
-/*  	    getFirstPic();      //第一章第一个功能成绩分析图
+   	    getFirstPic();      //第一章第一个功能成绩分析图
 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
@@ -346,7 +351,7 @@
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图       */
+		getNinthPic();      //第四章第二个功能9张或10张分析图        
 
 	});
 	
@@ -2955,16 +2960,18 @@
 				</div>
 			</div>
 			<h2 style="text-align:center">第一章&nbsp;&nbsp;总体成绩分析</h2>
+			${analysis1.split("#")[1]}${analysis2.split("#")[1]} 
 			<h4>1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
-			<div id = "sss" class="row">
+			<h5>1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
+			${analysis1.split("#")[2]} 
+			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h5>1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
+							<h5 id = "table1.1" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table1.1" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3035,15 +3042,16 @@
 				</div>
 			</div>
 			
+			<h3 class="card-title">1.1.1&nbsp;&nbsp;必修、专业选修、通识选修课程成绩整体分布情况</h3> 
+			${analysis2.split("#")[2] }
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">1.1.1&nbsp;&nbsp;必修、专业选修、通识选修课程成绩整体分布情况</h3> 
+							<h5 id = "table1.2" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table1.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3114,16 +3122,16 @@
 			</div>
 			
 			<h2 style="text-align:center">第二章&nbsp;&nbsp;必修、专业选修课程成绩整体情况分析</h2>
+			${analysis3.split("#")[1] } 
 			<h4>2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
+			${analysis3.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<!-- <div class="card-header">
-							<h3 class="card-title">全校必修、专业选修整体成绩分布情况</h3> 
-						</div> -->
-						<!-- /.card-header -->
+						<div class="card-header">
+							<h5 id = "table2.1" style="text-align:center"></h5> 
+						</div>
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.1" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3193,15 +3201,15 @@
 			
 			<h4>2.2&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h4>
 			<h5 id = "RPECTitle1">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "firstGradeDepartmentRPEC" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "firstGradeDepartmentRPEC" class="card-title"></h3> 
+							<h5 id = "table2.2" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3244,7 +3252,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					${analysis4.split("#")[0] } 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;表2.2${analysis4.split("#")[0] } </p>
 					</div>
 				</div>
 			</div>
@@ -3252,20 +3260,20 @@
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle1" class="card-title"></h3> 
-					<p>详见附表1。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表1 。</p>
 				</div>
 			</div>
 			
 			<h5 id = "RPECTitle2">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "secondGradeDepartmentRPEC" class="card-title"></h5>
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "secondGradeDepartmentRPEC" class="card-title"></h3> 
+							<h5 id = "table2.3" style="text-align:center"></h5>  
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.3" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3308,7 +3316,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					${analysis5.split("#")[0] } 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;表2.3${analysis5.split("#")[0] } </p>
 					</div>
 				</div>
 			</div>
@@ -3316,20 +3324,20 @@
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle2" class="card-title"></h3> 
-					<p>详见附表2。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表2。</p>
 				</div>
 			</div>
 			
 			<h5 id = "RPECTitle3">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "thirdGradeDepartmentRPEC" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "thirdGradeDepartmentRPEC" class="card-title"></h3> 
+							<h5 id = "table2.4" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.4" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3372,7 +3380,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					${analysis6.split("#")[0] } 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;表2.4${analysis6.split("#")[0] } </p>
 					</div>
 				</div>
 			</div>
@@ -3380,20 +3388,20 @@
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle3" class="card-title"></h3> 
-					<p>详见附表3。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表3。</p>
 				</div>
 			</div>
 			
 			<h5 id = "RPECTitle4">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "forthGradeDepartmentRPEC" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 id = "forthGradeDepartmentRPEC" class="card-title"></h3> 
+							<h5 id = "table2.5" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.5" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3436,7 +3444,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					${analysis7.split("#")[0] } 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;表2.5${analysis7.split("#")[0] } </p>
 					</div>
 				</div>
 			</div>
@@ -3444,19 +3452,20 @@
 			<div class="card">
 				<div class="card-header">
 					<h3 id = "classRPECTitle4" class="card-title"></h3> 
-					<p>详见附表4。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表4。</p>
 				</div>
 			</div>
 			
+			<h5 class="card-title">2.2.5&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
+			${analysis8.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">2.2.5&nbsp;&nbsp;各院系分年级成绩平均分比较</h3> 
+						<h5 id = "table2.6" style="text-align:center">表2.6&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table2.6" style="text-align:center">表2.6&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3526,13 +3535,17 @@
 			</div>
 			
 			<h2 style="text-align:center">第三章&nbsp;&nbsp;不及格成绩情况分析</h2>
+			${analysis9.split("#")[1] } 
 			<h4>3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
+			${analysis9.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+						<div class="card-header">
+							<h5 id = "table3.1" style="text-align:center">表3.1&nbsp;&nbsp;各年级不及格门数统计</h5> 
+						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table3.1" style="text-align:center">表3.1&nbsp;&nbsp;各年级不及格门数统计</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3602,15 +3615,16 @@
 			</div>
 			
 			<h4>3.2&nbsp;&nbsp;各院系不及格学生情况比较分析</h4> 
+			<h5 class="card-title">3.2.1&nbsp;&nbsp;各院系不及格学生整体情况</h5> 
+			${analysis10.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">3.2.1&nbsp;&nbsp;各院系不及格学生整体情况</h3> 
+						<h5 id = "table3.2" style="text-align:center">表3.2&nbsp;&nbsp;各院系不及格学生情况统计表</h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table3.2" style="text-align:center">表3.2&nbsp;&nbsp;各院系不及格学生情况统计表</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3672,15 +3686,17 @@
 				</div>
 			</div>
 			
+			
+			<h5 class="card-title">3.2.2&nbsp;&nbsp;各院系分年级学生不及格情况统计分布</h5> 
+			${analysis11.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">3.2.2&nbsp;&nbsp;各院系分年级学生不及格情况统计分布</h3> 
+						<h5 id = "table3.3" style="text-align:center">表3.3&nbsp;&nbsp;各院系分年级不及格情况统计</h5>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table3.3" style="text-align:center">表3.3&nbsp;&nbsp;各院系分年级不及格情况统计</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3760,17 +3776,20 @@
 			<h4>3.3&nbsp;&nbsp; 各班级不及格情况统计</h4> 
 			<div class="card">
 				<div class="card-header">
-					<p >详见附表5-附表8。</p> 
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表5-附表8。</p> 
 				</div>
 			</div>
 			
 			<h4>3.4&nbsp;&nbsp; 各年级缺考情况统计</h4> 
+			${analysis12.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+						<div class="card-header">
+							<h5 id = "table3.4" style="text-align:center">表3.4&nbsp;&nbsp;各年级缺考情况统计表</h5> 
+						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table3.4" style="text-align:center">表3.4&nbsp;&nbsp;各年级缺考情况统计表</h5> 
 							<table id="example1" class="table table-bordered table-striped" >
 								<thead>
 									<tr>
@@ -3810,13 +3829,17 @@
 			</div>
 			
 			<h2 style="text-align:center">第四章&nbsp;&nbsp;基础课程成绩情况分析</h2>
+			${analysis13.split("#")[1] }  
 			<h4>4.1&nbsp;&nbsp;主要基础课程成绩情况分布</h4> 
+			${analysis13.split("#")[2] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+						<div class="card-header">
+							<h5 id = "table4.1" style="text-align:center">表4.1&nbsp;&nbsp;主要基础课程成绩情况</h5> 
+						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.1" style="text-align:center">表4.1&nbsp;&nbsp;主要基础课程成绩情况</h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3875,16 +3898,19 @@
 			</div>
 			
 			<h4>4.2&nbsp;&nbsp;主要基础课程成绩具体分析</h4> 
+			${analysis13.split("#")[3] }  
 			<h5 id = "termCourseTitle1" ></h5> 
+			${analysis13.split("#")[4] } 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle" class="card-title" ></h3> 
+							${analysis14.split("#")[2] } 
+							<h5 id = "table4.2" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.2" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3933,12 +3959,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis14.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle1" class="card-title"></h3> 
+							${analysis15.split("#")[2] } 
+							<h5 id = "table4.3" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.3" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -3987,12 +4022,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis15.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle2" class="card-title" ></h3> 
+							${analysis16.split("#")[2] } 
+							<h5 id = "table4.4" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.4" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4036,18 +4080,28 @@
 					</div>
 				</div>
 			</div>		
-			<h5 id = "pic11" style="text-align:center"></h5>		
+			<h5 id = "pic11" style="text-align:center"></h5>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis16.split("#")[0] } 
+					</div>
+				</div>
+			</div>		
 			
 			<h5 id = "secondTermCourseTitle2"></h5> 
+			<p id = "ssj">${analysis13.split("#")[5] } </p>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
-							<h3 id="courseDepartmentTitle3" class="card-title" ></h3> 
+							<h3 id="courseDepartmentTitle3" class="card-title" ></h3>
+							${analysis17.split("#")[2] }  
+							<h5 id = "table4.5" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.5" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4096,12 +4150,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis17.split("#")[0] } 
+					</div>
+				</div>
+			</div>	
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle4" class="card-title"></h3> 
+							${analysis18.split("#")[2] } 
+							<h5 id = "table4.6" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.6" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4147,16 +4210,26 @@
 			</div>
 			<h5 id = "pic13" style="text-align:center"></h5>	
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis18.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<h5 id = "firstTermCourseTitle2"></h5> 
+			<p id = "zlq">${analysis13.split("#")[5] } </p>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle5" class="card-title" ></h3> 
+							${analysis19.split("#")[2] } 
+							<h5 id = "table4.7" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.7" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4205,12 +4278,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis19.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle6" class="card-title" ></h3> 
+							${analysis20.split("#")[2] }
+							<h5 id = "table4.8" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.8" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4259,12 +4341,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis20.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle7" class="card-title" ></h3> 
+							${analysis21.split("#")[2] }
+							<h5 id = "table4.9" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.9" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4313,12 +4404,21 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+					${analysis21.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle8" class="card-title" ></h3> 
+							${analysis22.split("#")[2] }
+							<h5 id = "table4.10" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.10" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4364,15 +4464,24 @@
 			</div>
 			<h5 id = "pic17" style="text-align:center"></h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis22.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div id = "firstTermAddCourse" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
 							<h3 id="courseDepartmentTitle9" class="card-title"></h3> 
+							${analysis23.split("#")[2] }
+							<h5 id = "table4.11" style="text-align:center"></h5> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-						<h5 id = "table4.11" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -4418,10 +4527,18 @@
 			</div>
 			<h5 id = "pic18" style="text-align:center"></h5>
 			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+					${analysis23.split("#")[0] } 
+					</div>
+				</div>
+			</div>
+			
 			<div class="card">
 				<div class="card-header"> 
 					<h5>4.2.3&nbsp;&nbsp;主要基础课程各班成绩情况</h5> 
-					<p id = "basicCourseClass">详见附表9-附表21。</p>
+					<p id = "basicCourseClass">&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表21。</p>
 				</div>
 			</div>
 			

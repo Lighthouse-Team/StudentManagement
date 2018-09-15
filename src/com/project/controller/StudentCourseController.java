@@ -1002,7 +1002,9 @@ public class StudentCourseController {
 		bcddListList = studentCourseService.getBasicCourseDetailDistributionListList(year, term);
 		for (int i=0 ; i<bcddListList.size() ; i++) {
 			String bcddListNumber = "bcddList" + String.valueOf(i);
+			String analysisNumber = "analysis" + String.valueOf(i + 14);
 			map.put(bcddListNumber,bcddListList.get(i));
+			map.put(analysisNumber, bcddListList.get(i).get(bcddListList.get(i).size() - 1).getAnalysis());
 		}                                //第四章第二个功能
 		
 		return "print";
