@@ -43,6 +43,7 @@ import com.project.dto.DepartmentFailDistribution;
 import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
+import com.sun.glass.ui.Size;
 import com.sun.org.apache.bcel.internal.generic.I2F;
 import com.sun.xml.internal.messaging.saaj.soap.AttachmentPartImpl;
 
@@ -289,6 +290,7 @@ public class StudentCourseService {
 			double currentMediumRates = Double.parseDouble(od.getMediumRate().substring(0, od.getMediumRate().length()-1))+
 					Double.parseDouble(od.getGoodRate().substring(0, od.getGoodRate().length()-1))+
 					Double.parseDouble(od.getExcellentRate().substring(0, od.getExcellentRate().length()-1));//当前年级70分以上的概率
+			//System.out.println("111223"+currentMediumRates);
 			overMediumRates.add(currentMediumRates);
 			overMediumRateGrades.add(Integer.parseInt(od.getGrade()));
 					
@@ -366,38 +368,44 @@ public class StudentCourseService {
 		double alloverMediumRate = Double.parseDouble(overallDistribution.getMediumRate().substring(0, overallDistribution.getMediumRate().length()-1))+
 				Double.parseDouble(overallDistribution.getGoodRate().substring(0, overallDistribution.getGoodRate().length()-1))+
 				Double.parseDouble(overallDistribution.getExcellentRate().substring(0, overallDistribution.getExcellentRate().length()-1));//全年级70分以上的概率
-		for(int i=0;i<overMediumRates.size();i++) {
-			if(alloverMediumRate < overMediumRates.get(i)) {
-				overAllGrades.add(overMediumRateGrades.get(i));
+		if(overMediumRates.size()!=0) {
+			for(int i=0;i<overMediumRates.size();i++) {
+				if(alloverMediumRate < overMediumRates.get(i)) {
+					overAllGrades.add(overMediumRateGrades.get(i));
+				}
 			}
 		}
+		//System.out.println("222222222"+overAllGrades.size());
 		String overAllGradeStr = "";
-		for(int i=0;i<overAllGrades.size();i++) {
-			overAllGradeStr = overAllGradeStr+overAllGrades.get(i)+"级、";
+		if(overAllGrades.size()!=0) {
+			for(int i=0;i<overAllGrades.size();i++) {
+				overAllGradeStr = overAllGradeStr+overAllGrades.get(i)+"级、";
+			}
+			overAllGradeStr = overAllGradeStr.substring(0,overAllGradeStr.length()-1);
 		}
 		if(overallDistribution.getGrade().equals("全校")) {
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表1.1、图1.1-1.2统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）全校有效总成绩记录数为"+overallDistribution.getTotalNumber()+
+			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.1、图1.1-1.2统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）全校有效总成绩记录数为"+overallDistribution.getTotalNumber()+
 					"条。优秀成绩记录数"+overallDistribution.getExcellentNumber()+
 					"条，占总成绩记录数的"+overallDistribution.getExcellentRate()+
 					"；不及格成绩记录数为"+overallDistribution.getFailNumber()+
-					"条，占总成绩记录数的"+overallDistribution.getFailRate()+"。"+"<br>"+
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）优秀率方面，最高的年级为"+excellentRateHighestGrade+
+					"条，占总成绩记录数的"+overallDistribution.getFailRate()+"。"+"\n"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）优秀率方面，最高的年级为"+excellentRateHighestGrade+
 					"级，达到"+excellentRateHighest+
 					"%，其次为"+excellentRateHigherGrade+
 					"级，达到"+excellentRateHigher+
-					"%，高于全校平均值（"+overallDistribution.getExcellentRate()+"）。"+"<br>"+
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）不及格率方面，最低年级是"+failRateLowestGrade+
+					"%，高于全校平均值（"+overallDistribution.getExcellentRate()+"）。"+"\n"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）不及格率方面，最低年级是"+failRateLowestGrade+
 					"级，仅为"+failRateLowest+
 					"%，其次为"+failRateLowerGrade+
 					"级，为"+failRateLower+
-					"%，均低于全校平均值（"+overallDistribution.getFailRate()+"）。"+"<br>"+
-					"&nbsp;&nbsp;&nbsp;&nbsp;（4）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
+					"%，均低于全校平均值（"+overallDistribution.getFailRate()+"）。"+"\n"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
 					"，"+averageScoreHighestGrade+
 					"级最高，为"+averageScoreHighest+
 					"，"+averageScoreLowestGrade+
-					"级最低，为"+averageScoreLowest+"。"+"<br>"+
-					"&nbsp;&nbsp;&nbsp;&nbsp;（5）总体上，"+overAllGradeStr.substring(0,overAllGradeStr.length()-1)+"成绩较好，70分以上（含70）的成绩记录高于全校平均水平。"+
-					"#"+"&nbsp;&nbsp;&nbsp;&nbsp;"+year+
+					"级最低，为"+averageScoreLowest+"。"+"\n"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（5）总体上，"+overAllGradeStr+"成绩较好，70分以上（含70）的成绩记录高于全校平均水平。"+
+					"#"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+year+
 					"学年"+termStr+
 					"本科生期末考试有效的成绩记录"+overallDistribution.getTotalNumber()+
 					"条，其中，"+odList.get(0).getGrade()+"级有效成绩数据"+odList.get(0).getTotalNumber()+
@@ -405,12 +413,78 @@ public class StudentCourseService {
 					"条，"+odList.get(2).getGrade()+"级有效成绩数据"+odList.get(2).getTotalNumber()+
 					"条，"+odList.get(3).getGrade()+"级有效成绩数据"+odList.get(3).getTotalNumber()+
 					"条。"+
-					"#表1.1和图1.1为我校本科生"+"&nbsp;&nbsp;&nbsp;&nbsp;"+year+"学年"+termStr+
+					"#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.1和图1.1为我校本科生"+year+"学年"+termStr+
 					"所有课程成绩分布情况。主要统计了全校各年级各分数段成绩记录数，成绩优良率、不及格率等情况。");
 		}
 		odList.add(overallDistribution);
 		return odList;
 	}
+	
+//	/**
+//	 * 查询全校该学期AC的成绩分布
+//	 * 
+//	 * @param year
+//	 * @param term
+//	 * @return
+//	 */
+//	public List<OverallDistribution> getACOverallDistributionList(String year, Integer term) {
+//		String strGradeOne = year.substring(0, 4);
+//		Integer gradeOne = Integer.parseInt(strGradeOne);
+//		List<OverallDistribution> odList = new ArrayList<>();
+//		Integer totalNumber = 0; // 成绩记录总数
+//		Integer excellentNumber = 0; // 优秀成绩记录数
+//		Integer goodNumber = 0; // 良好成绩记录数
+//		Integer mediumNumber = 0; // 中等成绩记录数
+//		Integer passNumber = 0; // 及格成绩记录数
+//		Integer id = 1; // 序号
+//		for (Integer gradeI = gradeOne - 3; gradeI <= gradeOne; gradeI++) {
+//			OverallDistribution od = getACOverallDistributionByGrade(gradeI, year, term);
+//			od.setId(id++);
+//			odList.add(od);
+//			totalNumber += od.getTotalNumber();
+//			excellentNumber += od.getExcellentNumber();
+//			goodNumber += od.getGoodNumber();
+//			mediumNumber += od.getMediumNumber();
+//			passNumber += od.getPassNumber();
+//		}
+//		Integer failNumber = totalNumber - excellentNumber - goodNumber - mediumNumber - passNumber; // 不及格成绩记录数
+//		OverallDistribution overallDistribution = new OverallDistribution();
+//		overallDistribution.setId(id);
+//		overallDistribution.setGrade("全校");
+//		if (totalNumber != 0) {
+//			double excellentRate = (double) excellentNumber / totalNumber; // 优秀率
+//			double goodRate = (double) goodNumber / totalNumber; // 良好率
+//			double mediumRate = (double) mediumNumber / totalNumber; // 中等率
+//			double passRate = (double) passNumber / totalNumber; // 及格率
+//			double failRate = (double) failNumber / totalNumber; // 不及格率
+//			double averageScore = getUniversityACAverageScore(year, term); // 平均分
+//
+//			DecimalFormat rateDF = new DecimalFormat("0.00%");
+//			DecimalFormat scoreDF = new DecimalFormat("0.00");
+//			String strExcellentRate = rateDF.format(excellentRate);
+//			String strGoodRate = rateDF.format(goodRate);
+//			String strMediumRate = rateDF.format(mediumRate);
+//			String strPassRate = rateDF.format(passRate);
+//			String strFailRate = rateDF.format(failRate);
+//			String strAverageScore = scoreDF.format(averageScore);
+//
+//			overallDistribution.setTotalNumber(totalNumber);
+//			overallDistribution.setExcellentNumber(excellentNumber);
+//			overallDistribution.setGoodNumber(goodNumber);
+//			overallDistribution.setMediumNumber(mediumNumber);
+//			overallDistribution.setPassNumber(passNumber);
+//			overallDistribution.setFailNumber(failNumber);
+//			overallDistribution.setAverageScore(strAverageScore);
+//			overallDistribution.setExcellentRate(strExcellentRate);
+//			overallDistribution.setGoodRate(strGoodRate);
+//			overallDistribution.setMediumRate(strMediumRate);
+//			overallDistribution.setPassRate(strPassRate);
+//			overallDistribution.setFailRate(strFailRate);
+//		}
+//		odList.add(overallDistribution);
+//		return odList;
+//	}
+
 
 	/*
 	 * ======通过 courseType 属性获得AG该课程的考试成绩分布，AG指所有年级======
@@ -647,23 +721,23 @@ public class StudentCourseService {
 			overAllCourseStr = overAllCourseStr+overAllFailRateCourses.get(i)+"、";
 		}
 		if(overallDistribution.getCourseType().equals("全校")) {
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
+			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
 					"最高，达到"+excellentRateHighest+
 					"%，"+excellentRateLowestCourse+
 					"最低，为"+excellentRateLowest+
 					"%，低于全校平均水平（"+overallDistribution.getExcellentRate()+
-					"）；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格率方面，"+failRateLowestCourse+
+					"）；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格率方面，"+failRateLowestCourse+
 					"最低，仅为"+failRateLowest+
 					"%,"+overAllCourseStr.substring(0,overAllCourseStr.length()-1)+
-					"基本均高于全校平均水平（"+overallDistribution.getFailRate()+"）；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
+					"基本均高于全校平均水平（"+overallDistribution.getFailRate()+"）；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
 					"，其中，"+averageScoreHighestCourse+
 					"平均分最高，为"+averageScoreHighest+"。" + 
 					"#其中必修课成绩"+odList.get(0).getTotalNumber()+
 					"条，选修课成绩"+odList.get(1).getTotalNumber()+
 					"条，通识教育选修课"+odList.get(2).getTotalNumber()+
-					"条。#&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：");
+					"条。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：");
 		}
 		odList.add(overallDistribution);
 		return odList;
@@ -923,28 +997,28 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表2.1、图2.3-2.4统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，全校必修、专业选修课程优秀率最高的年级为"+excellentRateHighestGrade+
+			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.1、图2.3-2.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，全校必修、专业选修课程优秀率最高的年级为"+excellentRateHighestGrade+
 					"级，达到"+excellentRateHighest+
 					"%，其次为"+excellentRateHigherGrade+
 					"级，达到"+excellentRateHigher+
 					"%，均高于全校平均值（"+overallDistribution.getExcellentRate()+
-					"）。<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格率方面，全校必修、专业选修课程不及格率最低年级是"+failRateLowestGrade+
+					"）。\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格率方面，全校必修、专业选修课程不及格率最低年级是"+failRateLowestGrade+
 					"级，仅为"+failRateLowest+
 					"%，其次为"+failRateLowerGrade+
 					"级，为"+failRateLower+
-					"%，均低于全校平均值（"+overallDistribution.getFailRate()+"）<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
+					"%，均低于全校平均值（"+overallDistribution.getFailRate()+"）\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）在平均分方面，全校平均分为"+overallDistribution.getAverageScore()+
 					"，"+averageScoreHighestGrade+
 					"级最高，为"+averageScoreHighest+
 					","+averageScoreLowestGrade+"级最低，为"+averageScoreLowest+"。"+
-					"#&nbsp;&nbsp;&nbsp;&nbsp;本章对全校的必修、专业选修课程成绩进行分析，在第1章的数据基础上，剔除通识教育选修课成绩，其中，"+odList.get(0).getGrade()+
+					"#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本章对全校的必修、专业选修课程成绩进行分析，在第1章的数据基础上，剔除通识教育选修课成绩，其中，"+odList.get(0).getGrade()+
 					"级有效成绩数据"+odList.get(0).getTotalNumber()+
 					"条，"+odList.get(1).getGrade()+"级有效成绩数据"+odList.get(1).getTotalNumber()+
 					"条，"+odList.get(2).getGrade()+"级有效成绩数据"+odList.get(2).getTotalNumber()+
 					"条，"+odList.get(3).getGrade()+"级有效成绩数据"+odList.get(3).getTotalNumber()+
 					"条。"+ 
-					"#&nbsp;&nbsp;&nbsp;&nbsp;表2.1为我校本科生"+year+"学年"+termStr+"必修、专业选修课程成绩分布情况，各年级有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图2.1-2.2：");
+					"#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.1为我校本科生"+year+"学年"+termStr+"必修、专业选修课程成绩分布情况，各年级有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图2.1-2.2：");
 		}
 		
 		odList.add(overallDistribution);
@@ -1314,17 +1388,17 @@ public class StudentCourseService {
 				departmentScoStr = departmentScoStr + overAllaverageScoresDepartments.get(i)+"、";
 			}
 	
-			departmentDistribution.setAnalysis("统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentDistribution.getGrade()+
+			departmentDistribution.setAnalysis("统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentDistribution.getGrade()+
 					"级全校必修、专业选修课程平均优秀率为"+departmentDistribution.getExcellentRate()+
 					"，高于全校平均水平的院系有："+departmentExStr.substring(0,departmentExStr.length()-1)+
 					"，其中"+excellentRateHighestDepartment+
-					"最高，为"+excellentRateHighest+"%；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）"+departmentDistribution.getGrade()+
+					"最高，为"+excellentRateHighest+"%；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）"+departmentDistribution.getGrade()+
 					"级全校必修、专业选修课程平均不及格率为"+departmentDistribution.getFailRate()+
 					"，高于全校平均水平的院系有："+departmentFaStr.substring(0,departmentFaStr.length()-1)+
 					"，其中"+failRateHighestDepartment+
-					"最高，为"+failRateHighest+"%；<br>" + 
-			        "&nbsp;&nbsp;&nbsp;&nbsp;（3）"+departmentDistribution.getGrade()+
+					"最高，为"+failRateHighest+"%；\n" + 
+			        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）"+departmentDistribution.getGrade()+
 					"级全校必修、专业选修课程平均分为"+departmentDistribution.getAverageScore()+
 					"，高于全校平均水平的院系有："+departmentScoStr.substring(0,departmentScoStr.length()-1)+
 					"。##" );
@@ -1761,21 +1835,21 @@ public class StudentCourseService {
 		List<DepartmentAllGradeAverageScoreCompare> dagascList = new ArrayList<>();
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = dagascMap.get(departmentId);
-			departmentAllGradeAverageScoreCompare.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表2.6、图2.3统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeOneOverDepartmentNamesStr.substring(0,gradeOneOverDepartmentNamesStr.length()-1)+
+			departmentAllGradeAverageScoreCompare.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.6、图2.3统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeOneOverDepartmentNamesStr.substring(0,gradeOneOverDepartmentNamesStr.length()-1)+
 					"，平均成绩大幅度（差值≤5）低于全校平均成绩的院系有：" + gradeOneDownDepartDiffStr.substring(0,gradeOneDownDepartDiffStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）"+gradeTw+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeTwoOverDepartmentNamesStr.substring(0,gradeTwoOverDepartmentNamesStr.length()-1)+
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）"+gradeTw+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeTwoOverDepartmentNamesStr.substring(0,gradeTwoOverDepartmentNamesStr.length()-1)+
 					"，平均成绩大幅度（差值≤5）低于全校平均成绩的院系有：" + gradeTwoDownDepartDiffStr.substring(0,gradeTwoDownDepartDiffStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）"+gradeTh+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeThreeOverDepartmentNamesStr.substring(0,gradeThreeOverDepartmentNamesStr.length()-1)+
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）"+gradeTh+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeThreeOverDepartmentNamesStr.substring(0,gradeThreeOverDepartmentNamesStr.length()-1)+
 					"，平均成绩大幅度（差值≤5）低于全校平均成绩的院系有：" + gradeThreeDownDepartDiffStr.substring(0,gradeThreeDownDepartDiffStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（4）"+gradeFo+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeFourOverDepartmentNamesStr.substring(0,gradeFourOverDepartmentNamesStr.length()-1)+
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）"+gradeFo+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeFourOverDepartmentNamesStr.substring(0,gradeFourOverDepartmentNamesStr.length()-1)+
 					"，平均成绩大幅度（差值≤5）低于全校平均成绩的院系有：" + gradeFourDownDepartDiffStr.substring(0,gradeFourDownDepartDiffStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（5）四个年级的平均成绩均在全校平均成绩之上的院系有："+gradeAllOverDepartmentsStr.substring(0,gradeAllOverDepartmentsStr.length()-1)+
-					"；四个年级的平均成绩均在全校平均成绩之下的院系有："+gradeAllDownDepartmentsStr.substring(0,gradeAllDownDepartmentsStr.length()-1)+"。<br>"+
-					"##&nbsp;&nbsp;&nbsp;&nbsp;将各院系"+gradeOn+"级、"+gradeTw+"级、"+gradeTh+"级、"+gradeFo+"级必修、专业选修平均成绩与全校平均分对比，差值为院系各年级的平均分减该年级的全校平均分，见下表：" );
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（5）四个年级的平均成绩均在全校平均成绩之上的院系有："+gradeAllOverDepartmentsStr.substring(0,gradeAllOverDepartmentsStr.length()-1)+
+					"；四个年级的平均成绩均在全校平均成绩之下的院系有："+gradeAllDownDepartmentsStr.substring(0,gradeAllDownDepartmentsStr.length()-1)+"。\n"+
+					"##&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将各院系所有年级的必修、专业选修平均成绩与全校平均分对比，差值为院系各年级的平均分减该年级的全校平均分，见下表：" );
 			dagascList.add(departmentAllGradeAverageScoreCompare);
 		}
 		return dagascList;
@@ -2007,17 +2081,17 @@ public class StudentCourseService {
 					downAllFailRateStr += downAllFailRateGrades.get(i)+"级（"+downAllFailRates.get(i)+"%）、";
 				}
 			}
-			gradeFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表3.1、图3.1统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）全校必修课有不及格成绩的学生共"+gradeFailDistribution.getTotalFailNumber()+
+			gradeFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.1、图3.1-3.2统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）全校必修课有不及格成绩的学生共"+gradeFailDistribution.getTotalFailNumber()+
 					"人，学生不及格率为"+gradeFailDistribution.getFailRate()+
 					"，四个年级中，学生不及格率高于全校平均水平的年级是"+overAllFailRateStr.substring(0,overAllFailRateStr.length()-1)+
 					"；学生不及格率低于全校平均水平的年级是"+downAllFailRateStr.substring(0,downAllFailRateStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格成绩门数为1的学生有"+failRateOneStudents+
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）不及格成绩门数为1的学生有"+failRateOneStudents+
 					"人，占有不及格成绩学生总数的"+strFailRate1+
 					"；不及格成绩门数≥4的学生有"+failRateOverFourStudents+
 					"人，按照学籍管理规定，这部分学生已处于留降级、退学的边缘，应给予重点关注。" + 
-					"#&nbsp;&nbsp;&nbsp;&nbsp;课程考核成绩不及格将会对学生留降级、退学、毕业、就业、出国留学等多方面带来影响，是学生、家长、老师都十分关注的问题。同时，课程不及格情况也能反映学生的学习态度和教师的授课质量，本部分将对"+year+
-					"学年度"+termStr+"期末考试不及格情况进行分析。本章统计数据只涵盖全校各年级必修课期末考试成绩。#"+"&nbsp;&nbsp;&nbsp;&nbsp;"+year+"学年"+termStr+"全校各年级学生必修课不及格门数及各年级学生不及格率统计如下:");
+					"#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课程考核成绩不及格将会对学生留降级、退学、毕业、就业、出国留学等多方面带来影响，是学生、家长、老师都十分关注的问题。同时，课程不及格情况也能反映学生的学习态度和教师的授课质量，本部分将对"+year+
+					"学年度"+termStr+"期末考试不及格情况进行分析。本章统计数据只涵盖全校各年级必修课期末考试成绩。#"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+year+"学年"+termStr+"全校各年级学生必修课不及格门数及各年级学生不及格率统计如下:");
 			gfdList.add(gradeFailDistribution);
 		}
 		return gfdList;
@@ -2233,13 +2307,13 @@ public class StudentCourseService {
 			for(int i=0;i<downTenfailRateDepartments.size();i++) {
 				downTenfailRateDepartmentsStr += downTenfailRateDepartments.get(i)+"、";
 			}
-			departmentFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表3.2、图3.2统计结果显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;全校学生不及格率为"+departmentFailDistribution.getTotalFailRate()+
+			departmentFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.2、图3.3统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全校学生不及格率为"+departmentFailDistribution.getTotalFailRate()+
 					"，学生不及格率高于全校平均水平的院系有："+overAllFailRateDepartmentsStr.substring(0,overAllFailRateDepartmentsStr.length()-1)+
 					"，其中，"+failRateHighestDepartment+
 					"学生不及格率最高，为"+failRateHighest+
 					"%；"+downTenfailRateDepartmentsStr.substring(0,downTenfailRateDepartmentsStr.length()-1)+
 					"学生不及格率低于10%，其中"+failRateLowestDepartment+
-					"学生不及格率全校最低，仅为"+failRateLowest+"%。##&nbsp;&nbsp;&nbsp;&nbsp;对不及格学生情况进行院系间的对比，统计如下：");
+					"学生不及格率全校最低，仅为"+failRateLowest+"%。##&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对不及格学生情况进行院系间的对比，统计如下：");
 		}
 		dfdList.add(departmentFailDistribution);
 		return dfdList;
@@ -2744,23 +2818,23 @@ public class StudentCourseService {
 		List<DepartmentAllGradeFailDistribution> dagfdList = new ArrayList<>();
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			DepartmentAllGradeFailDistribution departmentAllGradeFailDistribution = dagfdMap.get(departmentId);
-			departmentAllGradeFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表3.3、图3.3统计数据显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级全校学生不及格率为"+allFailRates.get(0)+
+			departmentAllGradeFailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.3、图3.4统计数据显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级全校学生不及格率为"+allFailRates.get(0)+
 					"，学生不及格率高于全校平均水平的院系有："+overAllOneFailRateDepartmentsStr.substring(0,overAllOneFailRateDepartmentsStr.length()-1)+
-					"，其中"+oneFailRateDepartment+"学生不及格率最高，为"+oneFailRate+"%；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）"+gradeTw+"级全校学生不及格率为"+allFailRates.get(1)+
+					"，其中"+oneFailRateDepartment+"学生不及格率最高，为"+oneFailRate+"%；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）"+gradeTw+"级全校学生不及格率为"+allFailRates.get(1)+
 					"，学生不及格率高于全校平均水平的院系有："+overAllTwoFailRateDepartmentsStr.substring(0,overAllTwoFailRateDepartmentsStr.length()-1)+
-					"，其中"+twoFailRateDepartment+"学生不及格率最高，为"+twoFailRate+"%；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）"+gradeTh+"级全校学生不及格率为"+allFailRates.get(2)+
+					"，其中"+twoFailRateDepartment+"学生不及格率最高，为"+twoFailRate+"%；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）"+gradeTh+"级全校学生不及格率为"+allFailRates.get(2)+
 					"，学生不及格率高于全校平均水平的院系有："+overAllThreeFailRateDepartmentsStr.substring(0,overAllThreeFailRateDepartmentsStr.length()-1)+
-					"，其中"+threeFailRateDepartment+"学生不及格率最高，为"+threeFailRate+"%；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（4）"+gradeFo+"级全校学生不及格率为"+allFailRates.get(3)+
+					"，其中"+threeFailRateDepartment+"学生不及格率最高，为"+threeFailRate+"%；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）"+gradeFo+"级全校学生不及格率为"+allFailRates.get(3)+
 					"，学生不及格率高于全校平均水平的院系有："+overAllFourFailRateDepartmentsStr.substring(0,overAllFourFailRateDepartmentsStr.length()-1)+
-					"，其中"+fourFailRateDepartment+"学生不及格率最高，为"+fourFailRate+"%。<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（5）所有年级中，"+allFailRateHigestDepartment+
+					"，其中"+fourFailRateDepartment+"学生不及格率最高，为"+fourFailRate+"%。\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（5）所有年级中，"+allFailRateHigestDepartment+
 					"级不及格率最高，为"+allFailRateHigest+
 					"%，其次为"+allFailRateHigerDepartment+
 					"级，为"+allFailRateHiger+"%；" + 
-					"##&nbsp;&nbsp;&nbsp;&nbsp;对各院系学生不及格情况进行分年级统计，"+gradeOn+"级、"+gradeTw+"级、"+gradeTh+"级、"+gradeFo+"级学生不及格情况如下表所示。");
+					"##&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对各院系学生不及格情况进行分年级统计，"+gradeOn+"级、"+gradeTw+"级、"+gradeTh+"级、"+gradeFo+"级学生不及格情况如下表所示。");
 			dagfdList.add(departmentAllGradeFailDistribution);
 		}
 		return dagfdList;
@@ -2945,13 +3019,13 @@ public class StudentCourseService {
 		}else {
 			absenceNumberSubjectAll = "通识教育选修课";
 		}
-		gradeAbsenceDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表3.4统计数据表明：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）"+absenceGradeHighest+
+		gradeAbsenceDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.4统计数据表明：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+absenceGradeHighest+
 				"级缺考人次最多，为"+absenceNumberHighest+
 				"人次，主要为"+absenceSubjectHighest+
 				"，"+absenceGradeHigher+
-				"级紧随其后，为"+absenceNumberHigher+"人次；<br>" + 
-				"&nbsp;&nbsp;&nbsp;&nbsp;（2）在必修课、专业选修课、通识教育选修课中，缺考人次最多的为"+absenceNumberSubjectAll+"。" + 
-				"##&nbsp;&nbsp;&nbsp;&nbsp;根据学籍管理规定，学生缺考成绩以不及格记录。本次统计缺考数据共"+gradeAbsenceDistribution.getTotalAbsenceNumber()+"条。统计情况如下：");
+				"级紧随其后，为"+absenceNumberHigher+"人次；\n" + 
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）在必修课、专业选修课、通识教育选修课中，缺考人次最多的为"+absenceNumberSubjectAll+"。" + 
+				"##&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据学籍管理规定，学生缺考成绩以不及格记录。本次统计缺考数据共"+gradeAbsenceDistribution.getTotalAbsenceNumber()+"条。统计情况如下：");
 		gadList.add(gradeAbsenceDistribution);
 		return gadList;
 	}
@@ -3147,15 +3221,20 @@ public class StudentCourseService {
 		ArrayList<BasicCourseOverallDistribution> basicCourseOverallDistributions = new ArrayList<>();
 		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
 		List<String> bcoList = getBasicCourseOverallListByTerm(term);
+		String strGradeOneTemp = year.substring(0, 4);
+		Integer gradeOneTemp = Integer.parseInt(strGradeOneTemp);
+		Integer gradeOn = gradeOneTemp - 3;
+		Integer gradeTh = gradeOn + 2;//大二
+		Integer gradeFo = gradeOn + 3;//大一
+		grades.add(gradeTh.toString());
+		grades.add(gradeFo.toString());
 		Integer id = 1;
 		for (String courseName : bcoList) {
 			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
 			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
 			//System.out.println("999"+basicCourseOverallDistribution);
-			String grade = basicCourseOverallDistribution.getGrade();
-			if(!grades.contains(grade)) {
-				grades.add(grade);
-			}
+			//String grade = basicCourseOverallDistribution.getGrade();
+			
 			basicCourseOverallDistributions.add(basicCourseOverallDistribution);
 			allExcellentRates.add(Double.parseDouble(basicCourseOverallDistribution.getExcellentRate().substring(0, basicCourseOverallDistribution.getExcellentRate().length()-1)));
 			courseNames.add(basicCourseOverallDistribution.getCourseName());
@@ -3209,36 +3288,51 @@ public class StudentCourseService {
 		}
 				
 		String gradesStr = "";
-		for(int i=0;i<grades.size();i++) {
-			gradesStr += grades.get(i)+"级";
+		if(grades.size()!=0) {
+			for(int i=0;i<grades.size();i++) {
+				gradesStr += grades.get(i)+"级、";
+			}
 		}
+		
 		String courseTerm ="";
 		if(term == 1) {
-			courseTerm = "#&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(1)+"大学英语（三）、大学物理下A、大学物理下B、大学物理实验（二）、复变函数与积分变换5门基本课程的优秀率、不及格率。#&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(2)+"大学英语（一）、大学计算机基础A、普通化学、线性代数与解析几何A、微积分A（一）5门基本课程的优秀率、不及格率。";
+			courseTerm = "#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(0)+"大学英语（三）、大学物理下A、大学物理下B、大学物理实验（二）、复变函数与积分变换5门基本课程的优秀率、不及格率。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(1)+"大学英语（一）、大学计算机基础A、普通化学、线性代数与解析几何A、微积分A（一）5门基本课程的优秀率、不及格率。";
 		}else if(term == 2){
-			courseTerm = "#&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(1)+"工程实践A、机械设计基础B、大学英语（四）3门基本课程的优秀率、不及格率。#&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(2)+"大学英语（二）、程序设计基础、大学物理上、概率论与数理统计、微积分A（二）、工程图学基础6门基本课程的优秀率、不及格率。";
+			courseTerm = "#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(0)+"工程实践A、机械设计基础B、大学英语（四）3门基本课程的优秀率、不及格率。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主要统计"+grades.get(1)+"大学英语（二）、程序设计基础、大学物理上、概率论与数理统计、微积分A（二）、工程图学基础6门基本课程的优秀率、不及格率。";
 		}
 		for (BasicCourseOverallDistribution basicCourseOverallDistribution : basicCourseOverallDistributions) {
 			basicCourseOverallDistribution.setId(id++);
-			basicCourseOverallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;表4.1、图4.1统计数据显示：<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）在优秀率方面，最高的课程为"+excellentRateHighestCourse+
+			basicCourseOverallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.1、图4.1统计数据显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）在优秀率方面，最高的课程为"+excellentRateHighestCourse+
 					"（"+excellentRateHighest+
 					"%），最低的课程为"+excellentRateLowestCourse+
 					"（"+excellentRateLowest+
 					"%），其次为"+excellentRateLowerCourse+
 					"（"+excellentRateLower+
-					"%）；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）在不及格率方面，最高的课程为"+failRateHighestCourse+
+					"%）；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）在不及格率方面，最高的课程为"+failRateHighestCourse+
 					"（"+failRateHighest+
 					"%），不及格率在5%以下的课程有："+downFiveCoursesStr.substring(0,downFiveCoursesStr.length()-1)+
-					"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（3）不及格率高于优秀率的课程有："+failOverExcellentCoursesStr.substring(0,failOverExcellentCoursesStr.length()-1)+
+					"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）不及格率高于优秀率的课程有："+failOverExcellentCoursesStr.substring(0,failOverExcellentCoursesStr.length()-1)+
 					"。" + 
-					"#&nbsp;&nbsp;&nbsp;&nbsp;基础课程面向全校开课，学生成绩的对比分析有助于进一步分析各院系间学生学习情况，为课程建设、教学改革、教师授课、学生管理提供一定的指导建议。#&nbsp;&nbsp;&nbsp;&nbsp;本章统计了"+gradesStr.substring(0,gradesStr.length()-1)+"较有代表性的"+courseNames.size()+"门基础课程成绩情况，对其优秀率、不及格率、平均分情况进行统计分析，详见表4.1。#对表4.1中"+grades.get(0)+"级、"+grades.get(1)+"级主要基础课程的优秀率、不及格率进行学院间的对比分析。"+
+					"#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基础课程面向全校开课，学生成绩的对比分析有助于进一步分析各院系间学生学习情况，为课程建设、教学改革、教师授课、学生管理提供一定的指导建议。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本章统计了"+gradesStr.substring(0,gradesStr.length()-1)+"较有代表性的"+courseNames.size()+"门基础课程成绩情况，对其优秀率、不及格率、平均分情况进行统计分析，详见表4.1。#对表4.1中"+grades.get(0)+"级、"+grades.get(1)+"级主要基础课程的优秀率、不及格率进行学院间的对比分析。"+
 					courseTerm);
 			bcodList.add(basicCourseOverallDistribution);
 		}
 		return bcodList;
 	}
+//	public List<BasicCourseOverallDistribution> getBasicCourseOverallDistributionList(String year, Integer term) {
+//		List<BasicCourseOverallDistribution> bcodList = new ArrayList<>();
+//		List<String> bcoList = getBasicCourseOverallListByTerm(term);
+//		Integer id = 1;
+//		for (String courseName : bcoList) {
+//			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
+//			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
+//			basicCourseOverallDistribution.setId(id++);
+//			bcodList.add(basicCourseOverallDistribution);
+//		}
+//		return bcodList;
+//	}
 
 	/*
 	 * ======大一、大二具有代表性的10门主要基础课程成绩具体分析======
@@ -3337,6 +3431,7 @@ public class StudentCourseService {
 				//System.out.println("44444"+basicCourseDetailDistribution);
 			}
 		}	
+//		System.out.println("8888"+basicCourseDetailDistributionExcellentRates.toString());
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
 		Integer id = 1;
 		Integer totalStudentNumber = 0;
@@ -3382,8 +3477,9 @@ public class StudentCourseService {
 					excellentRateHighest = basicCourseDetailDistributionExcellentRates.get(i);
 					excellentRateHighestDepartment = basicCourseDetailDistributions.get(i).getDepartmentName();
 				}
-				if(excellentRate < basicCourseDetailDistributionExcellentRates.get(i)) {
+				if(excellentRate*100 < basicCourseDetailDistributionExcellentRates.get(i)) {
 					overAllExcellentDepartments.add(basicCourseDetailDistributions.get(i).getDepartmentName());
+				    //System.out.println("99999999"+excellentRate);
 				}
 			}
 			for(int i=0;i<basicCourseDetailDistributionFailRates.size();i++) {
@@ -3391,7 +3487,7 @@ public class StudentCourseService {
 					failRateHighest = basicCourseDetailDistributionFailRates.get(i);
 					failRateHighestDepartment = basicCourseDetailDistributions.get(i).getDepartmentName();
 				}
-				if(failRate < basicCourseDetailDistributionFailRates.get(i)) {
+				if(failRate*100 < basicCourseDetailDistributionFailRates.get(i)) {
 					overAllFailDepartments.add(basicCourseDetailDistributions.get(i).getDepartmentName());
 				}
 			}
@@ -3420,15 +3516,15 @@ public class StudentCourseService {
 						"最高，为"+failRateHighest+"%";
 			}
 			//System.out.println("全年级："+basicCourseDetailDistribution);
-			basicCourseDetailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentName+courseName+
+			basicCourseDetailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentName+courseName+
 					"课程成绩优秀率为"+basicCourseDetailDistribution.getExcellentRate()+
 					"，优秀率高于年级平均水平的院系有："+overAllExcellentDepartmentsStr.substring(0,overAllExcellentDepartmentsStr.length()-1)+
-					highestExcellentDepartmentAndRate+"；<br>" + 
-					"&nbsp;&nbsp;&nbsp;&nbsp;（2）"+departmentName+courseName+
+					highestExcellentDepartmentAndRate+"；\n" + 
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）"+departmentName+courseName+
 					"课程成绩不及格率为"+basicCourseDetailDistribution.getFailRate()+
 					"，不及格率高于年级平均水平的院系有："+overAllFailDepartmentsStr.substring(0,overAllFailDepartmentsStr.length()-1)+
 					highestFailDepartmentAndRate+"。" + 
-					"##&nbsp;&nbsp;&nbsp;&nbsp;对"+departmentName+"各院系"+courseName+"成绩情况统计如下表：");
+					"##&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对"+departmentName+"各院系"+courseName+"成绩情况统计如下表：");
 		}
 		bcddList.add(basicCourseDetailDistribution);
 		return bcddList;
