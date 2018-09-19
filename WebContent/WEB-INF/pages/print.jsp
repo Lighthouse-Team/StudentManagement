@@ -341,7 +341,7 @@
 	    });
 	  
    	    getFirstPic();      //第一章第一个功能成绩分析图
-		getSecondPic1();
+ 		getSecondPic1();
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
 		getThirdPic2();		//第二章第一个功能两张成绩分析图 
@@ -351,7 +351,7 @@
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图        
+		getNinthPic();      //第四章第二个功能9张或10张分析图         
 
 	});
 	
@@ -464,19 +464,6 @@
 		    },
 		    legend: {
 		        data: []
-		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
 		    },
 		    calculable: true,
 		    xAxis: [
@@ -806,19 +793,6 @@
 		    legend: {
 		        data: []
 		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
 		    calculable: true,
 		    xAxis: [
 		        {
@@ -957,11 +931,6 @@
 		        right: '12%',
 		        bottom: '3%',
 		        containLabel: true
-		    },
-		    toolbox: {
-		        feature: {
-		            saveAsImage: {}
-		        }
 		    },
 		    xAxis: {
 		        type: 'category',
@@ -1177,19 +1146,6 @@
 		    legend: {
 		        data: []
 		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
 		    calculable: true,
 		    xAxis: [
 		        {
@@ -1352,11 +1308,6 @@
 		        bottom: '3%',
 		        containLabel: true
 		    },
-		    toolbox: {
-		        feature: {
-		            saveAsImage: {}
-		        }
-		    },
 		    xAxis: {
 		        type: 'category',
 		        boundaryGap: false,
@@ -1511,11 +1462,6 @@
 		        right: '12%',
 		        bottom: '3%',
 		        containLabel: true
-		    },
-		    toolbox: {
-		        feature: {
-		            saveAsImage: {}
-		        }
 		    },
 		    xAxis: {
 		    	axisLabel: {                                //让x轴坐标文字竖直显示
@@ -1720,19 +1666,6 @@
 		    legend: {
 		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
 		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
 		    calculable: true,
 		    xAxis: [
 		        {
@@ -1838,11 +1771,6 @@
 		        right: '12%',
 		        bottom: '3%',
 		        containLabel: true
-		    },
-		    toolbox: {
-		        feature: {
-		            saveAsImage: {}
-		        }
 		    },
 		    xAxis: {
 		        type: 'category',
@@ -2000,19 +1928,6 @@
 		    },
 		    legend: {
 		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
-		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
 		    },
 		    calculable: true,
 		    xAxis: [
@@ -2203,19 +2118,6 @@
 		    },
 		    legend: {
 		        data: ['1门不及格', '2门不及格', '3门不及格', '≥4门不及格']
-		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
 		    },
 		    calculable: true,
 		    xAxis: [
@@ -2416,25 +2318,12 @@
 		    legend: {
 		        data: ['优秀率', '不及格率']
 		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
 		    calculable: true,
 		    xAxis: [
 		        {	
 		        	axisLabel: {
                         interval:0,
-                        rotate:20
+                        rotate:30
                     },
 		            type: 'category',
 		            axisTick: {show: false},
@@ -2602,19 +2491,6 @@
 		    legend: {
 		        data: ['优秀率', '不及格率']
 		    },
-		    toolbox: {
-		        show: true,
-		        orient: 'vertical',
-		        left: 'right',
-		        top: 'center',
-		        feature: {
-		            mark: {show: true},
-		            dataView: {show: true, readOnly: false},
-		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-		            restore: {show: true},
-		            saveAsImage: {show: true}
-		        }
-		    },
 		    calculable: true,
 		    xAxis: [
 		        {	
@@ -2654,7 +2530,463 @@
 		        }
 		    ]
 		};;
+		optionCourse1 = {
+			    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'shadow'
+			        }
+			    },
+			    legend: {
+			        data: ['优秀率', '不及格率']
+			    },
+			    calculable: true,
+			    xAxis: [
+			        {	
+			        	axisLabel: {
+	                        interval:0,
+	                        rotate:20
+	                    },
+			            type: 'category',
+			            axisTick: {show: false},
+			            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+			        }
+			    ],
+			    yAxis: [
+			    	  {  
+			              type: 'value',  
+			              axisLabel: {  
+			                    show: true,  
+			                    interval: 'auto',  
+			                    formatter: '{value}%'  
+			                  },  
+			              show: true  
+			          }  
+			    ],
+			    series: [
+			        {
+			            name: '优秀率',
+			            type: 'bar',
+			            barGap: 0,
+			            label: labelOption,
+			            data: [320, 332, 301, 334, 390]
+			        },
+			        {
+			            name: '不及格率',
+			            type: 'bar',
+			            label: labelOption,
+			            data: [220, 182, 191, 234, 290]
+			        }
+			    ]
+			};;	
+	optionCourse2 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
 		
+	optionCourse3 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+	                       interval:0,
+	                       rotate:20
+	                   },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;
+		
+	optionCourse4 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
+		
+	optionCourse5 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
+		
+	optionCourse6 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
+		
+	optionCourse7 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
+		
+	optionCourse8 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
+		
+	optionCourse9 = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:20
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        }
+		    ]
+		};;	
 		var courseList = new Array();
 		var year1 = "${year}";
 		var term1 = "${term}";	
@@ -2682,9 +3014,27 @@
 			courseList.push("工程图学基础");
 		}
 		
-		/* 与后台连接传递数据 */
 		var aRateList = new Array();
 		var bRateList = new Array();
+		var aRateList1 = new Array();
+		var bRateList1 = new Array();
+		var aRateList2 = new Array();
+		var bRateList2 = new Array();
+		var aRateList3 = new Array();
+		var bRateList3 = new Array();
+		var aRateList4 = new Array();
+		var bRateList4 = new Array();
+		var aRateList5 = new Array();
+		var bRateList5 = new Array();
+		var aRateList6 = new Array();
+		var bRateList6 = new Array();
+		var aRateList7 = new Array();
+		var bRateList7 = new Array();
+		var aRateList8 = new Array();
+		var bRateList8 = new Array();
+		var aRateList9 = new Array();
+		var bRateList9 = new Array();
+		
 		url = "getBasicCourseDetailDistributionListByCourseNameData";
 		var args = {
 			year : year1,
@@ -2710,6 +3060,7 @@
 			}
 		});
 		
+
 		/* 与后台连接传递数据 */
 		args = {
 			year : year1,
@@ -2719,22 +3070,22 @@
 
 		$.post(url, args, function(bcddList){
 			for(var i = 0; i < bcddList.length ; i++){
-				optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+				optionCourse1.xAxis[0].data[i] = bcddList[i].departmentName;
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-				aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-				bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+				aRateList1[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+				bRateList1[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 			}
 			
-			optionCourse.series[0].data = aRateList;
-			optionCourse.series[1].data = bRateList;
+			optionCourse1.series[0].data = aRateList1;
+			optionCourse1.series[1].data = bRateList1;
 			
 			var dom13 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic1");
 			var myChart13 = echarts.init(dom13);
-			if (optionCourse && typeof optionCourse === "object") {
-			    myChart13.setOption(optionCourse, true);
+			if (optionCourse1 && typeof optionCourse1 === "object") {
+			    myChart13.setOption(optionCourse1, true);
 			}
 		});
-		
+
 		args = {
 				year : year1,
 				term : term1,
@@ -2743,19 +3094,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse2.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList2[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList2[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse2.series[0].data = aRateList2;
+				optionCourse2.series[1].data = bRateList2;
 				
 				var dom14 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic2");
 				var myChart14 = echarts.init(dom14);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart14.setOption(optionCourse, true);
+				if (optionCourse2 && typeof optionCourse2 === "object") {
+				    myChart14.setOption(optionCourse2, true);
 				}
 			});
 			
@@ -2767,22 +3118,23 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse3.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList3[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList3[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse3.series[0].data = aRateList3;
+				optionCourse3.series[1].data = bRateList3;
 				
 				var dom15 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic3");
 				var myChart15 = echarts.init(dom15);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart15.setOption(optionCourse, true);
+				if (optionCourse3 && typeof optionCourse3 === "object") {
+				    myChart15.setOption(optionCourse3, true);
 				}
 			});
 
+			
 		args = {
 				year : year1,
 				term : term1,
@@ -2791,19 +3143,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse4.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList4[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList4[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse4.series[0].data = aRateList4;
+				optionCourse4.series[1].data = bRateList4;
 				
 				var dom16 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic4");
 				var myChart16 = echarts.init(dom16);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart16.setOption(optionCourse, true);
+				if (optionCourse4 && typeof optionCourse4 === "object") {
+				    myChart16.setOption(optionCourse4, true);
 				}
 			});
 			
@@ -2815,19 +3167,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse5.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList5[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList5[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse5.series[0].data = aRateList5;
+				optionCourse5.series[1].data = bRateList5;
 				
 				var dom17 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic5");
 				var myChart17 = echarts.init(dom17);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart17.setOption(optionCourse, true);
+				if (optionCourse5 && typeof optionCourse5 === "object") {
+				    myChart17.setOption(optionCourse5, true);
 				}
 			});
 			
@@ -2839,19 +3191,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse6.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList6[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList6[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse6.series[0].data = aRateList6;
+				optionCourse6.series[1].data = bRateList6;
 				
 				var dom18 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic6");
 				var myChart18 = echarts.init(dom18);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart18.setOption(optionCourse, true);
+				if (optionCourse6 && typeof optionCourse6 === "object") {
+				    myChart18.setOption(optionCourse6, true);
 				}
 			});
 				
@@ -2864,19 +3216,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse7.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList7[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList7[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse7.series[0].data = aRateList7;
+				optionCourse7.series[1].data = bRateList7;
 				
 				var dom19 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic7");
 				var myChart19 = echarts.init(dom19);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart19.setOption(optionCourse, true);
+				if (optionCourse7 && typeof optionCourse7 === "object") {
+				    myChart19.setOption(optionCourse7, true);
 				}
 			});
 			
@@ -2888,19 +3240,19 @@
 
 			$.post(url, args, function(bcddList){
 				for(var i = 0; i < bcddList.length ; i++){
-					optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+					optionCourse8.xAxis[0].data[i] = bcddList[i].departmentName;
 					/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-					aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-					bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+					aRateList8[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+					bRateList8[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 				}
 				
-				optionCourse.series[0].data = aRateList;
-				optionCourse.series[1].data = bRateList;
+				optionCourse8.series[0].data = aRateList8;
+				optionCourse8.series[1].data = bRateList8;
 				
 				var dom20 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic8");
 				var myChart20 = echarts.init(dom20);
-				if (optionCourse && typeof optionCourse === "object") {
-				    myChart20.setOption(optionCourse, true);
+				if (optionCourse8 && typeof optionCourse8 === "object") {
+				    myChart20.setOption(optionCourse8, true);
 				}
 			});
 			
@@ -2914,19 +3266,19 @@
 
 				$.post(url, args, function(bcddList){
 					for(var i = 0; i < bcddList.length ; i++){
-						optionCourse.xAxis[0].data[i] = bcddList[i].departmentName;
+						optionCourse9.xAxis[0].data[i] = bcddList[i].departmentName;
 						/*将后台传回来的百分比去掉百分号并转换为数字类型 */
-						aRateList[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
-						bRateList[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
+						aRateList9[i] = parseFloat(bcddList[i].excellentRate.substring(0,bcddList[i].excellentRate.length-1));
+						bRateList9[i] = parseFloat(bcddList[i].failRate.substring(0,bcddList[i].failRate.length-1));
 					}
 					
-					optionCourse.series[0].data = aRateList;
-					optionCourse.series[1].data = bRateList;
+					optionCourse9.series[0].data = aRateList9;
+					optionCourse9.series[1].data = bRateList9;
 					
 					var dom21 = document.getElementById("basicCourseDetailDistributionListByCourseNameBarPic9");
 					var myChart21 = echarts.init(dom21);
-					if (optionCourse && typeof optionCourse === "object") {
-					    myChart21.setOption(optionCourse, true);
+					if (optionCourse9 && typeof optionCourse9 === "object") {
+					    myChart21.setOption(optionCourse9, true);
 					}
 				});
 			
@@ -2959,6 +3311,10 @@
 					</div>
 				</div>
 			</div>
+			
+			<div style = "width: 100%;display: relative; ">
+			
+			<div style="width:1050px; margin:0 auto" >
 			<h2 style="text-align:center">第一章&nbsp;&nbsp;总体成绩分析</h2>
 			<textarea rows = "3" style = "width: 100% ; border-style: none ; background: transparent" >${analysis1.split("#")[1]}${analysis2.split("#")[1]} </textarea>			
 			<h4>1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
@@ -3022,10 +3378,10 @@
 				<div class="col-12">
 					<div class="card">
 						<div id="scNumberPic"  
-							style="display:block; height: 350%; width: 70%;  position:relative; left:-50px;">
+							style="display:block; height: 350%; width: 100%;  position:relative; ">
 						</div>
 						<div id="scRatePic"    
-							style="display:block; height: 350%; width: 70%;  position:relative; left:-50px;">
+							style="display:block; height: 350%; width: 100%;  position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3102,9 +3458,9 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="variousScRateBarPic"  style="display:block; height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="variousScRateBarPic"  style="display:block; height: 350%; width:100%; position:relative; ">
 						</div>
-						<div id="variousScRateLinePic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="variousScRateLinePic"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3178,9 +3534,9 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="RPECScoreRateBarPic"  style="display:block; height: 350%; width:100%; position:relative; left:-50px;">
+						<div id="RPECScoreRateBarPic"  style="display:block; height: 350%; width:100%; position:relative; ">
 						</div>
-						<div id="RPECScoreRateLinePic"  style="display:block;  height: 350%; width:100%; position:relative; left:-50px;">
+						<div id="RPECScoreRateLinePic"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3497,7 +3853,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div id="RPECDepartmentAllGradeAverageScoreComparePic"
-							style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+							style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -3573,7 +3929,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="barPic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="barPic"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
@@ -3582,7 +3938,7 @@
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
-						<div id="linePic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="linePic"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3652,7 +4008,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="RCDepartmentFailDistributionListBarPic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="RCDepartmentFailDistributionListBarPic"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3737,7 +4093,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="getRCDepartmentAllGradeFailDistributionListBarPic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="getRCDepartmentAllGradeFailDistributionListBarPic"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -3856,7 +4212,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseOverallDistributionListBarPic"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseOverallDistributionListBarPic"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -3919,7 +4275,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic0"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic0"  style="display:block;  height: 350%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
@@ -3981,10 +4337,15 @@
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic1"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic1"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4045,7 +4406,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic2"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic2"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4108,7 +4469,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic3"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic3"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4169,7 +4530,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic4"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic4"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4229,10 +4590,11 @@
 			</div>
 			<!-- /.row --> 
 			<div>&nbsp;</div>
+			<div>&nbsp;</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic5"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic5"  style="display:block;  height: 350%;width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4295,7 +4657,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic6"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic6"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4360,7 +4722,7 @@
 		    <div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic7"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic7"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4424,7 +4786,7 @@
 		    <div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic8"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic8"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4483,7 +4845,7 @@
 	        <div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic9"  style="display:block;  height: 350%; width:70%; position:relative; left:-50px;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic9"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -4503,6 +4865,10 @@
 					<p id = "basicCourseClass">&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表21。</p>
 			</div>
 			
+		</div>
+		
+		    </div>
+		    
 		</div>
 	</div>
 
