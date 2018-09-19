@@ -185,6 +185,10 @@
 		if(term1 == "1"){
 			
 			document.getElementById("ssj").style.display = "none";
+			document.getElementById("secondTermAddDiv").style.display = "none";
+			document.getElementById("secondTermAddDiv2").style.display = "none";
+			document.getElementById("secondTermAddDiv3").style.display = "none";
+			document.getElementById("secondTermAddDiv4").style.display = "none";
 			
 			var firstTermCourseTitle2 = document.getElementById("firstTermCourseTitle2");
 			firstTermCourseTitle2.innerHTML = "4.2.2&nbsp;&nbsp;" + gradeList[3] + "级主要基础课程成绩情况";
@@ -260,6 +264,11 @@
 			
 			document.getElementById("analysisFirstTermAdd").style.display = "none";
 			document.getElementById("zlq").style.display = "none";
+			document.getElementById("firstTermAddDiv").style.display = "none";
+			document.getElementById("firstTermAddDiv2").style.display = "none";
+			document.getElementById("firstTermAddDiv3").style.display = "none";
+			document.getElementById("firstTermAddDiv4").style.display = "none";
+			document.getElementById("firstTermAddDiv5").style.display = "none";
 			
 			var secondTermCourseTitle2 = document.getElementById("secondTermCourseTitle2");
 			secondTermCourseTitle2.innerHTML = "4.2.2&nbsp;&nbsp;" + gradeList[3] + "级主要基础课程成绩情况";
@@ -2323,7 +2332,7 @@
 		        {	
 		        	axisLabel: {
                         interval:0,
-                        rotate:30
+                        rotate:20
                     },
 		            type: 'category',
 		            axisTick: {show: false},
@@ -4332,6 +4341,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			<div id = "secondTermAddDiv">
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
@@ -4342,13 +4352,15 @@
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
 			<div>&nbsp;&nbsp;</div>
+			</div>
 			<div class="row">
+			
 				<div class="col-12">
 					<div class="card">
 						<div id="basicCourseDetailDistributionListByCourseNameBarPic1"  style="display:block;  height: 350%; width:100%; position:relative;">
 						</div>
-					</div>
-				</div>
+					
+				
 			</div>		
 			<h5 id = "pic10" style="text-align:center"></h5>	
 			
@@ -4402,7 +4414,21 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			
+			<div id = "firstTermAddDiv">
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4465,7 +4491,12 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			
+			<div id = "firstTermAddDiv2">
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4526,6 +4557,21 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div id = "firstTermAddDiv3">
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			<div>&nbsp;&nbsp;</div>
+			</div>
 			
 			<div class="row">
 				<div class="col-12">
@@ -4589,8 +4635,10 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			<div id = "secondTermAddDiv2">
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
+			</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4650,10 +4698,12 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			<div id = "secondTermAddDiv3">
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
+			</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4713,12 +4763,14 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			<div id = "secondTermAddDiv4">
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
+			</div>
 		    <div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4782,6 +4834,7 @@
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
+			<div id = "firstTermAddDiv4">&nbsp;</div>
 			
 		    <div class="row">
 				<div class="col-12">
@@ -4842,6 +4895,15 @@
 			</div>
 			<!-- /.row --> 
 			
+			<div id = "firstTermAddDiv5">
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			</div>					
 	        <div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4871,7 +4933,8 @@
 		    
 		</div>
 	</div>
-
+</div>
+</div>
 
 <script type="text/javascript">
 
