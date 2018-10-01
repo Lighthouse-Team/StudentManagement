@@ -3324,12 +3324,13 @@
 			
 			<div style = "width: 100%;display: relative; ">
 			
-			<div style="width:1050px; margin:0 auto" >
+			<div style="width:1000px; margin:0 auto" >
 			<h2 style="text-align:center">第一章&nbsp;&nbsp;总体成绩分析</h2>
-			<textarea rows = "3" style = "width: 100% ; border-style: none ; background: transparent" >${analysis1.split("#")[1]}${analysis2.split("#")[1]} </textarea>			
-			<h4>1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
-			<h5>1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
-			${analysis1.split("#")[2]} 
+			<textarea rows = "3" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis1.split("#")[1]}${analysis2.split("#")[1]} </textarea>			
+			<h4 style = "font-size:18pt">1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
+			<h5 style = "font-size:17pt">1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
+			<%-- <font size="4">${analysis1.split("#")[2]}</font> --%>
+			<div style="font-size:15pt">${analysis1.split("#")[2]}</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3401,13 +3402,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "8" style = "width: 100% ; border-style: none ; background: transparent" >${analysis1.split("#")[0] } </textarea>	
+					<textarea rows = "10" style = "width: 100% ;font-size:15pt; border-style: none ; background: transparent" >${analysis1.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h3 class="card-title">1.1.1&nbsp;&nbsp;必修、专业选修、通识选修课程成绩整体分布情况</h3> 
-			${analysis2.split("#")[2] }
+			<h3 class="card-title" style = "font-size:17pt">1.1.2&nbsp;&nbsp;必修、专业选修、通识选修课程成绩整体分布情况</h3> 
+			<div style="font-size:15pt">${analysis2.split("#")[2]}</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3480,15 +3481,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "6" style = "width: 100% ; border-style: none ; background: transparent" >${analysis2.split("#")[0] }  </textarea>	
+					<textarea rows = "7" style = "width: 100% ; border-style: none ;font-size:15pt; background: transparent" >${analysis2.split("#")[0] }  </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<h2 style="text-align:center">第二章&nbsp;&nbsp;必修、专业选修课程成绩整体情况分析</h2>
-			<textarea rows = "3" style = "width: 100% ; border-style: none ; background: transparent" >${analysis3.split("#")[1] }  </textarea>	
-			<h4>2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
-			${analysis3.split("#")[2] } 
+			<textarea rows = "3" style = "width: 100% ;font-size:15pt; border-style: none ; background: transparent" >${analysis3.split("#")[1] }  </textarea>	
+			<h4 style="font-size:18pt">2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
+			<div style="font-size:15pt">${analysis3.split("#")[2] }</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3556,14 +3557,14 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "7" style = "width: 100% ; border-style: none ; background: transparent" >${analysis3.split("#")[0] } </textarea>	
+					<textarea rows = "7" style = "width: 100% ;font-size:15pt; border-style: none ; background: transparent" >${analysis3.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h4>2.2&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h4>
-			<h5 id = "RPECTitle1">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
-			<h5 id = "firstGradeDepartmentRPEC" class="card-title"></h5> 
+			<h4 style="font-size:18pt">2.2&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h4>
+			<h5 id = "RPECTitle1" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "firstGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3612,18 +3613,18 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "9" style = "width: 100% ; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.2${analysis4.split("#")[0] } </textarea>	
+					<textarea rows = "10" style = "width: 100% ;font-size:15pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.2${analysis4.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div class="card">
-				<h3 id = "classRPECTitle1" class="card-title"></h3> 
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表1 。</p>
+				<h3 id = "classRPECTitle1" style="font-size: 16pt" class="card-title"></h3> 
+				<p style="font-size: 15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表1 。</p>
 			</div>
 			
-			<h5 id = "RPECTitle2">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
-			<h5 id = "secondGradeDepartmentRPEC" class="card-title"></h5>
+			<h5 id = "RPECTitle2" style="font-size: 17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "secondGradeDepartmentRPEC" style="font-size: 16pt" class="card-title"></h5>
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3672,18 +3673,18 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "8" style = "width: 100% ; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.3${analysis5.split("#")[0] }  </textarea>	
+					<textarea rows = "8" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.3${analysis5.split("#")[0] }  </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div class="card">
-				<h3 id = "classRPECTitle2" class="card-title"></h3> 
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表2。</p>
+				<h3 id = "classRPECTitle2" style="font-size:16pt" class="card-title"></h3> 
+				<p style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表2。</p>
 			</div>
 			
-			<h5 id = "RPECTitle3">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
-			<h5 id = "thirdGradeDepartmentRPEC" class="card-title"></h5> 
+			<h5 id = "RPECTitle3" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "thirdGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3732,18 +3733,18 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "8" style = "width: 100% ; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.4${analysis6.split("#")[0] }  </textarea>	
+					<textarea rows = "9" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.4${analysis6.split("#")[0] }  </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div class="card">
-				<h3 id = "classRPECTitle3" class="card-title"></h3> 
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表3。</p>
+				<h3 id = "classRPECTitle3" style="font-size:16pt" class="card-title"></h3> 
+				<p style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表3。</p>
 			</div>
 			
-			<h5 id = "RPECTitle4">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
-			<h5 id = "forthGradeDepartmentRPEC" class="card-title"></h5> 
+			<h5 id = "RPECTitle4" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
+			<h5 id = "forthGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3792,18 +3793,18 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "8" style = "width: 100% ; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.5${analysis7.split("#")[0] }  </textarea>	
+					<textarea rows = "9" style = "width: 100% ; font-size:15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.5${analysis7.split("#")[0] }  </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div class="card">
-				<h3 id = "classRPECTitle4" class="card-title"></h3> 
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表4。</p>
+				<h3 id = "classRPECTitle4" style="font-size:16pt" class="card-title"></h3> 
+				<p style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表4。</p>
 			</div>
 			
-			<h5 class="card-title">2.2.5&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
-			${analysis8.split("#")[2] } 
+			<h5 style="font-size:17pt" class="card-title">2.2.5&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
+			<div style="font-size:15pt">${analysis8.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3873,15 +3874,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "13" style = "width: 100% ; border-style: none ; background: transparent" >${analysis8.split("#")[0] } </textarea>	
+					<textarea rows = "14" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis8.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<h2 style="text-align:center">第三章&nbsp;&nbsp;不及格成绩情况分析</h2>
-			<textarea rows = "4" style = "width: 100% ; border-style: none ; background: transparent" >${analysis9.split("#")[1] } </textarea>	
-			<h4>3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
-			${analysis9.split("#")[2] } 
+			<textarea rows = "4" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis9.split("#")[1] } </textarea>	
+			<h4 style="font-size:18pt">3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
+			<div style="font-size:15pt">${analysis9.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3958,14 +3959,14 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<textarea rows = "6" style = "width: 100% ; border-style: none ; background: transparent" >${analysis9.split("#")[0] } </textarea>	
+						<textarea rows = "6" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis9.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h4>3.2&nbsp;&nbsp;各院系不及格学生情况比较分析</h4> 
-			<h5 class="card-title">3.2.1&nbsp;&nbsp;各院系不及格学生整体情况</h5> 
-			${analysis10.split("#")[2] } 
+			<h4 style="font-size:18pt">3.2&nbsp;&nbsp;各院系不及格学生情况比较分析</h4> 
+			<h5 style="font-size:17pt" class="card-title">3.2.1&nbsp;&nbsp;各院系不及格学生整体情况</h5> 
+			<div style="font-size:15pt">${analysis10.split("#")[2] }</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4028,14 +4029,14 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis10.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis10.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			
-			<h5 class="card-title">3.2.2&nbsp;&nbsp;各院系分年级学生不及格情况统计分布</h5> 
-			${analysis11.split("#")[2] } 
+			<h5 style="font-size:17pt" class="card-title">3.2.2&nbsp;&nbsp;各院系分年级学生不及格情况统计分布</h5> 
+			<div style="font-size:15pt">${analysis11.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4113,18 +4114,18 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "11" style = "width: 100% ; border-style: none ; background: transparent" >${analysis11.split("#")[0] } </textarea>	
+					<textarea rows = "11" style = "width: 100% ;font-size: 15pt; border-style: none ; background: transparent" >${analysis11.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h4>3.3&nbsp;&nbsp; 各班级不及格情况统计</h4> 
+			<h4 style="font-size:18pt">3.3&nbsp;&nbsp; 各班级不及格情况统计</h4> 
 			<div class="card">
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;详见附表5-附表8。</p> 
+					<p style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表5-附表8。</p> 
 			</div>
 			
-			<h4>3.4&nbsp;&nbsp; 各年级缺考情况统计</h4> 
-			${analysis12.split("#")[2] } 
+			<h4 style="font-size:18pt">3.4&nbsp;&nbsp; 各年级缺考情况统计</h4> 
+			<div style="font-size:15pt">${analysis12.split("#")[2] }</div> 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4164,15 +4165,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "4" style = "width: 100% ; border-style: none ; background: transparent" >${analysis12.split("#")[0] } </textarea>	
+					<textarea rows = "4" style = "width: 100% ; font-size: 15pt; border-style: none ; background: transparent" >${analysis12.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<h2 style="text-align:center">第四章&nbsp;&nbsp;基础课程成绩情况分析</h2>
-			${analysis13.split("#")[1] }  
-			<h4>4.1&nbsp;&nbsp;主要基础课程成绩情况分布</h4> 
-			${analysis13.split("#")[2] } 
+			<div style="font-size:15pt">${analysis13.split("#")[1] }</div>  
+			<h4 style="font-size:18pt">4.1&nbsp;&nbsp;主要基础课程成绩情况分布</h4> 
+			<div style="font-size:15pt">${analysis13.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4231,17 +4232,17 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "6" style = "width: 100% ; border-style: none ; background: transparent" >${analysis13.split("#")[0] } </textarea>	
+					<textarea rows = "8" style = "width: 100% ; font-size: 15pt; border-style: none ; background: transparent" >${analysis13.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h4>4.2&nbsp;&nbsp;主要基础课程成绩具体分析</h4> 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${analysis13.split("#")[3] }  
-			<h5 id = "termCourseTitle1" ></h5> 
-			${analysis13.split("#")[4] } 
-			<h5 id="courseDepartmentTitle" class="card-title" ></h5> 
-			${analysis14.split("#")[2] } 
+			<h4 style="font-size:18pt">4.2&nbsp;&nbsp;主要基础课程成绩具体分析</h4> 
+			<div style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${analysis13.split("#")[3] }</div>  
+			<h5 id = "termCourseTitle1" style="font-size:17pt"></h5> 
+			<div style="font-size:15pt">${analysis13.split("#")[4] }</div> 
+			<h5 id="courseDepartmentTitle" style="font-size:16pt" class="card-title" ></h5> 
+			<div style="font-size:15pt">${analysis14.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4295,13 +4296,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis14.split("#")[0] } </textarea>	
+					<textarea rows = "6" style = "width: 100% ;font-size: 15pt; border-style: none ; background: transparent" >${analysis14.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h5 id="courseDepartmentTitle1" class="card-title"></h5> 
-			${analysis15.split("#")[2] } 
+			<h5 id="courseDepartmentTitle1" style="font-size:16pt" class="card-title"></h5> 
+			<div style="font-size:15pt">${analysis15.split("#")[2] } </div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4368,13 +4369,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis15.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt; border-style: none ; background: transparent" >${analysis15.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h5 id="courseDepartmentTitle2" class="card-title" ></h5> 
-			${analysis16.split("#")[2] } 
+			<h5 id="courseDepartmentTitle2" style="font-size:16pt" class="card-title" ></h5> 
+			<div style="font-size:15pt">${analysis16.split("#")[2] }</div> 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4443,15 +4444,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis16.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ;font-size: 15pt; border-style: none ; background: transparent" >${analysis16.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>		
 			
-			<h5 id = "secondTermCourseTitle2"></h5> 
-			<p id = "ssj">${analysis13.split("#")[5] } </p>
-			<h5 id="courseDepartmentTitle3" class="card-title" ></h5>
-			${analysis17.split("#")[2] }  
+			<h5 id = "secondTermCourseTitle2" style="font-size:17pt"></h5> 
+			<p id = "ssj" style="font-size:15pt">${analysis13.split("#")[5] } </p>
+			<h5 id="courseDepartmentTitle3" style="font-size:16pt" class="card-title" ></h5>
+			<div style="font-size:15pt">${analysis17.split("#")[2] }</div>  
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4511,13 +4512,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis17.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt; border-style: none ; background: transparent" >${analysis17.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>	
 			
-			<h5 id="courseDepartmentTitle4" class="card-title"></h5> 
-			${analysis18.split("#")[2] } 
+			<h5 id="courseDepartmentTitle4" style="font-size:16pt" class="card-title"></h5> 
+			<div style="font-size:15pt">${analysis18.split("#")[2] }</div> 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4587,15 +4588,15 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis18.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >${analysis18.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h5 id = "firstTermCourseTitle2"></h5> 
-			<p id = "zlq">${analysis13.split("#")[5] } </p>
-			<h5 id="courseDepartmentTitle5" class="card-title" ></h5> 
-			${analysis19.split("#")[2] } 
+			<h5 id = "firstTermCourseTitle2" style="font-size:16pt"></h5> 
+			<p id = "zlq" style="font-size:15pt">${analysis13.split("#")[5] } </p>
+			<h5 id="courseDepartmentTitle5" style="font-size:16pt" class="card-title" ></h5> 
+			<div style="font-size:15pt">${analysis19.split("#")[2] }</div> 
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4653,13 +4654,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis19.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ;font-size: 15pt; border-style: none ; background: transparent" >${analysis19.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h5 id="courseDepartmentTitle6" class="card-title" ></h5> 
-			${analysis20.split("#")[2] }
+			<h5 id="courseDepartmentTitle6" style="font-size:16pt" class="card-title" ></h5> 
+			<div style="font-size:15pt">${analysis20.split("#")[2] }</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4718,13 +4719,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis20.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >${analysis20.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h3 id="courseDepartmentTitle7" class="card-title" ></h3> 
-			${analysis21.split("#")[2] }
+			<h3 id="courseDepartmentTitle7" style="font-size:16pt" class="card-title" ></h3> 
+			<div style="font-size:15pt">${analysis21.split("#")[2] }</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4785,13 +4786,13 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis21.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ;font-size: 15pt; border-style: none ; background: transparent" >${analysis21.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<h3 id="courseDepartmentTitle8" class="card-title" ></h3> 
-			${analysis22.split("#")[2] }
+			<h3 id="courseDepartmentTitle8" style="font-size:16pt" class="card-title" ></h3> 
+			<div style="font-size:15pt">${analysis22.split("#")[2] }</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4849,14 +4850,14 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis22.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt; border-style: none ; background: transparent" >${analysis22.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div id = "firstTermAddCourse" class="row">
-				<h3 id="courseDepartmentTitle9" class="card-title"></h3> 
-				${analysis23.split("#")[2] }
+				<h3 id="courseDepartmentTitle9" style="font-size:16pt" class="card-title"></h3> 
+				<div style="font-size:15pt">${analysis23.split("#")[2] }</div>
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body" style="margin: 0">
@@ -4918,14 +4919,14 @@
 			<div id = "analysisFirstTermAdd" class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "5" style = "width: 100% ; border-style: none ; background: transparent" >${analysis23.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >${analysis23.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
 			<div class="card">
-					<h5>4.2.3&nbsp;&nbsp;主要基础课程各班成绩情况</h5> 
-					<p id = "basicCourseClass">&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表21。</p>
+					<h5 style="font-size:17pt">4.2.3&nbsp;&nbsp;主要基础课程各班成绩情况</h5> 
+					<p id = "basicCourseClass" style="font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;详见附表9-附表21。</p>
 			</div>
 			
 		</div>
