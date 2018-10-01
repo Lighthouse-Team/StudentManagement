@@ -347,6 +347,7 @@
 	        bLengthChange: false,   //去掉每页显示多少条数据方法
 	        "paging" : false, //去掉底部分页框
 	        "info": false, //去掉表格底部信息
+	        "bSort": false, //排序功能
 	    });
 	  
    	    getFirstPic();      //第一章第一个功能成绩分析图
@@ -3340,27 +3341,27 @@
 									<tr>
 										<!-- <th>序号</th> -->
 										<th>年级</th>
-										<th>成绩记录总数</th>
-										<th>优秀(90-100)</th>
-										<th>良好(80-89)</th>
-										<th>中等(70-79)</th>
-										<th>及格(60-69)</th>
-										<th>不及格(0-59)</th>
-										<th>平均分</th>
-										<th>优秀率</th>
-										<th>良好率</th>
-										<th>中等率</th>
-										<th>及格率</th>
-										<th>不及格率</th>
+										<th style="text-align:center">成绩记录<br>总数</th>
+										<th style="text-align:center">优秀<br>(90-100)</th>
+										<th style="text-align:center">良好<br>(80-89)</th>
+										<th style="text-align:center">中等<br>(70-79)</th>
+										<th style="text-align:center">及格<br>(60-69)</th>
+										<th style="text-align:center">不及格<br>(0-59)</th>
+										<th style="text-align:center">平均分</th>
+										<th style="text-align:center">优秀率</th>
+										<th style="text-align:center">良好率</th>
+										<th style="text-align:center">中等率</th>
+										<th style="text-align:center">及格率</th>
+										<th style="text-align:center">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${odList }" var="OverallDistribution">
 										<tr>
-											<td>${OverallDistribution.grade }</td>
-											<td>${OverallDistribution.totalNumber }</td>
-											<td>${OverallDistribution.excellentNumber }</td>
-											<td>${OverallDistribution.goodNumber }</td>
+											<td style="text-align:center">${OverallDistribution.grade }</td>
+											<td style="text-align:center">${OverallDistribution.totalNumber }</td>
+											<td style="text-align:center">${OverallDistribution.excellentNumber }</td>
+											<td style="text-align:center">${OverallDistribution.goodNumber }</td>
 											<td>${OverallDistribution.mediumNumber }</td>
 											<td>${OverallDistribution.passNumber }</td>
 											<td>${OverallDistribution.failNumber }</td>

@@ -131,16 +131,11 @@
 		$("#term").on('change', function() {
 			localStorage.setItem('term', $('option:selected', this).index());
 		});
-	});
-	
-
-	$(function() {
+		
 		$('#getData').click(function(){
 			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 		});
-	});
-	
-	$(function() {
+		
 		$('#getPic').click(function(){
 			if($("#picTitle").css('display')=='none'){
 	            $("#picTitle").css("display","block");
@@ -152,23 +147,6 @@
 			getBarPic();      //显示柱状图
 		});
 	});
-	
-	/* 显示分析图 */
-/* 	function getRCDepartmentAllGradeFailDistributionListData() {
-		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#getRCDepartmentAllGradeFailDistributionListBarPic").css('display')=='none'){
-            $("#getRCDepartmentAllGradeFailDistributionListBarPic").css("display","block");
-        } 
-		
-		getBarPic();      //显示柱状图
-		
-		 
-	}; */
-	
 	
 	/* 显示柱状图 */
 	function getBarPic(){

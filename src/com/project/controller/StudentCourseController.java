@@ -278,6 +278,20 @@ public class StudentCourseController {
 	}
 	
 	/**
+	 * 返回各年级必修专业选修课程成绩总体分布情况(按院系查询)(画图)
+	 * @param year
+	 * @param term
+	 * @param grade
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getDepartmentRPECScoreDistributionListByGradeData")
+	public List<DepartmentDistribution> sendDepartmentRPECScoreDistributionListByGradeData(Integer grade, String year, Integer term){
+		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(grade, year, term);
+		return ddList;
+	}
+	
+	/**
 	 * 跳转页面至各年级必修专业选修课程成绩总体分布情况(按班级查询)页面
 	 * @param session
 	 * @param map
@@ -681,6 +695,21 @@ public class StudentCourseController {
 		}
 		return "getGradeAbsenceDistributionList";
 	}
+	
+	/**
+	 * 返回各年级缺考情况统计情况(画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getGradeAbsenceDistributionListData")
+	public List<GradeAbsenceDistribution> sendGradeAbsenceDistributionListData(String year, Integer term){
+		List<GradeAbsenceDistribution> gadList = new ArrayList<>();
+		gadList = studentCourseService.getGradeAbsenceDistributionList(year, term);
+		return gadList;
+	}
+
 	
 	/**
 	 * 跳转至主要基础课程成绩基本情况统计页面

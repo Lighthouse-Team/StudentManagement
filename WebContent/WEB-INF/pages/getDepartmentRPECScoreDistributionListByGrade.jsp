@@ -96,16 +96,57 @@
 <script src="<%=path%>/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=path%>/dist/js/demo.js"></script>
+<!-- echarts -->
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
 <script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
 <script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 <script type="text/javascript">
 
-	
-	$(function() {
+	$(function() {  
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+		if (localStorage.getItem('year')) {
+			$("#year option").eq(localStorage.getItem('year')).prop('selected',
+					true);
+		}
+		$("#year").on('change', function() {
+			localStorage.setItem('year', $('option:selected', this).index());
+		}); 
+		
+		if (localStorage.getItem('term')) {
+			$("#term option").eq(localStorage.getItem('term')).prop('selected',
+					true);
+		}
+		$("#term").on('change', function() {
+			localStorage.setItem('term', $('option:selected', this).index());
+		});
+		
 		$('#getData').click(function(){
 			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
+		});
+		
+		setSelect();
+		
+		$('#getPic').click(function(){
+			if($("#picTitle").css('display')=='none'){
+	            $("#picTitle").css("display","block");
+	            
+			} 
+			if($("#departmentRPECScoreDistributionListByGradeBarPic").css('display')=='none'){
+	            $("#departmentRPECScoreDistributionListByGradeBarPic").css("display","block");
+	        } 
+			getBarPic();      //显示柱状图
+		
 		});
 	});
 	
@@ -130,6 +171,218 @@
 		} 
 	};
 	
+	function getBarPic(){
+		var app = {};
+		option = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '良好率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '中等率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		
+
+		/* 与后台连接传递数据 */
+ 		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		var eRateList = new Array();
+		url = "getDepartmentRPECScoreDistributionListByGradeData";
+		var args = {
+			year : $("#year").val(),
+			term : $("#term").val(),
+			grade : $("#grade").val()
+		};
+		$.post(url, args, function(ddList){
+			for(var i = 0; i < ddList.length ; i++){
+				option.xAxis[0].data[i] = ddList[i].departmentName;
+				aRateList[i] = parseFloat(ddList[i].excellentRate.substring(0,ddList[i].excellentRate.length-1));
+				bRateList[i] = parseFloat(ddList[i].goodRate.substring(0,ddList[i].goodRate.length-1));
+				cRateList[i] = parseFloat(ddList[i].mediumRate.substring(0,ddList[i].mediumRate.length-1));
+				dRateList[i] = parseFloat(ddList[i].passRate.substring(0,ddList[i].passRate.length-1));
+				eRateList[i] = parseFloat(ddList[i].failRate.substring(0,ddList[i].failRate.length-1));
+			}
+			
+			option.series[0].data = aRateList;
+			option.series[1].data = bRateList;
+			option.series[2].data = cRateList;
+			option.series[3].data = dRateList;
+			option.series[4].data = eRateList;
+			
+			var dom = document.getElementById("departmentRPECScoreDistributionListByGradeBarPic");
+			var myChart = echarts.init(dom);
+			if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+		}); 
+		
+	}
+	
+	
 </script>
 
 
@@ -147,8 +400,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcr	Qumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">所有课程成绩分布</li>
+							<li class="breadcrumb-item"><a href="#">首页</a></li>
+							<li class="breadcrumb-item active">各院系必修、专业选修课程成绩情况</li>
 						</ol>
 					</div>
 				</div>
@@ -228,7 +481,7 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th> 
+										<th align="center">序号</th> 
 										<th>院系</th>
 										<th>成绩记录总数</th>
 										<th>平均分</th>
@@ -242,19 +495,20 @@
 								<tbody>
 									<c:forEach items="${ddList }"  var="DepartmentDistribution">
 										<tr>
-											<td>${DepartmentDistribution.id }</td>
-											<td>${DepartmentDistribution.departmentName }</td>
-											<td>${DepartmentDistribution.totalNumber }</td>
-											<td>${DepartmentDistribution.averageScore }</td>
-											<td>${DepartmentDistribution.excellentRate }</td>
-											<td>${DepartmentDistribution.goodRate }</td>
-											<td>${DepartmentDistribution.mediumRate }</td>
-											<td>${DepartmentDistribution.passRate }</td>
-											<td>${DepartmentDistribution.failRate }</td>
+											<td align="center">${DepartmentDistribution.id }</td>
+											<td align="center">${DepartmentDistribution.departmentName }</td>
+											<td align="center">${DepartmentDistribution.totalNumber }</td>
+											<td align="center">${DepartmentDistribution.averageScore }</td>
+											<td align="center">${DepartmentDistribution.excellentRate }</td>
+											<td align="center">${DepartmentDistribution.goodRate }</td>
+											<td align="center">${DepartmentDistribution.mediumRate }</td>
+											<td align="center">${DepartmentDistribution.passRate }</td>
+											<td align="center">${DepartmentDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
+							<button id="getPic" class="btn btn-info float-left">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -264,6 +518,17 @@
 			</div>
 			<!-- /.row --> 
 			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id = "picTitle" class="card-header" style="display:none">
+							<h3 class="card-title">成绩分析图</h3> 
+						</div>
+						<div id="departmentRPECScoreDistributionListByGradeBarPic"  style="display:none; height: 400%; width:95%; margin: 0;float:left">
+					</div>
+				</div>
+			</div>
 			
 		</div>
 	</div>

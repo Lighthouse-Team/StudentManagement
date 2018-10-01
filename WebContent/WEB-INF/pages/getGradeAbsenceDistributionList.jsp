@@ -96,6 +96,16 @@
 <script src="<%=path%>/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<%=path%>/dist/js/demo.js"></script>
+<!-- echarts -->
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
 
 <!-- jQuery -->
 <script src="<%=path%>/assets/js/jquery-1.7.2.min.js"></script>
@@ -105,10 +115,234 @@
 
 
 	$(function() {
+		
+		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
+		$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+		if (localStorage.getItem('year')) {
+			$("#year option").eq(localStorage.getItem('year')).prop('selected',
+					true);
+		}
+		$("#year").on('change', function() {
+			localStorage.setItem('year', $('option:selected', this).index());
+		}); 
+		
+		if (localStorage.getItem('term')) {
+			$("#term option").eq(localStorage.getItem('term')).prop('selected',
+					true);
+		}
+		$("#term").on('change', function() {
+			localStorage.setItem('term', $('option:selected', this).index());
+		});
+		
 		$('#getData').click(function(){
 			$.blockUI({ message: '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>' });
 		});
+		
+		$('#getPic').click(function(){
+			if($("#picTitle").css('display')=='none'){
+	            $("#picTitle").css("display","block");
+	            
+			} 
+			if($("#gradeAbsenceDistributionListBarPic").css('display')=='none'){
+	            $("#gradeAbsenceDistributionListBarPic").css("display","block");
+	        } 
+		getBarPic();      //显示柱状图
 	});
+	});
+		
+		/* 显示柱状图 */
+ 	function getBarPic(){
+			
+		var app = {};
+		option = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option = {
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['必修', '专业选修', '通识教育']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:0
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '必修',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '专业选修',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '通识教育',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        }
+		    ]
+		};;
+		
+		
+
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		
+		url = "getGradeAbsenceDistributionListData";
+		var args = {
+			year : $("#year").val(),
+			term : $("#term").val()
+		};
+		$.post(url, args, function(gadList){
+			for(var i = 0; i < gadList.length ; i++){
+				option.xAxis[0].data[i] = gadList[i].grade;
+				aRateList[i] = gadList[i].rcAbsenceNumber;
+				bRateList[i] = gadList[i].pecAbsenceNumber;
+				cRateList[i] = gadList[i].gecAbsenceNumber;
+			}
+			
+			option.series[0].data = aRateList;
+			option.series[1].data = bRateList;
+			option.series[2].data = cRateList;
+			
+			var dom = document.getElementById("gradeAbsenceDistributionListBarPic");
+			var myChart = echarts.init(dom);
+			if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+		});
+		
+	} 
 
 </script>
 
@@ -196,7 +430,7 @@
 							<table id="example1" class="table table-bordered table-striped" >
 								<thead>
 									<tr>
-										<th>年级</th>
+										<th align="center">年级</th>
 										<th>缺考总数</th>
 										<th>必修</th>
 										<th>专业选修</th>
@@ -215,6 +449,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<button id="getPic" class="btn btn-info float-left">显示成绩分析图</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -224,6 +459,19 @@
 			</div>
 			<!-- /.row --> 
 			</section>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id = "picTitle" class="card-header" style="display:none">
+							<h3 class="card-title">成绩分析图</h3> 
+						</div>
+						<div id="gradeAbsenceDistributionListBarPic"  style="display:none; height: 400%; width:95%; margin: 0;float:left">
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 

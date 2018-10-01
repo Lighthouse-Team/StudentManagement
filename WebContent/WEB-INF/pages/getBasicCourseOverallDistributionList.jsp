@@ -263,7 +263,7 @@
 		};
 
 		option = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {

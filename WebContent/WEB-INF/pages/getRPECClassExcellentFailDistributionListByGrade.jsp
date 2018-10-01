@@ -148,8 +148,8 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcr	Qumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">所有课程成绩分布</li>
+							<li class="breadcrumb-item"><a href="#">首页</a></li>
+							<li class="breadcrumb-item active">各班级必修、专业选修课程成绩情况</li>
 						</ol>
 					</div>
 				</div>

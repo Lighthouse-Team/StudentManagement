@@ -156,26 +156,6 @@
 		});
 	});
 	
-	/* 显示分析图 */
-/* 	function getUniversityRPECScoreDistributedData() {
-		
-	 	if($("#picTitle").css('display')=='none'){
-            $("#picTitle").css("display","block");
-            
-		} 
-		if($("#RPECScoreRateBarPic").css('display')=='none'){
-            $("#RPECScoreRateBarPic").css("display","block");
-        } 
-		if($("#RPECScoreRateLinePic").css('display')=='none'){
-	        $("#RPECScoreRateLinePic").css("display","block");
-	    } 
-		
-		getBarPic();      //显示柱状图
-		getLinePic();     //显示折线图
-		
-		 
-	}; */
-	
 	
 	/* 显示柱状图 */
 	function getBarPic(){
@@ -449,8 +429,8 @@
 		        data:[]
 		    },
 		    grid: {
-		        left: '3%',
-		        right: '4%',
+		        left: '8%',
+		        right: '12%',
 		        bottom: '3%',
 		        containLabel: true
 		    },
@@ -699,19 +679,19 @@
 								<tbody>
 									<c:forEach items="${odList}" var="OverallDistribution">
 										<tr>
-											<td>${OverallDistribution.grade }</td>
-											<td>${OverallDistribution.totalNumber }</td>
-											<td>${OverallDistribution.excellentNumber }</td>
-											<td>${OverallDistribution.goodNumber }</td>
-											<td>${OverallDistribution.mediumNumber }</td>
-											<td>${OverallDistribution.passNumber }</td>
-											<td>${OverallDistribution.failNumber }</td>
-											<td>${OverallDistribution.averageScore }</td>
-											<td>${OverallDistribution.excellentRate }</td>
-											<td>${OverallDistribution.goodRate }</td>
-											<td>${OverallDistribution.mediumRate }</td>
-											<td>${OverallDistribution.passRate }</td>
-											<td>${OverallDistribution.failRate }</td>
+											<td align="center">${OverallDistribution.grade }</td>
+											<td align="center">${OverallDistribution.totalNumber }</td>
+											<td align="center">${OverallDistribution.excellentNumber }</td>
+											<td align="center">${OverallDistribution.goodNumber }</td>
+											<td align="center">${OverallDistribution.mediumNumber }</td>
+											<td align="center">${OverallDistribution.passNumber }</td>
+											<td align="center">${OverallDistribution.failNumber }</td>
+											<td align="center">${OverallDistribution.averageScore }</td>
+											<td align="center">${OverallDistribution.excellentRate }</td>
+											<td align="center">${OverallDistribution.goodRate }</td>
+											<td align="center">${OverallDistribution.mediumRate }</td>
+											<td align="center">${OverallDistribution.passRate }</td>
+											<td align="center">${OverallDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
