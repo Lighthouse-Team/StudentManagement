@@ -138,6 +138,7 @@
 	        bLengthChange: false,   //去掉每页显示多少条数据方法
 	        "paging" : false, //去掉底部分页框
 	        "info": false, //去掉表格底部信息
+	        "bSort": false, //排序功能
 	    });
 	  
 

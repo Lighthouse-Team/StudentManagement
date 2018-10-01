@@ -568,10 +568,10 @@ public class StudentCourseService {
 			strCourseType = "必修";
 			break;
 		case 2:
-			strCourseType = "专业选修";
+			strCourseType = "专业<br>选修";
 			break;
 		case 3:
-			strCourseType = "通识选修";
+			strCourseType = "通识<br>教育";
 		}
 		OverallDistribution overallDistribution = new OverallDistribution();
 		overallDistribution.setCourseType(strCourseType);
