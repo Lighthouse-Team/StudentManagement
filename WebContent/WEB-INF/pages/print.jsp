@@ -3984,12 +3984,7 @@
 			</div>
 			
 			<div style = "width: 100%;display: relative; ">
-			
-<<<<<<< HEAD
 			<div style="width:1015px; margin:0 auto" >
-=======
-			<div style="width:1000px; margin:0 auto" >
->>>>>>> branch 'master' of https://github.com/Lighthouse-Team/StudentManagement.git
 			<h2 style="text-align:center">第一章&nbsp;&nbsp;总体成绩分析</h2>
 			<textarea rows = "3" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis1.split("#")[1]}${analysis2.split("#")[1]} </textarea>			
 			<h4 style = "font-size:18pt">1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
