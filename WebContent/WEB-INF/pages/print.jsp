@@ -355,13 +355,15 @@
 		getSecondPic2();	//第一章第二个功能两张成绩分析图
 		getThirdPic1();
 		getThirdPic2();		//第二章第一个功能两张成绩分析图 
-		getForthPic(); 
- 		getFifthPic1();
+		getForthPic(); 		//第二章第四个功能成绩分析图 
+ 		getFifthPic1();		
 		getFifthPic2();     //第三章第一个功能 
 		getSixthPic();      //第三章第二个功能 
 		getSeventhPic();    //第三章第三个功能  
  		getEighthPic();     //第四章第一个功能 
 		getNinthPic();      //第四章第二个功能9张或10张分析图         
+		getTenthPic();      //第二章第二个功能四张分析图
+		getEleventhPic();   //第三章第五个功能
 			
 	});
 	
@@ -3316,6 +3318,667 @@
 		}
 				
  	}
+ 	
+ 	function getTenthPic(){
+ 		var app = {};
+		option22 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option22 = {
+		    color: ['#003366', '#006699', '#4cabce', '#000000','#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '良好率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '中等率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+ 		option23 = {
+		    color: ['#003366', '#006699', '#4cabce', '#000000','#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '良好率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '中等率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		
+		option24 = {
+		    color: ['#003366', '#006699', '#4cabce', '#000000','#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '良好率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '中等率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};;
+		
+		option25 = {
+		    color: ['#003366', '#006699', '#4cabce', '#000000','#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:30
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: []
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}%'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '优秀率',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '良好率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '中等率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        },
+		        {
+		            name: '及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        },
+		        {
+		            name: '不及格率',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [98, 77, 101, 99, 40]
+		        }
+		    ]
+		};; 
+		
+		var year1 = "${year}";
+		var term1 = "${term}";
+		/* 与后台连接传递数据 */
+ 		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		var dRateList = new Array();
+		var eRateList = new Array();
+		var aRateList1 = new Array();
+		var bRateList1 = new Array();
+		var cRateList1 = new Array();
+		var dRateList1 = new Array();
+		var eRateList1 = new Array();
+		var aRateList2 = new Array();
+		var bRateList2 = new Array();
+		var cRateList2 = new Array();
+		var dRateList2 = new Array();
+		var eRateList2 = new Array();
+		var aRateList3= new Array();
+		var bRateList3 = new Array();
+		var cRateList3 = new Array();
+		var dRateList3 = new Array();
+		var eRateList3 = new Array();
+		url = "getDepartmentRPECScoreDistributionListData";
+		args = {
+				year : year1,
+				term : term1
+		};  
+		$.post(url, args, function(ddAllList){
+			for(var i = 0; i < ddAllList[0].length ; i++){
+				option22.xAxis[0].data[i] = ddAllList[0][i].departmentName;
+				aRateList[i] = parseFloat(ddAllList[0][i].excellentRate.substring(0,ddAllList[0][i].excellentRate.length-1));
+				bRateList[i] = parseFloat(ddAllList[0][i].goodRate.substring(0,ddAllList[0][i].goodRate.length-1));
+				cRateList[i] = parseFloat(ddAllList[0][i].mediumRate.substring(0,ddAllList[0][i].mediumRate.length-1));
+				dRateList[i] = parseFloat(ddAllList[0][i].passRate.substring(0,ddAllList[0][i].passRate.length-1));
+				eRateList[i] = parseFloat(ddAllList[0][i].failRate.substring(0,ddAllList[0][i].failRate.length-1));
+			}
+			
+			option22.series[0].data = aRateList;
+			option22.series[1].data = bRateList;
+			option22.series[2].data = cRateList;
+			option22.series[3].data = dRateList;
+			option22.series[4].data = eRateList;
+			
+			var dom22 = document.getElementById("departmentRPECScoreDistributionListByGradeBarPic");
+			var myChart22 = echarts.init(dom22);
+			if (option22 && typeof option22 === "object") {
+			    myChart22.setOption(option22, true);
+			}
+			
+			for(var i = 0; i < ddAllList[1].length ; i++){
+				option23.xAxis[0].data[i] = ddAllList[1][i].departmentName;
+				aRateList1[i] = parseFloat(ddAllList[1][i].excellentRate.substring(0,ddAllList[1][i].excellentRate.length-1));
+				bRateList1[i] = parseFloat(ddAllList[1][i].goodRate.substring(0,ddAllList[1][i].goodRate.length-1));
+				cRateList1[i] = parseFloat(ddAllList[1][i].mediumRate.substring(0,ddAllList[1][i].mediumRate.length-1));
+				dRateList1[i] = parseFloat(ddAllList[1][i].passRate.substring(0,ddAllList[1][i].passRate.length-1));
+				eRateList1[i] = parseFloat(ddAllList[1][i].failRate.substring(0,ddAllList[1][i].failRate.length-1));
+			}
+			
+			option23.series[0].data = aRateList1;
+			option23.series[1].data = bRateList1;
+			option23.series[2].data = cRateList1;
+			option23.series[3].data = dRateList1;
+			option23.series[4].data = eRateList1;
+			
+			var dom23 = document.getElementById("departmentRPECScoreDistributionListByGradeBarPic1");
+			var myChart23 = echarts.init(dom23);
+			if (option23 && typeof option23 === "object") {
+			    myChart23.setOption(option23, true);
+			}
+			
+			for(var i = 0; i < ddAllList[2].length ; i++){
+				option24.xAxis[0].data[i] = ddAllList[2][i].departmentName;
+				aRateList2[i] = parseFloat(ddAllList[2][i].excellentRate.substring(0,ddAllList[2][i].excellentRate.length-1));
+				bRateList2[i] = parseFloat(ddAllList[2][i].goodRate.substring(0,ddAllList[2][i].goodRate.length-1));
+				cRateList2[i] = parseFloat(ddAllList[2][i].mediumRate.substring(0,ddAllList[2][i].mediumRate.length-1));
+				dRateList2[i] = parseFloat(ddAllList[2][i].passRate.substring(0,ddAllList[2][i].passRate.length-1));
+				eRateList2[i] = parseFloat(ddAllList[2][i].failRate.substring(0,ddAllList[2][i].failRate.length-1));
+			}
+			
+			option24.series[0].data = aRateList2;
+			option24.series[1].data = bRateList2;
+			option24.series[2].data = cRateList2;
+			option24.series[3].data = dRateList2;
+			option24.series[4].data = eRateList2;
+			
+			var dom24 = document.getElementById("departmentRPECScoreDistributionListByGradeBarPic2");
+			var myChart24 = echarts.init(dom24);
+			if (option24 && typeof option24 === "object") {
+			    myChart24.setOption(option24, true);
+			}
+			
+			for(var i = 0; i < ddAllList[3].length ; i++){
+				option25.xAxis[0].data[i] = ddAllList[3][i].departmentName;
+				aRateList3[i] = parseFloat(ddAllList[3][i].excellentRate.substring(0,ddAllList[3][i].excellentRate.length-1));
+				bRateList3[i] = parseFloat(ddAllList[3][i].goodRate.substring(0,ddAllList[3][i].goodRate.length-1));
+				cRateList3[i] = parseFloat(ddAllList[3][i].mediumRate.substring(0,ddAllList[3][i].mediumRate.length-1));
+				dRateList3[i] = parseFloat(ddAllList[3][i].passRate.substring(0,ddAllList[3][i].passRate.length-1));
+				eRateList3[i] = parseFloat(ddAllList[3][i].failRate.substring(0,ddAllList[3][i].failRate.length-1));
+			}
+			
+			option25.series[0].data = aRateList3;
+			option25.series[1].data = bRateList3;
+			option25.series[2].data = cRateList3;
+			option25.series[3].data = dRateList3;
+			option25.series[4].data = eRateList3;
+			
+			var dom25 = document.getElementById("departmentRPECScoreDistributionListByGradeBarPic3");
+			var myChart25 = echarts.init(dom25);
+			if (option25 && typeof option25 === "object") {
+			    myChart25.setOption(option25, true);
+			}
+		}); 
+ 	}
+ 	
+ 	function getEleventhPic(){
+ 		var app = {};
+		option26 = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    normal: {
+		        show: true,
+		        position: app.config.position,
+		        distance: app.config.distance,
+		        align: app.config.align,
+		        verticalAlign: app.config.verticalAlign,
+		        rotate: app.config.rotate,
+		        formatter: '',
+		        fontSize: 16,
+		        rich: {
+		            name: {
+		                textBorderColor: '#fff'
+		            }
+		        }
+		    }
+		};
+
+		option26 = {
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['必修', '专业选修', '通识教育']
+		    },
+		    calculable: true,
+		    xAxis: [
+		        {	
+		        	axisLabel: {
+                        interval:0,
+                        rotate:0
+                    },
+		            type: 'category',
+		            axisTick: {show: false},
+		            data: ['优秀率', '良好率', '中等率', '及格率', '不及格率']
+		        }
+		    ],
+		    yAxis: [
+		    	  {  
+		              type: 'value',  
+		              axisLabel: {  
+		                    show: true,  
+		                    interval: 'auto',  
+		                    formatter: '{value}'  
+		                  },  
+		              show: true  
+		          }  
+		    ],
+		    series: [
+		        {
+		            name: '必修',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '专业选修',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [220, 182, 191, 234, 290]
+		        },
+		        {
+		            name: '通识教育',
+		            type: 'bar',
+		            label: labelOption,
+		            data: [150, 232, 201, 154, 190]
+		        }
+		    ]
+		};;
+		
+		
+		var year1 = "${year}";
+		var term1 = "${term}";
+		var aRateList = new Array();
+		var bRateList = new Array();
+		var cRateList = new Array();
+		
+		url = "getGradeAbsenceDistributionListData";
+		var args = {
+			year : year1,
+			term : term1
+		};
+		$.post(url, args, function(gadList){
+			for(var i = 0; i < gadList.length ; i++){
+				option26.xAxis[0].data[i] = gadList[i].grade;
+				aRateList[i] = gadList[i].rcAbsenceNumber;
+				bRateList[i] = gadList[i].pecAbsenceNumber;
+				cRateList[i] = gadList[i].gecAbsenceNumber;
+			}
+			
+			option26.series[0].data = aRateList;
+			option26.series[1].data = bRateList;
+			option26.series[2].data = cRateList;
+			
+			var dom26 = document.getElementById("gradeAbsenceDistributionListBarPic");
+			var myChart26 = echarts.init(dom26);
+			if (option26 && typeof option26 === "object") {
+			    myChart26.setOption(option26, true);
+			}
+		});
+ 	}
 
 </script>
 
@@ -3345,15 +4008,13 @@
 			
 			<div style = "width: 100%;display: relative; ">
 			
-			<div style="width:1025px; margin:0 auto" >
+			<div style="width:1015px; margin:0 auto" >
 			<h2 style="text-align:center">第一章&nbsp;&nbsp;总体成绩分析</h2>
 			<textarea rows = "4" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >${analysis1.split("#")[1]}${analysis2.split("#")[1]} </textarea>			
 			<h4 style = "font-size:18pt">1.1&nbsp;&nbsp;各年级本科生总体分布情况</h4>
 			<h5 style = "font-size:17pt">1.1.1&nbsp;&nbsp;所有课程成绩分布情况</h5> 
 			<div style="font-size:15pt">${analysis1.split("#")[2]}</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table1.1" style="text-align:center"></h5> 
@@ -3398,9 +4059,7 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
 					<!-- /.card -->
-				</div>
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
@@ -3421,9 +4080,9 @@
 			
 			<div class="row">
 				<div class="col-12">
-					<div class="card">
+				<div class="card">
 					<textarea rows = "10" style = "width: 100% ;font-size:15pt; border-style: none ; background: transparent" >${analysis1.split("#")[0] } </textarea>	
-					</div>
+				</div>
 				</div>
 			</div>
 			
@@ -3431,7 +4090,6 @@
 			<div style="font-size:15pt">${analysis2.split("#")[2]}</div>
 			<div class="row">
 				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table1.2" style="text-align:center"></h5> 
@@ -3479,7 +4137,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
@@ -3511,8 +4168,6 @@
 			<h4 style="font-size:18pt">2.1&nbsp;&nbsp;全校必修、专业选修整体成绩分布情况</h4>
 			<div style="font-size:15pt">${analysis3.split("#")[2] }</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table2.1" style="text-align:center"></h5>
 							<table id="example1" class="table table-bordered table-striped">
@@ -3555,10 +4210,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -3586,8 +4237,6 @@
 			<h5 id = "RPECTitle1" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
 			<h5 id = "firstGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table2.2" style="text-align:center"></h5> 
@@ -3623,13 +4272,19 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
-			<!-- /.row --> 
-			
+			<!-- /.row -->
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="departmentRPECScoreDistributionListByGradeBarPic"
+							style="display:block; height: 350%; width:100%; position:relative; ">
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -3646,8 +4301,6 @@
 			<h5 id = "RPECTitle2" style="font-size: 17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
 			<h5 id = "secondGradeDepartmentRPEC" style="font-size: 16pt" class="card-title"></h5>
 			<div id = "table1" class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table2.3" style="text-align:center"></h5>  
@@ -3683,10 +4336,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -3694,6 +4343,16 @@
 				<div class="col-12">
 					<div class="card">
 					<textarea rows = "8" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.3${analysis5.split("#")[0] }  </textarea>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="departmentRPECScoreDistributionListByGradeBarPic1"
+							style="display:block; height: 350%; width:100%; position:relative; ">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -3706,8 +4365,6 @@
 			<h5 id = "RPECTitle3" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
 			<h5 id = "thirdGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table2.4" style="text-align:center"></h5> 
@@ -3743,10 +4400,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -3754,6 +4407,16 @@
 				<div class="col-12">
 					<div class="card">
 					<textarea rows = "9" style = "width: 100% ; font-size:15pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.4${analysis6.split("#")[0] }  </textarea>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="departmentRPECScoreDistributionListByGradeBarPic2"
+							style="display:block; height: 350%; width:100%; position:relative; ">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -3766,8 +4429,6 @@
 			<h5 id = "RPECTitle4" style="font-size:17pt">2.2.1&nbsp;&nbsp;各年级本科生必修、专业选修课程成绩情况</h5>
 			<h5 id = "forthGradeDepartmentRPEC" style="font-size:16pt" class="card-title"></h5> 
 			<div id = "table1" class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table2.5" style="text-align:center"></h5> 
@@ -3803,10 +4464,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -3814,6 +4471,16 @@
 				<div class="col-12">
 					<div class="card">
 					<textarea rows = "9" style = "width: 100% ; font-size:15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.5${analysis7.split("#")[0] }  </textarea>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="departmentRPECScoreDistributionListByGradeBarPic3"
+							style="display:block; height: 350%; width:100%; position:relative; ">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -3826,8 +4493,6 @@
 			<h5 style="font-size:17pt" class="card-title">2.2.5&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
 			<div style="font-size:15pt">${analysis8.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 							<h5 id = "table2.6" style="text-align:center">表2.6&nbsp;&nbsp;各院系分年级成绩平均分比较</h5> 
@@ -3873,10 +4538,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 
@@ -3904,8 +4565,6 @@
 			<h4 style="font-size:18pt">3.1&nbsp;&nbsp;全校本科生不及格整体情况</h4> 
 			<div style="font-size:15pt">${analysis9.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table3.1" style="text-align:center">表3.1&nbsp;&nbsp;各年级不及格门数统计</h5> 
@@ -3950,10 +4609,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 
@@ -3988,8 +4643,6 @@
 			<h5 style="font-size:17pt" class="card-title">3.2.1&nbsp;&nbsp;各院系不及格学生整体情况</h5> 
 			<div style="font-size:15pt">${analysis10.split("#")[2] }</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table3.2" style="text-align:center">表3.2&nbsp;&nbsp;各院系不及格学生情况统计表</h5> 
@@ -4029,10 +4682,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -4058,8 +4707,6 @@
 			<h5 style="font-size:17pt" class="card-title">3.2.2&nbsp;&nbsp;各院系分年级学生不及格情况统计分布</h5> 
 			<div style="font-size:15pt">${analysis11.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table3.3" style="text-align:center">表3.3&nbsp;&nbsp;各院系分年级不及格情况统计</h5>
@@ -4114,10 +4761,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -4147,8 +4790,6 @@
 			<h4 style="font-size:18pt">3.4&nbsp;&nbsp; 各年级缺考情况统计</h4> 
 			<div style="font-size:15pt">${analysis12.split("#")[2] }</div> 
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table3.4" style="text-align:center">表3.4&nbsp;&nbsp;各年级缺考情况统计表</h5> 
@@ -4176,12 +4817,18 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div id="gradeAbsenceDistributionListBarPic" style="display:block;  height: 350%; width:100%; position:relative;">
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4195,8 +4842,6 @@
 			<h4 style="font-size:18pt">4.1&nbsp;&nbsp;主要基础课程成绩情况分布</h4> 
 			<div style="font-size:15pt">${analysis13.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.1" style="text-align:center">表4.1&nbsp;&nbsp;主要基础课程成绩情况</h5> 
@@ -4233,10 +4878,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -4264,8 +4905,6 @@
 			<h5 id="courseDepartmentTitle" style="font-size:16pt" class="card-title" ></h5> 
 			<div style="font-size:15pt">${analysis14.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.2" style="text-align:center"></h5>
 							<table id="example1" class="table table-bordered table-striped">
@@ -4296,10 +4935,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -4324,8 +4959,6 @@
 			<h5 id="courseDepartmentTitle1" style="font-size:16pt" class="card-title"></h5> 
 			<div style="font-size:15pt">${analysis15.split("#")[2] } </div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.3" style="text-align:center"></h5> 
@@ -4357,10 +4990,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "secondTermAddDiv">
@@ -4397,8 +5026,6 @@
 			<h5 id="courseDepartmentTitle2" style="font-size:16pt" class="card-title" ></h5> 
 			<div style="font-size:15pt">${analysis16.split("#")[2] }</div> 
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.4" style="text-align:center"></h5> 
@@ -4430,10 +5057,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "firstTermAddDiv">
@@ -4474,8 +5097,6 @@
 			<h5 id="courseDepartmentTitle3" style="font-size:16pt" class="card-title" ></h5>
 			<div style="font-size:15pt">${analysis17.split("#")[2] }</div>  
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.5" style="text-align:center"></h5> 
@@ -4507,10 +5128,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "firstTermAddDiv2">
@@ -4540,8 +5157,6 @@
 			<h5 id="courseDepartmentTitle4" style="font-size:16pt" class="card-title"></h5> 
 			<div style="font-size:15pt">${analysis18.split("#")[2] }</div> 
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.6" style="text-align:center"></h5> 
@@ -4573,10 +5188,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
@@ -4618,8 +5229,6 @@
 			<h5 id="courseDepartmentTitle5" style="font-size:16pt" class="card-title" ></h5> 
 			<div style="font-size:15pt">${analysis19.split("#")[2] }</div> 
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.7" style="text-align:center"></h5>
@@ -4651,10 +5260,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "secondTermAddDiv2">
@@ -4682,8 +5287,6 @@
 			<h5 id="courseDepartmentTitle6" style="font-size:16pt" class="card-title" ></h5> 
 			<div style="font-size:15pt">${analysis20.split("#")[2] }</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.8" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
@@ -4714,10 +5317,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "secondTermAddDiv3">
@@ -4747,8 +5346,6 @@
 			<h3 id="courseDepartmentTitle7" style="font-size:16pt" class="card-title" ></h3> 
 			<div style="font-size:15pt">${analysis21.split("#")[2] }</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 							<h5 id = "table4.9" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
@@ -4779,10 +5376,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div id = "secondTermAddDiv4">
@@ -4814,8 +5407,6 @@
 			<h3 id="courseDepartmentTitle8" style="font-size:16pt" class="card-title" ></h3> 
 			<div style="font-size:15pt">${analysis22.split("#")[2] }</div>
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 							<h5 id = "table4.10" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
@@ -4846,10 +5437,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			<div>&nbsp;</div>
@@ -4878,8 +5465,6 @@
 			<div id = "firstTermAddCourse" class="row">
 				<h3 id="courseDepartmentTitle9" style="font-size:16pt" class="card-title"></h3> 
 				<div style="font-size:15pt">${analysis23.split("#")[2] }</div>
-				<div class="col-12">
-					<div class="card">
 						<div class="card-body" style="margin: 0">
 							<h5 id = "table4.11" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
@@ -4910,10 +5495,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
 			
