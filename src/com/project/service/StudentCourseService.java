@@ -721,7 +721,7 @@ public class StudentCourseService {
 			overAllCourseStr = overAllCourseStr+overAllFailRateCourses.get(i)+"、";
 		}
 		if(overallDistribution.getCourseType().equals("全校")) {
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
+			String analysisHaveBr = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
 					"最高，达到"+excellentRateHighest+
 					"%，"+excellentRateLowestCourse+
 					"最低，为"+excellentRateLowest+
@@ -737,7 +737,9 @@ public class StudentCourseService {
 					"#其中必修课成绩"+odList.get(0).getTotalNumber()+
 					"条，选修课成绩"+odList.get(1).getTotalNumber()+
 					"条，通识教育选修课"+odList.get(2).getTotalNumber()+
-					"条。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：");
+					"条。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：";
+			String anaylsisNoBr = analysisHaveBr.replace("<br>", "") ;
+			overallDistribution.setAnalysis(anaylsisNoBr);
 		}
 		odList.add(overallDistribution);
 		return odList;
