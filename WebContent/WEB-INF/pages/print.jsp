@@ -2511,7 +2511,7 @@
 		};
 
 		optionCourse = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2561,7 +2561,7 @@
 		    ]
 		};;
 		optionCourse1 = {
-			    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+			    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 			    tooltip: {
 			        trigger: 'axis',
 			        axisPointer: {
@@ -2611,7 +2611,7 @@
 			    ]
 			};;	
 	optionCourse2 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2662,7 +2662,7 @@
 		};;	
 		
 	optionCourse3 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2713,7 +2713,7 @@
 		};;
 		
 	optionCourse4 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2764,7 +2764,7 @@
 		};;	
 		
 	optionCourse5 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2815,7 +2815,7 @@
 		};;	
 		
 	optionCourse6 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2866,7 +2866,7 @@
 		};;	
 		
 	optionCourse7 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2917,7 +2917,7 @@
 		};;	
 		
 	optionCourse8 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -2968,7 +2968,7 @@
 		};;	
 		
 	optionCourse9 = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
