@@ -3983,6 +3983,36 @@
  .noprint{display:none}
 </style>
 
+<style media="print" type="text/css">
+@page {
+/* 	size: A4; */
+	/* margin: 20mm; */
+/* 	@bottom-left.content = ""; */
+}
+
+@page:right{ 
+  @bottom-left {
+    margin: 10pt 0 30pt 0;
+    border-top: .25pt solid #666;
+    content: "Our Cats";
+    font-size: 9pt;
+    color: #333;
+  }
+  @bottom-right { 
+    margin: 10pt 0 30pt 0;
+    border-top: .25pt solid #666;
+    content: counter(page);
+    font-size: 9pt;
+  }
+  @top-right {
+    content: "2222";
+    margin: 30pt 0 10pt 0;
+    font-size: 9pt;
+    color: #333;
+  }
+}
+</style>
+
 </head>
 <body class="hold-transition sidebar-mini" >
 	<div class="wrapper">
