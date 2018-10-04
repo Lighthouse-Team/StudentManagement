@@ -3991,7 +3991,7 @@
  .noprint{display:none}
 </style>
 
-<style media="print" type="text/css">
+<!-- <style media="print" type="text/css">
 @page {
 /* 	size: A4; */
 	/* margin: 20mm; */
@@ -4019,7 +4019,7 @@
     color: #333;
   }
 }
-</style>
+</style> -->
 
 </head>
 <body class="hold-transition sidebar-mini" >
@@ -4251,15 +4251,14 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="RPECScoreRateBarPic"  style="display:block; height: 350%; width:100%; position:relative; ">
+						<div id="RPECScoreRateBarPic"  style="display:block; height: 340%; width:100%; position:relative; ">
 						</div>
-						<div id="RPECScoreRateLinePic"  style="display:block;  height: 350%; width:100%; position:relative; ">
+						<div id="RPECScoreRateLinePic"  style="display:block;  height: 340%; width:100%; position:relative; ">
 						</div>
 					</div>
 				</div>
 			</div>
 			<h5 id = "pic3" style="text-align:center"></h5>
-			<p>&nbsp;</p>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4309,7 +4308,12 @@
 						<!-- /.card-body -->
 			</div>
 			<!-- /.row -->
-
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -4389,7 +4393,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "9" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.3、图2.4${analysis5.split("#")[0] }  </textarea>	
+					<textarea rows = "8" style = "width: 100% ; font-size: 15pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;表2.3、图2.4${analysis5.split("#")[0] }  </textarea>	
 					</div>
 				</div>
 			</div>
