@@ -158,6 +158,7 @@
 
 <style media=print type="text/css">
  .noprint{display:none}
+ .PageNext{PAGE-BREAK-AFTER:always}   
 </style>
 
 </head>
@@ -181,7 +182,7 @@
 			</div>
 
 			<h3 style="text-align:center" id = "firstGradeRPECClass" class="card-title"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -216,7 +217,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center"  id="secondGradeRPECClass" class="card-title"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -251,7 +252,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center"  id="thirdGradeRPECClass" class="card-title"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -286,7 +287,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center"  id="forthGradeRPECClass" class="card-title"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">

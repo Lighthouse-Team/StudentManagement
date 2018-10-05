@@ -1040,6 +1040,35 @@ public class StudentCourseController {
 	}
 	
 	/**
+	 * 返回各年级必修专业选修课程成绩总体分布情况(按院系查询)(画图)(打印页面同时画4张图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getDepartmentRPECScoreDistributionListData")
+	public List<List<DepartmentDistribution>> sendDepartmentRPECScoreDistributionListData(String year, Integer term){
+		
+		int yearSelected = Integer.parseInt(year.substring(0,4));
+		List<Integer> gradeList = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			gradeList.add(yearSelected - 3 + i);
+		}
+		
+		List<List<DepartmentDistribution>> ddAllList = new ArrayList<>();
+		
+		List<DepartmentDistribution> ddList = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(0), year, term);
+		List<DepartmentDistribution> ddList1 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(1), year, term);
+		List<DepartmentDistribution> ddList2 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(2), year, term);
+		List<DepartmentDistribution> ddList3 = studentCourseService.getRPECDepartmentDistributionListByGrade(gradeList.get(3), year, term);
+		ddAllList.add(ddList);
+		ddAllList.add(ddList1);
+		ddAllList.add(ddList2);
+		ddAllList.add(ddList3);
+		return ddAllList;
+	}
+	
+	/**
 	 * 跳转至各班级优秀率、不及格率附表打印准备页面
 	 * @param session
 	 * @param map

@@ -215,6 +215,7 @@
 
 <style media=print type="text/css">
  .noprint{display:none}
+ .PageNext{PAGE-BREAK-AFTER:always}   
 </style>
 
 </head>
@@ -238,7 +239,7 @@
 			</div>
 
 			<h3 style="text-align:center" class="card-title" id = "courseTitle"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -273,7 +274,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle1"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -308,7 +309,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle2"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -343,7 +344,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle3"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -378,7 +379,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center" class="card-title" id = "courseTitle4"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -413,7 +414,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle5"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -448,7 +449,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle6"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -483,7 +484,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle7"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -518,7 +519,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle8"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -553,7 +554,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle9"></h3> 
-			<div class="row">
+			<div class="PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -588,7 +589,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle10"></h3> 
-			<div id = "secondTermAddCourse1" class="row">
+			<div class="PageNext" id = "secondTermAddCourse1" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -623,7 +624,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle11"></h3> 
-			<div id = "secondTermAddCourse2" class="row">
+			<div class="PageNext" id = "secondTermAddCourse2" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">
@@ -658,7 +659,7 @@
 			<!-- /.row --> 
 			
 			<h3 style="text-align:center" class="card-title" id = "courseTitle12"></h3> 
-			<div id = "secondTermAddCourse3" class="row">
+			<div class="PageNext" id = "secondTermAddCourse3" class="row">
 				<div class="col-12">
 						<!-- /.card-header --> 
 						<div class="card-body" style="margin: 0">

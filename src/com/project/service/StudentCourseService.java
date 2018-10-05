@@ -721,7 +721,7 @@ public class StudentCourseService {
 			overAllCourseStr = overAllCourseStr+overAllFailRateCourses.get(i)+"、";
 		}
 		if(overallDistribution.getCourseType().equals("全校")) {
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
+			String analysisHaveBr = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2、图1.3-1.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，"+excellentRateHighestCourse+
 					"最高，达到"+excellentRateHighest+
 					"%，"+excellentRateLowestCourse+
 					"最低，为"+excellentRateLowest+
@@ -737,7 +737,9 @@ public class StudentCourseService {
 					"#其中必修课成绩"+odList.get(0).getTotalNumber()+
 					"条，选修课成绩"+odList.get(1).getTotalNumber()+
 					"条，通识教育选修课"+odList.get(2).getTotalNumber()+
-					"条。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：");
+					"条。#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表1.2为我校本科生"+year+"学年"+termStr+"必修、专业选修、通识选修课程成绩分布情况，有效成绩数、优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（0-59）、成绩平均值情况如图1.3-1.4：";
+			String anaylsisNoBr = analysisHaveBr.replace("<br>", "") ;
+			overallDistribution.setAnalysis(anaylsisNoBr);
 		}
 		odList.add(overallDistribution);
 		return odList;
@@ -997,7 +999,7 @@ public class StudentCourseService {
 			overallDistribution.setMediumRate(strMediumRate);
 			overallDistribution.setPassRate(strPassRate);
 			overallDistribution.setFailRate(strFailRate);
-			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.1、图2.3-2.4统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，全校必修、专业选修课程优秀率最高的年级为"+excellentRateHighestGrade+
+			overallDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.1、图2.1-2.2统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）优秀率方面，全校必修、专业选修课程优秀率最高的年级为"+excellentRateHighestGrade+
 					"级，达到"+excellentRateHighest+
 					"%，其次为"+excellentRateHigherGrade+
 					"级，达到"+excellentRateHigher+
@@ -1839,7 +1841,7 @@ public class StudentCourseService {
 		List<DepartmentAllGradeAverageScoreCompare> dagascList = new ArrayList<>();
 		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 			DepartmentAllGradeAverageScoreCompare departmentAllGradeAverageScoreCompare = dagascMap.get(departmentId);
-			departmentAllGradeAverageScoreCompare.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.6、图2.3统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeOneOverDepartmentNamesStr.substring(0,gradeOneOverDepartmentNamesStr.length()-1)+
+			departmentAllGradeAverageScoreCompare.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表2.6、图2.7统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+gradeOn+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeOneOverDepartmentNamesStr.substring(0,gradeOneOverDepartmentNamesStr.length()-1)+
 					"，平均成绩大幅度（差值≤5）低于全校平均成绩的院系有：" + gradeOneDownDepartDiffStr.substring(0,gradeOneDownDepartDiffStr.length()-1)+
 					"；\n" + 
 					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）"+gradeTw+"级平均成绩大幅度（差值≥5）高于全校平均成绩的院系有："+gradeTwoOverDepartmentNamesStr.substring(0,gradeTwoOverDepartmentNamesStr.length()-1)+
@@ -3025,7 +3027,7 @@ public class StudentCourseService {
 		}else {
 			absenceNumberSubjectAll = "通识教育选修课";
 		}
-		gradeAbsenceDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.4统计数据表明：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+absenceGradeHighest+
+		gradeAbsenceDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表3.4、图3.5统计数据表明：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+absenceGradeHighest+
 				"级缺考人次最多，为"+absenceNumberHighest+
 				"人次，主要为"+absenceSubjectHighest+
 				"，"+absenceGradeHigher+
@@ -3523,7 +3525,7 @@ public class StudentCourseService {
 						"最高，为"+failRateHighest+"%";
 			}
 			//System.out.println("全年级："+basicCourseDetailDistribution);
-			basicCourseDetailDistribution.setAnalysis("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentName+courseName+
+			basicCourseDetailDistribution.setAnalysis("统计结果显示：\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）"+departmentName+courseName+
 					"课程成绩优秀率为"+basicCourseDetailDistribution.getExcellentRate()+
 					"，优秀率高于年级平均水平的院系有："+overAllExcellentDepartmentsStr.substring(0,overAllExcellentDepartmentsStr.length()-1)+
 					highestExcellentDepartmentAndRate+"；\n" + 

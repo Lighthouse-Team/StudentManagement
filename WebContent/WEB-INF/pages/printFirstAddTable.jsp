@@ -160,6 +160,7 @@
 
 <style media=print type="text/css">
  .noprint{display:none}
+ .PageNext{PAGE-BREAK-AFTER:always}   
 </style>
 
 </head>
@@ -183,7 +184,7 @@
 			</div>
 
 			<h3 style="text-align:center" id = "firstGradeRPECClass" class="card-title">所有课程成绩分布（按班级）</h3> 
-			<div class="row">
+			<div class = "PageNext" class="row">
 				<div class="col-12">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
@@ -221,8 +222,8 @@
 			</div>
 			<!-- /.row --> 
 			
-			<h3  style="text-align:center"  id="secondGradeRPECClass" class="card-title">所有课程成绩分布（按班级）</h3> 
-			<div class="row">
+			<h3 style="text-align:center"  id="secondGradeRPECClass" class="card-title">所有课程成绩分布（按班级）</h3> 
+			<div class = "PageNext" class="row">
 				<div class="col-12">
 						<div class="card-body" style="margin: 0">
 							<table id="example1" class="table table-bordered table-striped">
@@ -261,7 +262,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center"  id="thirdGradeRPECClass" class="card-title">所有课程成绩分布（按班级）</h3> 
-			<div class="row">
+			<div class = "PageNext" class="row">
 				<div class="col-12">
 					
 						<!-- /.card-header -->
@@ -302,7 +303,7 @@
 			<!-- /.row --> 
 			
 			<h3  style="text-align:center"  id="forthGradeRPECClass" class="card-title">所有课程成绩分布（按班级）</h3> 
-			<div class="row">
+			<div class = "PageNext" class="row">
 				<div class="col-12">
 						<div class="card-body" style="margin: 0">
 							<table id="example1" class="table table-bordered table-striped">

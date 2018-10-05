@@ -262,7 +262,7 @@
 		};
 
 		option = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#006699', '#4cabce', '#000000','#e5323e'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -519,9 +519,9 @@
 			<!-- /.row --> 
 			</section>
 			
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
 							<h3 class="card-title">成绩分析图</h3> 
 						</div>
@@ -529,7 +529,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	
