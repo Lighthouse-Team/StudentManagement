@@ -191,25 +191,25 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>成绩记录总数</th>
-										<th>优秀成绩数</th>
-										<th>不及格成绩数</th>
-										<th>优秀率</th>
-										<th>不及格率</th>
+										<th width="6%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="20%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">优秀成绩数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">不及格成绩数</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cefdList }"  var="ClassExcellentFailDistribution">
 										<tr>
-											<td>${ClassExcellentFailDistribution.id }</td>
-											<td>${ClassExcellentFailDistribution.classNumber }</td>
-											<td>${ClassExcellentFailDistribution.totalNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentNumber }</td>
-											<td>${ClassExcellentFailDistribution.failNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentRate }</td>
-											<td>${ClassExcellentFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -229,25 +229,25 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>成绩记录总数</th>
-										<th>优秀成绩数</th>
-										<th>不及格成绩数</th>
-										<th>优秀率</th>
-										<th>不及格率</th>
+										<th width="6%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="20%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">优秀成绩数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">不及格成绩数</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cefdList1 }"  var="ClassExcellentFailDistribution">
 										<tr>
-											<td>${ClassExcellentFailDistribution.id }</td>
-											<td>${ClassExcellentFailDistribution.classNumber }</td>
-											<td>${ClassExcellentFailDistribution.totalNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentNumber }</td>
-											<td>${ClassExcellentFailDistribution.failNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentRate }</td>
-											<td>${ClassExcellentFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -270,25 +270,25 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>成绩记录总数</th>
-										<th>优秀成绩数</th>
-										<th>不及格成绩数</th>
-										<th>优秀率</th>
-										<th>不及格率</th>
+										<th width="6%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="20%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">优秀成绩数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">不及格成绩数</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cefdList2 }"  var="ClassExcellentFailDistribution">
 										<tr>
-											<td>${ClassExcellentFailDistribution.id }</td>
-											<td>${ClassExcellentFailDistribution.classNumber }</td>
-											<td>${ClassExcellentFailDistribution.totalNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentNumber }</td>
-											<td>${ClassExcellentFailDistribution.failNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentRate }</td>
-											<td>${ClassExcellentFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -309,25 +309,25 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>成绩记录总数</th>
-										<th>优秀成绩数</th>
-										<th>不及格成绩数</th>
-										<th>优秀率</th>
-										<th>不及格率</th>
+										<th width="6%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="20%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">优秀成绩数</th>
+										<th width="16%" style = "text-align:center ; vertical-align: middle ">不及格成绩数</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th width="13%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cefdList3 }"  var="ClassExcellentFailDistribution">
 										<tr>
-											<td>${ClassExcellentFailDistribution.id }</td>
-											<td>${ClassExcellentFailDistribution.classNumber }</td>
-											<td>${ClassExcellentFailDistribution.totalNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentNumber }</td>
-											<td>${ClassExcellentFailDistribution.failNumber }</td>
-											<td>${ClassExcellentFailDistribution.excellentRate }</td>
-											<td>${ClassExcellentFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassExcellentFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
