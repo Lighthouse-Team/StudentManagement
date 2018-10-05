@@ -1424,7 +1424,9 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			if (flagMap.get(classNumber) == null) {
 				flagMap.put(classNumber, 1);
-				classNumberUniqueList.add(classNumber);
+				if(!classNumber.contains("w")) { // 不统计包括班级号带w的班级
+					classNumberUniqueList.add(classNumber);
+				}
 			}
 		}
 		Collections.sort(classNumberUniqueList); // 对某个年级的所有班级进行排序，从小到大
@@ -1479,8 +1481,10 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			ClassExcellentFailDistribution classExcellentFailDistribution = getRPECExcellentFailDistributionByClassNumber(
 					classNumber, year, term);
-			classExcellentFailDistribution.setId(id++);
-			cefdList.add(classExcellentFailDistribution);
+			if(classExcellentFailDistribution.getTotalNumber() >= 10) {
+				classExcellentFailDistribution.setId(id++);
+				cefdList.add(classExcellentFailDistribution);
+			}
 		}
 		return cefdList;
 	}
@@ -2904,8 +2908,10 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			ClassFailDistribution classFailDistribution = new ClassFailDistribution();
 			classFailDistribution = getRCClassFailDistributionByClassNumber(classNumber, year, term);
-			classFailDistribution.setId(id++);
-			cfdList.add(classFailDistribution);
+			if(classFailDistribution.getTotalStudentNumber() >= 10) {
+				classFailDistribution.setId(id++);
+				cfdList.add(classFailDistribution);
+			}
 		}
 		return cfdList;
 	}
@@ -3050,7 +3056,6 @@ public class StudentCourseService {
 		}
 		Set<String> gradeSet = new HashSet<>(gradeList);
 		Iterator<String> gradeIt = gradeSet.iterator();
-		//System.out.println(gradeIt);
 		// 取具有修该课程最多班级个数所在的年级
 		String resultGrade = "--";
 		if (gradeIt.hasNext()) {
@@ -3233,13 +3238,12 @@ public class StudentCourseService {
 		for (String courseName : bcoList) {
 			BasicCourseOverallDistribution basicCourseOverallDistribution = new BasicCourseOverallDistribution();
 			basicCourseOverallDistribution = getBasicCourseOverallDistributionByCourseName(courseName, year, term);
-			//System.out.println("999"+basicCourseOverallDistribution);
-			//String grade = basicCourseOverallDistribution.getGrade();
-			
-			basicCourseOverallDistributions.add(basicCourseOverallDistribution);
-			allExcellentRates.add(Double.parseDouble(basicCourseOverallDistribution.getExcellentRate().substring(0, basicCourseOverallDistribution.getExcellentRate().length()-1)));
-			courseNames.add(basicCourseOverallDistribution.getCourseName());
-			allFailRates.add(Double.parseDouble(basicCourseOverallDistribution.getFailRate().substring(0, basicCourseOverallDistribution.getFailRate().length()-1)));
+			if(basicCourseOverallDistribution.getTotalNumber() >= 10) {
+				basicCourseOverallDistributions.add(basicCourseOverallDistribution);
+				allExcellentRates.add(Double.parseDouble(basicCourseOverallDistribution.getExcellentRate().substring(0, basicCourseOverallDistribution.getExcellentRate().length()-1)));
+				courseNames.add(basicCourseOverallDistribution.getCourseName());
+				allFailRates.add(Double.parseDouble(basicCourseOverallDistribution.getFailRate().substring(0, basicCourseOverallDistribution.getFailRate().length()-1)));
+			}
 		}
 		for(int i=0;i<allExcellentRates.size();i++) {
 			if(excellentRateHighest < allExcellentRates.get(i)) {
@@ -3425,7 +3429,8 @@ public class StudentCourseService {
 			BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
 			basicCourseDetailDistribution = getBasicCourseDetailDistributionByCourseNameAndDepartmentId(courseName,
 					departmentId, year, term);
-			if(basicCourseDetailDistribution.getTotalStudentNumber() != 0) {
+//			if(basicCourseDetailDistribution.getTotalStudentNumber() != 0) { // 成绩记录数小于等于10的院系过滤
+			if(basicCourseDetailDistribution.getTotalStudentNumber() >= 10) {
 				basicCourseDetailDistributionFailRates.add(Double.parseDouble(basicCourseDetailDistribution.getFailRate().substring(0, basicCourseDetailDistribution.getFailRate().length()-1)));
 				basicCourseDetailDistributionExcellentRates.add(Double.parseDouble(basicCourseDetailDistribution.getExcellentRate().substring(0, basicCourseDetailDistribution.getExcellentRate().length()-1)));
 				basicCourseDetailDistributions.add(basicCourseDetailDistribution);
@@ -3445,6 +3450,7 @@ public class StudentCourseService {
 			basicCourseDetailDistributions.get(i).setId(id++);
 			bcddList.add(basicCourseDetailDistributions.get(i));
 		}
+		// 没有考虑自动生成分析报告的情况下的处理方法
 //		for (Integer departmentId = 1; departmentId <= 19; departmentId++) {
 //			BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
 //			basicCourseDetailDistribution = getBasicCourseDetailDistributionByCourseNameAndDepartmentId(courseName,
@@ -3461,6 +3467,7 @@ public class StudentCourseService {
 		BasicCourseDetailDistribution basicCourseDetailDistribution = new BasicCourseDetailDistribution();
 		basicCourseDetailDistribution.setCourseName(courseName);
 		basicCourseDetailDistribution.setDepartmentName(departmentName);
+		basicCourseDetailDistribution.setId(id++);
 		if (totalStudentNumber != 0) {
 			double excellentRate = (double) excellentNumber / totalStudentNumber;
 			double failRate = (double) failNumber / totalStudentNumber;
@@ -3472,7 +3479,6 @@ public class StudentCourseService {
 			basicCourseDetailDistribution.setTotalStudentNumber(totalStudentNumber);
 			basicCourseDetailDistribution.setExcellentRate(strExcellentRate);
 			basicCourseDetailDistribution.setFailRate(strFailRate);
-			basicCourseDetailDistribution.setId(id++);
 			for(int i=0;i<basicCourseDetailDistributionExcellentRates.size();i++) {
 				if(excellentRateHighest < basicCourseDetailDistributionExcellentRates.get(i)) {
 					excellentRateHighest = basicCourseDetailDistributionExcellentRates.get(i);
@@ -3643,8 +3649,10 @@ public class StudentCourseService {
 				BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 				basicCourseClassDistribution = getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName,
 						classNumber, year, term);
-				basicCourseClassDistribution.setId(id++);
-				bccdList.add(basicCourseClassDistribution);
+				if(basicCourseClassDistribution.getTotalNumber() >= 10) {
+					basicCourseClassDistribution.setId(id++);
+					bccdList.add(basicCourseClassDistribution);
+				}
 			}
 		}
 		return bccdList;

@@ -426,7 +426,7 @@ public class TestStudentCourse {
 	@Test
 	public void getBasicCourseDetailDistributionListByCourseNameTest() {
 		// 13秒
-		String courseName = "大学英语（二）";
+		String courseName = "工程实践A";
 		String year = "2017-2018";
 		Integer term = 2;
 		List<BasicCourseDetailDistribution> bcddList = new ArrayList<>();
