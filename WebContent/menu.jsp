@@ -464,7 +464,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="testPage" class="nav-link">
+            <a href="uplaodPage" class="nav-link">
               <i class="nav-icon fa fa-circle-o text-info"></i>
               <p>上传成绩数据</p>
             </a>
