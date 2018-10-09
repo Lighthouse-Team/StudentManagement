@@ -171,7 +171,9 @@ public class TestStudentCourse {
 		Integer grade = 2015;
 		List<String> classNumberList = studentCourseService.getClassNumberListByGrade(grade);
 		System.out.println(classNumberList.size());
-		System.out.println(classNumberList);
+		for(int i = 0; i < classNumberList.size(); i++) {
+			System.out.println(classNumberList.get(i));
+		}
 	}
 
 	@Test

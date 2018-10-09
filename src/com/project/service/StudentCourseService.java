@@ -1426,7 +1426,7 @@ public class StudentCourseService {
 		for (String classNumber : classNumberList) {
 			if (flagMap.get(classNumber) == null) {
 				flagMap.put(classNumber, 1);
-				if(!classNumber.contains("w")) { // 不统计包括班级号带w的班级
+				if(!classNumber.contains("W") && !classNumber.contains("w")) { // 不统计包括班级号带w的班级
 					classNumberUniqueList.add(classNumber);
 				}
 			}
