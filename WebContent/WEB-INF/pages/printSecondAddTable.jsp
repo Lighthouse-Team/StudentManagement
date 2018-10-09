@@ -189,21 +189,21 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>人数</th>
-										<th>不及格人数</th>
-										<th>不及格率</th>
+										<th width="8%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cfdList }"  var="ClassFailDistribution">
 										<tr>
-											<td>${ClassFailDistribution.id }</td>
-											<td>${ClassFailDistribution.classNumber }</td>
-											<td>${ClassFailDistribution.totalStudentNumber }</td>
-											<td>${ClassFailDistribution.totalFailNumber }</td>
-											<td>${ClassFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -224,21 +224,21 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>人数</th>
-										<th>不及格人数</th>
-										<th>不及格率</th>
+										<th width="8%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cfdList1 }"  var="ClassFailDistribution">
 										<tr>
-											<td>${ClassFailDistribution.id }</td>
-											<td>${ClassFailDistribution.classNumber }</td>
-											<td>${ClassFailDistribution.totalStudentNumber }</td>
-											<td>${ClassFailDistribution.totalFailNumber }</td>
-											<td>${ClassFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -259,21 +259,21 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>人数</th>
-										<th>不及格人数</th>
-										<th>不及格率</th>
+										<th width="8%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cfdList2 }"  var="ClassFailDistribution">
 										<tr>
-											<td>${ClassFailDistribution.id }</td>
-											<td>${ClassFailDistribution.classNumber }</td>
-											<td>${ClassFailDistribution.totalStudentNumber }</td>
-											<td>${ClassFailDistribution.totalFailNumber }</td>
-											<td>${ClassFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -294,21 +294,21 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>人数</th>
-										<th>不及格人数</th>
-										<th>不及格率</th>
+										<th width="8%" style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<th width="23%" style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cfdList3 }"  var="ClassFailDistribution">
 										<tr>
-											<td>${ClassFailDistribution.id }</td>
-											<td>${ClassFailDistribution.classNumber }</td>
-											<td>${ClassFailDistribution.totalStudentNumber }</td>
-											<td>${ClassFailDistribution.totalFailNumber }</td>
-											<td>${ClassFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

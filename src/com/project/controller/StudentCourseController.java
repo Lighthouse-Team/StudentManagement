@@ -1254,4 +1254,19 @@ public class StudentCourseController {
 		
 		return "printThirdAddTable";
 	}
+	
+	/**
+	 * 跳转至上传成绩数据页面
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/uplaodPage")
+	public String uplaodPage(HttpSession session, Map<String, Object> map) {
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/login.jsp";
+		} 
+		return "upload";
+	}
 }

@@ -407,7 +407,7 @@ public class StudentCourseService {
 					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（5）总体上，"+overAllGradeStr+"成绩较好，70分以上（含70）的成绩记录高于全校平均水平。"+
 					"#"+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+year+
 					"学年"+termStr+
-					"本科生期末考试有效的成绩记录"+overallDistribution.getTotalNumber()+
+					"本科生期末考试有效成绩记录"+overallDistribution.getTotalNumber()+
 					"条，其中，"+odList.get(0).getGrade()+"级有效成绩数据"+odList.get(0).getTotalNumber()+
 					"条，"+odList.get(1).getGrade()+"级有效成绩数据"+odList.get(1).getTotalNumber()+
 					"条，"+odList.get(2).getGrade()+"级有效成绩数据"+odList.get(2).getTotalNumber()+
