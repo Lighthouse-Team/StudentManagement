@@ -6,41 +6,83 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.project.beans.User;
+import com.project.service.StudentCourseService;
+import com.project.tools.InsertIntoDB;
 
 @Controller
 public class FileUploadHandler {
-	
+
+	@Autowired
+	private StudentCourseService studentCourseService;
+
 	@RequestMapping("/redirectUploadPage")
-	public String redirectUploadPage(HttpSession session) { 
-		
+	public String redirectUploadPage(HttpSession session) {
+
 		User user = (User) session.getAttribute("user");
-		if(user == null) {
+		if (user == null) {
 			return "redirect:/login.jsp";
 		}
-		
+
 		return "upload";
 	}
 
 	@RequestMapping("/fileUpload")
-    public String fileUpload(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException {
-		String uploadPath = "D:/uploadFile";
+	public String fileUpload(HttpSession session, @RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) throws IOException {
 		
-        //String path = "E:/" + file.getOriginalFilename();
-        File uploadFile = new File(uploadPath);
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/login.jsp";
+		}
+
+		// 获取项目目录作为上传文件的目录
+		String strUploadPath = System.getProperty("user.dir");
+		strUploadPath = strUploadPath + File.separator + "uploadFile";
+		System.out.println("uploadPath:" + strUploadPath);
 		
-		if(!uploadFile.exists()) {
-			uploadFile.mkdirs();
+		// 判断存放文件的目录是否存在，如果不存在，创建目录
+		File uploadPath = new File(strUploadPath);
+		if (!uploadPath.exists()) {
+			uploadPath.mkdirs();
 		}
 		
-        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
-        file.transferTo(new File("D:/uploadFile/" + file.getOriginalFilename()));
-        return "index"; 
-    }
+		// 得到需要上传的文件
+		String strUploadFile = strUploadPath + File.separator + file.getOriginalFilename();
+		File uploadFile = new File(strUploadFile);
+		if (uploadFile.exists()) {
+			System.out.println("文件" + uploadFile.getName() + "已存在！");
+		} else {
+			// 通过CommonsMultipartFile的方法直接写文件
+			file.transferTo(uploadFile);
+			System.out.println("写入文件成功！");
+		}
+		
+		// 通过获得文件中的学期和数据库中的学期比较，判断文件是否已经被导入数据库
+		boolean insertFlag = studentCourseService.isFileInsertedByFilePath(uploadFile.getPath());
+		if (insertFlag == true) {
+			System.out.println("文件" + uploadFile.getName() + "已经被导入数据库或上传文件不完整，请尝试重新上传！");
+		} else {
+			System.out.println("正在导入数据库，请等待！");
+			new InsertIntoDB().Insert(uploadFile.getPath());
+		}
+		
+		// 导入成功后，删除上传的文件
+		File deleteFile = new File(strUploadFile);
+		boolean deleteFlag = deleteFile.delete();
+		if(deleteFlag) {
+			System.out.println("删除成功！");
+		}else {
+			System.out.println("删除失败！");
+		}
+
+		return "index";
+	}
 
 }

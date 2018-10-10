@@ -43,6 +43,7 @@ import com.project.dto.DepartmentFailDistribution;
 import com.project.dto.GradeAbsenceDistribution;
 import com.project.dto.GradeFailDistribution;
 import com.project.dto.OverallDistribution;
+import com.project.tools.InsertIntoDB;
 import com.sun.glass.ui.Size;
 import com.sun.org.apache.bcel.internal.generic.I2F;
 import com.sun.xml.internal.messaging.saaj.soap.AttachmentPartImpl;
@@ -3677,4 +3678,32 @@ public class StudentCourseService {
 		}
 		return bccdListList;
 	}
+	
+	
+	/*
+	 *========文件上传需要的方法==========
+	 */
+	
+	/**
+	 * 通过 filePath 判断该文件是否被导入数据库
+	 * @param filePath
+	 * @return
+	 */
+	public boolean isFileInsertedByFilePath(String filePath) {
+		String examTerm = new InsertIntoDB().getExamTermByFilePath(filePath);
+		if(examTerm.equals("null")) {
+			System.out.println("文件" + filePath + "未找到！");
+			return true;
+		}
+		System.out.println("examtTerm:" + examTerm);
+		Integer insertFlag = studentCourseMapper.isFileInsertedByExamTerm(examTerm);
+		if(insertFlag == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	
 }

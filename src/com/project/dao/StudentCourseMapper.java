@@ -740,4 +740,15 @@ public interface StudentCourseMapper {
 	public Integer getCourseFailNumberByCourseNameAndClassNumber(@Param(value = "courseName") String courseName,
 			@Param(value = "classNumber") String classNumber, @Param(value = "year") String year,
 			@Param(value = "term") Integer term);
+	
+	/*
+	 *========文件上传需要的接口==========
+	 */
+	
+	/**
+	 * 通过 examTerm 判断数据库中该学期的个数
+	 * @param examTerm
+	 * @return
+	 */
+	public Integer isFileInsertedByExamTerm(@Param(value = "examTerm") String examTerm);
 }

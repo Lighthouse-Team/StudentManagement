@@ -1,5 +1,6 @@
 package com.project.test;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -478,6 +479,28 @@ public class TestStudentCourse {
 		bccdList = studentCourseService.getBasicCourseClassDistributionListByCourseName(courseName, year, term);
 		for (BasicCourseClassDistribution basicCourseClassDistribution : bccdList) {
 			System.out.println(basicCourseClassDistribution);
+		}
+	}
+	
+	/*
+	 * 测试成绩文件是否被重复导入
+	 */
+	@Test
+	public void fileIsInsertedTest() {
+		String filePath = "E:/实验室/学生管理系统/2017-2018-1成绩/2017级.xls";
+		boolean flag = studentCourseService.isFileInsertedByFilePath(filePath);
+		System.out.println(flag);
+	}
+	
+	@Test
+	public void deleteFileTest() {
+		String deleteFilePath = "D:\\Program Files\\eclipse\\uploadFile\\2014级.xls";
+		File deleteFile = new File(deleteFilePath);
+		boolean deleteFlag = deleteFile.delete();
+		if(deleteFlag) {
+			System.out.println("删除成功");
+		}else {
+			System.out.println("删除失败");
 		}
 	}
 
