@@ -1199,6 +1199,16 @@
 		</where>
 	</select>
 
+	<!-- =======导入数据库中需要的接口====== -->
+	<!-- 通过 examTerm 判断数据库中该学期的个数:public Integer isFileInsertedByExamTerm(@Param(value 
+		= "examTerm") String examTerm); -->
+	<select id="isFileInsertedByExamTerm" resultType="java.lang.Integer">
+		<!-- select ifnull((select 1 from studentcourse <where> examTerm = #{examTerm} 
+			</where> limit 1),0) -->
+		select ifnull((select 1 from studentcourse where examTerm =
+		#{examTerm} limit 1),0)
+	</select>
+
 	<sql id="studentCourseProperty">
 		(score, scLevel, studentId, courseId, examTerm,
 		examProperty, scoreMark)

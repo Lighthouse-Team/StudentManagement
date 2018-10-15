@@ -2,6 +2,7 @@ package com.project.tools;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,8 +11,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import org.eclipse.jdt.internal.compiler.ast.DoubleLiteral;
 import org.springframework.context.ApplicationContext;
@@ -52,7 +56,8 @@ public class InsertIntoDB {
 			Sheet readsheet = readxls.getSheet(0); // 表索引从0开始,取xls的第一张表
 			int rsRows = readsheet.getRows(); // 获得表格的行数
 			int startRow = 0; // 智能识别数据从第几行开始
-			while(!readsheet.getCell(0, startRow++).getContents().equals("学号"));
+			while (!readsheet.getCell(0, startRow++).getContents().equals("学号"))
+				;
 			System.out.println("本次导入记录总数：" + (rsRows - startRow));
 			System.out.println("Inserting, please wait...");
 
@@ -183,8 +188,64 @@ public class InsertIntoDB {
 
 			System.out.println("Insert Complete!");
 
+			input.close();
 		} catch (BiffException | IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			System.out.println("文件不存在或上传的文件有错误，请确认上传！");
 		}
 	}
+
+	public String getExamTermByFilePath(String filePath) {
+		// 如果一个excele文件中只有一个学期的成绩，直接取第一条记录的学期即可
+		// 但是如果有多个学期，选择取占多数的学期作为该成绩文件的学期，这个功能被注释了，因为只考虑一个成绩文件只有一个学期的情况
+//		List<String> examTermList = new ArrayList<>();
+//		List<String> examTermUniqueList = new ArrayList<>();
+		String examTermResult = "null";
+		File file = new File(filePath);
+		try {
+			InputStream input = new FileInputStream(file);
+			Workbook readxls = Workbook.getWorkbook(input);
+			Sheet readsheet = readxls.getSheet(0); // 表索引从0开始,取xls的第一张表
+			int rsRows = readsheet.getRows(); // 获得表格的行数
+			int startRow = 0; // 智能识别数据从第几行开始
+			while (!readsheet.getCell(0, startRow++).getContents().equals("学号"))
+				;
+			System.out.println("startRow:" + (startRow + 1));
+			System.out.println("Excel中记录总数:" + (rsRows - startRow));
+			
+			examTermResult = readsheet.getCell(3,startRow).getContents().toString();
+
+//			for (int i = startRow; i < rsRows; i++) {
+//				examTermList.add(readsheet.getCell(3, i).getContents());
+//			}
+//
+//			// Set<String> examTermUniqueSet = new HashSet<>(examTermList);
+//			Map<String, Integer> flagMap = new HashMap<>();
+//			for (String examTerm : examTermList) {
+//				if (flagMap.get(examTerm) == null) {
+//					flagMap.put(examTerm, 1);
+//					examTermUniqueList.add(examTerm);
+//				}
+//			}
+//			// Iterator examTermIt = examTermUniqueSet.iterator();
+//			Iterator<String> examTermIt = examTermUniqueList.iterator();
+//			if (examTermIt.hasNext()) {
+//				examTermResult = examTermIt.next().toString();
+//				while (examTermIt.hasNext()) {
+//					String examTermTmp = examTermIt.next().toString();
+//					if (Collections.frequency(examTermList, examTermResult) < Collections.frequency(examTermList,
+//							examTermTmp)) {
+//						examTermResult = examTermTmp;
+//					}
+//				}
+//			}
+			// 关闭InputStream，否则删除这里用到的文件会出错
+			input.close();
+		} catch (BiffException | IOException e) {
+			// e.printStackTrace();
+			System.out.println("文件不存在或上传的文件有错误，请确认上传！");
+		}
+		return examTermResult;
+	}
+
 }

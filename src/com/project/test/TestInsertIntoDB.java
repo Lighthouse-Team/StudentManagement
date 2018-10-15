@@ -49,4 +49,19 @@ public class TestInsertIntoDB {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void getExamTermByExcelTest() {
+		String filePath = "E:/实验室/学生管理系统/2017-2018-1成绩/2018级.xls";
+		String examTerm = new InsertIntoDB().getExamTermByFilePath(filePath);
+		System.out.println("examTerm:" + examTerm);
+	}
+	
+	@Test
+	public void getProjectPathTest() {
+		String projectPath = System.getProperty("user.dir");
+		System.out.println("projectPath:" + projectPath);
+		projectPath = projectPath.replace("\\", "/");
+		System.out.println("projectPath:" + projectPath);
+	}
 }
