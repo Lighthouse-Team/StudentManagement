@@ -114,6 +114,7 @@
 	
 	$(function() {   
 		
+		/* 表格标题处理 */
  		var year1 = "${year}";
  		var term1 = "${term}";
 		var yearSelected = parseInt(year1.substring(0,4));
