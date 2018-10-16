@@ -459,9 +459,9 @@ public class TestStudentCourse {
 	 */
 	@Test
 	public void getCourseNormalDistributionByCourseNameTest() {
-		String courseName = "大学英语（五）";
+		String courseName = "大学英语（二）";
 		String year = "2017-2018";
-		Integer term = 1;
+		Integer term = 2;
 		BasicCourseNormalDistribution basicCourseNormalDistribution = new BasicCourseNormalDistribution();
 		basicCourseNormalDistribution = studentCourseService.getBasicCourseNormalDistributionByCourseName(courseName,
 				year, term);

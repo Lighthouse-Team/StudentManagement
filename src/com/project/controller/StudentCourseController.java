@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.beans.User;
 import com.project.dto.BasicCourseClassDistribution;
 import com.project.dto.BasicCourseDetailDistribution;
+import com.project.dto.BasicCourseNormalDistribution;
 import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
@@ -835,6 +836,21 @@ public class StudentCourseController {
 	}
 	
 	/**
+	 * 返回主要基础课程成绩正态分析(表格以及画图)
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getBasicCourseNormalDistribution")
+	public BasicCourseNormalDistribution sendBasicCourseNormalDistribution(String year, Integer term, String courseName){
+		BasicCourseNormalDistribution basicCourseNormalDistribution = new BasicCourseNormalDistribution();
+		basicCourseNormalDistribution = studentCourseService.getBasicCourseNormalDistributionByCourseName(courseName,
+				year, term);
+		return basicCourseNormalDistribution;
+	}
+	
+	/**
 	 * 跳转至主要基础课程各班成绩情况统计页面
 	 * @param session
 	 * @param map 
@@ -1035,6 +1051,8 @@ public class StudentCourseController {
 			map.put(bcddListNumber,bcddListList.get(i));
 			map.put(analysisNumber, bcddListList.get(i).get(bcddListList.get(i).size() - 1).getAnalysis());
 		}                                //第四章第二个功能
+		
+		
 		
 		return "print";
 	}
