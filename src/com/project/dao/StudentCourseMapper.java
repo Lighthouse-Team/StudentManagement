@@ -633,6 +633,17 @@ public interface StudentCourseMapper {
 	 */
 	public Integer getCourseExcellentNumberByCourseName(@Param(value = "courseName") String courseName,
 			@Param(value = "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程得优良的学生人数
+	 * 
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseExcellentAndMediumNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
 
 	/**
 	 * 通过 courseName 获得该课程得不及格的学生人数

@@ -27,30 +27,25 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a href="#"><b>上传文件</b></a>
+			<!-- <a href="#"><b>上传文件</b></a> -->
 		</div>
 		<!-- /.login-logo -->
 		<div class="card">
 			<div class="card-body login-card-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg">导入成绩到数据库</p>
 
 				<form action="fileUpload" method="post" enctype="multipart/form-data">
 					<div class="form-group has-feedback">
-						<input type="file" class="form-control" placeholder="Email" name="file"/>
+						<input type="file" class="form-control" placeholder="Email" name="files"/>
+						<input type="file" class="form-control" placeholder="Email" name="files"/>
+						<input type="file" class="form-control" placeholder="Email" name="files"/>
+						<input type="file" class="form-control" placeholder="Email" name="files"/>
 					</div>
-					<!-- <div class="form-group has-feedback">
-						<input type="password" class="form-control" placeholder="Password">
-					</div> -->
-					<div class="row">
-						<!-- <div class="col-8">
-							<div class="checkbox icheck">
-								<label> <input type="checkbox"> Remember Me
-								</label>
-							</div>
-						</div> -->
+					<div class="col">
 						<!-- /.col -->
 						<div class="col-12">
 							<input type="submit" value="确认上传" class="btn btn-primary btn-block btn-flat"/>
+							<button onclick="retToMain" value="返回" class="btn btn-primary btn-block btn-flat"/>
 						</div>
 						<!-- /.col -->
 					</div>

@@ -1041,6 +1041,24 @@
 		</where>
 	</select>
 
+	<!-- 通过 courseName 获得该课程得优良的学生人数: public Integer getCourseExcellentAndMediumNumberByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseExcellentAndMediumNumberByCourseName"
+		resultType="java.lang.Integer">
+		select count(*) from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			sc.examProperty = 1
+			and sc.scoreMark = 1
+			and sc.examTerm =
+			CONCAT(#{year}, '-', #{term})
+			and sc.score >= 80
+		</where>
+	</select>
+
 	<!-- 通过 courseName 获得该课程得不及格的学生人数: public Integer getCourseFailNumberByCourseName(@Param(value 
 		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
 		= "term") Integer term); -->

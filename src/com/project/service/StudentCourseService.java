@@ -3694,7 +3694,14 @@ public class StudentCourseService {
 		List<Double> OrdinateList = new ArrayList<>();
 		double left = 1 / (Math.pow(2 * Math.PI, 0.5) * standardDeviation);
 		// DecimalFormat ordinateDF = new DecimalFormat("0.00000000");
-		for (double x = 0; x <= 100; x++) {
+		for (double x = 0; x <= 30; x = x + 3) {
+			double expPart = -(Math.pow(x - averageScore, 2) / (2 * Math.pow(standardDeviation, 2)));
+			double right = Math.pow(Math.E, expPart);
+			double ordinate = left * right;
+			// String strOrdinate = ordinateDF.format(ordinate);
+			OrdinateList.add(ordinate);
+		}
+		for (double x = 31; x <= 100; x++) {
 			double expPart = -(Math.pow(x - averageScore, 2) / (2 * Math.pow(standardDeviation, 2)));
 			double right = Math.pow(Math.E, expPart);
 			double ordinate = left * right;
@@ -3717,47 +3724,59 @@ public class StudentCourseService {
 		Integer courseNumber = studentCourseMapper.getCourseNumberByCourseName(courseName);
 		String courseDepartment = studentCourseMapper.getCourseDepartmentByCourseName(courseName);
 		BasicCourseNormalDistribution basicCourseNormalDistribution = new BasicCourseNormalDistribution();
+		String grade = getGradeByCourseName(courseName, year, term);
 		basicCourseNormalDistribution.setCourseName(courseName);
 		basicCourseNormalDistribution.setCourseNumber(courseNumber);
 		basicCourseNormalDistribution.setCourseDepartment(courseDepartment);
+		basicCourseNormalDistribution.setCourseObject(grade + "级本科生"); // 授课对象如果是专选的话需要修改这里
+		basicCourseNormalDistribution.setCourseTerm(term.toString());
 		Integer totalStudentNumber = studentCourseMapper.getCourseTotalStudentNumberByCourseName(courseName, year,
 				term);
 		if (totalStudentNumber != 0) {
-			Integer excellentNumber = studentCourseMapper.getCourseExcellentNumberByCourseName(courseName, year, term);
+			Integer excAndMedNumber = studentCourseMapper.getCourseExcellentAndMediumNumberByCourseName(courseName,
+					year, term);
 			Integer failNumber = studentCourseMapper.getCourseFailNumberByCourseName(courseName, year, term);
-			double excellentRate = (double) excellentNumber / totalStudentNumber;
+			double excAndMedRate = (double) excAndMedNumber / totalStudentNumber;
 			double failRate = (double) failNumber / totalStudentNumber;
 			double averageScore = getCourseAverageScoreByCourseName(courseName, year, term);
 			double standardDeviation = getCourseStandardDeviationByCourseName(courseName, year, term);
 			List<Double> ordinateList = getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(
 					averageScore, standardDeviation);
+			System.out.println("正态分布点的个数：" + ordinateList.size());
 			Map<String, Integer> studentNumberMap = studentCourseMapper
 					.getCourseStudentNumberMapByCourseName(courseName, year, term);
-			System.out.println(studentNumberMap);
+			// System.out.println(studentNumberMap);
 			// 将10个分数段的Map转换为List
 			List<Integer> studentNumberList = new ArrayList<>();
-			studentNumberList.add(((Number)studentNumberMap.get("segmentZero")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentOne")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentTwo")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentThree")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentFour")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentFive")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentSix")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentSeven")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentEight")).intValue());
-			studentNumberList.add(((Number)studentNumberMap.get("segmentNine")).intValue());
+			Number belowThirty = ((Number) studentNumberMap.get("segmentZero")).intValue()
+					+ ((Number) studentNumberMap.get("segmentOne")).intValue()
+					+ ((Number) studentNumberMap.get("segmentTwo")).intValue();
+			// studentNumberList.add(((Number)
+			// studentNumberMap.get("segmentZero")).intValue());
+			// studentNumberList.add(((Number)
+			// studentNumberMap.get("segmentOne")).intValue());
+			// studentNumberList.add(((Number)
+			// studentNumberMap.get("segmentTwo")).intValue());
+			studentNumberList.add(belowThirty.intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentThree")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentFour")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentFive")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentSix")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentSeven")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentEight")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentNine")).intValue());
 
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
 
-			String strExcellentRate = rateDF.format(excellentRate);
+			String strExcAndMedRate = rateDF.format(excAndMedRate);
 			String strFailRate = rateDF.format(failRate);
 			String strAverageScore = scoreDF.format(averageScore);
 			String strStandardDeviation = scoreDF.format(standardDeviation);
 			basicCourseNormalDistribution.setTotalStudentNumber(totalStudentNumber);
-			basicCourseNormalDistribution.setExcellentNumber(excellentNumber);
+			basicCourseNormalDistribution.setExcAndMedNumber(excAndMedNumber);
 			basicCourseNormalDistribution.setFailNumber(failNumber);
-			basicCourseNormalDistribution.setExcellentRate(strExcellentRate);
+			basicCourseNormalDistribution.setExcAndMedRate(strExcAndMedRate);
 			basicCourseNormalDistribution.setFailRate(strFailRate);
 			basicCourseNormalDistribution.setAverageScore(strAverageScore);
 			basicCourseNormalDistribution.setStandardDeviation(strStandardDeviation);
