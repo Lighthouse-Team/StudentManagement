@@ -114,6 +114,107 @@
 	
 	$(function() {   
 		
+		var colors = ['#5793f3', '#d14a61', '#675bba'];
+		
+		
+		testOption = {
+		color: colors,
+		
+		tooltip: {
+		    trigger: 'none',
+		    axisPointer: {
+		        type: 'cross'
+		    }
+		},
+		legend: {
+		    data:['正态分布', '实际分布']
+		},
+		grid: {
+		    top: 70,
+		    bottom: 50
+		},
+		xAxis: [
+		    {
+		        type: 'category',
+		        axisTick: {
+		            alignWithLabel: true
+		        },
+		        axisLine: {
+		            onZero: false,
+		            lineStyle: {
+		                color: colors[1]
+		            }
+		        },
+		        axisPointer: {
+		            label: {
+		                formatter: function (params) {
+		                    return  + params.value
+		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+		                }
+		            }
+		        },
+		        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
+		    },
+		    {
+		    	show : false, 
+		        type: 'category',
+		        axisTick: {
+		            alignWithLabel: true
+		        },
+		        axisLine: {
+		            onZero: false,
+		            lineStyle: {
+		                color: colors[0]
+		            }
+		        },
+		        axisPointer: {
+		            label: {
+		                formatter: function (params) {
+		                    return  + params.value
+		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+		                }
+		            }
+		        },
+		        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0","90","0", "0","0"]
+		    }
+		    
+		],
+		yAxis: [
+			 {
+		         type: 'value',
+		     },
+		     {
+		    	 show : false, 
+		         name: '正态分布',
+		         type: 'value',
+		     }
+		],
+		series: [
+		    {
+		        name:'正态分布',
+		        type:'line',
+		        xAxisIndex: 1,
+		        yAxisIndex : 1, 
+		        smooth: true,
+		        data: [0.1,1.3,2.4,3.2,4.1,5.7,6.4,7.9,9,11,11.6,12.4,11,5,3,0]
+		    },
+		    {
+		        name:'实际分布',
+		        type:'bar',
+		        smooth: true,
+		        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
+		    }
+		]
+		};
+		    // 使用刚指定的配置项和数据显示图表
+		    var testDom = document.getElementById("main");     //显示第二张图
+			var testMyChart = echarts.init(testDom);
+			
+			if (testOption && typeof testOption === "object") {
+				testMyChart.setOption(testOption, true);
+			}
+		
+		
  		var year1 = "${year}";
  		var term1 = "${term}";
 		var yearSelected = parseInt(year1.substring(0,4));
@@ -3988,36 +4089,6 @@
  .PageNext{PAGE-BREAK-AFTER:always}   
 </style>
 
-<!-- <style media="print" type="text/css">
-@page {
-/* 	size: A4; */
-	/* margin: 20mm; */
-/* 	@bottom-left.content = ""; */
-}
-
-@page:right{ 
-  @bottom-left {
-    margin: 10pt 0 30pt 0;
-    border-top: .25pt solid #666;
-    content: "Our Cats";
-    font-size: 9pt;
-    color: #333;
-  }
-  @bottom-right { 
-    margin: 10pt 0 30pt 0;
-    border-top: .25pt solid #666;
-    content: counter(page);
-    font-size: 9pt;
-  }
-  @top-right {
-    content: "2222";
-    margin: 30pt 0 10pt 0;
-    font-size: 9pt;
-    color: #333;
-  }
-}
-</style> -->
-
 </head>
 <body class="hold-transition sidebar-mini" >
 	<div class="wrapper">
@@ -5019,6 +5090,125 @@
 					</div>
 				</div>
 			</div>
+			
+			<div id ="normalAnalysis" class="row" >
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header"> 
+							<h3 class="card-title" id = "head">成绩正态分布分析</h3> 
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body" style="margin: 0">
+							<table id="example1" class="table table-bordered table-striped">
+<!-- 								<thead>
+									
+								</thead> -->
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td style = "text-align:center ; vertical-align: middle" colspan="2"><center>信通学院</center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td style = "text-align:center ; vertical-align: middle" colspan="2"><center>第5学期</center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td style = "text-align:center ; vertical-align: middle"  colspan="2"><center>08010050</center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td style = "text-align:center ; vertical-align: middle"  colspan="2"><center>数字电子技术</center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td style = "text-align:center ; vertical-align: middle"  colspan="5"><center>2005级本科生</center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td style = "text-align:center ; vertical-align: middle ">877</td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td style = "text-align:center ; vertical-align: middle ">69.25</td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td style = "text-align:center ; vertical-align: middle ">19.5</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td style = "text-align:center ; vertical-align: middle ">189</td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td style = "text-align:center ; vertical-align: middle ">19.34%</td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td style = "text-align:center ; vertical-align: middle ">273</td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td style = "text-align:center ; vertical-align: middle ">35.34%</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">0-9</th>
+										<td style = "text-align:center ; vertical-align: middle ">10</td>
+										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></td>
+									</tr>
+									
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">10-19</th>
+										<td style = "text-align:center ; vertical-align: middle ">21</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">20-29</th>
+										<td style = "text-align:center ; vertical-align: middle ">28</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td style = "text-align:center ; vertical-align: middle ">52</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td style = "text-align:center ; vertical-align: middle ">48</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td style = "text-align:center ; vertical-align: middle ">238</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td style = "text-align:center ; vertical-align: middle ">216</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td style = "text-align:center ; vertical-align: middle ">215</td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-99</th>
+										<td style = "text-align:center ; vertical-align: middle ">119</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col -->
+			</div>
+			
 			<h5 id="courseDepartmentTitle1" style="font-size:15pt" class="card-title"></h5> 
 			<div style="font-size:14pt">${analysis15.split("#")[2] } </div>
 			<div class="row">

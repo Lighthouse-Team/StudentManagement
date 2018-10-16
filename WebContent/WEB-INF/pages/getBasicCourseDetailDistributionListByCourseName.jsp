@@ -112,112 +112,6 @@
 <script src="<%=path%>/assets/js/jquery.blockUI.js"></script>
 
 <script type="text/javascript">
-
-	
-	$(function() {
-	    //指定图表的配置项和数据
-	/* 	   app.title = '多 X 轴示例'; */
-	
-	var colors = ['#5793f3', '#d14a61', '#675bba'];
-	
-	
-	option = {
-	color: colors,
-	
-	tooltip: {
-	    trigger: 'none',
-	    axisPointer: {
-	        type: 'cross'
-	    }
-	},
-	legend: {
-	    data:['正态分布', '实际分布']
-	},
-	grid: {
-	    top: 70,
-	    bottom: 50
-	},
-	xAxis: [
-	    {
-	        type: 'category',
-	        axisTick: {
-	            alignWithLabel: true
-	        },
-	        axisLine: {
-	            onZero: false,
-	            lineStyle: {
-	                color: colors[1]
-	            }
-	        },
-	        axisPointer: {
-	            label: {
-	                formatter: function (params) {
-	                    return  + params.value
-	                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-	                }
-	            }
-	        },
-	        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
-	    },
-	    {
-	    	show : false, 
-	        type: 'category',
-	        axisTick: {
-	            alignWithLabel: true
-	        },
-	        axisLine: {
-	            onZero: false,
-	            lineStyle: {
-	                color: colors[0]
-	            }
-	        },
-	        axisPointer: {
-	            label: {
-	                formatter: function (params) {
-	                    return  + params.value
-	                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-	                }
-	            }
-	        },
-	        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0","90","0", "0","0"]
-	    }
-	    
-	],
-	yAxis: [
-		 {
-	         type: 'value',
-	     },
-	     {
-	    	 show : false, 
-	         name: '正态分布',
-	         type: 'value',
-	     }
-	],
-	series: [
-	    {
-	        name:'正态分布',
-	        type:'line',
-	        xAxisIndex: 1,
-	        yAxisIndex : 1, 
-	        smooth: true,
-	        data: [0.1,1.3,2.4,3.2,4.1,5.7,6.4,7.9,9,11,11.6,12.4,11,5,3,0]
-	    },
-	    {
-	        name:'实际分布',
-	        type:'bar',
-	        smooth: true,
-	        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
-	    }
-	]
-	};
-	    // 使用刚指定的配置项和数据显示图表
-	    var dom = document.getElementById("main");     //显示第二张图
-		var myChart = echarts.init(dom);
-		
-		if (option && typeof option === "object") {
-			myChart.setOption(option, true);
-		}
-	});
 	
 	$(function() {       
 		$.blockUI.defaults.message = '<h1> 成绩数据正在加载中，请稍后... <img src="<%=path%>/pic/busy.gif" /></h1>';
@@ -372,6 +266,115 @@
 	        } 
 			getBarPic();      //显示柱状图
 		});
+		
+		$('#getNormalAnalysis').click(function(){
+			if($("#normalAnalysis").css('display')=='none'){
+	            $("#normalAnalysis").css("display","block");
+	            
+			}
+			
+			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			
+			
+			option = {
+			color: colors,
+			
+			tooltip: {
+			    trigger: 'none',
+			    axisPointer: {
+			        type: 'cross'
+			    }
+			},
+			legend: {
+			    data:['正态分布', '实际分布']
+			},
+			grid: {
+			    top: 70,
+			    bottom: 50
+			},
+			xAxis: [
+			    {
+			        type: 'category',
+			        axisTick: {
+			            alignWithLabel: true
+			        },
+			        axisLine: {
+			            onZero: false,
+			            lineStyle: {
+			                color: colors[1]
+			            }
+			        },
+			        axisPointer: {
+			            label: {
+			                formatter: function (params) {
+			                    return  + params.value
+			                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+			                }
+			            }
+			        },
+			        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
+			    },
+			    {
+			    	show : false, 
+			        type: 'category',
+			        axisTick: {
+			            alignWithLabel: true
+			        },
+			        axisLine: {
+			            onZero: false,
+			            lineStyle: {
+			                color: colors[0]
+			            }
+			        },
+			        axisPointer: {
+			            label: {
+			                formatter: function (params) {
+			                    return  + params.value
+			                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+			                }
+			            }
+			        },
+			        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0","90","0", "0","0"]
+			    }
+			    
+			],
+			yAxis: [
+				 {
+			         type: 'value',
+			     },
+			     {
+			    	 show : false, 
+			         name: '正态分布',
+			         type: 'value',
+			     }
+			],
+			series: [
+			    {
+			        name:'正态分布',
+			        type:'line',
+			        xAxisIndex: 1,
+			        yAxisIndex : 1, 
+			        smooth: true,
+			        data: [0.1,1.3,2.4,3.2,4.1,5.7,6.4,7.9,9,11,11.6,12.4,11,5,3,0]
+			    },
+			    {
+			        name:'实际分布',
+			        type:'bar',
+			        smooth: true,
+			        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
+			    }
+			]
+			};
+			    // 使用刚指定的配置项和数据显示图表
+			    var dom = document.getElementById("main");     //显示第二张图
+				var myChart = echarts.init(dom);
+				
+				if (option && typeof option === "object") {
+					myChart.setOption(option, true);
+				}
+			
+		});
+		
 	});
 	
 	/* 显示柱状图 */
@@ -683,6 +686,7 @@
 								</tbody>
 							</table>
 							<button id="getPic" class="btn btn-info float-left" >显示成绩分析图</button>
+							<button id="getNormalAnalysis" class="btn btn-info float-right" >显示成绩正态分析</button>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -705,8 +709,8 @@
 				</div>
 			</div>
 			
-			<section class="content">
-			<div class="row">
+			<!--  id ="normalAnalysis"  style="display:none"-->
+			<div id ="normalAnalysis" class="row" style="display:none" >
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
@@ -769,7 +773,7 @@
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">0-9</th>
 										<td style = "text-align:center ; vertical-align: middle ">10</td>
-										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></th>
+										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></td>
 									</tr>
 									
 									
@@ -822,7 +826,6 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
-			</section>
 		</div>
 	</div>
 
