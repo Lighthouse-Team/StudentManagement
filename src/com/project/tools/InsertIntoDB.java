@@ -191,7 +191,7 @@ public class InsertIntoDB {
 			input.close();
 		} catch (BiffException | IOException e) {
 			// e.printStackTrace();
-			System.out.println("文件不存在或上传的文件有错误，请确认上传！");
+			System.out.println("文件不存在或上传的文件有错误，请尝试重新上传！");
 		}
 	}
 
@@ -200,7 +200,7 @@ public class InsertIntoDB {
 		// 但是如果有多个学期，选择取占多数的学期作为该成绩文件的学期，这个功能被注释了，因为只考虑一个成绩文件只有一个学期的情况
 //		List<String> examTermList = new ArrayList<>();
 //		List<String> examTermUniqueList = new ArrayList<>();
-		String examTermResult = "null";
+		String examTermResult = "";
 		File file = new File(filePath);
 		try {
 			InputStream input = new FileInputStream(file);
@@ -215,6 +215,7 @@ public class InsertIntoDB {
 			
 			examTermResult = readsheet.getCell(3,startRow).getContents().toString();
 
+			// 这里注释的是，如果一个学期的成绩列表中还有其他学期的成绩，就需要找出该成绩列表中成绩数最多的那个学期，同时mapper中的判断成绩是否已经导入数据库中的方法也要修改
 //			for (int i = startRow; i < rsRows; i++) {
 //				examTermList.add(readsheet.getCell(3, i).getContents());
 //			}

@@ -3689,17 +3689,17 @@ public class StudentCourseService {
 	 * @param standardDeviation
 	 * @return
 	 */
-	public List<String> getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(double averageScore,
+	public List<Double> getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(double averageScore,
 			double standardDeviation) {
-		List<String> OrdinateList = new ArrayList<>();
+		List<Double> OrdinateList = new ArrayList<>();
 		double left = 1 / (Math.pow(2 * Math.PI, 0.5) * standardDeviation);
-		DecimalFormat ordinateDF = new DecimalFormat("0.00000000");
+		// DecimalFormat ordinateDF = new DecimalFormat("0.00000000");
 		for (double x = 0; x <= 100; x++) {
 			double expPart = -(Math.pow(x - averageScore, 2) / (2 * Math.pow(standardDeviation, 2)));
 			double right = Math.pow(Math.E, expPart);
 			double ordinate = left * right;
-			String strOrdinate = ordinateDF.format(ordinate);
-			OrdinateList.add(strOrdinate);
+			// String strOrdinate = ordinateDF.format(ordinate);
+			OrdinateList.add(ordinate);
 		}
 		return OrdinateList;
 	}
@@ -3729,10 +3729,23 @@ public class StudentCourseService {
 			double failRate = (double) failNumber / totalStudentNumber;
 			double averageScore = getCourseAverageScoreByCourseName(courseName, year, term);
 			double standardDeviation = getCourseStandardDeviationByCourseName(courseName, year, term);
-			List<String> ordinateList = getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(
+			List<Double> ordinateList = getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(
 					averageScore, standardDeviation);
 			Map<String, Integer> studentNumberMap = studentCourseMapper
 					.getCourseStudentNumberMapByCourseName(courseName, year, term);
+			System.out.println(studentNumberMap);
+			// 将10个分数段的Map转换为List
+			List<Integer> studentNumberList = new ArrayList<>();
+			studentNumberList.add(((Number)studentNumberMap.get("segmentZero")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentOne")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentTwo")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentThree")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentFour")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentFive")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentSix")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentSeven")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentEight")).intValue());
+			studentNumberList.add(((Number)studentNumberMap.get("segmentNine")).intValue());
 
 			DecimalFormat scoreDF = new DecimalFormat("0.00");
 			DecimalFormat rateDF = new DecimalFormat("0.00%");
@@ -3749,7 +3762,7 @@ public class StudentCourseService {
 			basicCourseNormalDistribution.setAverageScore(strAverageScore);
 			basicCourseNormalDistribution.setStandardDeviation(strStandardDeviation);
 			basicCourseNormalDistribution.setOrdinateList(ordinateList);
-			basicCourseNormalDistribution.setStudentNumberMap(studentNumberMap);
+			basicCourseNormalDistribution.setStudentNumberList(studentNumberList);
 		}
 		return basicCourseNormalDistribution;
 	}
@@ -3852,11 +3865,11 @@ public class StudentCourseService {
 	 */
 	public boolean isFileInsertedByFilePath(String filePath) {
 		String examTerm = new InsertIntoDB().getExamTermByFilePath(filePath);
-		if (examTerm.equals("null")) {
+		if (examTerm.equals("")) {
 			System.out.println("文件" + filePath + "未找到！");
 			return true;
 		}
-		System.out.println("examtTerm:" + examTerm);
+
 		Integer insertFlag = studentCourseMapper.isFileInsertedByExamTerm(examTerm);
 		if (insertFlag == 1) {
 			return true;

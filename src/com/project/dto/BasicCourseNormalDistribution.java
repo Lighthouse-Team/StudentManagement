@@ -26,8 +26,8 @@ public class BasicCourseNormalDistribution implements Serializable{
 	private String averageScore;			// 平均分
 	private String standardDeviation;		// 标准差
 	
-	private Map<String, Integer> studentNumberMap;	// 各分数段学生数列表
-	private List<String> ordinateList;				// 正态分布纵坐标列表
+	private List<Integer> studentNumberList;	// 各分数段学生数列表
+	private List<Double> ordinateList;			// 正态分布纵坐标列表
 	
 	public BasicCourseNormalDistribution() {
 		super();
@@ -39,14 +39,14 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.failRate = "0.00%";
 		this.averageScore = "0.00";
 		this.standardDeviation = "0.00"; // 只有一个数时的标准差为0
-		this.studentNumberMap = new HashMap<>();
+		this.studentNumberList = new ArrayList<>();
 		this.ordinateList = new ArrayList<>();
 	}
 
 	public BasicCourseNormalDistribution(Integer courseNumber, String courseName, String courseDepartment,
 			String courseTerm, String courseObject, Integer totalStudentNumber, Integer excellentNumber,
 			Integer failNumber, String excellentRate, String failRate, String averageScore, String standardDeviation,
-			Map<String, Integer> studentNumberMap, List<String> ordinateList) {
+			List<Integer> studentNumberList, List<Double> ordinateList) {
 		super();
 		this.courseNumber = courseNumber;
 		this.courseName = courseName;
@@ -60,7 +60,7 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.failRate = failRate;
 		this.averageScore = averageScore;
 		this.standardDeviation = standardDeviation;
-		this.studentNumberMap = studentNumberMap;
+		this.studentNumberList = studentNumberList;
 		this.ordinateList = ordinateList;
 	}
 
@@ -160,19 +160,19 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.standardDeviation = standardDeviation;
 	}
 
-	public Map<String, Integer> getStudentNumberMap() {
-		return studentNumberMap;
+	public List<Integer> getStudentNumberList() {
+		return studentNumberList;
 	}
 
-	public void setStudentNumberMap(Map<String, Integer> studentNumberMap) {
-		this.studentNumberMap = studentNumberMap;
+	public void setStudentNumberList(List<Integer> studentNumberList) {
+		this.studentNumberList = studentNumberList;
 	}
 
-	public List<String> getOrdinateList() {
+	public List<Double> getOrdinateList() {
 		return ordinateList;
 	}
 
-	public void setOrdinateList(List<String> ordinateList) {
+	public void setOrdinateList(List<Double> ordinateList) {
 		this.ordinateList = ordinateList;
 	}
 
@@ -186,8 +186,8 @@ public class BasicCourseNormalDistribution implements Serializable{
 				+ ", courseDepartment=" + courseDepartment + ", courseTerm=" + courseTerm + ", courseObject="
 				+ courseObject + ", totalStudentNumber=" + totalStudentNumber + ", excellentNumber=" + excellentNumber
 				+ ", failNumber=" + failNumber + ", excellentRate=" + excellentRate + ", failRate=" + failRate
-				+ ", averageScore=" + averageScore + ", standardDeviation=" + standardDeviation + ", studentNumberMap="
-				+ studentNumberMap + ", ordinateList=" + ordinateList + "]";
+				+ ", averageScore=" + averageScore + ", standardDeviation=" + standardDeviation + ", studentNumberList="
+				+ studentNumberList + ", ordinateList=" + ordinateList + "]";
 	}
-	
+
 }

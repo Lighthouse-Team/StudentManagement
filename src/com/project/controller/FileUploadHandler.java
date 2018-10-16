@@ -62,26 +62,27 @@ public class FileUploadHandler {
 			// 通过CommonsMultipartFile的方法直接写文件
 			file.transferTo(uploadFile);
 			System.out.println("写入文件成功！");
-		}
-		
-		// 通过获得文件中的学期和数据库中的学期比较，判断文件是否已经被导入数据库
-		boolean insertFlag = studentCourseService.isFileInsertedByFilePath(uploadFile.getPath());
-		if (insertFlag == true) {
-			System.out.println("文件" + uploadFile.getName() + "已经被导入数据库或上传文件不完整，请尝试重新上传！");
-		} else {
-			System.out.println("正在导入数据库，请等待！");
-			new InsertIntoDB().Insert(uploadFile.getPath());
-		}
-		
-		// 导入成功后，删除上传的文件
-		File deleteFile = new File(strUploadFile);
-		boolean deleteFlag = deleteFile.delete();
-		if(deleteFlag) {
-			System.out.println("删除成功！");
-		}else {
-			System.out.println("删除失败！");
-		}
 
+			// 通过获得文件中的学期和数据库中的学期比较，判断文件是否已经被导入数据库
+			boolean insertFlag = studentCourseService.isFileInsertedByFilePath(uploadFile.getPath());
+			if (insertFlag == true) {
+				System.out.println("文件" + uploadFile.getName() + "已经被导入数据库或文件存在错误，请尝试重新上传！");
+			} else {
+				System.out.println("正在导入数据库，请等待！");
+				// new InsertIntoDB().Insert(uploadFile.getPath());
+				System.out.println("导入操作暂时被注释，导入完成！");
+			}
+			
+			// 导入成功后，删除上传的文件
+			File deleteFile = new File(strUploadFile);
+			boolean deleteFlag = deleteFile.delete();
+			if(deleteFlag) {
+				System.out.println("删除成功！");
+			}else {
+				System.out.println("删除失败！");
+			}
+		}
+		
 		return "index";
 	}
 

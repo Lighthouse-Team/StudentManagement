@@ -467,7 +467,7 @@ public class TestStudentCourse {
 				year, term);
 		System.out.println(basicCourseNormalDistribution);
 		System.out.println(basicCourseNormalDistribution.getOrdinateList());
-		System.out.println(basicCourseNormalDistribution.getStudentNumberMap());
+		System.out.println(basicCourseNormalDistribution.getStudentNumberList());
 	}
 
 	/*
