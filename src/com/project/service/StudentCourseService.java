@@ -3748,6 +3748,7 @@ public class StudentCourseService {
 			// System.out.println(studentNumberMap);
 			// 将10个分数段的Map转换为List
 			List<Integer> studentNumberList = new ArrayList<>();
+<<<<<<< HEAD
 			Number belowThirty = ((Number) studentNumberMap.get("segmentZero")).intValue()
 					+ ((Number) studentNumberMap.get("segmentOne")).intValue()
 					+ ((Number) studentNumberMap.get("segmentTwo")).intValue();
@@ -3758,6 +3759,11 @@ public class StudentCourseService {
 			// studentNumberList.add(((Number)
 			// studentNumberMap.get("segmentTwo")).intValue());
 			studentNumberList.add(belowThirty.intValue());
+=======
+			studentNumberList.add(((Number) studentNumberMap.get("segmentZero")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentOne")).intValue());
+			studentNumberList.add(((Number) studentNumberMap.get("segmentTwo")).intValue());
+>>>>>>> branch 'master' of https://github.com/Lighthouse-Team/StudentManagement.git
 			studentNumberList.add(((Number) studentNumberMap.get("segmentThree")).intValue());
 			studentNumberList.add(((Number) studentNumberMap.get("segmentFour")).intValue());
 			studentNumberList.add(((Number) studentNumberMap.get("segmentFive")).intValue());
