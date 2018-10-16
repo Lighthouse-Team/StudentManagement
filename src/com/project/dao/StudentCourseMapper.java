@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -697,6 +698,144 @@ public interface StudentCourseMapper {
 	public Integer getCourseFailNumberByCourseNameAndDepartmentId(@Param(value = "courseName") String courseName,
 			@Param(value = "departmentId") Integer departmentId, @Param(value = "year") String year,
 			@Param(value = "term") Integer term);
+	
+	/*
+	 * ==========正态分布统计分析==========
+	 */
+	
+	/**
+	 * 通过 courseName 查询课程编号
+	 * @param courseName
+	 * @return
+	 */
+	public Integer getCourseNumberByCourseName(@Param(value = "courseName") String courseName);
+	
+	/**
+	 * 通过 courseName 查询课程开课单位
+	 * @param courseName
+	 * @return
+	 */
+	public String getCourseDepartmentByCourseName(@Param(value = "courseName") String courseName);
+	
+	/**
+	 * 通过 courseName 获得该课程的成绩列表
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public List<Double> getCourseScoreListByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程10个分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Map<String, Integer> getCourseStudentNumberMapByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value = "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程0-9分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseZeroSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程10-19分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseOneSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程20-29分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseTwoSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程30-39分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseThreeSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程40-49分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseFourSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程50-59分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseFiveSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程60-69分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseSixSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程70-79分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseSevenSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程80-89分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseEightSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
+	
+	/**
+	 * 通过 courseName 获得该课程90-99分数段的学生人数
+	 * @param courseName
+	 * @param year
+	 * @param term
+	 * @return
+	 */
+	public Integer getCourseNineSegmentStudentNumberByCourseName(@Param(value = "courseName") String courseName,
+			@Param(value= "year") String year, @Param(value = "term") Integer term);
 
 	/*
 	 * 大一，大二具有代表性的10门基础课程各班成绩情况

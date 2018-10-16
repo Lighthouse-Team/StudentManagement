@@ -1138,7 +1138,64 @@
 		</where>
 	</select>
 
-	<!-- 大一，大二具有代表性的10门基础课程各班成绩情况 -->
+	<!-- ==========正态分布统计分析========== -->
+	<!-- 通过 courseName 查询课程编号public Integer getCourseNumberByCourseName(@Param(value 
+		= "courseName") String courseName); -->
+	<select id="getCourseNumberByCourseName" resultType="java.lang.Integer">
+		select
+		ifnull((select courseNumber from course where courseName =
+		#{courseName} limit 1), 0)
+	</select>
+
+	<!-- 通过 courseName 查询课程开课单位:public String getCourseDepartmentByCourseName(@Param(value 
+		= "courseName") String courseName); -->
+	<select id="getCourseDepartmentByCourseName" resultType="java.lang.String">
+		select
+		ifnull((select courseDepartment from course where courseName =
+		#{courseName} limit 1), '没有这个课')
+	</select>
+
+	<!-- 通过 courseName 获得该课程的成绩列表:public List<Double> getCourseScoreListByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value= "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseScoreListByCourseName" resultType="java.lang.Double">
+		select sc.score from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- 通过 courseName 获得该课程10个分数段的学生人数:public Map<String, Integer> getCourseStudentNumberMapByCourseName(@Param(value 
+		= "courseName") String courseName, @Param(value = "year") String year, @Param(value 
+		= "term") Integer term); -->
+	<select id="getCourseStudentNumberMapByCourseName" resultType="java.util.Map">
+		select <![CDATA[count(case when sc.score < 10 then scId end) segmentZero]]>,
+		<![CDATA[count(case when sc.score >=10 and sc.score < 20 then scId end) segmentOne]]>,
+		<![CDATA[count(case when sc.score >=20 and sc.score < 30 then scId end) segmentTwo]]>,
+		<![CDATA[count(case when sc.score >=30 and sc.score < 40 then scId end) segmentThree]]>,
+		<![CDATA[count(case when sc.score >=40 and sc.score < 50 then scId end) segmentFour]]>,
+		<![CDATA[count(case when sc.score >=50 and sc.score < 60 then scId end) segmentFive]]>,
+		<![CDATA[count(case when sc.score >=60 and sc.score < 70 then scId end) segmentSix]]>,
+		<![CDATA[count(case when sc.score >=70 and sc.score < 80 then scId end) segmentSeven]]>,
+		<![CDATA[count(case when sc.score >=80 and sc.score < 90 then scId end) segmentEight]]>,
+		<![CDATA[count(case when sc.score >=90 and sc.score <= 100 then scId end) segmentNine]]>
+		from course c, studentcourse sc
+		<where>
+			c.courseId = sc.courseId
+			and c.courseName = #{courseName}
+			and
+			sc.examTerm = CONCAT(#{year}, '-', #{term})
+			and sc.examProperty = 1
+			and sc.scoreMark = 1
+		</where>
+	</select>
+
+	<!-- ======大一，大二具有代表性的10门基础课程各班成绩情况====== -->
 
 	<!-- 通过 courseName和classNumber 获得该课程该班级的参加考试总人数: public Integer getCourseTotalStudentNumberByCourseNameAndClassNumber(@Param(value 
 		= "courseName") String courseName, @Param(value = "classNumber") String classNumber, 

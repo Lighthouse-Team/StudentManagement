@@ -21,6 +21,7 @@ import com.project.beans.Student;
 import com.project.beans.StudentCourse;
 import com.project.dto.BasicCourseClassDistribution;
 import com.project.dto.BasicCourseDetailDistribution;
+import com.project.dto.BasicCourseNormalDistribution;
 import com.project.dto.BasicCourseOverallDistribution;
 import com.project.dto.ClassExcellentFailDistribution;
 import com.project.dto.ClassFailDistribution;
@@ -172,7 +173,7 @@ public class TestStudentCourse {
 		Integer grade = 2015;
 		List<String> classNumberList = studentCourseService.getClassNumberListByGrade(grade);
 		System.out.println(classNumberList.size());
-		for(int i = 0; i < classNumberList.size(); i++) {
+		for (int i = 0; i < classNumberList.size(); i++) {
 			System.out.println(classNumberList.get(i));
 		}
 	}
@@ -456,13 +457,29 @@ public class TestStudentCourse {
 	/*
 	 * 测试第4章第3章的功能
 	 */
+	@Test
+	public void getCourseNormalDistributionByCourseNameTest() {
+		String courseName = "大学英语（五）";
+		String year = "2017-2018";
+		Integer term = 1;
+		BasicCourseNormalDistribution basicCourseNormalDistribution = new BasicCourseNormalDistribution();
+		basicCourseNormalDistribution = studentCourseService.getBasicCourseNormalDistributionByCourseName(courseName,
+				year, term);
+		System.out.println(basicCourseNormalDistribution);
+		System.out.println(basicCourseNormalDistribution.getOrdinateList());
+		System.out.println(basicCourseNormalDistribution.getStudentNumberMap());
+	}
+
+	/*
+	 * 测试第4章第4章的功能
+	 */
 
 	@Test
 	public void getBasicCourseClassDistributionByCourseNameAndClassNumberTest() {
 		String courseName = "大学英语（二）";
 		String classNumber = "20150615";
 		String year = "2017-2018";
-		Integer term = 1; 
+		Integer term = 1;
 		BasicCourseClassDistribution basicCourseClassDistribution = new BasicCourseClassDistribution();
 		basicCourseClassDistribution = studentCourseService
 				.getBasicCourseClassDistributionByCourseNameAndClassNumber(courseName, classNumber, year, term);
@@ -481,7 +498,7 @@ public class TestStudentCourse {
 			System.out.println(basicCourseClassDistribution);
 		}
 	}
-	
+
 	/*
 	 * 测试成绩文件是否被重复导入
 	 */
@@ -491,15 +508,15 @@ public class TestStudentCourse {
 		boolean flag = studentCourseService.isFileInsertedByFilePath(filePath);
 		System.out.println(flag);
 	}
-	
+
 	@Test
 	public void deleteFileTest() {
 		String deleteFilePath = "D:\\Program Files\\eclipse\\uploadFile\\2014级.xls";
 		File deleteFile = new File(deleteFilePath);
 		boolean deleteFlag = deleteFile.delete();
-		if(deleteFlag) {
+		if (deleteFlag) {
 			System.out.println("删除成功");
-		}else {
+		} else {
 			System.out.println("删除失败");
 		}
 	}
