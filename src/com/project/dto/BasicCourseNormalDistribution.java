@@ -19,9 +19,9 @@ public class BasicCourseNormalDistribution implements Serializable{
 	private String courseTerm;				// 授课学期，由选择的学期获取
 	private String courseObject;			// 授课对象，内容是20XX级本科生，具体年份由选择的学年和课程的开设年级（大一、大二或大三）获取
 	private Integer totalStudentNumber;		// 学生总数
-	private Integer excellentNumber;		// 优秀学生数
+	private Integer excAndMedNumber;		// 优良学生数
 	private Integer failNumber;				// 不及格人数
-	private String excellentRate;			// 优秀率
+	private String excAndMedRate;			// 优良率
 	private String failRate;				// 不及格率
 	private String averageScore;			// 平均分
 	private String standardDeviation;		// 标准差
@@ -33,9 +33,9 @@ public class BasicCourseNormalDistribution implements Serializable{
 		super();
 		this.courseNumber = 0;
 		this.totalStudentNumber = 0;
-		this.excellentNumber = 0;
+		this.excAndMedNumber = 0;
 		this.failNumber = 0;
-		this.excellentRate = "0.00%";
+		this.excAndMedRate = "0.00%";
 		this.failRate = "0.00%";
 		this.averageScore = "0.00";
 		this.standardDeviation = "0.00"; // 只有一个数时的标准差为0
@@ -44,8 +44,8 @@ public class BasicCourseNormalDistribution implements Serializable{
 	}
 
 	public BasicCourseNormalDistribution(Integer courseNumber, String courseName, String courseDepartment,
-			String courseTerm, String courseObject, Integer totalStudentNumber, Integer excellentNumber,
-			Integer failNumber, String excellentRate, String failRate, String averageScore, String standardDeviation,
+			String courseTerm, String courseObject, Integer totalStudentNumber, Integer excAndMedNumber,
+			Integer failNumber, String excAndMedRate, String failRate, String averageScore, String standardDeviation,
 			List<Integer> studentNumberList, List<Double> ordinateList) {
 		super();
 		this.courseNumber = courseNumber;
@@ -54,9 +54,9 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.courseTerm = courseTerm;
 		this.courseObject = courseObject;
 		this.totalStudentNumber = totalStudentNumber;
-		this.excellentNumber = excellentNumber;
+		this.excAndMedNumber = excAndMedNumber;
 		this.failNumber = failNumber;
-		this.excellentRate = excellentRate;
+		this.excAndMedRate = excAndMedRate;
 		this.failRate = failRate;
 		this.averageScore = averageScore;
 		this.standardDeviation = standardDeviation;
@@ -112,12 +112,12 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.totalStudentNumber = totalStudentNumber;
 	}
 
-	public Integer getExcellentNumber() {
-		return excellentNumber;
+	public Integer getExcAndMedNumber() {
+		return excAndMedNumber;
 	}
 
-	public void setExcellentNumber(Integer excellentNumber) {
-		this.excellentNumber = excellentNumber;
+	public void setExcAndMedNumber(Integer excAndMedNumber) {
+		this.excAndMedNumber = excAndMedNumber;
 	}
 
 	public Integer getFailNumber() {
@@ -128,12 +128,12 @@ public class BasicCourseNormalDistribution implements Serializable{
 		this.failNumber = failNumber;
 	}
 
-	public String getExcellentRate() {
-		return excellentRate;
+	public String getExcAndMedRate() {
+		return excAndMedRate;
 	}
 
-	public void setExcellentRate(String excellentRate) {
-		this.excellentRate = excellentRate;
+	public void setExcAndMedRate(String excAndMedRate) {
+		this.excAndMedRate = excAndMedRate;
 	}
 
 	public String getFailRate() {
@@ -184,10 +184,10 @@ public class BasicCourseNormalDistribution implements Serializable{
 	public String toString() {
 		return "BasicCourseNormalDistribution [courseNumber=" + courseNumber + ", courseName=" + courseName
 				+ ", courseDepartment=" + courseDepartment + ", courseTerm=" + courseTerm + ", courseObject="
-				+ courseObject + ", totalStudentNumber=" + totalStudentNumber + ", excellentNumber=" + excellentNumber
-				+ ", failNumber=" + failNumber + ", excellentRate=" + excellentRate + ", failRate=" + failRate
+				+ courseObject + ", totalStudentNumber=" + totalStudentNumber + ", excAndMedNumber=" + excAndMedNumber
+				+ ", failNumber=" + failNumber + ", excAndMedRate=" + excAndMedRate + ", failRate=" + failRate
 				+ ", averageScore=" + averageScore + ", standardDeviation=" + standardDeviation + ", studentNumberList="
 				+ studentNumberList + ", ordinateList=" + ordinateList + "]";
 	}
-
+	
 }
