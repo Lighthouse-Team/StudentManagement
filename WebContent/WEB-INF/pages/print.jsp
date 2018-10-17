@@ -114,107 +114,6 @@
 	
 	$(function() {   
 		
-		var colors = ['#5793f3', '#d14a61', '#675bba'];
-		
-		
-		testOption = {
-		color: colors,
-		
-		tooltip: {
-		    trigger: 'none',
-		    axisPointer: {
-		        type: 'cross'
-		    }
-		},
-		legend: {
-		    data:['正态分布', '实际分布']
-		},
-		grid: {
-		    top: 70,
-		    bottom: 50
-		},
-		xAxis: [
-		    {
-		        type: 'category',
-		        axisTick: {
-		            alignWithLabel: true
-		        },
-		        axisLine: {
-		            onZero: false,
-		            lineStyle: {
-		                color: colors[1]
-		            }
-		        },
-		        axisPointer: {
-		            label: {
-		                formatter: function (params) {
-		                    return  + params.value
-		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-		                }
-		            }
-		        },
-		        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
-		    },
-		    {
-		    	show : false, 
-		        type: 'category',
-		        axisTick: {
-		            alignWithLabel: true
-		        },
-		        axisLine: {
-		            onZero: false,
-		            lineStyle: {
-		                color: colors[0]
-		            }
-		        },
-		        axisPointer: {
-		            label: {
-		                formatter: function (params) {
-		                    return  + params.value
-		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-		                }
-		            }
-		        },
-		        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0","90","0", "0","0"]
-		    }
-		    
-		],
-		yAxis: [
-			 {
-		         type: 'value',
-		     },
-		     {
-		    	 show : false, 
-		         name: '正态分布',
-		         type: 'value',
-		     }
-		],
-		series: [
-		    {
-		        name:'正态分布',
-		        type:'line',
-		        xAxisIndex: 1,
-		        yAxisIndex : 1, 
-		        smooth: true,
-		        data: [0.1,1.3,2.4,3.2,4.1,5.7,6.4,7.9,9,11,11.6,12.4,11,5,3,0]
-		    },
-		    {
-		        name:'实际分布',
-		        type:'bar',
-		        smooth: true,
-		        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
-		    }
-		]
-		};
-		    // 使用刚指定的配置项和数据显示图表
-		    var testDom = document.getElementById("main");     //显示第二张图
-			var testMyChart = echarts.init(testDom);
-			
-			if (testOption && typeof testOption === "object") {
-				testMyChart.setOption(testOption, true);
-			}
-		
-		
  		var year1 = "${year}";
  		var term1 = "${term}";
 		var yearSelected = parseInt(year1.substring(0,4));
@@ -367,6 +266,7 @@
 		}
 		else if(term1 == "2"){
 			
+		
 			document.getElementById("analysisFirstTermAdd").style.display = "none";
 			document.getElementById("zlq").style.display = "none";
 			document.getElementById("firstTermAddDiv6").style.display = "none"; 
@@ -455,20 +355,21 @@
 	        "bSort": false, //排序功能
 	    });
 	  
-   	    getFirstPic();      //第一章第一个功能成绩分析图
+   	    getFirstPic();      					//第一章第一个功能成绩分析图
  		getSecondPic1();
-		getSecondPic2();	//第一章第二个功能两张成绩分析图
+		getSecondPic2();						//第一章第二个功能两张成绩分析图
 		getThirdPic1();
-		getThirdPic2();		//第二章第一个功能两张成绩分析图 
-		getForthPic(); 		//第二章第四个功能成绩分析图 
+		getThirdPic2();							//第二章第一个功能两张成绩分析图 
+		getForthPic(); 							//第二章第四个功能成绩分析图 
  		getFifthPic1();		
-		getFifthPic2();     //第三章第一个功能 
-		getSixthPic();      //第三章第二个功能 
-		getSeventhPic();    //第三章第三个功能  
- 		getEighthPic();     //第四章第一个功能 
-		getNinthPic();      //第四章第二个功能9张或10张分析图         
-		getTenthPic();      //第二章第二个功能四张分析图
-		getEleventhPic();   //第三章第五个功能		
+		getFifthPic2();     					//第三章第一个功能 
+		getSixthPic();      					//第三章第二个功能 
+		getSeventhPic();    					//第三章第三个功能  
+ 		getEighthPic();     					//第四章第一个功能 
+		getNinthPic();     					 	//第四章第二个功能9张或10张分析图         
+		getTenthPic();      					//第二章第二个功能四张分析图
+		getEleventhPic();   					//第三章第五个功能		
+		getBasicCourseNormalDistribution(); 	//基础课程正态分析
 	});
 	
 	$(function() {
@@ -476,6 +377,550 @@
 			window.print();
 		});
 	});
+	
+	function getBasicCourseNormalDistribution(){
+		var year1 = "${year}";
+		var term1 = "${term}";
+		var courseList = new Array();
+		if (term1 == "1"){
+			courseList.push("大学英语（三）");
+			courseList.push("大学物理下A");
+			courseList.push("大学物理下B");
+			courseList.push("大学物理实验（二）");
+			courseList.push("复变函数与积分变换");
+			courseList.push("大学英语（一）");
+			courseList.push("大学计算机基础A");
+			courseList.push("普通化学");
+			courseList.push("线性代数与解析几何A");
+			courseList.push("微积分A（一）");
+		}
+		else{
+			courseList.push("工程实践A");
+			courseList.push("机械设计基础B");
+			courseList.push("大学英语（四）");
+			courseList.push("大学英语（二）");
+			courseList.push("程序设计基础");
+			courseList.push("大学物理上");
+			courseList.push("概率论与数理统计");
+			courseList.push("微积分A（二）");
+			courseList.push("工程图学基础");
+		}
+		
+		var colors = ['#5793f3', '#d14a61', '#675bba'];
+		
+		
+		normalOption = {
+		color: colors,
+		
+		tooltip: {
+		    trigger: 'none',
+		    axisPointer: {
+		        type: 'cross'
+		    }
+		},
+		legend: {
+		    data:['正态分布', '实际分布']
+		},
+		grid: {
+		    top: 70,
+		    bottom: 50
+		},
+		xAxis: [
+		    {
+		        type: 'category',
+		        axisTick: {
+		            alignWithLabel: true
+		        },
+		        axisLine: {
+		            onZero: false,
+		            lineStyle: {
+		                color: colors[1]
+		            }
+		        },
+		        axisPointer: {
+		            label: {
+		                formatter: function (params) {
+		                    return  + params.value
+		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+		                }
+		            }
+		        },
+		        data: ["30以下","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
+		    },
+		    {
+		    	show : false, 
+		        type: 'category',
+		        axisTick: {
+		            alignWithLabel: true
+		        },
+		        axisLine: {
+		            onZero: false,
+		            lineStyle: {
+		                color: colors[0]
+		            }
+		        },
+		        axisPointer: {
+		            label: {
+		                formatter: function (params) {
+		                    return  + params.value
+		                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+		                }
+		            }
+		        },
+		        data: ["0","3", "6","9","12","15", "18", "21","24","27","30","31", "32","33","34","35", "36", "37","38","39","40","41", "42","43","44","45", "46", "47","48","49","50","51", "52","53","54","55", "56", "57","58","59","60","61", "62","63","64","65", "66", "67","68","69","70","71", "72","73","74","75", "76", "77","78","79","80","81", "82","83","84","85", "86", "87","88","89","90","91", "92","93","94","95", "96", "97","98","99","100"]
+		   }
+		    
+		],
+		yAxis: [
+			 {
+		         type: 'value',
+		     },
+		     {
+		    	 show : false, 
+		         name: '正态分布',
+		         type: 'value',
+		     }
+		],
+		series: [
+		    {
+		        name:'正态分布',
+		        type:'line',
+		        symbol:0,
+		        xAxisIndex: 1,
+		        yAxisIndex : 1, 
+		        smooth: true,
+		        data: []
+		    },
+		    {
+		        name:'实际分布',
+		        type:'bar',
+		        smooth: true,
+		        data: []
+		    }
+		]
+		};
+		
+		url = "getBasicCourseNormalDistribution";
+		args = {
+				year : year1,
+				term : term1,
+				courseName : courseList[0]
+		};
+		
+		$.post(url, args, function(basicCourseNormalDistribution){
+			/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+			
+			document.getElementById("courseNumber").innerHTML = basicCourseNormalDistribution.courseNumber;
+			document.getElementById("courseDepartment").innerHTML = basicCourseNormalDistribution.courseDepartment;
+			document.getElementById("courseName").innerHTML = basicCourseNormalDistribution.courseName;
+			document.getElementById("courseTerm").innerHTML = basicCourseNormalDistribution.courseTerm;
+			document.getElementById("courseObject").innerHTML = basicCourseNormalDistribution.courseObject;
+			document.getElementById("totalStudentNumber").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+			document.getElementById("excAndMedNumber").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+			document.getElementById("excAndMedRate").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+			document.getElementById("failNumber").innerHTML = basicCourseNormalDistribution.failNumber;
+			document.getElementById("failRate").innerHTML = basicCourseNormalDistribution.failRate;
+			document.getElementById("averageScore").innerHTML = basicCourseNormalDistribution.averageScore;
+			document.getElementById("standardDeviation").innerHTML = basicCourseNormalDistribution.standardDeviation;
+			
+			document.getElementById("20score").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+			document.getElementById("30score").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+			document.getElementById("40score").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+			document.getElementById("50score").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+			document.getElementById("60score").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+			document.getElementById("70score").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+			document.getElementById("80score").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+			document.getElementById("90score").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+			
+			
+			normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+			normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+			
+			var normalDom = document.getElementById("normalPic");
+			var narmalMyChart = echarts.init(normalDom);
+			if (normalOption && typeof normalOption === "object") {
+				narmalMyChart.setOption(normalOption, true);
+			}
+		});
+		
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[1]
+	};
+		
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber1").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment1").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName1").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm1").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject1").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber1").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber1").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate1").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber1").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate1").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore1").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation1").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score1").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score1").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score1").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score1").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score1").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score1").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score1").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score1").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic1");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[2]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		
+		document.getElementById("courseNumber2").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment2").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName2").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm2").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject2").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber2").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber2").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate2").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber2").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate2").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore2").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation2").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score2").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score2").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score2").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score2").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score2").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score2").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score2").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score2").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic2");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[3]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber3").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment3").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName3").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm3").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject3").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber3").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber3").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate3").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber3").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate3").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore3").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation3").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score3").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score3").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score3").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score3").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score3").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score3").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score3").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score3").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic3");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[4]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber4").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment4").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName4").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm4").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject4").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber4").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber4").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate4").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber4").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate4").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore4").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation4").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score4").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score4").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score4").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score4").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score4").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score4").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score4").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score4").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic4");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[5]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber5").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment5").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName5").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm5").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject5").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber5").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber5").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate5").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber5").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate5").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore5").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation5").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score5").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score5").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score5").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score5").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score5").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score5").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score5").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score5").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic5");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[6]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber6").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment6").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName6").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm6").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject6").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber6").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber6").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate6").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber6").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate6").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore6").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation6").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score6").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score6").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score6").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score6").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score6").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score6").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score6").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score6").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic6");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[7]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber7").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment7").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName7").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm7").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject7").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber7").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber7").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate7").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber7").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate7").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore7").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation7").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score7").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score7").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score7").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score7").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score7").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score7").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score7").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score7").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic7");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[8]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber8").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment8").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName8").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm8").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject8").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber8").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber8").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate8").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber8").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate8").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore8").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation8").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score8").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score8").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score8").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score8").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score8").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score8").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score8").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score8").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic8");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+	
+	args = {
+			year : year1,
+			term : term1,
+			courseName : courseList[9]
+	};
+	
+	$.post(url, args, function(basicCourseNormalDistribution){
+		/*将后台传回来的百分比去掉百分号并转换为数字类型 */
+		
+		document.getElementById("courseNumber9").innerHTML = basicCourseNormalDistribution.courseNumber;
+		document.getElementById("courseDepartment9").innerHTML = basicCourseNormalDistribution.courseDepartment;
+		document.getElementById("courseName9").innerHTML = basicCourseNormalDistribution.courseName;
+		document.getElementById("courseTerm9").innerHTML = basicCourseNormalDistribution.courseTerm;
+		document.getElementById("courseObject9").innerHTML = basicCourseNormalDistribution.courseObject;
+		document.getElementById("totalStudentNumber9").innerHTML = basicCourseNormalDistribution.totalStudentNumber;
+		document.getElementById("excAndMedNumber9").innerHTML = basicCourseNormalDistribution.excAndMedNumber;
+		document.getElementById("excAndMedRate9").innerHTML = basicCourseNormalDistribution.excAndMedRate;
+		document.getElementById("failNumber9").innerHTML = basicCourseNormalDistribution.failNumber;
+		document.getElementById("failRate9").innerHTML = basicCourseNormalDistribution.failRate;
+		document.getElementById("averageScore9").innerHTML = basicCourseNormalDistribution.averageScore;
+		document.getElementById("standardDeviation9").innerHTML = basicCourseNormalDistribution.standardDeviation;
+		
+		document.getElementById("20score9").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+		document.getElementById("30score9").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+		document.getElementById("40score9").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+		document.getElementById("50score9").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+		document.getElementById("60score9").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+		document.getElementById("70score9").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+		document.getElementById("80score9").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+		document.getElementById("90score9").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+		
+		
+		normalOption.series[0].data = basicCourseNormalDistribution.ordinateList;
+		normalOption.series[1].data = basicCourseNormalDistribution.studentNumberList;
+		
+		var normalDom = document.getElementById("normalPic9");
+		var narmalMyChart = echarts.init(normalDom);
+		if (normalOption && typeof normalOption === "object") {
+			narmalMyChart.setOption(normalOption, true);
+		}
+	});
+		
+	}
 	
  	function getFirstPic(){
  		var year1 = "${year}";
@@ -5015,7 +5460,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "8" style = "width: 100% ; font-size: 14pt; border-style: none ; background: transparent" >${analysis13.split("#")[0] } </textarea>	
+					<textarea rows = "7" style = "width: 100% ; font-size: 14pt; border-style: none ; background: transparent" >${analysis13.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
@@ -5029,6 +5474,99 @@
 			<div class="row">
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.2" style="text-align:center"></h5>
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5055,10 +5593,12 @@
 									</c:forEach>
 								</tbody>
 							</table>
+						
 						</div>
 						<!-- /.card-body -->
 			</div>
 			<!-- /.row --> 
+			
 			<div id = "firstTermAddDiv6">
 			<div>&nbsp;</div>
 			<div>&nbsp;</div>
@@ -5086,65 +5626,62 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "6" style = "width: 100% ;font-size: 14pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.2、图4.2${analysis14.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ;font-size: 14pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.2、图4.2${analysis14.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>
 			
-			<div id ="normalAnalysis" class="row" >
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header"> 
-							<h3 class="card-title" id = "head">成绩正态分布分析</h3> 
-						</div>
+			<h5 id="courseDepartmentTitle1" style="font-size:15pt" class="card-title"></h5> 
+			<div style="font-size:14pt">${analysis15.split("#")[2] } </div>
+			<div class="row">
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
-							<table id="example1" class="table table-bordered table-striped">
-<!-- 								<thead>
-									
-								</thead> -->
+						<div id = "secondTermAddDiv">
+						</div>
+						<h5 id = "table4.3" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
 								<tbody>
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
-										<td style = "text-align:center ; vertical-align: middle" colspan="2"><center>信通学院</center></td>
+										<td id = "courseDepartment1" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
 										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
-										<td style = "text-align:center ; vertical-align: middle" colspan="2"><center>第5学期</center></td>
+										<td id = "courseTerm1" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
-										<td style = "text-align:center ; vertical-align: middle"  colspan="2"><center>08010050</center></td>
+										<td id = "courseNumber1" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
 										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
-										<td style = "text-align:center ; vertical-align: middle"  colspan="2"><center>数字电子技术</center></td>
+										<td id = "courseName1" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
-										<td style = "text-align:center ; vertical-align: middle"  colspan="5"><center>2005级本科生</center></td>
+										<td id = "courseObject1" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
 									</tr>
 								
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
-										<td style = "text-align:center ; vertical-align: middle ">877</td>
+										<td id = "totalStudentNumber1" style = "text-align:center ; vertical-align: middle "></td>
 										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
-										<td style = "text-align:center ; vertical-align: middle ">69.25</td>
+										<td id = "averageScore1" style = "text-align:center ; vertical-align: middle "></td>
 										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
-										<td style = "text-align:center ; vertical-align: middle ">19.5</td>
+										<td id = "standardDeviation1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
-										<td style = "text-align:center ; vertical-align: middle ">189</td>
+										<td id = "failNumber1" style = "text-align:center ; vertical-align: middle "></td>
 										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
-										<td style = "text-align:center ; vertical-align: middle ">19.34%</td>
+										<td id = "failRate1" style = "text-align:center ; vertical-align: middle "></td>
 										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
-										<td style = "text-align:center ; vertical-align: middle ">273</td>
+										<td id = "excAndMedNumber1" style = "text-align:center ; vertical-align: middle "></td>
 										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
-										<td style = "text-align:center ; vertical-align: middle ">35.34%</td>
+										<td id = "excAndMedRate1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
@@ -5154,72 +5691,47 @@
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">0-9</th>
-										<td style = "text-align:center ; vertical-align: middle ">10</td>
-										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></td>
-									</tr>
-									
-									
-									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">10-19</th>
-										<td style = "text-align:center ; vertical-align: middle ">21</td>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score1" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic1" style="height: 350% ;width:95%;"></div></td>
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">20-29</th>
-										<td style = "text-align:center ; vertical-align: middle ">28</td>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
-										<td style = "text-align:center ; vertical-align: middle ">52</td>
+										<td id = "40score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
-										<td style = "text-align:center ; vertical-align: middle ">48</td>
+										<td id = "50score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
-										<td style = "text-align:center ; vertical-align: middle ">238</td>
+										<td id = "60score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
-										<td style = "text-align:center ; vertical-align: middle ">216</td>
+										<td id = "70score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
 										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
-										<td style = "text-align:center ; vertical-align: middle ">215</td>
+										<td id = "80score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">90-99</th>
-										<td style = "text-align:center ; vertical-align: middle ">119</td>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score1" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 								</tbody>
 							</table>
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col -->
-			</div>
-			
-			<h5 id="courseDepartmentTitle1" style="font-size:15pt" class="card-title"></h5> 
-			<div style="font-size:14pt">${analysis15.split("#")[2] } </div>
-			<div class="row">
-						<!-- /.card-header -->
-						<div class="card-body" style="margin: 0">
-						<div id = "secondTermAddDiv">
-						<div>&nbsp;</div>
-						<div>&nbsp;</div>
-						<div>&nbsp;</div>
-						</div>
-						<h5 id = "table4.3" style="text-align:center"></h5> 
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5288,6 +5800,99 @@
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.4" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment2" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm2" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber2" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName2" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject2" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber2" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore2" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber2" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate2" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber2" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score2" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic2" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score2" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5318,10 +5923,18 @@
 						<!-- /.card-body -->
 			</div>
 			<!-- /.row --> 
+			
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>	
+			<div>&nbsp;</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div id="basicCourseDetailDistributionListByCourseNameBarPic2"  style="display:block;  height: 350%; width:100%; position:relative;">
+						<div id="basicCourseDetailDistributionListByCourseNameBarPic2"  style="display:block;  height: 340%; width:100%; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -5331,7 +5944,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-					<textarea rows = "6" style = "width: 100% ;font-size: 14pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.4、图4.4${analysis16.split("#")[0] } </textarea>	
+					<textarea rows = "5" style = "width: 100% ;font-size: 14pt; border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.4、图4.4${analysis16.split("#")[0] } </textarea>	
 					</div>
 				</div>
 			</div>		
@@ -5344,6 +5957,99 @@
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.5" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment3" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm3" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber3" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName3" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject3" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber3" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore3" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber3" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate3" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber3" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score3" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic3" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score3" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5398,6 +6104,99 @@
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.6" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment4" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm4" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber4" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName4" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject4" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber4" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore4" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber4" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate4" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber4" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score4" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic4" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score4" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5460,6 +6259,99 @@
 						<div>&nbsp;</div>
 						</div>
 						<h5 id = "table4.7" style="text-align:center"></h5>
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment5" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm5" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber5" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName5" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject5" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber5" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore5" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber5" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate5" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber5" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score5" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic5" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score5" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5513,6 +6405,99 @@
 			<div class="row">
 						<div class="card-body" style="margin: 0">
 						<h5 id = "table4.8" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment6" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm6" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber6" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName6" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject6" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber6" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore6" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber6" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate6" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber6" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score6" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic6" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score6" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5543,7 +6528,11 @@
 						<!-- /.card-body -->
 			</div>
 			<!-- /.row --> 
-
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -5571,6 +6560,99 @@
 						<div>&nbsp;</div>
 						</div>
 							<h5 id = "table4.9" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment7" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm7" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber7" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName7" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject7" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber7" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore7" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber7" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate7" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber7" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score7" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic7" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score7" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5629,6 +6711,99 @@
 						<div>&nbsp;</div>
 						</div>
 							<h5 id = "table4.10" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment8" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm8" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber8" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName8" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject8" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber8" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore8" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber8" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate8" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber8" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score8" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic8" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score8" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5659,7 +6834,11 @@
 						<!-- /.card-body -->
 			</div>
 			<!-- /.row --> 
-			
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
 		    <div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -5682,6 +6861,99 @@
 				<div style="font-size:14pt">${analysis23.split("#")[2] }</div>
 						<div class="card-body" style="margin: 0">
 							<h5 id = "table4.11" style="text-align:center"></h5> 
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>开课单位</center></th>
+										<td id = "courseDepartment9" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课学期</center></th>
+										<td id = "courseTerm9" style = "text-align:center ; vertical-align: middle" colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程编号</center></th>
+										<td id = "courseNumber9" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<td id = "courseName9" style = "text-align:center ; vertical-align: middle"  colspan="2"><center></center></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle "><center>授课对象</center></th>
+										<td id = "courseObject9" style = "text-align:center ; vertical-align: middle"  colspan="5"><center></center></td>
+									</tr>
+								
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">统计成绩记录数</th>
+										<td id = "totalStudentNumber9" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<td id = "averageScore9" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">标准差</th>
+										<td id = "standardDeviation9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<td id = "failNumber9" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
+										<td id = "failRate9" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle"  rowspan="2" colspan="2"></th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">优良人数</th>
+										<td id = "excAndMedNumber9" style = "text-align:center ; vertical-align: middle "></td>
+										<th style = "text-align:center ; vertical-align: middle ">优良率</th>
+										<td id = "excAndMedRate9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">分段数</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle"  colspan="4">成绩分布图</th>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
+										<td id = "20score9" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="normalPic9" style="height: 350% ;width:95%;"></div></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">30-39</th>
+										<td id = "30score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">40-49</th>
+										<td id = "40score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">50-59</th>
+										<td id = "50score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">60-69</th>
+										<td id = "60score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">70-79</th>
+										<td id = "70score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">80-89</th>
+										<td id = "80score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+									
+									<tr>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
+										<td id = "90score9" style = "text-align:center ; vertical-align: middle "></td>
+									</tr>
+								</tbody>
+							</table>
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -5710,7 +6982,6 @@
 							</table>
 						</div>
 						<!-- /.card-body -->
-			</div>
 			<!-- /.row --> 
 						
 	        <div class="row">
@@ -5729,6 +7000,7 @@
 					<textarea rows = "6" style = "width: 100% ; font-size: 14pt;border-style: none ; background: transparent" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表4.11、图4.11${analysis23.split("#")[0] } </textarea>	
 					</div>
 				</div>
+			</div>
 			</div>
 			
 			<div class="card">

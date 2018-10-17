@@ -3742,13 +3742,11 @@ public class StudentCourseService {
 			double standardDeviation = getCourseStandardDeviationByCourseName(courseName, year, term);
 			List<Double> ordinateList = getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(
 					averageScore, standardDeviation);
-			System.out.println("正态分布点的个数：" + ordinateList.size());
 			Map<String, Integer> studentNumberMap = studentCourseMapper
 					.getCourseStudentNumberMapByCourseName(courseName, year, term);
 			// System.out.println(studentNumberMap);
 			// 将10个分数段的Map转换为List
 			List<Integer> studentNumberList = new ArrayList<>();
-<<<<<<< HEAD
 			Number belowThirty = ((Number) studentNumberMap.get("segmentZero")).intValue()
 					+ ((Number) studentNumberMap.get("segmentOne")).intValue()
 					+ ((Number) studentNumberMap.get("segmentTwo")).intValue();
@@ -3759,11 +3757,6 @@ public class StudentCourseService {
 			// studentNumberList.add(((Number)
 			// studentNumberMap.get("segmentTwo")).intValue());
 			studentNumberList.add(belowThirty.intValue());
-=======
-			studentNumberList.add(((Number) studentNumberMap.get("segmentZero")).intValue());
-			studentNumberList.add(((Number) studentNumberMap.get("segmentOne")).intValue());
-			studentNumberList.add(((Number) studentNumberMap.get("segmentTwo")).intValue());
->>>>>>> branch 'master' of https://github.com/Lighthouse-Team/StudentManagement.git
 			studentNumberList.add(((Number) studentNumberMap.get("segmentThree")).intValue());
 			studentNumberList.add(((Number) studentNumberMap.get("segmentFour")).intValue());
 			studentNumberList.add(((Number) studentNumberMap.get("segmentFive")).intValue());

@@ -313,7 +313,7 @@
 			                }
 			            }
 			        },
-			        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
+			        data: ["30以下","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
 			    },
 			    {
 			    	show : false, 
@@ -335,8 +335,8 @@
 			                }
 			            }
 			        },
-			        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","1"]
-			    }
+			        data: ["0","3", "6","9","12","15", "18", "21","24","27","30","31", "32","33","34","35", "36", "37","38","39","40","41", "42","43","44","45", "46", "47","48","49","50","51", "52","53","54","55", "56", "57","58","59","60","61", "62","63","64","65", "66", "67","68","69","70","71", "72","73","74","75", "76", "77","78","79","80","81", "82","83","84","85", "86", "87","88","89","90","91", "92","93","94","95", "96", "97","98","99","100"]
+			   }
 			    
 			],
 			yAxis: [
@@ -363,7 +363,7 @@
 			        name:'实际分布',
 			        type:'bar',
 			        smooth: true,
-			        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
+			        data: []
 			    }
 			]
 			};
@@ -379,22 +379,6 @@
 			$.post(url, args, function(basicCourseNormalDistribution){
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
 				
-				/* 	private Integer courseNumber; 			// 课程编号，没有这个课时，其值为0
-	private String courseName;				// 课程名称
-	private String courseDepartment;		// 开课单位，没有这个课时，其值为“没有这个课”
-	private String courseTerm;				// 授课学期，由选择的学期获取
-	private String courseObject;			// 授课对象，内容是20XX级本科生，具体年份由选择的学年和课程的开设年级（大一、大二或大三）获取
-	private Integer totalStudentNumber;		// 学生总数
-	private Integer excAndMedNumber;		// 优良学生数
-	private Integer failNumber;				// 不及格人数
-	private String excAndMedRate;			// 优良率
-	private String failRate;				// 不及格率
-	private String averageScore;			// 平均分
-	private String standardDeviation;		// 标准差
-	
-	private List<Integer> studentNumberList;	// 各分数段学生数列表
-	private List<Double> ordinateList;			// 正态分布纵坐标列表 */
-				
 				document.getElementById("courseNumber").innerHTML = basicCourseNormalDistribution.courseNumber;
 				document.getElementById("courseDepartment").innerHTML = basicCourseNormalDistribution.courseDepartment;
 				document.getElementById("courseName1").innerHTML = basicCourseNormalDistribution.courseName;
@@ -407,6 +391,16 @@
 				document.getElementById("failRate").innerHTML = basicCourseNormalDistribution.failRate;
 				document.getElementById("averageScore").innerHTML = basicCourseNormalDistribution.averageScore;
 				document.getElementById("standardDeviation").innerHTML = basicCourseNormalDistribution.standardDeviation;
+				
+				document.getElementById("20score").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+				document.getElementById("30score").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+				document.getElementById("40score").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+				document.getElementById("50score").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+				document.getElementById("60score").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+				document.getElementById("70score").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+				document.getElementById("80score").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+				document.getElementById("90score").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+				
 				
 				option.series[0].data = basicCourseNormalDistribution.ordinateList;
 				option.series[1].data = basicCourseNormalDistribution.studentNumberList;
@@ -817,20 +811,9 @@
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">0-9</th>
-										<td id = "1score" style = "text-align:center ; vertical-align: middle "></td>
-										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></td>
-									</tr>
-									
-									
-									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">10-19</th>
-										<td id = "10score" style = "text-align:center ; vertical-align: middle "></td>
-									</tr>
-									
-									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">20-29</th>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
 										<td id = "20score" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="main" style="height: 400% ;width:95%;"></div></td>
 									</tr>
 									
 									<tr>
@@ -864,7 +847,7 @@
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">90-99</th>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
 										<td id = "90score" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 								</tbody>
