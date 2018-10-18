@@ -243,7 +243,6 @@
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = firstTermCourse[i];
 				//获取select 下拉框对象,并将option添加进select
-			 /* 	courseName.appendChild(option);  */
 			}
 		} else if (termSelectedNumber == 2) {
 			for (var i = 0; i < secondTermCourse.length; i++) {
