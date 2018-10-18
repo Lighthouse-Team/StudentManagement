@@ -133,16 +133,19 @@
 			localStorage.setItem('term', $('option:selected', this).index());
 		});
 		
-		
-	 	var courseNameSelected =document.getElementById("courseName").value;
-		document.getElementById("head").innerHTML=courseNameSelected + "成绩情况";
+		if (localStorage.getItem('courseName')) {
+			$("#courseName option").eq(localStorage.getItem('courseName')).prop('selected',
+					true);
+		}
+		$("#courseName").on('change', function() {
+			localStorage.setItem('courseName', $('option:selected', this).index());
+		});
 		
 		var termSelected =document.getElementById("term").value;
 		var termSelectedNumber = parseInt(termSelected);
 		
-		$("#courseName").empty();
 		
-		var firstTermCourse = new Array();
+ 		var firstTermCourse = new Array();
 		var secondTermCourse = new Array();
 		firstTermCourse.push("大学英语（一）");
 		firstTermCourse.push("大学计算机基础A");
@@ -151,9 +154,9 @@
 		firstTermCourse.push("微积分A（一）");
 		firstTermCourse.push("大学英语（三）");
 		firstTermCourse.push("大学物理下A");
-		firstTermCourse.push("大学物理下B");
+ 		firstTermCourse.push("大学物理下B");
 		firstTermCourse.push("大学物理实验（二）");
-		firstTermCourse.push("复变函数与积分变换");
+		firstTermCourse.push("复变函数与积分变换"); 
 		
 		secondTermCourse.push("大学英语（二）");
 		secondTermCourse.push("程序设计基础");
@@ -162,33 +165,33 @@
 		secondTermCourse.push("微积分A（二）");
 		secondTermCourse.push("工程图学基础");
 		secondTermCourse.push("工程实践A");
-		secondTermCourse.push("机械设计基础B");
-		secondTermCourse.push("大学英语（四）");
+ 		secondTermCourse.push("机械设计基础B");
+		secondTermCourse.push("大学英语（四）"); 
+		secondTermCourse.push(""); 
 	
 
 		if (termSelectedNumber == 1) {
 			for (var i = 0; i < firstTermCourse.length; i++) {
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = firstTermCourse[i];
+				option.value = firstTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = firstTermCourse[i];
 				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
 			}
 		} else if (termSelectedNumber == 2) {
 			for (var i = 0; i < secondTermCourse.length; i++) {
+				
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = secondTermCourse[i];
+				option.value = secondTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = secondTermCourse[i];
-				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
+				
 			}
-		}
+		} 
 		
 	 	
 	});
@@ -205,7 +208,6 @@
 		var termSelected =document.getElementById("term").value;
 		var termSelectedNumber = parseInt(termSelected);
 		
-		$("#courseName").empty();
 		
 		var firstTermCourse = new Array();
 		var secondTermCourse = new Array();
@@ -215,10 +217,10 @@
 		firstTermCourse.push("线性代数与解析几何A");
 		firstTermCourse.push("微积分A（一）");
 		firstTermCourse.push("大学英语（三）");
-		firstTermCourse.push("大学物理下A");
+ 		firstTermCourse.push("大学物理下A");
 		firstTermCourse.push("大学物理下B");
 		firstTermCourse.push("大学物理实验（二）");
-		firstTermCourse.push("复变函数与积分变换");
+		firstTermCourse.push("复变函数与积分变换"); 
 		
 		secondTermCourse.push("大学英语（二）");
 		secondTermCourse.push("程序设计基础");
@@ -226,32 +228,33 @@
 		secondTermCourse.push("概率论与数理统计");
 		secondTermCourse.push("微积分A（二）");
 		secondTermCourse.push("工程图学基础");
-		secondTermCourse.push("工程实践A");
+ 		secondTermCourse.push("工程实践A");
 		secondTermCourse.push("机械设计基础B");
-		secondTermCourse.push("大学英语（四）");
+		secondTermCourse.push("大学英语（四）"); 
+		secondTermCourse.push(""); 
 	
 
 		if (termSelectedNumber == 1) {
 			for (var i = 0; i < firstTermCourse.length; i++) {
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = firstTermCourse[i];
+				option.value = firstTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = firstTermCourse[i];
 				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
+			 /* 	courseName.appendChild(option);  */
 			}
 		} else if (termSelectedNumber == 2) {
 			for (var i = 0; i < secondTermCourse.length; i++) {
-				//先创建好select里面的option元素
-				var option = document.createElement("option");
-				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = secondTermCourse[i];
-				//给option的text赋值,这就是你点开下拉框能够看到的东西
-				option.text = secondTermCourse[i];
-				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
+				
+					//先创建好select里面的option元素
+					var option = document.getElementById(i.toString());
+					//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+					option.value = secondTermCourse[i];
+					//给option的text赋值,这就是你点开下拉框能够看到的东西
+					option.text = secondTermCourse[i];
+				
 			}
 		}
 		
@@ -671,8 +674,17 @@
 								<div class="form-group">
 									<label>课程名称</label> 
 									<select id = "courseName" class="form-control select2" name="courseName"
-										data-placeholder="Select a State" style="width: 100%;">
-										<option value="">选择课程名称</option>
+										 style="width: 100%;">
+										<option id = "0" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "1" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "2" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "3" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "4" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "5" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "6" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "7" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "8" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "9" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
 									</select>
 								</div>
 								<!-- /.form-group -->
