@@ -463,33 +463,33 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th rowspan="2"><center>序号</center></th>
-										<th rowspan="2"><center>院系</center></th>
-										<th rowspan="2"><center>参与统计学生总数</center></th>
-										<th colspan="5"><center>不及格学生情况</center></th>
-										<th rowspan="2"><center>学生不及格率</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>序号</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>院系</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>参与统计学生总数</center></th>
+										<th style = "text-align:center ; vertical-align: middle " colspan="5"><center>不及格学生情况</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>学生不及格率</center></th>
 											
 									</tr>
 									<tr>
-										<td>1门不及格人数</td>
-										<td>2门不及格人数</td>
-										<td>3门不及格人数</td>
-										<td>≥4门不及格人数</td>
-										<td>不及格总人数</td>
+										<td style = "text-align:center ; vertical-align: middle ">1门不及格人数</td>
+										<td style = "text-align:center ; vertical-align: middle ">2门不及格人数</td>
+										<td style = "text-align:center ; vertical-align: middle ">3门不及格人数</td>
+										<td style = "text-align:center ; vertical-align: middle ">≥4门不及格人数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格总人数</td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${dfdList}" var="DepartmentFailDistribution">
 										<tr>
-											<td>${DepartmentFailDistribution.id }</td>
-											<td>${DepartmentFailDistribution.departmentName }</td>
-											<td>${DepartmentFailDistribution.totalStudentNumber }</td>
-											<td>${DepartmentFailDistribution.oneFailNumber }</td>
-											<td>${DepartmentFailDistribution.twoFailNumber }</td>
-											<td>${DepartmentFailDistribution.threeFailNumber }</td>
-											<td>${DepartmentFailDistribution.geFourFailNumber }</td>
-											<td>${DepartmentFailDistribution.totalFailNumber }</td>
-											<td>${DepartmentFailDistribution.totalFailRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.departmentName }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.oneFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.twoFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.threeFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.geFourFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentFailDistribution.totalFailRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

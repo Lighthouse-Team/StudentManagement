@@ -450,48 +450,48 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th rowspan="2"><center>序号</center></th>
-										<th rowspan="2"><center>院系</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>序号</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>院系</center></th>
 										<c:forEach items="${gradeList}" var="keyword" varStatus="id">
-										<th colspan="3"><center>${keyword}</center></th>
+										<th style = "text-align:center ; vertical-align: middle " colspan="3"><center>${keyword}</center></th>
 										</c:forEach>
 											
 									</tr>
 									<tr>
-										<td>学生数</td>
-										<td>不及格数</td>
-										<td>不及格率</td>
+										<td style = "text-align:center ; vertical-align: middle ">学生数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格率</td>
 										
-										<td>学生数</td>
-										<td>不及格数</td>
-										<td>不及格率</td>
+										<td style = "text-align:center ; vertical-align: middle ">学生数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格率</td>
 										
-										<td>学生数</td>
-										<td>不及格数</td>
-										<td>不及格率</td>
+										<td style = "text-align:center ; vertical-align: middle ">学生数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格率</td>
 										
-										<td>学生数</td>
-										<td>不及格数</td>
-										<td>不及格率</td>
+										<td style = "text-align:center ; vertical-align: middle ">学生数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格数</td>
+										<td style = "text-align:center ; vertical-align: middle ">不及格率</td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${dagfdList}" var="DepartmentAllGradeFailDistribution">
 										<tr>
-											<td>${DepartmentAllGradeFailDistribution.id }</td>
-											<td>${DepartmentAllGradeFailDistribution.departmentName }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeFourStudentNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeFourFailNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeFourFailRate }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeThreeStudentNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeThreeFailRate }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeTwoStudentNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeTwoFailRate }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeOneStudentNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeOneFailNumber }</td>
-											<td>${DepartmentAllGradeFailDistribution.gradeOneFailRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.departmentName }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeFourStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeFourFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeFourFailRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeThreeStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeThreeFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeThreeFailRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeTwoStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeTwoFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeTwoFailRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeOneStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeOneFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeFailDistribution.gradeOneFailRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

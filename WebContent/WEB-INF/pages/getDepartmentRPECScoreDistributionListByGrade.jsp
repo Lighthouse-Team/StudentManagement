@@ -481,29 +481,29 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th align="center">序号</th> 
-										<th>院系</th>
-										<th>成绩记录总数</th>
-										<th>平均分</th>
-										<th>优秀率</th>
-										<th>良好率</th>
-										<th>中等率</th>
-										<th>及格率</th>
-										<th>不及格率</th>
+										<th style = "text-align:center ; vertical-align: middle ">序号</th> 
+										<th style = "text-align:center ; vertical-align: middle ">院系</th>
+										<th style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<th style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th style = "text-align:center ; vertical-align: middle ">良好率</th>
+										<th style = "text-align:center ; vertical-align: middle ">中等率</th>
+										<th style = "text-align:center ; vertical-align: middle ">及格率</th>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${ddList }"  var="DepartmentDistribution">
 										<tr>
-											<td align="center">${DepartmentDistribution.id }</td>
-											<td align="center">${DepartmentDistribution.departmentName }</td>
-											<td align="center">${DepartmentDistribution.totalNumber }</td>
-											<td align="center">${DepartmentDistribution.averageScore }</td>
-											<td align="center">${DepartmentDistribution.excellentRate }</td>
-											<td align="center">${DepartmentDistribution.goodRate }</td>
-											<td align="center">${DepartmentDistribution.mediumRate }</td>
-											<td align="center">${DepartmentDistribution.passRate }</td>
-											<td align="center">${DepartmentDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.departmentName }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.averageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.goodRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.mediumRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.passRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

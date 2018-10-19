@@ -430,21 +430,21 @@
 							<table id="example1" class="table table-bordered table-striped" >
 								<thead>
 									<tr>
-										<th align="center">年级</th>
-										<th>缺考总数</th>
-										<th>必修</th>
-										<th>专业选修</th>
-										<th>通识教育</th>
+										<th style = "text-align:center ; vertical-align: middle ">年级</th>
+										<th style = "text-align:center ; vertical-align: middle ">缺考总数</th>
+										<th style = "text-align:center ; vertical-align: middle ">必修</th>
+										<th style = "text-align:center ; vertical-align: middle ">专业选修</th>
+										<th style = "text-align:center ; vertical-align: middle ">通识教育</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${gadList }" var="GradeAbsenceDistribution">
 										<tr>
-											<td>${GradeAbsenceDistribution.grade }</td>
-											<td>${GradeAbsenceDistribution.totalAbsenceNumber }</td>
-											<td>${GradeAbsenceDistribution.rcAbsenceNumber }</td>
-											<td>${GradeAbsenceDistribution.pecAbsenceNumber }</td>
-											<td>${GradeAbsenceDistribution.gecAbsenceNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeAbsenceDistribution.grade }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeAbsenceDistribution.totalAbsenceNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeAbsenceDistribution.rcAbsenceNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeAbsenceDistribution.pecAbsenceNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeAbsenceDistribution.gecAbsenceNumber }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

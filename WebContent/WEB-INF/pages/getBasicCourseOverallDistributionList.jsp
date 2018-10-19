@@ -444,30 +444,30 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th><center>序号</center></th>
-										<th><center>年级</center></th>
-										<th><center>课程名称</center></th>
-										<th><center>成绩总数</center></th>
-										<th><center>优秀数</center></th>
-										<th><center>优秀率</center></th>
-										<th><center>不及格数</center></th>
-										<th><center>不及格率</center></th>
-										<th><center>平均分</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>序号</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>年级</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>课程名称</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>成绩总数</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>优秀数</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>优秀率</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>不及格数</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>不及格率</center></th>
+										<th style = "text-align:center ; vertical-align: middle "><center>平均分</center></th>
 											
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${bcodList}" var="BasicCourseOverallDistribution">
 										<tr>
-											<td>${BasicCourseOverallDistribution.id }</td>
-											<td>${BasicCourseOverallDistribution.grade }</td>
-											<td>${BasicCourseOverallDistribution.courseName }</td>
-											<td>${BasicCourseOverallDistribution.totalNumber }</td>
-											<td>${BasicCourseOverallDistribution.excellentNumber }</td>
-											<td>${BasicCourseOverallDistribution.excellentRate }</td>
-											<td>${BasicCourseOverallDistribution.failNumber }</td>
-											<td>${BasicCourseOverallDistribution.failRate }</td>
-											<td>${BasicCourseOverallDistribution.averageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.grade }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.courseName }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${BasicCourseOverallDistribution.averageScore }</td>
 										</tr>
 									</c:forEach>
 								</tbody>

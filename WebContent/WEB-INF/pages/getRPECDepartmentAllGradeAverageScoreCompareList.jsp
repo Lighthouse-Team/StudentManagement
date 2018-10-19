@@ -381,39 +381,39 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th rowspan="2"><center>序号</center></th>
-										<th rowspan="2"><center>院系</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>序号</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>院系</center></th>
 										<c:forEach items="${gradeList}" var="keyword" varStatus="id">	
-											<th colspan="2"><center>${keyword}</center></th>
+											<th style = "text-align:center ; vertical-align: middle " colspan="2"><center>${keyword}</center></th>
 										</c:forEach>	
 									</tr>
 									<tr>
-										<td>平均分</td>
-										<td>差值</td>
+										<td style = "text-align:center ; vertical-align: middle ">平均分</td>
+										<td style = "text-align:center ; vertical-align: middle ">差值</td>
 										
-										<td>平均分</td>
-										<td>差值</td>
+										<td style = "text-align:center ; vertical-align: middle ">平均分</td>
+										<td style = "text-align:center ; vertical-align: middle ">差值</td>
 										
-										<td>平均分</td>
-										<td>差值</td>
+										<td style = "text-align:center ; vertical-align: middle ">平均分</td>
+										<td style = "text-align:center ; vertical-align: middle ">差值</td>
 										
-										<td>平均分</td>
-										<td>差值</td>
+										<td style = "text-align:center ; vertical-align: middle ">平均分</td>
+										<td style = "text-align:center ; vertical-align: middle ">差值</td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${dagascList}" var="DepartmentAllGradeAverageScoreCompare">
 										<tr>
-											<td>${DepartmentAllGradeAverageScoreCompare.id }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.departmentName }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeFourAverageScore }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeFourDifference }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeThreeAverageScore }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeThreeDifference }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeTwoAverageScore }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeTwoDifference }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeOneAverageScore }</td>
-											<td>${DepartmentAllGradeAverageScoreCompare.gradeOneDifference }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.departmentName }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeFourAverageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeFourDifference }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeThreeAverageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeThreeDifference }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeTwoAverageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeTwoDifference }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeOneAverageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${DepartmentAllGradeAverageScoreCompare.gradeOneDifference }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
