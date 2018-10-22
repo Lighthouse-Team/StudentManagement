@@ -702,7 +702,6 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
@@ -744,11 +743,10 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			
-			<div class="row">
+			<section class="content">
 				<div class="col-12">
 					<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
@@ -758,10 +756,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 			
-			<!--  id ="normalAnalysis"  style="display:none"-->
-			<div id ="normalAnalysis" class="row" style="display:none" >
+			<section class="content">
+			<div id ="normalAnalysis" style="display:none" >
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
@@ -871,6 +869,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			</section>
 		</div>
 	</div>
 

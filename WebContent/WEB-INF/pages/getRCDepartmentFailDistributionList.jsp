@@ -452,7 +452,6 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -501,11 +500,10 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			
-			<div class="row">
+			<section class="content">
 				<div class="col-12">
 					<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
@@ -515,7 +513,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			<section class="content">
 		</div>
 	</div>
 

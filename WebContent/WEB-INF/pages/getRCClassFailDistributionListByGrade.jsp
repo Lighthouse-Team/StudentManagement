@@ -147,7 +147,7 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcr	Qumb-item"><a href="#">首页</a></li>
+							<li class="breadcrumb-item"><a href="#">首页</a></li>
 							<li class="breadcrumb-item active">各班级不及格情况统计</li>
 						</ol>
 					</div>
@@ -217,7 +217,6 @@
 			</section>
 
 			<section class="content">
-			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -253,7 +252,6 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			

@@ -136,7 +136,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">首页</a></li>
-							<li class="breadcrumb-item active">打印选择页面</li>
+							<li class="breadcrumb-item active">各班级基础课程成绩情况打印选择页面</li>
 						</ol>
 					</div>
 				</div>

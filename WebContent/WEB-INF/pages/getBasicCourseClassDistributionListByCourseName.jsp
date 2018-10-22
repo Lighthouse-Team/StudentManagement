@@ -266,7 +266,6 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -302,7 +301,6 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 		</div>

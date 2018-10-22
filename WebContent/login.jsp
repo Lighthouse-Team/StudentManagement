@@ -80,12 +80,12 @@
 								<div class="form-group">
 									<label class="sr-only" for="form-first-name">userName</label>
 									<input type="text" name="userName" placeholder="账号..."
-										class="form-first-name form-control" id="userName">
+										class="form-first-name form-control" id="userName"/>
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-last-name">passWord</label> <input
-										type="passWord" name="passWord" placeholder="密码..."
-										class="form-last-name form-control" id="passWord">
+										type="password" name="passWord" placeholder="密码..."
+										class="form-last-name form-control" id="passWord"/>
 								</div>
 
 								<button type="submit" class="btn">登录</button>

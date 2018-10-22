@@ -163,5 +163,16 @@ public class FileUploadHandler {
 
 		return "index";
 	}
+	
+	@RequestMapping("/retToMain")
+	public String retToMain(HttpSession session) {
+
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/login.jsp";
+		}
+
+		return "index";
+	}
 
 }
