@@ -546,7 +546,7 @@
 			thirdRateList[3] = dRateList[2];
 			thirdRateList[4] = eRateList[2];
 
-			forthRateList[0] = aRateList[3]; //得到第全校成绩的百分比
+			forthRateList[0] = aRateList[3]; 
 			forthRateList[1] = bRateList[3];
 			forthRateList[2] = cRateList[3];
 			forthRateList[3] = dRateList[3];
