@@ -337,8 +337,18 @@
 		};
 		$.post(url, args, function(odList){
 			for(var i=0; i<odList.length ; i++){
-				option.legend.data[i] = odList[i].courseType;
-				option.series[i].name = odList[i].courseType;
+				if(odList[i].courseType == "通识<br>教育"){
+					option.legend.data[i] = "通识教育";
+					option.series[i].name = "通识教育";
+				}
+				else if (odList[i].courseType == "专业<br>选修"){
+					option.legend.data[i] = "专业选修";
+					option.series[i].name = "专业选修";
+				}
+				else{
+					option.legend.data[i] = odList[i].courseType;
+					option.series[i].name = odList[i].courseType;
+				}
 				
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
 				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
@@ -477,8 +487,18 @@
 			
 			
 			for(var i=0; i<odList.length ; i++){
-				option1.legend.data[i] = odList[i].courseType;
-				option1.series[i].name = odList[i].courseType;
+				if(odList[i].courseType == "通识<br>教育"){
+					option1.legend.data[i] = "通识教育";
+					option1.series[i].name = "通识教育";
+				}
+				else if (odList[i].courseType == "专业<br>选修"){
+					option1.legend.data[i] = "专业选修";
+					option1.series[i].name = "专业选修";
+				}
+				else{
+					option1.legend.data[i] = odList[i].courseType;
+					option1.series[i].name = odList[i].courseType;
+				}
 				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
 				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
 				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
