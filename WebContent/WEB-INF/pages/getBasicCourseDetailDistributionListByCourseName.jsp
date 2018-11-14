@@ -133,16 +133,19 @@
 			localStorage.setItem('term', $('option:selected', this).index());
 		});
 		
-		
-	 	var courseNameSelected =document.getElementById("courseName").value;
-		document.getElementById("head").innerHTML=courseNameSelected + "成绩情况";
+		if (localStorage.getItem('courseName')) {
+			$("#courseName option").eq(localStorage.getItem('courseName')).prop('selected',
+					true);
+		}
+		$("#courseName").on('change', function() {
+			localStorage.setItem('courseName', $('option:selected', this).index());
+		});
 		
 		var termSelected =document.getElementById("term").value;
 		var termSelectedNumber = parseInt(termSelected);
 		
-		$("#courseName").empty();
 		
-		var firstTermCourse = new Array();
+ 		var firstTermCourse = new Array();
 		var secondTermCourse = new Array();
 		firstTermCourse.push("大学英语（一）");
 		firstTermCourse.push("大学计算机基础A");
@@ -151,9 +154,9 @@
 		firstTermCourse.push("微积分A（一）");
 		firstTermCourse.push("大学英语（三）");
 		firstTermCourse.push("大学物理下A");
-		firstTermCourse.push("大学物理下B");
+ 		firstTermCourse.push("大学物理下B");
 		firstTermCourse.push("大学物理实验（二）");
-		firstTermCourse.push("复变函数与积分变换");
+		firstTermCourse.push("复变函数与积分变换"); 
 		
 		secondTermCourse.push("大学英语（二）");
 		secondTermCourse.push("程序设计基础");
@@ -162,33 +165,33 @@
 		secondTermCourse.push("微积分A（二）");
 		secondTermCourse.push("工程图学基础");
 		secondTermCourse.push("工程实践A");
-		secondTermCourse.push("机械设计基础B");
-		secondTermCourse.push("大学英语（四）");
+ 		secondTermCourse.push("机械设计基础B");
+		secondTermCourse.push("大学英语（四）"); 
+		secondTermCourse.push(""); 
 	
 
 		if (termSelectedNumber == 1) {
 			for (var i = 0; i < firstTermCourse.length; i++) {
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = firstTermCourse[i];
+				option.value = firstTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = firstTermCourse[i];
 				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
 			}
 		} else if (termSelectedNumber == 2) {
 			for (var i = 0; i < secondTermCourse.length; i++) {
+				
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = secondTermCourse[i];
+				option.value = secondTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = secondTermCourse[i];
-				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
+				
 			}
-		}
+		} 
 		
 	 	
 	});
@@ -205,7 +208,6 @@
 		var termSelected =document.getElementById("term").value;
 		var termSelectedNumber = parseInt(termSelected);
 		
-		$("#courseName").empty();
 		
 		var firstTermCourse = new Array();
 		var secondTermCourse = new Array();
@@ -215,10 +217,10 @@
 		firstTermCourse.push("线性代数与解析几何A");
 		firstTermCourse.push("微积分A（一）");
 		firstTermCourse.push("大学英语（三）");
-		firstTermCourse.push("大学物理下A");
+ 		firstTermCourse.push("大学物理下A");
 		firstTermCourse.push("大学物理下B");
 		firstTermCourse.push("大学物理实验（二）");
-		firstTermCourse.push("复变函数与积分变换");
+		firstTermCourse.push("复变函数与积分变换"); 
 		
 		secondTermCourse.push("大学英语（二）");
 		secondTermCourse.push("程序设计基础");
@@ -226,32 +228,32 @@
 		secondTermCourse.push("概率论与数理统计");
 		secondTermCourse.push("微积分A（二）");
 		secondTermCourse.push("工程图学基础");
-		secondTermCourse.push("工程实践A");
+ 		secondTermCourse.push("工程实践A");
 		secondTermCourse.push("机械设计基础B");
-		secondTermCourse.push("大学英语（四）");
+		secondTermCourse.push("大学英语（四）"); 
+		secondTermCourse.push(""); 
 	
 
 		if (termSelectedNumber == 1) {
 			for (var i = 0; i < firstTermCourse.length; i++) {
 				//先创建好select里面的option元素
-				var option = document.createElement("option");
+				var option = document.getElementById(i.toString());
 				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = firstTermCourse[i];
+				option.value = firstTermCourse[i];
 				//给option的text赋值,这就是你点开下拉框能够看到的东西
 				option.text = firstTermCourse[i];
 				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
 			}
 		} else if (termSelectedNumber == 2) {
 			for (var i = 0; i < secondTermCourse.length; i++) {
-				//先创建好select里面的option元素
-				var option = document.createElement("option");
-				//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
-				option.val = secondTermCourse[i];
-				//给option的text赋值,这就是你点开下拉框能够看到的东西
-				option.text = secondTermCourse[i];
-				//获取select 下拉框对象,并将option添加进select
-				courseName.appendChild(option);
+				
+					//先创建好select里面的option元素
+					var option = document.getElementById(i.toString());
+					//转换DOM对象为JQ对象,好用JQ里面提供的方法 给option的value赋值
+					option.value = secondTermCourse[i];
+					//给option的text赋值,这就是你点开下拉框能够看到的东西
+					option.text = secondTermCourse[i];
+				
 			}
 		}
 		
@@ -313,7 +315,7 @@
 			                }
 			            }
 			        },
-			        data: ["0-9", "10-19", "20-29","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
+			        data: ["30以下","30-39", "40-49", "50-59","60-69", "70-79", "80-89","90-100"]
 			    },
 			    {
 			    	show : false, 
@@ -335,8 +337,8 @@
 			                }
 			            }
 			        },
-			        data: ["0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","0","0", "0","0","0","5", "0","85", "0", "0","1"]
-			    }
+			        data: ["0","3", "6","9","12","15", "18", "21","24","27","30","31", "32","33","34","35", "36", "37","38","39","40","41", "42","43","44","45", "46", "47","48","49","50","51", "52","53","54","55", "56", "57","58","59","60","61", "62","63","64","65", "66", "67","68","69","70","71", "72","73","74","75", "76", "77","78","79","80","81", "82","83","84","85", "86", "87","88","89","90","91", "92","93","94","95", "96", "97","98","99","100"]
+			   }
 			    
 			],
 			yAxis: [
@@ -363,7 +365,7 @@
 			        name:'实际分布',
 			        type:'bar',
 			        smooth: true,
-			        data: [3.9, 5.9, 11.1,26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8]
+			        data: []
 			    }
 			]
 			};
@@ -379,22 +381,6 @@
 			$.post(url, args, function(basicCourseNormalDistribution){
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
 				
-				/* 	private Integer courseNumber; 			// 课程编号，没有这个课时，其值为0
-	private String courseName;				// 课程名称
-	private String courseDepartment;		// 开课单位，没有这个课时，其值为“没有这个课”
-	private String courseTerm;				// 授课学期，由选择的学期获取
-	private String courseObject;			// 授课对象，内容是20XX级本科生，具体年份由选择的学年和课程的开设年级（大一、大二或大三）获取
-	private Integer totalStudentNumber;		// 学生总数
-	private Integer excAndMedNumber;		// 优良学生数
-	private Integer failNumber;				// 不及格人数
-	private String excAndMedRate;			// 优良率
-	private String failRate;				// 不及格率
-	private String averageScore;			// 平均分
-	private String standardDeviation;		// 标准差
-	
-	private List<Integer> studentNumberList;	// 各分数段学生数列表
-	private List<Double> ordinateList;			// 正态分布纵坐标列表 */
-				
 				document.getElementById("courseNumber").innerHTML = basicCourseNormalDistribution.courseNumber;
 				document.getElementById("courseDepartment").innerHTML = basicCourseNormalDistribution.courseDepartment;
 				document.getElementById("courseName1").innerHTML = basicCourseNormalDistribution.courseName;
@@ -407,6 +393,16 @@
 				document.getElementById("failRate").innerHTML = basicCourseNormalDistribution.failRate;
 				document.getElementById("averageScore").innerHTML = basicCourseNormalDistribution.averageScore;
 				document.getElementById("standardDeviation").innerHTML = basicCourseNormalDistribution.standardDeviation;
+				
+				document.getElementById("20score").innerHTML = basicCourseNormalDistribution.studentNumberList[0];
+				document.getElementById("30score").innerHTML = basicCourseNormalDistribution.studentNumberList[1];
+				document.getElementById("40score").innerHTML = basicCourseNormalDistribution.studentNumberList[2];
+				document.getElementById("50score").innerHTML = basicCourseNormalDistribution.studentNumberList[3];
+				document.getElementById("60score").innerHTML = basicCourseNormalDistribution.studentNumberList[4];
+				document.getElementById("70score").innerHTML = basicCourseNormalDistribution.studentNumberList[5];
+				document.getElementById("80score").innerHTML = basicCourseNormalDistribution.studentNumberList[6];
+				document.getElementById("90score").innerHTML = basicCourseNormalDistribution.studentNumberList[7];
+				
 				
 				option.series[0].data = basicCourseNormalDistribution.ordinateList;
 				option.series[1].data = basicCourseNormalDistribution.studentNumberList;
@@ -515,7 +511,7 @@
 		};
 
 		option = {
-		    color: ['#003366', '#006699', '#4cabce', '#e5323e','#000000'],
+		    color: ['#003366', '#e5323e', '#4cabce', '#e5323e','#000000'],
 		    tooltip: {
 		        trigger: 'axis',
 		        axisPointer: {
@@ -677,8 +673,17 @@
 								<div class="form-group">
 									<label>课程名称</label> 
 									<select id = "courseName" class="form-control select2" name="courseName"
-										data-placeholder="Select a State" style="width: 100%;">
-										<option value="">选择课程名称</option>
+										 style="width: 100%;">
+										<option id = "0" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "1" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "2" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "3" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "4" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "5" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "6" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "7" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "8" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
+										<option id = "9" value="" <c:if test="${dto.prizepool.status eq ''}">selected="selected"</c:if>></option>
 									</select>
 								</div>
 								<!-- /.form-group -->
@@ -697,7 +702,6 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
@@ -739,11 +743,10 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			
-			<div class="row">
+			<section class="content">
 				<div class="col-12">
 					<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
@@ -753,10 +756,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 			
-			<!--  id ="normalAnalysis"  style="display:none"-->
-			<div id ="normalAnalysis" class="row" style="display:none" >
+			<section class="content">
+			<div id ="normalAnalysis" style="display:none" >
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header"> 
@@ -817,20 +820,9 @@
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">0-9</th>
-										<td id = "1score" style = "text-align:center ; vertical-align: middle "></td>
-										<td width = 60% align = center colspan="4" rowspan="10"> <div id="main" style="height: 400% ;width:95%;"></div></td>
-									</tr>
-									
-									
-									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">10-19</th>
-										<td id = "10score" style = "text-align:center ; vertical-align: middle "></td>
-									</tr>
-									
-									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">20-29</th>
+										<th style = "text-align:center ; vertical-align: middle ">30以下</th>
 										<td id = "20score" style = "text-align:center ; vertical-align: middle "></td>
+										<td width = 60% align = center colspan="4" rowspan="8"> <div id="main" style="height: 400% ;width:95%;"></div></td>
 									</tr>
 									
 									<tr>
@@ -864,7 +856,7 @@
 									</tr>
 									
 									<tr>
-										<th style = "text-align:center ; vertical-align: middle ">90-99</th>
+										<th style = "text-align:center ; vertical-align: middle ">90-100</th>
 										<td id = "90score" style = "text-align:center ; vertical-align: middle "></td>
 									</tr>
 								</tbody>
@@ -877,6 +869,7 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row --> 
+			</section>
 		</div>
 	</div>
 

@@ -374,8 +374,8 @@
 		        data:['不及格率']
 		    },
 		    grid: {
-		        left: '3%',
-		        right: '4%',
+		        left: '8%',
+		        right: '12%',
 		        bottom: '3%',
 		        containLabel: true
 		    },
@@ -513,7 +513,6 @@
 			</section>
 			
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -524,38 +523,38 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th rowspan="2"><center>年级</center></th>
-										<th colspan="8"><center>不及格学生情况（人数）</center></th>
-										<th rowspan="2"><center>不及格人数合计</center></th>
-										<th rowspan="2"><center>年级人数</center></th>
-										<th rowspan="2"><center>学生不及格率</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>年级</center></th>
+										<th style = "text-align:center ; vertical-align: middle " colspan="8"><center>不及格学生情况（人数）</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>不及格人数合计</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>年级人数</center></th>
+										<th style = "text-align:center ; vertical-align: middle " rowspan="2"><center>学生不及格率</center></th>
 									</tr>
 									<tr>
-										<td>1门不及格</td>
-										<td>2门不及格</td>
-										<td>3门不及格</td>
-										<td>4门不及格</td>
-										<td>5门不及格</td>
-										<td>6门不及格</td>
-										<td>7门不及格</td>
-										<td>8门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">1门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">2门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">3门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">4门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">5门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">6门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">7门不及格</td>
+										<td style = "text-align:center ; vertical-align: middle ">8门不及格</td>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${gfdList}" var="GradeFailDistribution">
 										<tr>
-											<td>${GradeFailDistribution.grade }</td>
-											<td>${GradeFailDistribution.oneFailNumber }</td>
-											<td>${GradeFailDistribution.twoFailNumber }</td>
-											<td>${GradeFailDistribution.threeFailNumber }</td>
-											<td>${GradeFailDistribution.fourFailNumber }</td>
-											<td>${GradeFailDistribution.fiveFailNumber }</td>
-											<td>${GradeFailDistribution.sixFailNumber }</td>
-											<td>${GradeFailDistribution.sevenFailNumber }</td>
-											<td>${GradeFailDistribution.eightFailNumber }</td>
-											<td>${GradeFailDistribution.totalFailNumber }</td>
-											<td>${GradeFailDistribution.totalStudentNumber }</td>
-											<td>${GradeFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.grade }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.oneFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.twoFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.threeFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.fourFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.fiveFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.sixFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.sevenFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.eightFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${GradeFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -567,11 +566,9 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
-			
-			<div class="row">
+			<section class="content">
 				<div class="col-12">
 					<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
@@ -583,7 +580,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</div>
 	</div>
 

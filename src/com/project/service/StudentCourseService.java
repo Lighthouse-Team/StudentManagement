@@ -3742,7 +3742,6 @@ public class StudentCourseService {
 			double standardDeviation = getCourseStandardDeviationByCourseName(courseName, year, term);
 			List<Double> ordinateList = getNormalDistributionOrdinateByCourseAverageScoreAndStandardDeviation(
 					averageScore, standardDeviation);
-			System.out.println("正态分布点的个数：" + ordinateList.size());
 			Map<String, Integer> studentNumberMap = studentCourseMapper
 					.getCourseStudentNumberMapByCourseName(courseName, year, term);
 			// System.out.println(studentNumberMap);

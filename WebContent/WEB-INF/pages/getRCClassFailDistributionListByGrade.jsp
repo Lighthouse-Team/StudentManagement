@@ -147,7 +147,7 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcr	Qumb-item"><a href="#">首页</a></li>
+							<li class="breadcrumb-item"><a href="#">首页</a></li>
 							<li class="breadcrumb-item active">各班级不及格情况统计</li>
 						</ol>
 					</div>
@@ -217,7 +217,6 @@
 			</section>
 
 			<section class="content">
-			<div id = "table1" class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
@@ -228,21 +227,21 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>  
-										<th>班级</th>
-										<th>人数</th>
-										<th>不及格人数</th>
-										<th>不及格率</th>
+										<th style = "text-align:center ; vertical-align: middle ">序号</th>  
+										<th style = "text-align:center ; vertical-align: middle ">班级</th>
+										<th style = "text-align:center ; vertical-align: middle ">人数</th>
+										<th style = "text-align:center ; vertical-align: middle ">不及格人数</th>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${cfdList }"  var="ClassFailDistribution">
 										<tr>
-											<td>${ClassFailDistribution.id }</td>
-											<td>${ClassFailDistribution.classNumber }</td>
-											<td>${ClassFailDistribution.totalStudentNumber }</td>
-											<td>${ClassFailDistribution.totalFailNumber }</td>
-											<td>${ClassFailDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.classNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalStudentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.totalFailNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${ClassFailDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -253,7 +252,6 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			

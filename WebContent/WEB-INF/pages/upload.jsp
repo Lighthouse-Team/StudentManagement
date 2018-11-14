@@ -45,11 +45,23 @@
 						<!-- /.col -->
 						<div class="col-12">
 							<input type="submit" value="确认上传" class="btn btn-primary btn-block btn-flat"/>
-							<button onclick="retToMain" value="返回" class="btn btn-primary btn-block btn-flat"/>
 						</div>
 						<!-- /.col -->
 					</div>
 				</form>
+				
+				<form action="retToMain" method="post" enctype="multipart/form-data">
+					<div class="form-group has-feedback">
+					</div>
+					<div class="col">
+						<!-- /.col -->
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary btn-block btn-flat">返回</button>
+						</div>
+						<!-- /.col -->
+					</div>
+				</form>
+				
 
 				<!-- <div class="social-auth-links text-center mb-3">
 					<p>- OR -</p>

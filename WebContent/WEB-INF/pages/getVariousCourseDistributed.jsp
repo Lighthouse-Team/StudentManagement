@@ -337,8 +337,18 @@
 		};
 		$.post(url, args, function(odList){
 			for(var i=0; i<odList.length ; i++){
-				option.legend.data[i] = odList[i].courseType;
-				option.series[i].name = odList[i].courseType;
+				if(odList[i].courseType == "通识<br>教育"){
+					option.legend.data[i] = "通识教育";
+					option.series[i].name = "通识教育";
+				}
+				else if (odList[i].courseType == "专业<br>选修"){
+					option.legend.data[i] = "专业选修";
+					option.series[i].name = "专业选修";
+				}
+				else{
+					option.legend.data[i] = odList[i].courseType;
+					option.series[i].name = odList[i].courseType;
+				}
 				
 				/*将后台传回来的百分比去掉百分号并转换为数字类型 */
 				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
@@ -477,8 +487,18 @@
 			
 			
 			for(var i=0; i<odList.length ; i++){
-				option1.legend.data[i] = odList[i].courseType;
-				option1.series[i].name = odList[i].courseType;
+				if(odList[i].courseType == "通识<br>教育"){
+					option1.legend.data[i] = "通识教育";
+					option1.series[i].name = "通识教育";
+				}
+				else if (odList[i].courseType == "专业<br>选修"){
+					option1.legend.data[i] = "专业选修";
+					option1.series[i].name = "专业选修";
+				}
+				else{
+					option1.legend.data[i] = odList[i].courseType;
+					option1.series[i].name = odList[i].courseType;
+				}
 				var aRateNumber = parseFloat(odList[i].excellentRate.substring(0,odList[i].excellentRate.length-1));
 				var bRateNumber = parseFloat(odList[i].goodRate.substring(0,odList[i].goodRate.length-1));
 				var cRateNumber = parseFloat(odList[i].mediumRate.substring(0,odList[i].mediumRate.length-1));
@@ -606,50 +626,49 @@
 			</section>
 
 			<section class="content">
-			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">所有课程成绩分布</h3> 
+							<h3 class="card-title">各类课程成绩分布</h3> 
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body" style="margin: 0">
 							<table id="example1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>序号</th>
-										<th>课程种类</th>
-										<th>成绩记录总数</th>
-										<th>优秀(90-100)</th>
-										<th>良好(80-89)</th>
-										<th>中等(70-79)</th>
-										<th>及格(60-69)</th>
-										<th>不及格(0-59)</th>
-										<th>平均分</th>
-										<th>优秀率</th>
-										<th>良好率</th>
-										<th>中等率</th>
-										<th>及格率</th>
-										<th>不及格率</th>
+										<th style = "text-align:center ; vertical-align: middle ">序号</th>
+										<th style = "text-align:center ; vertical-align: middle ">课程种类</th>
+										<th style = "text-align:center ; vertical-align: middle ">成绩记录总数</th>
+										<th style = "text-align:center ; vertical-align: middle ">优秀(90-100)</th>
+										<th style = "text-align:center ; vertical-align: middle ">良好(80-89)</th>
+										<th style = "text-align:center ; vertical-align: middle ">中等(70-79)</th>
+										<th style = "text-align:center ; vertical-align: middle ">及格(60-69)</th>
+										<th style = "text-align:center ; vertical-align: middle ">不及格(0-59)</th>
+										<th style = "text-align:center ; vertical-align: middle ">平均分</th>
+										<th style = "text-align:center ; vertical-align: middle ">优秀率</th>
+										<th style = "text-align:center ; vertical-align: middle ">良好率</th>
+										<th style = "text-align:center ; vertical-align: middle ">中等率</th>
+										<th style = "text-align:center ; vertical-align: middle ">及格率</th>
+										<th style = "text-align:center ; vertical-align: middle ">不及格率</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${odList}" var="OverallDistribution">
 										<tr>
-											<td align="center">${OverallDistribution.id }</td>
-											<td align="center">${OverallDistribution.courseType }</td>
-											<td align="center">${OverallDistribution.totalNumber }</td>
-											<td align="center">${OverallDistribution.excellentNumber }</td>
-											<td align="center">${OverallDistribution.goodNumber }</td>
-											<td align="center">${OverallDistribution.mediumNumber }</td>
-											<td align="center">${OverallDistribution.passNumber }</td>
-											<td align="center">${OverallDistribution.failNumber }</td>
-											<td align="center">${OverallDistribution.averageScore }</td>
-											<td align="center">${OverallDistribution.excellentRate }</td>
-											<td align="center">${OverallDistribution.goodRate }</td>
-											<td align="center">${OverallDistribution.mediumRate }</td>
-											<td align="center">${OverallDistribution.passRate }</td>
-											<td align="center">${OverallDistribution.failRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.id }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.courseType }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.totalNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.excellentNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.goodNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.mediumNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.passNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.failNumber }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.averageScore }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.excellentRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.goodRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.mediumRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.passRate }</td>
+											<td style = "text-align:center ; vertical-align: middle ">${OverallDistribution.failRate }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -661,11 +680,10 @@
 					<!-- /.card -->
 				</div>
 				<!-- /.col -->
-			</div>
 			<!-- /.row --> 
 			</section>
 			
-			<div class="row">
+			<section class="content">
 				<div class="col-12">
 					<div class="card">
 						<div id = "picTitle" class="card-header" style="display:none">
@@ -677,7 +695,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		</div>
 	</div>
 
